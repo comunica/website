@@ -1,0 +1,19 @@
+title: Comunica
+email: your-email@domain.com
+description: >
+  A highly modular and flexible meta query engine for the Web
+baseurl: ""
+url: "https://comunica.linkeddatafragments.org"
+github_username:  Comunica
+google_analytics : 'UA-117362699-2'
+permalink: pretty
+theme: minima
+
+markdown: kramdown
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE.txt
+  - script
+  - Rakefile
