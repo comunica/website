@@ -1,0 +1,52 @@
+---
+title: Quick Start
+layout: default
+show_in_nav: true
+---
+
+<div class="home">
+
+  <h1>Quick Start</h1>
+  
+  <h2>Execute SPARQL queries in your browser</h2>
+  
+  <p>
+    The easiest way to get started with Comunica,
+    is by <a href="https://query.linkeddatafragments.org/">executing a SPARQL query from your browser</a>.
+  </p>
+  
+  <h2>Install Comunica SPARQL</h2>
+  
+  <p>
+    In order to install Comunica SPARQL onto your machine, run the following command:<br />
+    <emph><i>Requires Node.js &ge; 8.0</i></emph>
+  </p>
+  
+  <pre>$ npm install -g @comunica/actor-init-sparql</pre>
+  
+  <p>
+    After that, you'll have access to the <code>comunica-sparql</code> command.
+    This will allow you to for example execute the following SPARQL query on the <emph>DBpedia TPF interface</emph>:
+  </p>
+  
+  <pre>$ comunica-sparql http://fragments.dbpedia.org/2015-10/en \
+      "CONSTRUCT WHERE { ?s ?p ?o } LIMIT 100"</pre>
+      
+  <p>
+      You can also install Comunica without the <code>-g</code> flag to add it as a dependency to any project,
+      after which you can use it to <a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql#usage-within-application">query programmatically</a>.
+  </p>
+      
+  <p>
+    More information on this command can be found by executing <code>comunica-sparql --help</code>
+    or by consulting the <a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql">Comunica SPARQL README</a>
+    or the <a href="http://comunica.readthedocs.io/en/latest/">Comunica manual</a>.
+  </p>
+  
+  <h2>Setup a development environment</h2>
+  
+  <p>
+    If you want to contribute to Comunica, or develop your own module, make sure to check the <a href="https://github.com/comunica/comunica">Comunica monorepo README</a>.
+  </p>
+
+</div>

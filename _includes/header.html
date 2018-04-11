@@ -1,0 +1,20 @@
+<header class="site-header">
+</header>
+
+<div class="site-nav-header">
+  <div class="wrapper">
+    <nav class="site-nav">
+      <div class="trigger">
+        <a href="{{ site.baseurl }}/"><img src="/img/comunica_logo.svg" alt="Comunica Logo" width="50px" /></a>
+        {% for my_page in site.pages %}
+        {% if my_page.title and my_page.show_in_nav != false %}
+        <a class="page-link{% if p.url == page.url %} active{% endif %}" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
+        {% endif %}
+        {% endfor %}
+        <a class="page-link" href="https://query.linkeddatafragments.org/">Query</a>
+        <a class="page-link" href="http://comunica.readthedocs.io/en/latest/">Documentation</a>
+        <a class="page-link" href="https://github.com/comunica/comunica/">Source</a>
+      </div>
+    </nav>
+  </div>
+</div>
