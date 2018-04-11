@@ -3,7 +3,7 @@ email: your-email@domain.com
 description: >
   A highly modular and flexible meta query engine for the Web
 baseurl: ""
-url: "https://comunica.linkeddatafragments.org"
+url: "https://comunica.linkeddatafragments.org/"
 github_username:  Comunica
 google_analytics : 'UA-117362699-2'
 permalink: pretty
