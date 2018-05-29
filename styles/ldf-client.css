@@ -13,22 +13,28 @@ html, input, textarea, button, pre {
 }
 
 body {
-  max-width: 650px;
+  max-width: 850px;
   margin: 0 auto;
   padding: 1em 3em;
-  background: white /*#be1622;*/
+  background: #be1622;
+  color: white;
 }
 
 a, button, label {
   font-weight: bold;
 }
-a, button, input:hover, label {
-  color: #be1622;
+
+a {
+  color: white;
+}
+
+button, input:hover, label {
+  color: white;
   cursor: pointer;
   text-decoration: none;
 }
 a:hover {
-  color: #be1622;
+  color: white;
   text-decoration: underline;
 }
 
@@ -53,12 +59,21 @@ input {
   font-size: 10pt;
 }
 label:after {
-  content: ":";
+  /*content: ":";*/
+}
+
+label {
+  font-size: 1.5em;
+}
+
+header {
+  margin: 4em 0 2em 0;
 }
 
 header h1 {
   margin: .3em 0 .1em;
-  font-size: 1.95em;
+  font-size: 3.00em;
+  text-align: center;
 }
 header p {
   font-weight: bold;
@@ -68,11 +83,14 @@ header a {
   color: inherit;
 }
 header .logo {
-  float: right;
+  /*float: left;*/
+  display: block;
+  text-align: center;
+
 }
 header img {
-  margin: -9px -11px 0 0;
-  height: 81px;
+  /*margin: -9px -11px 0 0;*/
+  max-height: 200px;
 }
 
 main {
@@ -103,7 +121,7 @@ fieldset > ul > li:after {
 }
 
 select {
-  width: 430px;
+  width: 350px;
 }
 
 .timing {
@@ -146,13 +164,14 @@ input.datetime {
 
 textarea {
   box-sizing: border-box;
-  min-height: 11em;
+  min-height: 13em;
   width: 100%;
-  padding-left: 1em;
+  padding: 1em;
   border: none;
   cursor: pointer;
   font-size: .95em;
   background-color: transparent;
+  margin-top: 1em;
 }
 
 .results {
@@ -237,7 +256,7 @@ footer {
     font-size: 1.4em;
   }
   header img {
-    height: 70px;
+    height: 150px;
   }
   header p {
     margin: 0 0 .5em;
@@ -262,10 +281,13 @@ footer {
 
 @media (max-width: 550px) {
   h1 {
-    ine-height: 1.2;
+    line-height: 1.2;
   }
-  header p, .logo {
+  header p  {
     display: none;
+  }
+  header img {
+    height: 100px;
   }
   label {
     display: block;
@@ -275,6 +297,9 @@ footer {
   }
 }
 
+emph {
+  font-style: italic;
+}
 
 
 .queryText {
@@ -283,6 +308,38 @@ footer {
   border-radius: 3px;
 }
 
+.feature-cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex:1;
+  color: white;
+  padding: 5pt;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.card-image {
+  padding: 10pt;
+
+}
+
+.card-header {
+  min-height: 4em;
+}
+
+.card-content {
+  text-align: justify;
+}
+
+.card-content ul {
+  text-align: left;
+  list-style: disc;
+  padding-left: 1.5em;
+}
 
 /*
  * Styling below derived from

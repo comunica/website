@@ -12,150 +12,128 @@
 <body>
 <header>
     <a class="logo" href="https://github.com/comunica"><img src="images/comunica_white.svg" alt=""/></a>
-    <h1><a href="#">Query any Linked Data interface with Comunica</a></h1>
-    <p>Comunica is meta query engine for the Web.</p>
+    <h1>A Web framework to query any Linked Data interface.</h1>
 </header>
 <!--[if lte IE 9]><b>Your browser is unsupported.</b>
 <div style="display:none"><![endif]-->
 
 
 <section class="feature-cards">
-        <div class="card">
-            <!-- image for feature -->
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="img/comunica.svg" alt="Placeholder image">
-                </figure>
-            </div>
-            <!-- end of image for feature -->
-
-            <!-- feature header -->
-            <div class="card-content-header">
-                <h4 class="title is-4">Querying Web-first</h4>
-            </div>
-            <!-- end of feature header -->
-
-            <!-- feature content -->
-            <div class="card-content">
-                <div class="content">
-                    <p>
-                        Comunica uses native Web technologies, including
-                        <emph>JavaScript</emph>
-                        and
-                        <emph>RDF</emph>
-                        .
-                    </p>
-                    <p>
-                        Using a collection of
-                        <emph>swappable components</emph>
-                        , Comunica can be instantiated into a
-                        <emph>query engine</emph>
-                        that can handle query languages such as
-                        <emph>SPARQL</emph>
-                        .
-                        with <a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql">Comunica
-                        SPARQL</a>.
-                    </p>
-                    <p>
-                        SPARQL queries can be evaluated via the
-                        <emph>command line</emph>
-                        , the
-                        <emph>JavaScript API</emph>
-                        , any
-                        <emph>Web browser</emph>
-                        .
-                    </p>
-                </div>
-            </div>
-            <!-- end of feature content -->
+    <div class="card">
+        <!-- image for feature -->
+        <div class="card-image">
+            <img width="150" height="150" src="images/web.svg" alt="Querying Web-first">
         </div>
-        <div class="card">
-            <!-- image for feature -->
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="img/comunica.svg" alt="Placeholder image">
-                </figure>
-            </div>
-            <!-- end of image for feature -->
+        <!-- end of image for feature -->
 
-            <!-- feature header -->
-            <div class="card-content-header">
-                <h4 class="title is-4">Heterogeneous interfaces</h4>
-            </div>
-            <!-- end of feature header -->
-
-            <!-- feature content -->
-            <div class="card-content">
-                <div class="content">
-                    Modules are provided to execute
-                    <emph>federated</emph>
-                    or
-                    <emph>single-source</emph>
-                    queries over any combination of data sources:
-                    <ul>
-                        <li><a href="http://linkeddatafragments.org/specification/">Triple Pattern Fragments</a>
-                            interfaces
-                        </li>
-                        <li><a href="https://www.w3.org/TR/sparql11-protocol/">SPARQL</a> endpoints</li>
-                        <li>Data dumps in various <a href="https://www.w3.org/wiki/RdfSyntax">RDF serializations</a>
-                        </li>
-                        <li>Compressed <a href="http://www.rdfhdt.org/">HDT</a> datasets</li>
-                        <li>Versioned <a href="https://github.com/rdfostrich/">OSTRICH</a> datasets</li>
-                        <li>...</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- end of feature content -->
+        <!-- feature header -->
+        <div class="card-header">
+            <h2>Web-first querying</h2>
         </div>
-        <div class="card">
-            <!-- image for feature -->
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="img/comunica.svg" alt="Placeholder image">
-                </figure>
-            </div>
-            <!-- end of image for feature -->
+        <!-- end of feature header -->
 
-            <!-- feature header -->
-            <div class="card-content-header">
-                <h4 class="title is-4">Modular</h4>
-            </div>
-            <!-- end of feature header -->
-
-            <!-- feature content -->
-            <div class="card-content">
-                <div class="content">
-                    <p>
-                        In essence, Comunica is a collection of
-                        <emph>modules</emph>
-                        that can be combined to achieve a certain task.
-                    </p>
-                    <p>
-                        Engines can be instantiated using
-                        <emph>semantic configuration files</emph>
-                        ,
-                        using the <a
-                            href="https://github.com/LinkedSoftwareDependencies/Components.js">Components.js</a>
-                        dependency injection framework.
-                    </p>
-                </div>
-            </div>
-            <!-- end of feature content -->
+        <!-- feature content -->
+        <div class="card-content">
+            <p>
+                Using a collection of
+                <emph>swappable components</emph> and <emph>native Web technologies</emph>, Comunica can be instantiated into a
+                <emph>query engine</emph>
+                that can handle query languages such as
+                <emph>SPARQL</emph>.
+            </p>
+            <p>
+                SPARQL queries can be evaluated via the
+                <emph>command line</emph>
+                , the
+                <emph>JavaScript API</emph>
+                , any
+                <emph>Web browser</emph> with <a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql">Comunica
+                SPARQL</a>.
+            </p>
         </div>
+        <!-- end of feature content -->
+    </div>
+    <div class="card">
+        <!-- image for feature -->
+        <div class="card-image">
+            <img width="150" height="150" src="images/ldf.svg" alt="Placeholder image">
+        </div>
+        <!-- end of image for feature -->
+
+        <!-- feature header -->
+        <div class="card-header">
+            <h2>Heterogeneous interfaces</h2>
+        </div>
+        <!-- end of feature header -->
+
+        <!-- feature content -->
+        <div class="card-content">
+            Modules are provided to execute
+            <emph>federated</emph>
+            or
+            <emph>single-source</emph>
+            queries over any type of data source:
+            <ul>
+                <li><a href="http://linkeddatafragments.org/specification/">Triple Pattern Fragments</a> interfaces</li>
+                <li><a href="https://www.w3.org/TR/sparql11-protocol/">SPARQL</a> endpoints</li>
+                <li>data dumps in various <a href="https://www.w3.org/wiki/RdfSyntax">RDF serializations</a></li>
+                <li>compressed <a href="http://www.rdfhdt.org/">HDT</a> datasets</li>
+                <li>versioned <a href="https://github.com/rdfostrich/">OSTRICH</a> datasets</li>
+                <li>...</li>
+            </ul>
+        </div>
+        <!-- end of feature content -->
+    </div>
+    <div class="card">
+        <!-- image for feature -->
+        <div class="card-image">
+            <img width="150" height="150" src="images/modular.svg" alt="Placeholder image">
+        </div>
+        <!-- end of image for feature -->
+
+        <!-- feature header -->
+        <div class="card-header">
+            <h2>Modular</h2>
+        </div>
+        <!-- end of feature header -->
+
+        <!-- feature content -->
+        <div class="card-content">
+            <p>
+                Comunica is a collection of
+                <emph>modules</emph>
+                that can be combined to achieve a certain task.
+            </p>
+            <p>
+                Engines can be instantiated using
+                <emph>semantic configuration files</emph>
+                ,
+                using the <a
+                    href="https://github.com/LinkedSoftwareDependencies/Components.js">Components.js</a>
+                dependency injection framework.
+            </p>
+        </div>
+        <!-- end of feature content -->
+    </div>
     </div>
 </section>
 
 
 <main>
+    <div>
+        <h1>Find out more by reading the <a href="http://comunica.readthedocs.io/en/latest/">documentation</a>, dive into the <a href="https://github.com/comunica/comunica">code</a> or by trying out a <a>SPARQL query</a> below.</h1>
+
+    </div>
     <div class="ldf-client">
-        <div>
-            <label>Type or pick a query</label>
-            <select class="query"></select>
+        <div >
             <textarea class="queryText"></textarea>
+            <label>Select a example query:</label>
+            <select class="query"></select>
         </div>
 
-        <div>
-            <label>Choose datasources</label>
+
+        <div >
+            <label>and choose whatever datasource</label>
             <span class="details-toggle" title="Show date option"></span>
             <select class="datasources" multiple></select>
         </div>
@@ -168,20 +146,16 @@
         <div>
             <button class="start">Execute query</button>
             <button class="stop" style="display:none">Stop execution</button>
-            <span class="timing"></span>
+
         </div>
 
         <div>
-            <label>Query results</label>
+            <div class="timing"></div>
             <div class="results"></div>
         </div>
 
     </div>
 
-    <p>
-        Discover how <a href="http://linkeddatafragments.org" target="_blank">Linked Data Fragments</a>
-        enable Web-scale querying of Linked Data.
-    </p>
 </main>
 
 <footer>
@@ -190,7 +164,10 @@
         <a href="http://www.ugent.be/" target="_blank">Ghent University</a> –
         <a href="http://www.imec.be/" target="_blank">imec</a>, Belgium.
         <a href="https://github.com/comunica/jQuery-Widget.js">Source code</a>.
+
+
     </p>
+    <div>Icons made by <a href="https://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a> and <a href="https://www.flaticon.com/authors/mynamepong" title="mynamepong">mynamepong</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </footer>
 
 <script src="scripts/ldf-client-ui.min.js"></script>
