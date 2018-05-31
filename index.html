@@ -121,33 +121,29 @@
 
 <main>
     <div>
-        <h1>Find out more by reading the <a href="http://comunica.readthedocs.io/en/latest/">documentation</a>, dive into the <a href="https://github.com/comunica/comunica">code</a> or by trying out a <a>SPARQL query</a> below.</h1>
+        <h1>Find out more by reading the <a href="http://comunica.readthedocs.io/en/latest/">documentation</a>,
+            diving into the <a href="https://github.com/comunica/comunica">code</a>, exploring the <a href="https://comunica.github.io/comunica">API documentation</a> or by trying out a <a>SPARQL query</a> below.</h1>
 
     </div>
     <div class="ldf-client">
         <div >
             <textarea class="queryText"></textarea>
-            <label>Select a example query:</label>
+            <label>or select a example query:</label>
             <select class="query"></select>
         </div>
 
 
-        <div >
-            <label>and choose whatever datasource</label>
-            <span class="details-toggle" title="Show date option"></span>
+        <div class="select-datasources">
+            <label>Now, <button class="start">execute</button>
+                <button class="stop" style="display:none">stop</button> the query on any combination of interfaces (SPARQL endpoint, Triple Pattern Fragments or RDF dump) here: </label>
+            <!--<span class="details-toggle" title="Show date option"></span>-->
             <select class="datasources" multiple></select>
         </div>
 
-        <div class="details">
-            <label>Pick a date</label>
-            <input class="datetime" type="date">
-        </div>
-
-        <div>
-            <button class="start">Execute query</button>
-            <button class="stop" style="display:none">Stop execution</button>
-
-        </div>
+        <!--<div class="details">-->
+            <!--<label>Pick a date</label>-->
+            <!--<input class="datetime" type="date">-->
+        <!--</div>-->
 
         <div>
             <div class="timing"></div>
@@ -175,13 +171,7 @@
 <script src="node_modules/yasgui-yasqe/dist/yasqe.min.js"></script>
 <script>
     jQuery(function ($) {
-
-
         var x = $('.ldf-client').queryui({settings: 'queries.json'});
-
-        console.log(x);
-
-
     });
 </script>
 </body>

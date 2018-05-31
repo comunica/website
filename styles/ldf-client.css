@@ -17,10 +17,9 @@ body {
   margin: 0 auto;
   padding: 1em 3em;
   background: #be1622;
-  color: white;
 }
 
-a, button, label {
+a, button {
   font-weight: bold;
 }
 
@@ -63,11 +62,15 @@ label:after {
 }
 
 label {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 header {
   margin: 4em 0 2em 0;
+}
+
+h1 {
+  color: white;
 }
 
 header h1 {
@@ -339,6 +342,10 @@ emph {
   text-align: left;
   list-style: disc;
   padding-left: 1.5em;
+}
+
+.select-datasources {
+  margin-top: 1em;
 }
 
 /*
