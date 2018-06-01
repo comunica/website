@@ -325,7 +325,7 @@ emph {
 .card {
   flex:1;
   color: white;
-  padding: 5pt;
+  padding: 15pt;
   text-align: center;
   border-radius: 3px;
 }
@@ -336,7 +336,7 @@ emph {
 }
 
 .card-header {
-  min-height: 4em;
+  min-height: 5em;
 }
 
 .card-content {
