@@ -408,7 +408,7 @@ emph {
   white-space: nowrap;
   line-height: 24px;
   font-weight: normal;
-  color: inherit;
+  color: black;
 }
 .chosen-single .chosen-single span {
   display: block;
