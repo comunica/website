@@ -373,6 +373,7 @@ emph {
   zoom: 1;
   *display: inline;
   user-select: none;
+  color: black;
 }
 .chosen * {
   box-sizing: border-box;
@@ -408,7 +409,6 @@ emph {
   white-space: nowrap;
   line-height: 24px;
   font-weight: normal;
-  color: black;
 }
 .chosen-single .chosen-single span {
   display: block;
