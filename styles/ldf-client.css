@@ -17,9 +17,10 @@ body {
   margin: 0 auto;
   padding: 1em 3em;
   background: #be1622;
+  color: white;
 }
 
-a, button {
+button {
   font-weight: bold;
 }
 
@@ -181,13 +182,16 @@ textarea {
   height: 23.5em;
   font-size: 10pt;
   margin: .5em 0 1em;
+  padding: .5em;
+  background-color: white;
+  border-radius: 5px;
 }
 .results a {
   font-weight: normal;
   color: inherit;
 }
 .result {
-  width: calc(100% - 2px);
+  width: calc(100% - 16px);
 }
 .result dl {
   border: 1px solid #be1622;
@@ -215,6 +219,7 @@ textarea {
 }
 .result dd {
   margin: 0 .5em 0 1em;
+  color: black;
 }
 .result dt:last-of-type {
   border-radius: 0 0 0 5px;
