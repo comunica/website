@@ -179,6 +179,7 @@ textarea {
 }
 
 .results {
+  color: black;
   height: 23.5em;
   font-size: 10pt;
   margin: .5em 0 1em;
@@ -251,6 +252,65 @@ textarea {
   contain: layout;
 }
 
+.querytext {
+  display: block;
+  background: white;
+  border: #999999 solid 1px;
+  border-radius: 3px;
+}
+
+.query-text-containers {
+  display: block;
+  clear: both;
+}
+
+.query-texts li {
+  float:left;
+  list-style:none;
+}
+
+.query-texts li a {
+  font-weight: bold;
+  font-size: 12px;
+  color: black;
+  display: block;
+  background-color: white;
+  border: 1px solid #999999;
+  border-radius: 3px 3px 0px 0px;
+  border-bottom: none;
+  margin: 0;
+  padding: 5px 8px 6px;
+  cursor: pointer;
+  height: 16px;
+}
+
+.query-texts li a img {
+  width: 14px;
+  height: 14px;
+  padding-right: 1px;
+  vertical-align: top;
+}
+
+.query-texts li a.inactive {
+  background-color: #f6f6f6;
+  padding: 5px 8px 5px;
+}
+
+.query-texts li a:hover {
+  background-color: white;
+  text-decoration: none;
+}
+
+.query-texts li a:active {
+  margin: 1px -1px -1px 1px;
+}
+
+.query-texts {
+  margin-top: 10px;
+  height: 27px;
+  border-bottom: 1px solid #999999;
+}
+
 footer {
   font-size: .8em;
 }
@@ -307,13 +367,6 @@ footer {
 
 emph {
   font-style: italic;
-}
-
-
-.queryText {
-  background: white;
-  border: #999999 solid 1px;
-  border-radius: 3px;
 }
 
 .feature-cards {

@@ -123,8 +123,31 @@
 
     </div>
     <div class="ldf-client">
-        <div >
-            <textarea class="queryText"></textarea>
+        <div>
+            <div>
+                <ul class="query-texts">
+                    <li><a id="sparql"><img src="images/sparql.png" alt="SPARQL" />SPARQL</a></li>
+                    <li><a id="graphql"><img src="images/graphql.svg" alt="GraphQL" />GraphQL-LD</a></li>
+                </ul>
+            </div>
+            
+            <div class="query-text-containers">
+                <div class="query-text-container" id="tab-sparql">
+                    <textarea class="querytext querytext-sparql" placeholder="Write a SPARQL query or select one from the list"></textarea>
+                </div>
+                <div class="query-text-container" id="tab-graphql">
+                    <a href="https://gist.github.com/rubensworks/9d6eccce996317677d71944ed1087ea6" class="help" target="_blank">What is GraphQL-LD?</a>
+                    <label class="muted">GraphQL Query</label>
+                    <textarea class="querytext querytext-graphql" placeholder="Write a GraphQL query or select one from the list"></textarea>
+            
+                    <label class="muted">JSON-LD context</label>
+                    <textarea class="querycontext querycontext-graphql" placeholder="Write a JSON-LD context to map GraphQL query fields to URIs"></textarea>
+            
+                    <label class="muted">JSON tree results</label>
+                    <input type="checkbox" class="results-to-tree results-to-tree-graphql" />
+                </div>
+            </div>
+            
             <label>or select an example query:</label>
             <select class="query"></select>
         </div>
@@ -145,6 +168,7 @@
         <div>
             <div class="timing"></div>
             <div class="results"></div>
+            <h2>Do you want more querying options such as <emph>time-travel</emph> and <emph>GraphQL</emph>? Have a look at our <a href="http://query.linkeddatafragments.org/">dedicated web interface</a>!</h2>
         </div>
 
     </div>
