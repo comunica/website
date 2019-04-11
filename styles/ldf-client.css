@@ -74,6 +74,20 @@ h1 {
   color: white;
 }
 
+.demo {
+    display: block;
+    text-decoration: none;
+    float: right;
+    background-color: #740008;
+    padding: 0.75em;
+    border-radius: 25px;
+}
+
+.demo:hover {
+    background-color: #9C0510;
+    text-decoration: none;
+}
+
 header h1 {
   margin: .3em 0 .1em;
   font-size: 3.00em;
@@ -100,6 +114,23 @@ header img {
 main {
   clear: both;
 }
+
+.getting-started li {
+    display: block;
+    margin-left: 1em;
+    margin-bottom: 2em;
+}
+
+.getting-started li .comunica-option {
+    font-weight: bold;
+    display: inline-block;
+    width: 15em;
+}
+
+.getting-started li .comunica-option a:hover {
+    text-decoration: underline;
+}
+
 
 fieldset {
   border: none;

@@ -10,9 +10,10 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 </head>
 <body>
+<a href="http://query.linkeddatafragments.org/" class="demo">Try out our <em>live</em> demo</a>
 <header>
     <a class="logo" href="https://github.com/comunica"><img src="images/comunica_white.svg" alt=""/></a>
-    <h1>A  modular framework<br />for querying Linked Data<br />on the Web.</h1>
+    <h1>A modular framework<br />for querying Linked Data<br />on the Web.</h1>
 </header>
 <!--[if lte IE 9]><b>Your browser is unsupported.</b>
 <div style="display:none"><![endif]-->
@@ -118,80 +119,53 @@
 
 <main>
     <div>
-        <h1>Find out more by reading the <a href="http://comunica.readthedocs.io/en/latest/">documentation</a>,
-            diving into the <a href="https://github.com/comunica/comunica">code</a>, reading our <a href="https://comunica.github.io/Article-ISWC2018-Resource/">article</a> or by trying out a <a>SPARQL query</a> below.</h1>
+        <h1>Getting started</h1>
+        <ul class="getting-started">
+            <li>
+                <span class="comunica-option"><a href="http://query.linkeddatafragments.org/">Web Client</a></span>
+                <emph>Live</emph> Comunica version to try out queries from your <emph>browser</emph>
+            </li>
+            <li>
+                <span class="comunica-option"><a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql#readme">Comunica SPARQL</a></span>
+                SPARQL querying from <emph>JavaScript applications</emph> or the <emph>CLI</emph>
+            </li>
+            <li>
+                <span class="comunica-option"><a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql-file#readme">Comunica SPARQL File</a></span>
+                Library to query over local <emph>RDF files</emph>
+            </li>
+            <li>
+                <span class="comunica-option"><a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql-rdfjs#readme">Comunica SPARQL RDFJS</a></span>
+                Library to query over in-memory <a href="http://rdf.js.org/stream-spec/#source-interface"><emph>RDFJS sources</emph></a>
+            </li>
+            <li>
+                <span class="comunica-option"><a href="https://github.com/comunica/comunica-actor-init-sparql-hdt#readme">Comunica SPARQL HDT</a></span>
+                Library to query over local <a href="http://www.rdfhdt.org/"><emph>HDT</emph></a> files
+            </li>
+            <li>
+                <span class="comunica-option"><a href="https://github.com/comunica/comunica/#readme">Comunica Framework</a></span>
+                Repository with all Comunica modules
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h2>Find out more by reading the <a href="http://comunica.readthedocs.io/en/latest/">full documentation</a>,
+            following some <a href="https://github.com/comunica?utf8=%E2%9C%93&q=topic%3Atutorial&type=&language=">tutorials</a>,
+            diving into the <a href="https://github.com/comunica/comunica">source code</a>,
+            or reading our <a href="https://comunica.github.io/Article-ISWC2018-Resource/">technical article</a>.</h2>
 
     </div>
-    <div class="ldf-client">
-        <div>
-            <div>
-                <ul class="query-texts">
-                    <li><a id="sparql"><img src="images/sparql.png" alt="SPARQL" />SPARQL</a></li>
-                    <li><a id="graphql"><img src="images/graphql.svg" alt="GraphQL" />GraphQL-LD</a></li>
-                </ul>
-            </div>
-            
-            <div class="query-text-containers">
-                <div class="query-text-container" id="tab-sparql">
-                    <textarea class="querytext querytext-sparql" placeholder="Write a SPARQL query or select one from the list"></textarea>
-                </div>
-                <div class="query-text-container" id="tab-graphql">
-                    <a href="https://gist.github.com/rubensworks/9d6eccce996317677d71944ed1087ea6" class="help" target="_blank">What is GraphQL-LD?</a>
-                    <label class="muted">GraphQL Query</label>
-                    <textarea class="querytext querytext-graphql" placeholder="Write a GraphQL query or select one from the list"></textarea>
-            
-                    <label class="muted">JSON-LD context</label>
-                    <textarea class="querycontext querycontext-graphql" placeholder="Write a JSON-LD context to map GraphQL query fields to URIs"></textarea>
-            
-                    <label class="muted">JSON tree results</label>
-                    <input type="checkbox" class="results-to-tree results-to-tree-graphql" />
-                </div>
-            </div>
-            
-            <label>or select an example query:</label>
-            <select class="query"></select>
-        </div>
-
-
-        <div class="select-datasources">
-            <label>Now, <button class="start">execute</button>
-                <button class="stop" style="display:none">stop</button> the query on any combination of interfaces (SPARQL endpoint, Triple Pattern Fragments or RDF dump) here: </label>
-            <!--<span class="details-toggle" title="Show date option"></span>-->
-            <select class="datasources" multiple></select>
-        </div>
-
-        <!--<div class="details">-->
-            <!--<label>Pick a date</label>-->
-            <!--<input class="datetime" type="date">-->
-        <!--</div>-->
-
-        <div>
-            <div class="timing"></div>
-            <div class="results"></div>
-            <h2>Do you want more querying options such as <emph>time-travel</emph> and <emph>GraphQL</emph>? Have a look at our <a href="http://query.linkeddatafragments.org/">dedicated web interface</a>!</h2>
-        </div>
-
-    </div>
-
 </main>
 
 <footer>
     <p>
-        ©2013–2018
+        ©2013–2019
         <a href="http://www.ugent.be/" target="_blank">Ghent University</a> –
         <a href="http://www.imec.be/" target="_blank">imec</a>, Belgium.
         <a href="https://github.com/comunica/website">Source of this page</a>.
-
 
     </p>
     <div>Icons made by <a href="https://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a> and <a href="https://www.flaticon.com/authors/mynamepong" title="mynamepong">mynamepong</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 </footer>
 
-<script src="scripts/ldf-client-ui.min.js"></script>
-<script>
-    jQuery(function ($) {
-        var x = $('.ldf-client').queryui({settings: 'queries.json'});
-    });
-</script>
 </body>
 </html>
