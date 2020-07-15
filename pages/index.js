@@ -1,12 +1,9 @@
-import Head from 'next/head'
+import Head from '../components/Head';
 
 export default function Home() {
   return (
     <div className="container">
-      <Head>
-        <title>Comunica</title>
-        <link rel="icon" href="./favicon.ico" />
-      </Head>
+      <Head title={'Index'}/>
 
       <main>
         <div className={"intro"}>
@@ -54,12 +51,6 @@ export default function Home() {
           </a>
         </div>
       </main>
-
-      <footer>
-        &copy;2018 – {(new Date().getFullYear())}&nbsp;<a href="http://www.ugent.be/">Ghent University</a>&nbsp;–&nbsp;<a href="http://www.imec.be/">imec</a>, Belgium.
-        &nbsp;
-        <a href="https://github.com/comunica/website">Source of this website.</a>
-      </footer>
     </div>
   )
 }
