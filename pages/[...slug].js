@@ -11,10 +11,11 @@ export default function Page({ frontmatter, body }) {
         <h1>{frontmatter.title}</h1>
         <hr />
         <ReactMarkdown
+            escapeHtml={false}
             source={body}
             renderers={{
                 code: CodeBlock,
-                inlineCode: CodeBlockInline
+                inlineCode: CodeBlockInline,
             }}
         />
       </main>
@@ -41,7 +42,7 @@ export async function getStaticPaths() {
         const keys = context.keys();
         const data = keys.map((key, index) => {
             let slug = key.slice(1, -3);
-            return slug;
+            return slug + '/';
         })
         return data;
     })(require.context('./', true, /\.md$/));

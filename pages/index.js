@@ -40,12 +40,12 @@ export default function Home() {
         </div>
 
         <div className="grid">
-          <a href="docs/query" className="card">
+          <a href="docs/query/" className="card">
             <h3>Query with Comunica &rarr;</h3>
             <p>Lean how to execute queries</p>
           </a>
 
-          <a href="docs/modify" className="card">
+          <a href="docs/modify/" className="card">
             <h3>Modify Comunica &rarr;</h3>
             <p>Learn how to configure or extend</p>
           </a>
