@@ -6,6 +6,7 @@ export default () => (
             <li><a href="/docs">Docs</a></li>
             <li><a href="/contribute">Contribute</a></li>
             <li><a href="/about">About</a></li>
+            <li><a href="/faq">FAQ</a></li>
             <li><a href="https://github.com/comunica/comunica">GitHub</a></li>
         </ul>
     </nav>
