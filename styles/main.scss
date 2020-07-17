@@ -179,6 +179,7 @@ code {
 .card:active {
     color: $color-comunica-red-light;
     border-color: $color-comunica-red-light;
+    text-decoration: none;
 }
 
 .card-info h3 {
@@ -212,6 +213,39 @@ code {
     float: left;
     margin-right: 0.5rem;
     height: 2rem;
+}
+
+.index-entry {
+    display: block;
+    margin: 1rem 0 1rem 0;
+    padding: 0.5rem;
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.indent-1 {
+    margin-left: 2rem;
+}
+
+.index-entry:hover,
+.index-entry:focus,
+.index-entry:active {
+    color: $color-comunica-red-light;
+    text-decoration: none;
+}
+
+.index-entry h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.index-entry p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #6f6f6f;
 }
 
 @media (max-width: 800px) {
