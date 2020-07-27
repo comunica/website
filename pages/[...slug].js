@@ -17,6 +17,7 @@ export default function Page({ frontmatter, body, path, paths, mattersData }) {
             renderers={{
                 code: CodeBlock,
                 inlineCode: CodeBlockInline,
+                heading: Heading,
             }}
         />
         {frontmatter.index && <DocIndex path={path} paths={paths} mattersData={mattersData}/>}
@@ -100,4 +101,17 @@ const CodeBlockInline = ({ value, language }) => {
     return (
         <code>{value}</code>
     )
+}
+
+function flatten(text, child) {
+    return typeof child === 'string'
+        ? text + child
+        : React.Children.toArray(child.props.children).reduce(flatten, text)
+}
+
+const Heading = (props) => {
+    const children = React.Children.toArray(props.children)
+    const text = children.reduce(flatten, '')
+    const slug = text.toLowerCase().replace(/\W/g, '-')
+    return React.createElement('h' + props.level, { id: slug }, props.children)
 }
