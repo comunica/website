@@ -155,6 +155,12 @@ code {
     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
+pre {
+    display: block;
+    overflow-x: scroll;
+    width: 800px;
+}
+
 .grid-wide {
     margin-top: 3rem;
     display: flex;
@@ -263,7 +269,27 @@ code {
     color: #6f6f6f;
 }
 
+.note {
+    padding: 1rem;
+    background: #e7eefa;
+    border: 1px solid #3e75d0;
+    border-radius: 5px;
+    &:before {
+        content: 'Note: ';
+        font-weight: bold;
+    }
+}
+
 @media (max-width: 800px) {
+    ul.breadcrumbs {
+        li {
+            display: block;
+            &:not(:last-child):after {
+                content: "";
+                margin: 0;
+            }
+        }
+    }
     .grid, .grid-wide {
         min-width: 0;
         width: 100%;
@@ -286,5 +312,23 @@ code {
     }
     .nav-pusher {
         height: 0;
+    }
+}
+
+@media (max-width: 800px) and (min-width: 600px) {
+    pre {
+        width: 600px;
+    }
+}
+
+@media (max-width: 600px) and (min-width: 400px) {
+    pre {
+        width: 400px;
+    }
+}
+
+@media (max-width: 400px) and (min-width: 200px) {
+    pre {
+        width: 200px;
     }
 }

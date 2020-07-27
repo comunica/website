@@ -90,12 +90,9 @@ export async function getStaticData() {
 
 const CodeBlock = ({ value, language }) => {
     return (
-        <div>
             <Highlight className={language}>
                 {value}
             </Highlight>
-            <br />
-        </div>
     )
 }
 
