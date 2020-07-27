@@ -69,6 +69,21 @@ nav {
     height: 3.5rem;
 }
 
+ul.breadcrumbs {
+    margin: 0.5rem 0;
+    padding: 0;
+    li {
+        color: #747474;
+        list-style: none;
+        display: inline-block;
+        &:not(:last-child):after {
+            color: #747474;
+            content: " / ";
+            margin-right: 0.3rem;
+        }
+    }
+}
+
 .container {
     min-height: 100vh;
     padding: 0 0.5rem;

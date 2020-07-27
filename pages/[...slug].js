@@ -3,12 +3,14 @@ import matter from 'gray-matter'
 import ReactMarkdown from 'react-markdown'
 import Highlight from 'react-highlight';
 import DocIndex from "../components/DocIndex";
+import BreadCrumbs from "../components/Breadcrumbs";
 
 export default function Page({ frontmatter, body, path, paths, mattersData }) {
   return (
     <div className="container-page">
       <Head title={frontmatter.title}/>
       <main>
+        <BreadCrumbs frontmatter={frontmatter} path={path} paths={paths} mattersData={mattersData}/>
         <h1>{frontmatter.title}</h1>
         <hr />
         <ReactMarkdown
