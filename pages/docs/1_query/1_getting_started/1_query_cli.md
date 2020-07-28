@@ -12,7 +12,7 @@ This guide discusses querying over Linked Data on the Web, exposed via URLs.
 <a href="/docs/query/getting_started/query_cli_file/">Click here to query over local RDF files</a> instead.
 </div>
 
-## Installation
+## 1. Installation
 
 Since Comunica runs on Node.js, make sure you have [Node.js installed](https://nodejs.org/en/) on your machine.
 
@@ -21,7 +21,7 @@ Next, we can install Comunica SPARQL on our machine:
 $ npm install -g @comunica/actor-init-sparql
 ```
 
-## SPARQL querying over one source
+## 2. SPARQL querying over one source
 
 After installing Comunica SPARQL, you will be given access to several commands including `comunica-sparql`,
 which allows you to execute SPARQL queries from the command line.
@@ -48,7 +48,7 @@ As output, a JSON array of bindings for the selected variables will be returned:
 ...
 ``` 
 
-## Query file input
+## 3. Query file input
 
 Since SPARQL queries can sometimes become very large, it is possible to supply them via a local file using the `-f` option.
 
@@ -58,7 +58,7 @@ Assuming a file `path/myquery.sparql` exists, we can query over it as follows:
 $ comunica-sparql https://fragments.dbpedia.org/2016-04/en -f path/myquery.sparql
 ```
 
-## SPARQL querying over multiple sources
+## 4. SPARQL querying over multiple sources
 
 One key feature of Comunica is its ability to query over **multiple sources**.
 For this, you can just supply any number of URLs as arguments.
@@ -71,7 +71,7 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
     "SELECT * WHERE { ?s ?p ?o } LIMIT 100"
 ```
 
-## SPARQL CONSTRUCT and ASK
+## 5. SPARQL CONSTRUCT and ASK
 
 Next to SPARQL `SELECT` queries,
 it is also possible to execute `CONSTRUCT` queries to produce RDF triples:
@@ -98,7 +98,7 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
 true
 ```
 
-## Changing result format
+## 6. Changing result format
 
 `SELECT` queries will be printed as JSON by default, and `CONSTRUCT` queries as [RDF TriG](https://www.w3.org/TR/trig/).
 This can be overridden using the `-t` option.
@@ -125,7 +125,7 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
 All <a href="/docs/query/advanced/result_formats/">available formats</a> can be printed via <code>comunica-sparql --listformats</code>
 </div>
 
-## Learn more
+## 7. Learn more
 
 This guide only discussed the basic functionality of `comunica-sparql`.
 You can learn more options by invoking the _help_ command:

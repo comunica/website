@@ -13,7 +13,7 @@ In some of these cases, the ability to access the local file system can imply a 
 which is why we require the use of a separate package. 
 </div>
 
-## Installation
+## 1. Installation
 
 Since Comunica runs on Node.js, make sure you have [Node.js installed](https://nodejs.org/en/) on your machine.
 
@@ -22,7 +22,7 @@ Next, we can install Comunica SPARQL on our machine:
 $ npm install -g @comunica/actor-init-sparql-file
 ```
 
-## SPARQL querying over one local file
+## 2. SPARQL querying over one local file
 
 After installing Comunica SPARQL, you will be given access to several commands including `comunica-sparql-file`,
 which allows you to execute SPARQL queries from the command line.
@@ -36,7 +36,7 @@ $ comunica-sparql-file path/to/my/file.ttl \
     "SELECT * WHERE { ?s ?p ?o } LIMIT 100"
 ```
 
-## SPARQL querying over one remote file
+## 3. SPARQL querying over one remote file
 
 Next to local file, also _remote_ files identified by a URL can be queried:
 ```bash
@@ -44,7 +44,7 @@ $ comunica-sparql-file https://www.rubensworks.net/ \
     "SELECT * WHERE { ?s ?p ?o } LIMIT 100"
 ```
 
-## Learn more
+## 4. Learn more
 
 This guide only discussed the basic functionality of `comunica-sparql-file`.
 You can learn more options by invoking the _help_ command, or by [reading the Comunica SPARQL documentation](/docs/query/getting_started/query_cli/):
