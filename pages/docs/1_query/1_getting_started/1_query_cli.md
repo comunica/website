@@ -9,7 +9,7 @@ In this guide, we will install it _globally_, and show how it can be invoked fro
 
 <div class="note">
 This guide discusses querying over Linked Data on the Web, exposed via URLs.
-<a href="/docs/query/getting_started/query_cli_file//">Click here to query over local RDF files</a> instead.
+<a href="/docs/query/getting_started/query_cli_file/">Click here to query over local RDF files</a> instead.
 </div>
 
 ## Installation
@@ -129,7 +129,7 @@ All <a href="/docs/query/advanced/result_formats/">available formats</a> can be 
 
 This guide only discussed the basic functionality of `comunica-sparql`.
 You can learn more options by invoking the _help_ command:
-```bash
+```text
 $ comunica-sparql --help
 
 Usage:
