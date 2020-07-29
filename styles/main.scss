@@ -255,6 +255,9 @@ pre {
 .index-entry:active {
     color: $color-comunica-red-light;
     text-decoration: none;
+    h3:after {
+        content: ' \2192';
+    }
 }
 
 .index-entry h3 {

@@ -11,7 +11,7 @@ export default function DocIndex ({ path, paths, mattersData }) {
         }))
         .map(entry =>
             <a href={entry.path} className={"index-entry indent-" + entry.indent}>
-                <h3>{entry.title} &rarr;</h3>
+                <h3>{entry.title}</h3>
                 <p>{entry.description}</p>
             </a>
         );
