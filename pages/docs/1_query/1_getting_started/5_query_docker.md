@@ -8,7 +8,7 @@ description: 'Execute SPARQL queries within a Docker container.'
 </div>
 
 If for whatever reason you are unable or unwilling to install Node.js,
-then you can make use Comunica via [Docker containers](https://www.docker.com/) instead.
+then you can make use Comunica via [**Docker containers**](https://www.docker.com/) instead.
 
 Usage of the Comunica SPARQL via Docker can be done via the [`comunica/actor-init-sparql` Docker image](https://hub.docker.com/r/comunica/actor-init-sparql):
 ```bash

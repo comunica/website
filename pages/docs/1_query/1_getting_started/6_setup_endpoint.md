@@ -5,7 +5,7 @@ description: 'Allow querying over HTTP via the SPARQL protocol'
 
 The [SPARQL protocol](https://www.w3.org/TR/sparql11-protocol/) allows clients to send SPARQL queries to Web servers over HTTP,
 and query results to be sent back to the client. 
-Comunica SPARQL can be used to set up a SPARQL endpoint on top of any number of sources you want.
+Comunica SPARQL can be used to set up a **SPARQL endpoint** on top of any number of sources you want.
 
 ## 1. Installation
 

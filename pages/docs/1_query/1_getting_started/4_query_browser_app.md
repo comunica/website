@@ -4,8 +4,7 @@ description: 'Execute SPARQL queries from within your client-side browser applic
 ---
 
 Comunica can run in both [Node.js JavaScript applications](/docs/query/getting_started/query_app/),
-and as client-side applications in Web browsers.
-
+and as **client-side applications in Web browsers**.
 
 ## 1. Using a pre-built version
 

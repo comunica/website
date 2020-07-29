@@ -3,7 +3,7 @@ title: 'Setting up a Web client'
 description: 'Set up a user-friendly static Web page where SPARQL queries can be executed client-side'
 ---
 
-If you want to easily demonstrate a couple of SPARQL queries on a Web page,
+If you want to easily **demonstrate** a couple of SPARQL queries on a **Web page**,
 or if you want to show off your custom built Comunica engine,
 then you can do this using the [Comunica jQuery widget](https://github.com/comunica/jQuery-Widget.js/).
 
