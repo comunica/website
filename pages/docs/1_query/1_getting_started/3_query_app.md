@@ -1,6 +1,6 @@
 ---
 title: 'Querying in a JavaScript app'
-description: 'Execute SPARQL queries from within your application using the JavaScript API'
+description: 'Execute SPARQL queries from within your application using the JavaScript API.'
 ---
 
 The default Comunica query engine that exposes most standard features is Comunica SPARQL,
