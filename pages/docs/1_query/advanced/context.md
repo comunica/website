@@ -42,6 +42,7 @@ The following table gives an overview of all possible context entries that can b
 | `baseIRI` | Base IRI for relative IRIs in SPARQL queries |
 | `log` | A custom logger instance |
 | `datetime` | Specify a custom date |
+| `httpProxyHandler` | A proxy for all HTTP requests |
 
 ## 3. Defining sources
 
@@ -157,3 +158,8 @@ const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
 
 This date is primarily used for the SPARQL `NOW()` operator.
 It is also used when performing time travel querying using the [Memento protocl](/docs/query/advanced/memento/).
+
+## 10. Enabling an HTTP proxy
+
+All HTTP requests can be run through a proxy using `httpProxyHandler`.
+More information on this can be found in the [HTTP proxy guide](/docs/query/advanced/proxying/).
