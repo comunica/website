@@ -10,7 +10,7 @@ export default function DocIndex ({ path, paths, mattersData }) {
             indent: (p.match(/\//g) || []).length - 1,
         }))
         .map(entry =>
-            <a href={entry.path} className={"index-entry indent-" + entry.indent}>
+            <a key={entry.path} href={entry.path} className={"index-entry indent-" + entry.indent}>
                 <h3>{entry.title}</h3>
                 <p>{entry.description}</p>
             </a>

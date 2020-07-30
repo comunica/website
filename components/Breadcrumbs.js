@@ -5,9 +5,9 @@ export default function BreadCrumbs ({ frontmatter, path, paths, mattersData }) 
             path: p,
             title: mattersData[p].title,
         }))
-        .map(entry => <li><a href={entry.path}>{entry.title}</a></li>);
+        .map(entry => <li key={entry.path}><a href={entry.path}>{entry.title}</a></li>);
     if (entries.length > 0) {
-        entries.push(<li>{frontmatter.title}</li>);
+        entries.push(<li key={"_"}>{frontmatter.title}</li>);
     }
     return (
         <ul className="breadcrumbs">
