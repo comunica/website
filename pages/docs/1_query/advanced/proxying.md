@@ -17,7 +17,7 @@ $ comunica-sparql http://fragments.dbpedia.org/2015-10/en "SELECT * WHERE { ?s ?
 
 ## Proxying in an application
 
-When using Comunica SPARQL in an application, a proxy can be set using the `httpProxyHandler` [context entry](/docs/query/advanced/context/):
+When using [Comunica SPARQL in an application](/docs/query/getting_started/query_app/), a proxy can be set using the `httpProxyHandler` [context entry](/docs/query/advanced/context/):
 ```javascript
 import { ProxyHandlerStatic } from "@comunica/actor-http-proxy";
 

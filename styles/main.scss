@@ -155,6 +155,10 @@ code {
     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
+code.text {
+    display: block;
+}
+
 pre {
     display: block;
     overflow-x: scroll;
