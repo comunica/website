@@ -209,10 +209,9 @@ One of the simplest forms SPARQL is the ASK query,
 which can be executed in Comunica as follows:
 ```javascript
 const result = await myEngine.query(`
-ASK {
-  ?s ?p <http://dbpedia.org/resource/Belgium>
-}
-`, {
+  ASK {
+    ?s ?p <http://dbpedia.org/resource/Belgium>
+  }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
 })
 const hasMatches = await result.booleanResult;

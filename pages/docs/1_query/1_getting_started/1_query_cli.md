@@ -79,7 +79,7 @@ it is also possible to execute `CONSTRUCT` queries to produce RDF triples:
 $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
     "CONSTRUCT WHERE { ?s ?p ?o } LIMIT 100"
 ```
-```
+```text
 <http://0-access.newspaperarchive.com.topcat.switchinc.org/Viewer.aspx?img=8716084> <http://dbpedia.org/property/accessdate> "2010-04-21"^^<http://www.w3.org/2001/XMLSchema#date>;
     <http://dbpedia.org/property/date> "1939-01-02"^^<http://www.w3.org/2001/XMLSchema#date>;
     <http://dbpedia.org/property/format> "PDF";
