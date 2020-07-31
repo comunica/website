@@ -224,7 +224,7 @@ which indicates if the query has at least one result.
 ## 7. Serializing to a specific result format
 
 If you want your application to output query results in a certain text-based format,
-just like [executin Comunica on the command line](/docs/query/getting_started/query_cli/),
+just like [executing Comunica on the command line](/docs/query/getting_started/query_cli/),
 then you can make use of the `resultToString()` method.
 
 For example, serializing to SPARQL JSON can be done as follows:
