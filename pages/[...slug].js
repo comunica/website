@@ -5,27 +5,86 @@ import Highlight from 'react-highlight';
 import DocIndex from "../components/DocIndex";
 import BreadCrumbs from "../components/Breadcrumbs";
 
-export default function Page({ frontmatter, body, path, paths, mattersData }) {
-  return (
-    <div className="container-page">
-      <Head title={frontmatter.title}/>
-      <main>
-        <BreadCrumbs frontmatter={frontmatter} path={path} paths={paths} mattersData={mattersData}/>
-        <h1>{frontmatter.title}</h1>
-        <hr />
-        <ReactMarkdown
-            escapeHtml={false}
-            source={body}
-            renderers={{
-                code: CodeBlock,
-                inlineCode: CodeBlockInline,
-                heading: Heading,
-            }}
-        />
-        {frontmatter.index && <DocIndex path={path} paths={paths} mattersData={mattersData}/>}
-      </main>
-    </div>
-  )
+export default class Page extends React.Component {
+    render() {
+        const { frontmatter, body, path, paths, mattersData } = this.props;
+        return (
+            <div className="container-page">
+                <Head title={frontmatter.title}/>
+                <main>
+                    <BreadCrumbs frontmatter={frontmatter} path={path} paths={paths} mattersData={mattersData}/>
+                    <h1>{frontmatter.title}</h1>
+                    <hr />
+                    <div className="headers-overview">
+                        <p>On this page</p>
+                        <ol className="headers-overview-elements"/>
+                    </div>
+                    <ReactMarkdown
+                        escapeHtml={false}
+                        source={body}
+                        renderers={{
+                            code: CodeBlock,
+                            inlineCode: CodeBlockInline,
+                            heading: Heading,
+                        }}
+                    />
+                    {frontmatter.index && <DocIndex path={path} paths={paths} mattersData={mattersData}/>}
+                </main>
+            </div>
+        )
+    }
+
+    componentDidMount() {
+        // Get index container
+        const index = document.querySelector('.headers-overview-elements');
+
+        // Find all headers
+        const container = document.querySelector('.container-page');
+        const headers = container.querySelectorAll('h2');
+        for (const header of headers) {
+            const listItem = document.createElement('li');
+            const anchor = document.createElement('a');
+            anchor.textContent = header.innerText;
+            anchor.setAttribute('href', '#' + header.id);
+            anchor.setAttribute('class', 'headers-overview-element');
+            listItem.appendChild(anchor);
+            index.appendChild(listItem);
+        }
+
+        // Show headers as active based on scroll status
+        window.addEventListener('load', updateIndex);
+        window.addEventListener('scroll', updateIndex);
+        function updateIndex(){
+            // Unselect all other entries
+            const entries = document.querySelectorAll('a.headers-overview-element');
+            for (let i = 0; i < entries.length; i++) {
+                entries[i].classList.remove('headers-overview-element-active');
+            }
+
+            // Select the hovered entry
+            const header = getActiveHeader();
+            if (header) {
+                let match = index.querySelector('a[href="#' + header.id + '"]');
+                if (match) {
+                    match.classList.add('headers-overview-element-active');
+                }
+            }
+        }
+        // Get the first header section that is visible
+        function getActiveHeader() {
+            let lastHiddenHeader;
+            for (const header of headers) {
+                if (header.id) {
+                    if (header.getBoundingClientRect().top <= 70) { // Offset to account for fixed header
+                        lastHiddenHeader = header;
+                    } else {
+                        return lastHiddenHeader;
+                    }
+                }
+            }
+            return lastHiddenHeader;
+        }
+    }
 }
 
 export async function getStaticProps({ ...ctx }) {
