@@ -51,6 +51,11 @@ export default class Page extends React.Component {
             index.appendChild(listItem);
         }
 
+        // Only show overview node if we have at least one header
+        if (headers.length > 0) {
+            index.parentNode.style.display = 'block';
+        }
+
         // Show headers as active based on scroll status
         window.addEventListener('load', updateIndex);
         window.addEventListener('scroll', updateIndex);
