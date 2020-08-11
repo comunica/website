@@ -1,6 +1,6 @@
 # Comunica website
 
-Source code for the [Comunica](https://comunica.linkeddatafragments.org/) website.
+Source code for the [Comunica](https://comunica.dev/) website.
 
 ## Contributing
 

@@ -3,7 +3,7 @@ title: 'Cite'
 ---
 
 If you are using or extending Comunica as part of a scientific publication,
-we would appreciate a citation.
+we would appreciate a citation of our [article](https://comunica.github.io/Article-ISWC2018-Resource/).
 
 ```bibtex
 @inproceedings{taelman_iswc_resources_comunica_2018,
