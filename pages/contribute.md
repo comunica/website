@@ -31,4 +31,16 @@ When contributing, make sure to keep in mind the following:
     * Signing the [Contributor License Agreement](https://cla-assistant.io/comunica/comunica)
 * Only add the files that are needed, so don't blindly do a `git -a`. (avoid adding editor-specific files)
 * A good editor can make your life a lot easier. For example, [WebStorm](https://www.jetbrains.com/community/education/#students) can be used for free with an academic license.
-    
+
+## Write documentation
+
+This website aims to provide detailed documentation on how to use and modify Comunica.
+If you see an opportunity for improving this documentation, fixing mistakes, or adding new guides,
+you are welcome to contribute via [GitHub](https://github.com/comunica/website).
+
+## Create example code
+
+The [Comunica examples repository](https://github.com/comunica/examples) contains several example packages that modify Comunica,
+with details on how they are created and how they work.
+Anyone is more than welcome to contribute new example packages to this repository.
+For inspiration, you can have a look at the [example requests](https://github.com/comunica/examples/issues?q=is%3Aissue+is%3Aopen+label%3Aexample-request).
