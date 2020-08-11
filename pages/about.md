@@ -47,3 +47,6 @@ The Comunica project has been initiated by [IDLab](https://www.ugent.be/ea/idlab
 and is being actively developed and maintained by a variety of [contributors](https://github.com/comunica/comunica/graphs/contributors).
 All development happens publicaly via GitHub [project boards](https://github.com/orgs/comunica/projects), [issues](https://github.com/comunica/comunica/issues), and [pull requests](https://github.com/comunica/comunica/pulls).
 Anyone is welcome to [contribute](/contribute/) to this project.
+
+While IDLab is a research lab that prefers research-related projects,
+we are open to [discussing commercial support](mailto:ruben.taelman@ugent.be).

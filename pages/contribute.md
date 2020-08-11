@@ -18,6 +18,9 @@ you are welcome to contribute by submitting a **pull request**.
 Before you open a pull request, it is considered a good practise to first
 [open an issue](https://github.com/comunica/comunica/issues) or [discuss it with the community](/ask/).
 
+Don't know on what to get started? Have a look at issues tagged with the [`good-first-issue`](https://github.com/comunica/comunica/issues?q=is%3Aissue+is%3Aopen+label%3Agood-first-issue) label
+or the [`dev-ready`](https://github.com/comunica/comunica/issues?q=is%3Aissue+is%3Aopen+label%3Adev-ready) label.
+
 When contributing, make sure to keep in mind the following:
 * Read how to [set up a development environment](https://github.com/comunica/comunica#development-setup).
 * [Use descriptive, imperative commit message](https://chris.beams.io/posts/git-commit/)
