@@ -15,6 +15,17 @@ export default class Page extends React.Component {
                     <BreadCrumbs frontmatter={frontmatter} path={path} paths={paths} mattersData={mattersData}/>
                     <h1>{frontmatter.title}</h1>
                     <hr />
+                    {frontmatter.wip && <div className={'wip'}>
+                        <h2>🚧 Under construction 🚧️</h2>
+                        <p>
+                            This section still needs to be created 🔨.
+                            <br />
+                            In the meantime, you can read our <a href={"https://comunica.readthedocs.io/en/latest/"}>old documentation</a> and check our <a href={"https://github.com/comunica?utf8=%E2%9C%93&q=topic%3Atutorial&type=&language="}>tutorials</a>.
+                        </p>
+                        <p>
+                            <a href={"/contribute/"}>You can contribute by helping to write guides like this.</a>
+                        </p>
+                    </div>}
                     <div className="headers-overview">
                         <p>On this page</p>
                         <ol className="headers-overview-elements"/>

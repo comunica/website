@@ -328,6 +328,17 @@ pre {
     }
 }
 
+.wip {
+    margin: 4rem 0 4rem 0;
+    text-align: center;
+    h2 {
+        font-size: 2rem;
+    }
+    p {
+        font-size: 1.2rem;
+    }
+}
+
 @media (max-width: 1350px) {
     .headers-overview {
         display: none;
