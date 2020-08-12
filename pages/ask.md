@@ -25,4 +25,4 @@ you are very welcome to [contribute](contribute/).
 
 ## Email
 
-For any other matters, such as commercial support, you can send an email to [Ruben Taelman](mailto:ruben.taelman@ugent.be).
+For any other matters, such as research collaborations or commercial support, you can send an email to [Ruben Taelman](mailto:ruben.taelman@ugent.be).
