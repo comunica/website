@@ -121,6 +121,10 @@ table {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    main {
+        align-items: center;
+    }
 }
 
 .container-page {

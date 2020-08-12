@@ -8,11 +8,11 @@ export default function Home() {
       <main>
         <div className={"intro"}>
           <img src="/img/comunica_red.svg" alt="Comunica" className="comunica-logo" />
-          <h1 className="title">A Linked Data querying framework</h1>
+          <h1 className="title">A knowledge graph querying framework</h1>
         </div>
 
         <p className="description">
-          Flexible, Web-friendly SPARQL querying over RDF in JavaScript.
+          Flexible SPARQL and GraphQL over decentralized RDF on the Web.
         </p>
 
         <div className="grid-wide">
@@ -20,7 +20,7 @@ export default function Home() {
             <img src="/img/web.svg" alt="Web" className="feature-icon" />
             <h3>For the Web</h3>
             <p>
-              Powered by native Web technologies, execute queries server or client-side.
+              Powered by Web technologies, execute queries via JavaScript on server or client.
             </p>
           </div>
           <div className="card-info">
