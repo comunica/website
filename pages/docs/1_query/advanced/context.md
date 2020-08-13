@@ -43,6 +43,7 @@ The following table gives an overview of all possible context entries that can b
 | `log` | A custom logger instance |
 | `datetime` | Specify a custom date |
 | `httpProxyHandler` | A proxy for all HTTP requests |
+| `httpIncludeCredentials` | (_browser-only_) If current credentials should be included for HTTP requests |
 
 ## 3. Defining sources
 
@@ -163,3 +164,19 @@ It is also used when performing time travel querying using the [Memento protocl]
 
 All HTTP requests can be run through a proxy using `httpProxyHandler`.
 More information on this can be found in the [HTTP proxy guide](/docs/query/advanced/proxying/).
+
+## 11. Include credentials in HTTP requests
+
+_Only applicable when running in the browser_
+
+If this option is enabled, then all cross-site requests will be made using credentials of the current pages.
+This includes cookies, authorization headers or TLS client certificates.
+
+Enabling this option has no effect on same-site requests.
+
+```javascript
+const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+  sources: ['http://fragments.dbpedia.org/2015/en'],
+  httpIncludeCredentials: true,
+});
+```
