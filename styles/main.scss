@@ -369,37 +369,27 @@ pre {
 
 @media (max-width: 1350px) {
     .headers-overview {
-        display: none;
+        visibility: hidden;
     }
 }
 
 @media (max-width: 800px) {
-    ul.breadcrumbs {
-        li {
-            display: block;
-            &:not(:last-child):after {
-                content: "";
-                margin: 0;
-            }
-        }
-    }
     .grid, .grid-wide {
         min-width: 0;
         width: 100%;
         flex-direction: column;
+    }
+    .card {
+        width: 95%;
     }
     .container-page {
         width: 100%;
     }
     nav {
         position: inherit;
-        margin-top: -1rem;
-        height: auto;
         ul {
-            float: none;
             li {
-                margin-top: 1rem;
-                display: block;
+                margin-left: 1rem;
             }
         }
     }
@@ -408,7 +398,13 @@ pre {
     }
 }
 
-@media (max-width: 800px) and (min-width: 600px) {
+@media (max-width: 800px) and (min-width: 700px) {
+    pre {
+        width: 700px;
+    }
+}
+
+@media (max-width: 700px) and (min-width: 600px) {
     pre {
         width: 600px;
     }
