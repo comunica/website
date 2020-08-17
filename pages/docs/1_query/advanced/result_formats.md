@@ -11,6 +11,8 @@ By default, Comunica has support for the following result formats:
 | [`simple`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-simple) | A custom, text-based result format. |
 | [`application/sparql-results+json`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-json) | The [SPARQL/JSON](https://www.w3.org/TR/sparql11-results-json/) results format. |
 | [`application/sparql-results+xml`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-xml) | The [SPARQL/XML](https://www.w3.org/TR/rdf-sparql-XMLres/) results format. |
+| [`text/csv`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-csv) | The [SPARQL/CSV](https://www.w3.org/TR/sparql11-results-csv-tsv/) results format. |
+| [`text/tab-separated-values`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-tsv) | The [SPARQL/TSV](https://www.w3.org/TR/sparql11-results-csv-tsv/) results format. |
 | [`stats`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-stats) | A custom results format for testing and debugging. |
 | [`table`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-table) | A text-based visual table result format. |
 | [`tree`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-tree) | A tree-based result format for GraphQL-LD result compacting. |

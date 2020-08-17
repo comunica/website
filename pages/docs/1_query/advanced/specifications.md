@@ -16,6 +16,7 @@ The following standard query specifications are supported:
 | [SPARQL 1.1 Federated Query](https://www.w3.org/TR/sparql11-federated-query/) |
 | [SPARQL 1.1 Query Results JSON Format](https://www.w3.org/TR/sparql11-results-json/) |
 | [SPARQL Query Results XML Format (Second Edition)](https://www.w3.org/TR/rdf-sparql-XMLres/) |
+| [SPARQL 1.1 Query Results CSV and TSV Formats](https://www.w3.org/TR/sparql11-results-csv-tsv/) |
 | [SPARQL 1.1 Protocol](https://www.w3.org/TR/sparql11-protocol/) |
 
 The following notable specifications are not supported _yet_:
@@ -23,7 +24,6 @@ The following notable specifications are not supported _yet_:
 | **Description** |
 | ------- |
 | [SPARQL 1.1 Update](https://www.w3.org/TR/sparql11-update/) |
-| [SPARQL 1.1 Query Results CSV and TSV Formats](https://www.w3.org/TR/sparql11-results-csv-tsv/) |
 | [SPARQL 1.1 Entailment Regimes](https://www.w3.org/TR/sparql11-entailment/) |
 | [SPARQL 1.1 Graph Store HTTP Protocol](https://www.w3.org/TR/sparql11-http-rdf-update/) |
 
@@ -36,6 +36,8 @@ For all of these supported formats, the following are standards:
 | ------- | --------------- |
 | [`application/sparql-results+json`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-json) | The [SPARQL/JSON](https://www.w3.org/TR/sparql11-results-json/) results format. |
 | [`application/sparql-results+xml`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-xml) | The [SPARQL/XML](https://www.w3.org/TR/rdf-sparql-XMLres/) results format. |
+| [`text/csv`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-csv) | The [SPARQL/CSV](https://www.w3.org/TR/sparql11-results-csv-tsv/) results format. |
+| [`text/tab-separated-values`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-tsv) | The [SPARQL/TSV](https://www.w3.org/TR/sparql11-results-csv-tsv/) results format. |
 
 <div class="note">
 All serializers work in a <i>streaming</i> manner.
