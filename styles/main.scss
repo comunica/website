@@ -415,6 +415,7 @@ pre {
         }
     }
     nav:not(.active) {
+        position: initial;
         ul {
             display: none;
         }
@@ -452,6 +453,9 @@ pre {
                 }
             }
         }
+    }
+    .nav-pusher {
+        height: 0;
     }
 }
 
