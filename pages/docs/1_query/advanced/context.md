@@ -169,7 +169,7 @@ More information on this can be found in the [HTTP proxy guide](/docs/query/adva
 
 _Only applicable when running in the browser_
 
-If this option is enabled, then all cross-site requests will be made using credentials of the current pages.
+If this option is enabled, then all cross-site requests will be made using credentials of the current page.
 This includes cookies, authorization headers or TLS client certificates.
 
 Enabling this option has no effect on same-site requests.
@@ -180,3 +180,8 @@ const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
   httpIncludeCredentials: true,
 });
 ```
+
+## 12. Send requests via HTTP basic authentication
+
+Via HTTP Basic Authentication one can include **username and password** credentials in HTTP requests.
+More information on this can be found in the [HTTP basic authentication guide](/docs/query/advanced/basic_auth/).
