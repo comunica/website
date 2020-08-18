@@ -3,7 +3,7 @@ import Head from '../components/Head';
 export default function Home() {
   return (
     <div className="container">
-      <Head title={'Index'}/>
+      <Head title={'A knowledge graph querying framework'}/>
 
       <main>
         <div className={"intro"}>
