@@ -3,7 +3,10 @@ import Head from '../components/Head';
 export default function Home() {
   return (
     <div className="container">
-      <Head title={'A knowledge graph querying framework'}/>
+      <Head
+          title={'A knowledge graph querying framework'}
+          description={'Flexible SPARQL and GraphQL over decentralized RDF on the Web.'}
+      />
 
       <main>
         <div className={"intro"}>

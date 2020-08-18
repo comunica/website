@@ -10,7 +10,7 @@ export default class Page extends React.Component {
         const { frontmatter, body, path, paths, mattersData } = this.props;
         return (
             <div className="container-page">
-                <Head title={frontmatter.title}/>
+                <Head title={frontmatter.title} description={frontmatter.description}/>
                 <main>
                     <BreadCrumbs frontmatter={frontmatter} path={path} paths={paths} mattersData={mattersData}/>
                     <h1>{frontmatter.title}</h1>
