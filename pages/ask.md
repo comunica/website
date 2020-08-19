@@ -1,5 +1,6 @@
 ---
 title: 'Ask'
+description: 'Ask questions about Comunica.'
 ---
 
 Should you not find the right information on this website,

@@ -21,6 +21,7 @@ export default function DocIndex ({ path, paths, mattersData }) {
                 <p className={"date"}>{entry.date}</p>
                 <div className={"excerpt"}>
                     <Markdown body={entry.excerpt} />
+                    <p className={"read-more"}>Read more...</p>
                 </div>
             </a>
         );

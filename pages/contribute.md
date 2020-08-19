@@ -1,5 +1,6 @@
 ---
 title: 'Contribute'
+description: 'Contribute to the development of Comunica.'
 ---
 
 ## Report bugs or request features

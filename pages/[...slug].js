@@ -7,10 +7,10 @@ import Markdown from "../components/Markdown";
 
 export default class Page extends React.Component {
     render() {
-        const { frontmatter, body, path, paths, mattersData } = this.props;
+        const { frontmatter, body, path, paths, mattersData, excerpt } = this.props;
         return (
             <div className="container-page">
-                <Head title={frontmatter.title} description={frontmatter.description}/>
+                <Head title={frontmatter.title} description={excerpt || frontmatter.description}/>
                 <main>
                     <BreadCrumbs frontmatter={frontmatter} path={path} paths={paths} mattersData={mattersData}/>
                     <h1>{frontmatter.title}</h1>
@@ -114,6 +114,7 @@ export async function getStaticProps({ ...ctx }) {
         props: {
             frontmatter: data.data,
             body: data.content,
+            excerpt: data.excerpt,
             path,
             paths,
             mattersData,

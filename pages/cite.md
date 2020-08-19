@@ -1,5 +1,6 @@
 ---
 title: 'Cite'
+description: 'Reference Comunica in a scientific publication.'
 ---
 
 If you are using or extending Comunica as part of a scientific publication,

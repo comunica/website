@@ -1,5 +1,6 @@
 ---
 title: 'Documentation'
+description: 'Overview of all Comunica documentation.'
 index: true
 ---
 
