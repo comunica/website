@@ -5,6 +5,10 @@ title: 'Ask'
 Should you not find the right information on this website,
 we would be happy to help you out via any of the methods below.
 
+Related pages:
+* [Roadmap](/roadmap/)
+* [Contribute](/contribute/)
+
 ## Gitter
 
 The easiest way to get an answer to small questions is via our [Gitter channel](https://gitter.im/comunica/Lobby).

@@ -2,6 +2,10 @@
 title: 'About'
 ---
 
+Related pages:
+* [Roadmap](/roadmap/)
+* [Contribute](/contribute/)
+
 ## Flexible querying of Linked Data
 
 [**Linked Data**](https://www.w3.org/standards/semanticweb/data) on the Web exists in **many shapes and forms**.

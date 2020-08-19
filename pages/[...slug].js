@@ -1,9 +1,9 @@
 import Head from '../components/Head';
 import matter from 'gray-matter'
-import ReactMarkdown from 'react-markdown'
-import Highlight from 'react-highlight';
 import DocIndex from "../components/DocIndex";
+import BlogIndex from "../components/BlogIndex";
 import BreadCrumbs from "../components/Breadcrumbs";
+import Markdown from "../components/Markdown";
 
 export default class Page extends React.Component {
     render() {
@@ -30,16 +30,9 @@ export default class Page extends React.Component {
                         <p>On this page</p>
                         <ol className="headers-overview-elements"/>
                     </div>
-                    <ReactMarkdown
-                        escapeHtml={false}
-                        source={body}
-                        renderers={{
-                            code: CodeBlock,
-                            inlineCode: CodeBlockInline,
-                            heading: Heading,
-                        }}
-                    />
+                    <Markdown body={body} />
                     {frontmatter.index && <DocIndex path={path} paths={paths} mattersData={mattersData}/>}
+                    {frontmatter.blog_index && <BlogIndex path={path} paths={paths} mattersData={mattersData}/>}
                 </main>
             </div>
         )
@@ -111,6 +104,10 @@ export async function getStaticProps({ ...ctx }) {
     const mattersData = {};
     for (const p in matters) {
         mattersData[p] = matters[p].data;
+        const excerpt = matters[p].excerpt;
+        if (excerpt) {
+            mattersData[p].excerpt = excerpt;
+        }
     }
 
     return {
@@ -150,7 +147,7 @@ export async function getStaticData() {
 
     const matters = (await Promise.all(pathsRaw
         .map(path => import(`.${path.slice(0, -1)}.md`))))
-        .map(content => matter(content.default))
+        .map(content => matter(content.default, { excerpt_separator: '<!-- excerpt-end -->' }))
         .reduce((acc, content, i) => {
             acc[paths[i]] = content;
             return acc;
@@ -161,31 +158,4 @@ export async function getStaticData() {
         matters,
         fallback: false,
     }
-}
-
-const CodeBlock = ({ value, language }) => {
-    return (
-            <Highlight className={language}>
-                {value}
-            </Highlight>
-    )
-}
-
-const CodeBlockInline = ({ value, language }) => {
-    return (
-        <code>{value}</code>
-    )
-}
-
-function flatten(text, child) {
-    return typeof child === 'string'
-        ? text + child
-        : React.Children.toArray(child.props.children).reduce(flatten, text)
-}
-
-const Heading = (props) => {
-    const children = React.Children.toArray(props.children)
-    const text = children.reduce(flatten, '')
-    const slug = text.toLowerCase().replace(/\W/g, '-')
-    return React.createElement('h' + props.level, { id: slug }, props.children)
 }

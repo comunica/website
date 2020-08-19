@@ -8,9 +8,8 @@ export default class Navigation extends React.Component {
             <ul>
                 <li><a href="http://query.linkeddatafragments.org/">Try live</a></li>
                 <li><a href="/docs/">Docs</a></li>
-                <li><a href="/contribute/">Contribute</a></li>
+                <li><a href="/blog/">Blog</a></li>
                 <li><a href="/about/">About</a></li>
-                <li><a href="/roadmap/">Roadmap</a></li>
                 <li><a href="/ask/">Ask</a></li>
                 <li><a href="/cite/">Cite</a></li>
                 <li><a href="https://github.com/comunica/comunica">GitHub</a></li>
