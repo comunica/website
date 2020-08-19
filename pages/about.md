@@ -3,6 +3,9 @@ title: 'About'
 description: 'Learn more about Comunica.'
 ---
 
+Comunica is a knowledge graph querying framework.<br >
+This page provides more details about its goals and motivations.
+
 Related pages:
 * [Roadmap](/roadmap/)
 * [Contribute](/contribute/)
