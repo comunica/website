@@ -26,7 +26,7 @@ This fine-tuning of Comunica to suit your own needs, and avoiding the overhead o
 ## For and on the Web
 
 We strongly believe in the existence of **open Web standards**, such as those provided by [W3C](https://www.w3.org/) and [WhatWG](https://whatwg.org/).
-As such, Comunica **implements** several specifications such as [RDF](https://www.w3.org/TR/rdf11-concepts/) and [SPARQL](https://www.w3.org/TR/sparql11-query/).
+As such, [Comunica **implements** several specifications](/docs/query/advanced/specifications/) such as [RDF](https://www.w3.org/TR/rdf11-concepts/) and [SPARQL](https://www.w3.org/TR/sparql11-query/).
 Furthermore, Comunica is implemented using Web-based technologies in **JavaScript**, which enables usage through browsers,
 the command line, the SPARQL protocol, or any Web or JavaScript application.
 
