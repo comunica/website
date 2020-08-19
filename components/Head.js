@@ -13,9 +13,10 @@ export default ({ title, description }) => (
         <meta property="og:locale" content="en_US" />
         <meta property="og:site_name" content={`Comunica – ${title}`} />
         <meta property="og:type" content="website" />
+        <meta name="twitter:site" content="@comunicajs" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={`Comunica – ${title}`} />
         <meta name="twitter:description" content={`${description.replace(/\n/g, ' ')}`} />
-        <meta name="twitter:image" content="/img/comunica_red.svg" />
+        <meta name="twitter:image" content="https://comunica.dev/img/comunica_red.png" />
     </Head>
 );
