@@ -52,3 +52,12 @@ Internally, this library makes use of RDF parsers from the Comunica framework, w
 All metadata of the [ESWC Conference (2020)](https://2020.eswc-conferences.org/) is [queryable](https://query.2020.eswc-conferences.org/)
 via a jQuery widget instance of Comunica.
 It features several example queries over a [Triple Pattern Fragments](https://linkeddatafragments.org/concept/) interface through which the ESWC 2020 metadata is published.
+
+## Walder
+
+[Walder](https://github.com/KNowledgeOnWebScale/walder) offers an easy way 
+to set up a website or Web API on top of decentralized knowledge graphs.
+It uses Comunica for querying these knowledge graphs.
+hosted via Solid PODs, SPARQL endpoints, Triple Pattern Fragments interfaces, RDF files, and so on. 
+Using content negotiation, Walder makes the data in these knowledge graphs available to clients via HTML, RDF, and JSON-LD. 
+Users define in a configuration file which data Walder uses and how it processes this data.
