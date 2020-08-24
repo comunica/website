@@ -5,6 +5,7 @@ export default function DocIndex ({ path, paths, mattersData }) {
         .filter(p => p.startsWith(path) && p !== path + '/')
         .map(p => p.slice(path.length + 1, p.length))
         .filter(p => (p.match(/\//g) || []).length === 1) // Only files directly under blog/
+        .reverse()
         .map(p => {
             const [_, year, month, day] = /^([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])-/.exec(p);
             return {
