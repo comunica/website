@@ -10,9 +10,8 @@ This page gives an overview of the long-term goals of Comunica.
 ## Specification compliance
 
 A primary goal is to achieve full compliance for [SPARQL and other related specifications](/docs/query/advanced/specifications/).
-While the majority of SPARQL specifications are supported,
-some edge-cases for [SPARQL 1.1 Query are not handled correctly yet](https://github.com/comunica/comunica/issues/287),
-and [SPARQL 1.1 Update](https://github.com/comunica/comunica/issues/435) is not implemented yet.
+While the SPARQL 1.1 Query specification is fully supported,
+[SPARQL 1.1 Update](https://github.com/comunica/comunica/issues/435) has not been implemented yet.
 
 ## Future-oriented development
 
