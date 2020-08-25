@@ -26,7 +26,11 @@ feel free to report them in our [issue tracker on GitHub](https://github.com/com
 Please take into account that this is an open-source effort,
 so we may not be able to solve all issues, but we do our best!
 Should you be interested in helping our with fixing or implementing any of these issues,
-you are very welcome to [contribute](contribute/). 
+you are very welcome to [contribute](contribute/).
+
+## Twitter
+
+To keep updated with the latest news on Comunica, find us on [Twitter](https://twitter.com/comunicajs).
 
 ## Email
 
