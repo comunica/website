@@ -12,7 +12,7 @@ Feel free to [contact us](/ask/) if you want your use of Comunica added to this 
 [LDflex](https://github.com/LDflex/LDflex) is a JavaScript library provides a convenient syntax for quickly writing and executing queries in a developer-friendly way.
 Using the power of Comunica and JSON-LD contexts, you can write expressions like `person.friends.firstName` to get a list of your friends.
 
-LDflex is used within the [Solid](https://solid.mit.edu/) community to easily [interact with one or more Solid data pods](https://github.com/solid/query-ldflex/).
+LDflex is used within the [Solid](https://solidproject.org/) community to easily [interact with one or more Solid data pods](https://github.com/solid/query-ldflex/).
 Using the compact syntax of LDflex, it is very simple to query from within [React components](https://github.com/solid/react-components).
 
 ## GraphQL-LD
