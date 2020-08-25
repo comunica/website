@@ -1,6 +1,6 @@
 ---
-title: 'Creating a custom configuration'
-description: 'Create a custom configuration of Comunica modules with specific features.'
+title: 'Querying with a custom configuration from the command line'
+description: 'Create a custom configuration of Comunica modules with reduced features, and query with it from the command line.'
 ---
 
 While packages such as [Comunica SPARQL](https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql)
@@ -9,13 +9,14 @@ it is possible to **override these configurations**,
 so that you can modify the internal capabilities of your query engine.
 
 In this guide, we will keep it simple,
-and we will just **remove some parts of the config file** to create a more lightweight query engine.
-In a next guide, we will look into [adding a component to a config file](/docs/modify/getting_started/custom_config_add/). 
+and we will just **remove some parts of the config file** to create a more lightweight query engine,
+and query it from the command line.
+In a next guide, we will look into [querying with a custom config from a JavaScript app](/docs/modify/getting_started/custom_config_app/). 
 
 <div class="note">
 This guide assumes basic knowledge on querying with Comunica.
 If you haven't looked into this yet, it is recommended to follow
-<a href="/docs/query/getting_started/">one of the getting started guides</a>.
+<a href="/docs/query/getting_started/query_cli">the getting started guide on querying from the command line</a>.
 </div>
 
 ## 1. Requirements of a config file
@@ -185,7 +186,7 @@ If you don't define the <code>COMUNICA_CONFIG</code> environment variable,
 <code>comunica-dynamic-sparql</code> has a significant startup delay compared to <code>comunica-sparql</code>,
 since it now have to load in, parse, and interpret a config file.
 <code>comunica-dynamic-sparql</code> should therefore only be used for simple testing
-before you <a href="/docs/modify/getting_started/custom_package/">expose your query engine into a standalone reusable package</a>.
+before you <a href="/docs/modify/getting_started/custom_config_app/">use your query engine in a separate package</a>.
 </div>
 
 ## 5. Removing RDF serialization actors
@@ -253,7 +254,7 @@ because it also contains actors for other SPARQL query operators which we don't 
 Instead of _just_ removing `files-cais:config/sets/sparql-queryoperators.json`,
 we will remove it _and_ copy its contents directly into our config file.
 
-### Inline an imported config
+### 6.1. Inline an imported config
 
 To do this, first **remove** the following line from our `config.json`:
 ```text
@@ -320,7 +321,7 @@ At this point, your config file should still be valid.
 Confirm this by executing <code>comunica-dynamic-sparql</code>.
 </div>
 
-### Remove actors
+### 6.2. Remove actors
 
 Next, we will remove the actors we don't need.
 Concretely, we will remove the actors of the following types:
@@ -347,7 +348,7 @@ Concretely, we will remove the following entries:
     },
 ```
 
-### Test changes
+### 6.3. Test changes
 
 After this change, you should now be unable to execute `CONSTRUCT` or `DESCRIBE` queries.
 Try this out by executing the following:
@@ -366,49 +367,7 @@ You have now successfully built your own custom Comunica engine that is a bit mo
 Just like the `CONSTRUCT` and `DESCRIBE` actors,
 you can remove any other actors you don't want to make it even more lightweight.
 
-## 7. Execute in a JavaScript app
-
-Up until now, we have tested our changes on the command line with `comunica-dynamic-sparql`.
-We can however also **load this config from a JavaScript application**.
-
-If you're starting from scratch, first initialize a new JavaScript application:
-```bash
-$ npm init
-$ npm touch main.js # the file in which we can write our app.
-```
-
-First, make sure Comunica SPARQL (`@comunica/actor-init-sparql`) is installed as a dependency.
-```bash
-$ npm install @comunica/actor-init-sparql
-```
-
-While [`newEngine()` is used to import Comunica SPARQL's default config](/docs/query/getting_started/query_app/),
-we can load a custom config by creating our engine via `newEngineDynamic()`:
-```javascript
-const newEngineDynamic = require('@comunica/actor-init-sparql').newEngineDynamic;
-
-const myEngine = await newEngineDynamic({
-  configResourceUrl: 'config.json', // Relative or absolute path 
-});
-```
-
-The API of the resulting engine is identical to `newEngine()`:
-```javascript
-const result = await myEngine.query(`
-  SELECT ?s ?p ?o WHERE {
-    ?s ?p <http://dbpedia.org/resource/Belgium>.
-    ?s ?p ?o
-  } LIMIT 100`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
-});
-result.bindingsStream.on('data', (binding) => {
-    console.log(binding.get('?s').value);
-    console.log(binding.get('?s').termType);
-});
-```
-
 <div class="note">
-If you run into config loading problems,
-make sure your app has a <code>package.json</code> file,
-otherwise config loading may fail.
+Loading custom configs from the command line is limited to loading from a single config file.
+If you want to split up your config file over different parts, you have to <a href="/modify/getting_started/custom_config_app/">load it via the JavaScript API</a>.
 </div>

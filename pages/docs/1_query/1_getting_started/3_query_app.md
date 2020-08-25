@@ -10,6 +10,12 @@ and show how it can be used to execute queries.
 
 ## 1. Installation
 
+<div class="note">
+This assumes you already have an npm package.
+If you don't have one yet, create one using <code>npm init</code>.
+You will also need a JavaScript file to write in, such as <code>main.js</code>.
+</div>
+
 In order to add Comunica SPARQL as a _dependency_ to your [Node.js](https://nodejs.org/en/) application,
 we can execute the following command:
 ```bash
