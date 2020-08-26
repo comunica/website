@@ -21,7 +21,7 @@ If you haven't looked into this yet, it is recommended to follow
 
 ## 1. Requirements of a config file
 
-Comunica is composed of a **set of _[actors](/docs/modify/advanced/architecture/)_**
+Comunica is composed of a **set of _[actors](/docs/modify/advanced/architecture_core/)_**
 that execute specific tasks.
 For example, all SPARQL query operators (`DISTINCT`, `FILTER`, `ASK`, ...)
 have a corresponding actor that implements them in a certain way.
