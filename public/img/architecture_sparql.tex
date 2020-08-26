@@ -1,0 +1,186 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+% Page setup
+\usepackage[a4paper,landscape,margin=2cm]{geometry}
+\usepackage{amsmath}
+
+% Typography
+\usepackage[scaled]{helvet}
+\let\familydefault\sfdefault
+
+\usepackage[usenames,svgnames]{xcolor}
+\usepackage{tikz,pgfplots}
+\usetikzlibrary{positioning,arrows,intersections,calc}
+
+% Set page size to tikz figure size
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}
+
+\definecolor{coloractor}    {RGB}{199,212,104}
+\definecolor{colormediator} {RGB}{ 79,142,209}
+\definecolor{colorbus}      {RGB}{143,232,186}
+\definecolor{colortext}     {RGB}{ 29, 29, 27}
+\definecolor{coloraction}   {RGB}{129, 29, 27}
+\definecolor{colortest}     {RGB}{129,129,227}
+
+\begin{document}
+\pagestyle{empty}
+\begin{tikzpicture}[
+    node distance = 10em, auto,
+    font={\Large\itshape},
+    base/.style={text=colortext,font={\Large\bfseries},inner sep=10pt,align=center,rectangle},
+    txt/.style={text=colortext,font={},inner sep=7pt,align=center},
+    action/.style={txt,color=coloraction},
+    test/.style={txt,color=colortest},
+    treenode/.style={base,thick,draw=colortext,text width=2em},
+    relation/.style={text width=13em},
+	actor/.style={base,font={\Large},fill=coloractor,text width=10em},
+	mediator/.style={base,fill=colormediator,text width=10em},
+	bus/.style={base,fill=colorbus,text width=20em},
+]
+
+	% Legend
+    \draw [fill=black!1!white] (-43,0) rectangle (-28,2);
+	\node[actor] at (-40,1) {Actor};
+	\node[bus] at (-33,1) {Bus};
+
+	% Init
+	\node[bus] (bus-init) {Init};
+	\node[actor,below=1 of bus-init] (actor-init-sparql) {Comunica SPARQL};
+	\draw[->,thick](bus-init.south) -- (actor-init-sparql.north);
+	
+	\node[bus,below=of actor-init-sparql] (bus-query-operation) {Query Operation};
+	\node[bus,left=of bus-query-operation] (bus-optimize-query-operation) {Optimize Query Operation};
+	\node[bus,left=1 of bus-optimize-query-operation] (bus-sparql-parse) {SPARQL Parse};
+	\node[bus,left=1 of bus-sparql-parse] (bus-context-preprocess) {Context Preprocess};
+	\node[bus,right=7 of bus-query-operation] (bus-sparql-serialize) {SPARQL Serialize};
+	
+	\draw[->,thick](actor-init-sparql.south) -- (bus-query-operation.north);
+	\draw[->,thick](actor-init-sparql.south) -- (bus-optimize-query-operation.north);
+	\draw[->,thick](actor-init-sparql.south) -- (bus-sparql-parse.north);
+	\draw[->,thick](actor-init-sparql.south) -- (bus-context-preprocess.north);
+	\draw[->,thick](actor-init-sparql.south) -- (bus-sparql-serialize.north);
+	
+	% SPARQL Parse
+	\node[actor,below=1 of bus-sparql-parse] (actor-sparql-parse-algebra) {Algebra};
+	\draw[->,thick](bus-sparql-parse.south) -- (actor-sparql-parse-algebra.north);
+	
+	% Optimize Query Operation
+	\node[actor,below=1 of bus-optimize-query-operation] (actor-optimize-query-operation-join-bgp) {Optimize Join BGP};
+	\draw[->,thick](bus-optimize-query-operation) -- (actor-optimize-query-operation-join-bgp.north);
+	
+	% Query Operation
+	\node[actor,below=1 of bus-query-operation] (actor-query-operation-union) {Union};
+	\node[actor,right=1 of actor-query-operation-union] (actor-query-operation-join) {Join};
+	\node[actor,left=1 of actor-query-operation-union] (actor-query-operation-quadpattern) {Quad Pattern};
+	\draw[<->,thick](bus-query-operation) -- (actor-query-operation-union.north);
+	\draw[<->,thick](bus-query-operation) -- (actor-query-operation-join.north);
+	\draw[->,thick](bus-query-operation) -- (actor-query-operation-quadpattern.north);
+	
+	% SPARQL Serialize
+	\node[actor,below=1 of bus-sparql-serialize] (actor-sparql-serialize-xml) {SPARQL/XML};
+	\node[actor,left=1 of actor-sparql-serialize-xml] (actor-sparql-serialize-json) {SPARQL/JSON};
+	\node[actor,right=1 of actor-sparql-serialize-xml] (actor-sparql-serialize-rdf) {RDF};
+	\draw[->,thick](bus-sparql-serialize.south) -- (actor-sparql-serialize-xml.north);
+	\draw[->,thick](bus-sparql-serialize.south) -- (actor-sparql-serialize-json.north);
+	\draw[->,thick](bus-sparql-serialize.south) -- (actor-sparql-serialize-rdf.north);
+	
+	% RDF Serialize
+	\node[bus,below=of actor-sparql-serialize-rdf] (bus-rdf-serialize) {RDF Serialize};
+	\draw[->,thick](actor-sparql-serialize-rdf.south) -- (bus-rdf-serialize.north);
+
+	\node[actor,below=1 of bus-rdf-serialize] (actor-rdf-serialize-jsonld) {JSON-LD};
+	\draw[->,thick](bus-rdf-serialize) -- (actor-rdf-serialize-jsonld.north);
+	
+	% RDF Join
+	\node[bus,below=of actor-query-operation-join] (bus-rdf-join) {RDF Join};
+	\draw[->,thick](actor-query-operation-join.south) -- (bus-rdf-join.north);
+	
+	\node[actor,below=1 of bus-rdf-join] (actor-rdf-join-symmetrichash) {Symmetric Hash};
+	\node[actor,left=1 of actor-rdf-join-symmetrichash] (actor-rdf-join-nestedloop) {Nested Loop};
+	\node[actor,right=1 of actor-rdf-join-symmetrichash] (actor-rdf-join-multi-smallest) {Multi Smallest};
+	\draw[->,thick](bus-rdf-join) -- (actor-rdf-join-symmetrichash.north);
+	\draw[->,thick](bus-rdf-join) -- (actor-rdf-join-nestedloop.north);
+	\draw[<->,thick](bus-rdf-join) -- (actor-rdf-join-multi-smallest.north);
+	
+	% RDF Resolve Quad Pattern
+	\node[bus,below left=of actor-query-operation-quadpattern] (bus-rdf-resolve-quad-pattern) {RDF Resolve Quad Pattern};
+	\draw[->,thick](actor-query-operation-quadpattern.south) -- (bus-rdf-resolve-quad-pattern.north);
+	
+	\node[actor,below=of bus-rdf-resolve-quad-pattern] (actor-rdf-resolve-quad-pattern-federated) {Federated};
+	\node[actor,right=of actor-rdf-resolve-quad-pattern-federated] (actor-rdf-resolve-quad-pattern-hypermedia) {Hypermedia};
+	\node[actor,left=of actor-rdf-resolve-quad-pattern-federated] (actor-rdf-resolve-quad-pattern-rdfjs) {RDF/JS};
+	\draw[<->,thick](bus-rdf-resolve-quad-pattern) -- (actor-rdf-resolve-quad-pattern-federated.north);
+	\draw[->,thick](bus-rdf-resolve-quad-pattern) -- (actor-rdf-resolve-quad-pattern-rdfjs.north);
+	\draw[->,thick](bus-rdf-resolve-quad-pattern) -- (actor-rdf-resolve-quad-pattern-hypermedia.north);
+	
+	% RDF Resolve Quad Pattern Hypermedia
+	\node[bus,below=of actor-rdf-resolve-quad-pattern-hypermedia] (bus-rdf-metadata-extract) {RDF Metadata Extract};
+	\node[bus,left=of bus-rdf-metadata-extract] (bus-rdf-metadata) {RDF Metadata};
+	\node[bus,left=6 of bus-rdf-metadata] (bus-rdf-dereference) {RDF Dereference};
+	\node[bus,right=of bus-rdf-metadata-extract] (bus-rdf-resolve-hypermedia-links) {RDF Hypermedia Links};
+	\node[bus,right=of bus-rdf-resolve-hypermedia-links] (bus-rdf-resolve-hypermedia) {RDF Resolve Hypermedia};
+
+	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-metadata-extract.north);
+	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-metadata.north);
+	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-dereference.north);
+	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia.north);
+	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links.north);
+
+	% RDF Dereference
+	\node[actor,below left=1 of bus-rdf-dereference] (actor-rdf-dereference-file) {File};
+	\node[actor,below right=1 of bus-rdf-dereference] (actor-rdf-dereference-http) {HTTP};
+	\draw[->,thick](bus-rdf-dereference) -- (actor-rdf-dereference-file.north);
+	\draw[->,thick](bus-rdf-dereference) -- (actor-rdf-dereference-http.north);
+	
+	% RDF Parse
+	\node[bus,below=of actor-rdf-dereference-file] (bus-rdf-parse) {RDF Parse};
+	\draw[->,thick](actor-rdf-dereference-file.south) -- (bus-rdf-parse.north);
+	\draw[->,thick](actor-rdf-dereference-http.south) -- (bus-rdf-parse.north);
+	
+	\node[actor,below=1 of bus-rdf-parse] (actor-rdf-parse-jsonld) {JSON-LD};
+	\node[actor,left=1 of actor-rdf-parse-jsonld] (actor-rdf-parse-html) {HTML};
+	\node[actor,right=1 of actor-rdf-parse-jsonld] (actor-rdf-parse-turtle) {Turtle};
+	\draw[->,thick](bus-rdf-parse) -- (actor-rdf-parse-jsonld.north);
+	\draw[<->,thick](bus-rdf-parse) -- (actor-rdf-parse-html.north);
+	\draw[->,thick](bus-rdf-parse) -- (actor-rdf-parse-turtle.north);
+
+	% HTTP
+	\node[bus,below right=of actor-rdf-dereference-http] (bus-http) {HTTP};
+	\draw[->,thick](actor-rdf-dereference-http.south) -- (bus-http.north);
+	
+	\node[actor,below=1 of bus-http] (actor-http-native) {Native};
+	\node[actor,left=1 of actor-http-native] (actor-http-proxy) {Proxy};
+	\node[actor,right=1 of actor-http-native] (actor-http-fetch) {Fetch};
+	\draw[->,thick](bus-http) -- (actor-http-native.north);
+	\draw[<->,thick](bus-http) -- (actor-http-proxy.north);
+	\draw[->,thick](bus-http) -- (actor-http-fetch.north);
+	
+	% RDF Metadata
+	\node[actor,below=1 of bus-rdf-metadata] (actor-rdf-metadata-all) {All};
+	\draw[->,thick](bus-rdf-metadata) -- (actor-rdf-metadata-all.north);
+	
+	% RDF Metadata Extract
+	\node[actor,below=1 of bus-rdf-metadata-extract] (actor-rdf-metadata-extract-hydra-controls) {Hydra Controls};
+	\node[actor,left=1 of actor-rdf-metadata-extract-hydra-controls] (actor-rdf-metadata-extract-hydra-count) {Hydra Count};
+	\node[actor,right=1 of actor-rdf-metadata-extract-hydra-controls] (actor-rdf-metadata-extract-sparql-service) {SPARQL Service};
+	\draw[->,thick](bus-rdf-metadata-extract) -- (actor-rdf-metadata-extract-hydra-controls.north);
+	\draw[->,thick](bus-rdf-metadata-extract) -- (actor-rdf-metadata-extract-hydra-count.north);
+	\draw[->,thick](bus-rdf-metadata-extract) -- (actor-rdf-metadata-extract-sparql-service.north);
+	
+	% RDF Resolve Hypermedia Links
+	\node[actor,below=1 of bus-rdf-resolve-hypermedia-links] (actor-rdf-resolve-hypermedia-links-next) {Next};
+	\draw[->,thick](bus-rdf-resolve-hypermedia-links) -- (actor-rdf-resolve-hypermedia-links-next.north);
+	
+	% RDF Resolve Hypermedia
+	\node[actor,below=1 of bus-rdf-resolve-hypermedia] (actor-rdf-resolve-hypermedia-sparql) {SPARQL};
+	\node[actor,left=1 of actor-rdf-resolve-hypermedia-sparql] (actor-rdf-resolve-hypermedia-none) {None};
+	\node[actor,right=1 of actor-rdf-resolve-hypermedia-sparql] (actor-rdf-resolve-hypermedia-qpf) {QPF};
+	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-sparql.north);
+	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-none.north);
+	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-qpf.north);
+
+\end{tikzpicture}
+\end{document}
