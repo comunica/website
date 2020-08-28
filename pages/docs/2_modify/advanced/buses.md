@@ -73,7 +73,7 @@ Subscribed actors need to implement [`ActorOptimizeQueryOperation`](https://comu
 
 _Package: [`@comunica/bus-query-operation`](https://github.com/comunica/comunica/tree/master/packages/bus-query-operation)_
 
-Evaluates SPARQL algebra operations.
+Evaluates [SPARQL algebra operations](/docs/modify/advanced/algebra/).
 
 Subscribed actors need to implement [`ActorQueryOperation`](https://comunica.github.io/comunica/classes/bus_query_operation.actorqueryoperation-1.html)
 or [`ActorQueryOperationTyped`](https://comunica.github.io/comunica/classes/bus_query_operation.actorqueryoperationtyped-1.html).
