@@ -3,6 +3,9 @@ title: 'Querying FAQ'
 description: 'Frequently asked questions about using Comunica.'
 ---
 
+Feel free to [ask us](/ask/), or have a look at the
+[example](https://github.com/comunica/examples) repository.
+
 ## How can I query over RDF documents on my local file system?
 
 Instead of using Comunica SPARQL, you can use [Comunica SPARQL File](/docs/query/getting_started/query_cli_file/)
