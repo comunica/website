@@ -38,6 +38,20 @@ As such, [Comunica **implements** several specifications](/docs/query/advanced/s
 Furthermore, Comunica is implemented using Web-based technologies in **JavaScript**, which enables usage through browsers,
 the command line, the SPARQL protocol, or any Web or JavaScript application.
 
+## Open
+
+Comunica is an **open-source** software project that is available under the [MIT license](https://github.com/comunica/comunica/blob/master/LICENSE.txt),
+which means that it is allowed to be used in both open and commercial projects.
+Next to the source code, also our development process is open, which you can read or contribute to on [GitHub](https://github.com/orgs/comunica/projects),
+or read our [high-level roadmap](/roadmap/).
+
+## Research and Education
+
+Comunica is designed as a flexible research platform for research on query execution.
+As such, our goal is to make it sufficiently easy for researchers
+to investigate alternative query algorithms and techniques by [modifying engines](/docs/modify/).
+Next to this, we also aim to educate researchers and developers on [how to use](/docs/) Comunica.
+
 ## Linked Data Fragments
 
 One of the motivations behind Comunica is to be a [**Linked Data Fragments Client**](https://linkeddatafragments.org/concept/).
@@ -47,6 +61,17 @@ While software used to exist to query over specific types of Linked Data interfa
 it used to be impossible to query over **combinations of different interfaces**.
 Comunica solves this need by being independent of specific types of interfaces,
 as support for new interfaces can be plugged in.
+
+## Stability
+
+A primary goal of Comunica is to acts as a **stable** querying framework.
+For this, we spend extra effort in [continuous testing](/docs/modify/advanced/testing/) at different levels.
+
+## Supporting the JavaScript ecosystem
+
+Comunica depends on many dependencies to achieve its goals,
+such as spec-compliant RDF parsers and serializers.
+We support these libraries, and contribute to them.
 
 ## Who works on Comunica?
 
