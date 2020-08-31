@@ -58,5 +58,5 @@ For instance, the following figure shows an example of a mediator that will alwa
 All Comunica actors, buses, and mediators are implemented as [separate npm packages](https://github.com/comunica/comunica/tree/master/packages).
 In order to _wire_ these different components with each other in a single application,
 we make use of the **dependency injection** framework [Components.js](/docs/modify/advanced/componentsjs/).
-Components.js allows us to wire components with each other using one or more [configuration files](/docs/modify/advanced/configs/).
+Components.js allows us to wire components with each other using one or more [configuration files](/docs/modify/advanced/componentsjs/#creating-configurations-in-json-ld).
 Plugging in different components therefore do not require any code changes, but simply a config change.

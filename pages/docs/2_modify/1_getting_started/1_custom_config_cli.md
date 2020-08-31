@@ -104,7 +104,7 @@ which each fulfill a specific task:
 While the exact meaning of these config files are not important for this guide,
 if you want to learn more about its details,
 have a look at the guide on
-<a href="/docs/modify/advanced/configs/">configuration files</a>.
+<a href="/docs/modify/advanced/componentsjs/#creating-configurations-in-json-ld">configuration files</a>.
 </div>
 
 ## 2. Install Comunica SPARQL
