@@ -1,6 +1,6 @@
 ---
-title: 'Buses'
-description: 'An overview of all buses in Comunica.'
+title: 'Buses and Actors'
+description: 'An overview of all buses in Comunica and their actors.'
 ---
 
 This page gives an **overview of all _buses_ and _actors_**

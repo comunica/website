@@ -53,6 +53,18 @@ For instance, the following figure shows an example of a mediator that will alwa
   <img src="/img/run-test-phases.svg" alt="Run and test phase" style="width:100%" \>
 </div>
 
+Therefore, an actor must at least expose the following methods:
+```typescript
+export interface Actor {
+  test(action: IAction): Promise<IActorTest>;
+  run(action: IAction): Promise<IActorOutput>;
+}
+```
+
+The interfaces `IAction`, `IActorTest`, and `IActorOutput` depend on the bus this actor is subscribed to.
+
+Learn more about the [actors, buses](/docs/modify/advanced/buses/) and [mediators](/docs/modify/advanced/mediators/) that exist in Comunica.
+
 ## Wiring of components
 
 All Comunica actors, buses, and mediators are implemented as [separate npm packages](https://github.com/comunica/comunica/tree/master/packages).
