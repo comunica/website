@@ -6,6 +6,11 @@ description: 'Loggers can be set to different logging levels to inspect what Com
 If you want to inspect what is going on during query execution,
 you can enable a logger in Comunica.
 
+<div class="note">
+This guide focuses on configuring logging levels and printing output.
+<a href="/docs/modify/advanced/logging/">Click here</a> if you want to learn more about invoking a logger from within an actor implementation.
+</div>
+
 ## Logging on the command line
 
 Using Comunica SPARQL on the command line, logging can be enabled via the `-l` option.

@@ -43,6 +43,10 @@ Instead, they always communicate via a mediators and buses, as shown in the foll
 With <a href="/docs/modify/advanced/observers/">Observers</a>, you can passively observe actions executed by actors on a given bus.
 </div>
 
+<div class="note">
+Optionally, actors can <a href="/docs/modify/advanced/logging/">log certain events</a>.
+</div>
+
 ## Run and test phases for selecting an actor
 
 Different mediators can select actors in different ways.

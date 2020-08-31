@@ -1,0 +1,44 @@
+---
+title: 'Logging'
+description: 'How to log messages from within actors.'
+---
+
+Actors can log messages at different levels,
+which may be useful for debugging,
+or emitting basic information.
+
+<div class="note">
+This guide focuses on invoking a logger from within an actor implementation.
+<a href="/docs/query/advanced/logging/">Click here</a> if you want to learn more about configuring logging levels and printing output.
+</div>
+
+## Logging methods
+
+All actors ([`Actor`](https://comunica.github.io/comunica/classes/core.actor-1.html)) expose the following methods:
+
+* `logTrace(context, message, data?)`
+* `logDebug(context, message, data?)`
+* `logInfo(context, message, data?)`
+* `logWarn(context, message, data?)`
+* `logError(context, message, data?)`
+* `logFatal(context, message, data?)`
+
+These methods allow a log message to be emitted at the different [logging levels](/docs/query/advanced/logging/#logging-levels).
+
+These methods require the [context](/docs/query/advanced/context/) to be passed,
+and a string message.
+Optionally, you can pass a JSON data hash.
+
+## Example
+
+Emitting a log message in an actor's `run` method can be done as follows:
+```typescript
+public run(action: IAction): Promise<IActorHttpOutput> {
+  this.logInfo(action.context, 'This is a message');
+  this.logInfo(action.context, 'This is another message, with data',
+    { someParam: 'someValue' });
+}
+```
+
+
+
