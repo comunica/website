@@ -15,21 +15,21 @@ On top of this architecture, the more high-level [SPARQL architecture](/docs/mod
 Comunica's architecture has been designed with flexibility and loose coupling of components as main goals.
 For this, Comunica consists of **three types of components**: **actors**, **mediators**, and **buses**.
 
-All logic in Comunica is separated into different **actors**,
+All logic in Comunica is separated into different **actors** ([`Actor`](https://comunica.github.io/comunica/classes/core.actor-1.html)),
 following the [actor model](https://en.wikipedia.org/wiki/Actor_model).
 Each actor independently performs a specific task.
 For example, one actor can take implement the SPARQL `UNION` operator,
 another actor can parse JSON-LD documents,
 and another actor can parse JSON-LD documents _in a different way_.
 
-All actors are subscribed onto task-specific **buses**,
-following the [publish-subsribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern).
+All actors are subscribed onto task-specific **buses** ([`Bus`](https://comunica.github.io/comunica/classes/core.bus-1.html)),
+following the [publish-subscribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern).
 For example, a SPARQL query operator bus could contain actors for `UNION`, `SELECT`, `FILTER`, and more.
 An RDF parsing bus could contain actors for JSON-LD, RDFa, Turtle, and more.
 
 Since multiple actors can exist for solving a specific task
 (for example if we have two actors for parsing JSON-LD documents),
-**mediators** are used for determining the "best" actor on a bus for executing a certain action,
+**mediators** ([`Mediator`](https://comunica.github.io/comunica/classes/core.mediator-1.html)) are used for determining the "best" actor on a bus for executing a certain action,
 following the [mediator pattern](https://en.wikipedia.org/wiki/Mediator_pattern).
 
 To ensure loose coupling of components, actors never communicate with each other directly.
@@ -37,6 +37,10 @@ Instead, they always communicate via a mediators and buses, as shown in the foll
 
 <div class="docs-intro-img">
   <img src="/img/actor-mediator-bus.svg" alt="Actor Mediator Bus Architecture" style="width:100%" \>
+</div>
+
+<div class="note">
+With <a href="/docs/modify/advanced/observers/">Observers</a>, you can passively observe actions executed by actors on a given bus.
 </div>
 
 ## Run and test phases for selecting an actor
