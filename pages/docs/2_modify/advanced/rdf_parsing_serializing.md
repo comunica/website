@@ -1,6 +1,6 @@
 ---
 title: 'RDF Parsing and Serializing'
-description: 'The unit and integration tests that lead to a more stable codebase.'
+description: 'Basic concepts behind parsing and serializing RDF.'
 ---
 
 Parsing from and serializing to RDF is of great importance within Comunica,
