@@ -78,7 +78,7 @@ We support these libraries, and contribute to them.
 First and foremost, Comunica is an **open-source** framework.
 The Comunica project has been initiated by [IDLab](https://www.ugent.be/ea/idlab/en) at Ghent University – imec,
 and is being actively developed and maintained by a variety of [contributors](https://github.com/comunica/comunica/graphs/contributors).
-All development happens publicaly via GitHub [project boards](https://github.com/orgs/comunica/projects), [issues](https://github.com/comunica/comunica/issues), and [pull requests](https://github.com/comunica/comunica/pulls).
+All development happens publicly via GitHub [project boards](https://github.com/orgs/comunica/projects), [issues](https://github.com/comunica/comunica/issues), and [pull requests](https://github.com/comunica/comunica/pulls).
 Anyone is welcome to [contribute](/contribute/) to this project.
 
 While IDLab is a research lab that prefers research-related projects,

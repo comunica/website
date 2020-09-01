@@ -11,7 +11,7 @@ export default class Navigation extends React.Component {
                 <li><a href="/blog/">Blog</a></li>
                 <li><a href="/about/">About</a></li>
                 <li><a href="/ask/">Ask</a></li>
-                <li><a href="/cite/">Cite</a></li>
+                <li><a href="/research/">Research</a></li>
                 <li><a href="https://github.com/comunica/comunica">GitHub</a></li>
             </ul>
         </nav>;
