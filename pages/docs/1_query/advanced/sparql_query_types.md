@@ -18,6 +18,10 @@ and via [a JavaScript application](/docs/query/getting_started/query_app/).
 Query results for each of these query types can be represented in <a href="/docs/query/advanced/result_formats/">different formats</a>.
 </div>
 
+<div class="note">
+Learn more about how the <a href="/docs/modify/advanced/query_output_types/">output types are represented internally</a>.
+</div>
+
 ## 1. Command line
 
 Below, the different query type usages are summarized.
