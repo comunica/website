@@ -29,9 +29,19 @@ When contributing, make sure to keep in mind the following:
     * Unit tests with 100% branching coverage (`yarn test`)
     * Clean code with passing linter (`yarn run lint`)
     * Code documentation
+    * [Pass all spec and integration tests](/docs/modify/advanced/testing/)
     * Signing the [Contributor License Agreement](https://cla-assistant.io/comunica/comunica)
 * Only add the files that are needed, so don't blindly do a `git -a`. (avoid adding editor-specific files)
 * A good editor can make your life a lot easier. For example, [WebStorm](https://www.jetbrains.com/community/education/#students) can be used for free with an academic license.
+* All JSdoc can be found on https://comunica.github.io/comunica/
+
+Tips and tricks:
+* Only do `yarn install` in the repo root, and *never* in one of the sub-packages, as this can break your repo.
+* `yarn run build` will (re)build all TypeScript to JavaScript. This can also be executed on package-level.
+* `yarn run build-watch` will continuously build the TypeScript to JavaScript. This is useful during development.
+* `yarn test` and `yarn run lint` execute the tests and linter checks locally. Before a PR is opened, these must always pass, and testing coverage must be 100%.
+* When editing configuration files in packages like `actor-init-sparql`, `yarn run prepare` can be executed to compile the JSON files to JavaScript before they can be executed. (not needed when executing dynamically)
+* When modifying a dependency package such as [sparqlee](https://github.com/comunica/sparqlee), [Yarn's link functionality](https://classic.yarnpkg.com/en/docs/cli/link/) can be used to force your local version of that dependency to be used in Comunica.
 
 ## Write documentation
 
@@ -45,3 +55,45 @@ The [Comunica examples repository](https://github.com/comunica/examples) contain
 with details on how they are created and how they work.
 Anyone is more than welcome to contribute new example packages to this repository.
 For inspiration, you can have a look at the [example requests](https://github.com/comunica/examples/issues?q=is%3Aissue+is%3Aopen+label%3Aexample-request).
+
+## Guidelines for core developers
+
+The following guidelines only apply to people with push access to the Comunica repositories.
+
+### Branching Strategy
+
+The `master` branch is the main development branch.
+
+Releases are `tags` on the `master` branch.
+
+All changes (features and bugfixes) must be done in a separate branch, and PR'd to `master`.
+
+Recursive features must be PR'd to their parent feature branches, as a feature can consist of multiple smaller features.
+
+The naming strategy of branches is as follows:
+* Features: `feature/short-name-of-feature`
+* Bugfixes: `fix/short-name-of-fix`
+
+### Issue Strategy
+
+Issues should be assigned to people when possible, and must be progressed using the applicable GitHub project boards:
+* [Maintenance](https://github.com/orgs/comunica/projects/2)
+* [Development](https://github.com/orgs/comunica/projects/3)
+* [Documentation](https://github.com/orgs/comunica/projects/4)
+
+General issues progress:
+1. To Do: When the issue is accepted and assigned, but not in progress yet.
+2. In Progress: When the issue is being worked on by the assignee.
+3. To Review: When the issue is resolved, but must be reviewed. This can be attached to a PR.
+4. Done: When the issue is resolved and reviewed. If attached to a PR, this can be merged, or closed otherwise.
+
+### Making a new release
+
+Making a new release only requires invoking `yarn run publish` from the repository root, which does the following using [lerna](https://github.com/lerna/lerna):
+
+* Prompts your for providing the new version (major, minor, patch).
+* Bump the versions from all changed packages.
+* [Generate a changelog](https://github.com/rubensworks/manual-git-changelog.js) from all commits since the last release. The process will halt until you modify (and save) the changelog where needed (remove unneeded commits, and categorize them), and confirm by pressing any key in the console. 
+* Release all changed packages to npm.
+* Push the tag to GitHub.
+* Push to master.
