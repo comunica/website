@@ -9,6 +9,7 @@ This page provides more details about its goals and motivations.
 Related pages:
 * [Roadmap](/roadmap/)
 * [Contribute](/contribute/)
+* [Logos](/logos/)
 
 ## Flexible querying of Linked Data
 
