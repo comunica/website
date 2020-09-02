@@ -33,3 +33,6 @@ yarn-error.log*
 # LaTeX
 *_latexmk
 *.fls
+
+# RSS feed
+public/rss-feed.xml
