@@ -1,5 +1,5 @@
 ---
 title: 'Blog'
-description: 'Blog posts, containing announcement or other of news.'
+description: 'Blog posts, containing announcements or other news.'
 blog_index: true
 ---

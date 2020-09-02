@@ -6,6 +6,7 @@ export default ({ title, description }) => (
         <link rel="icon" href="/favicon.ico"/>
         <link rel="foaf:primaryTopic" href="/#software" />
         <link rel="foaf:maker" href="https://www.rubensworks.net/#me" />
+        <link rel="alternate" type="application/rss+xml" title="Comunica – Blog" href="/rss-feed.xml" />
         <meta property="og:image" content="/img/comunica_red.svg" />
         <meta property="og:title" content={`Comunica – ${title}`} />
         <meta property="og:description" content={`${description.replace(/\n/g, ' ')}`} />
