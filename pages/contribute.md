@@ -24,6 +24,7 @@ or the [`dev-ready`](https://github.com/comunica/comunica/issues?q=is%3Aissue+is
 
 When contributing, make sure to keep in mind the following:
 * Read how to [set up a development environment](https://github.com/comunica/comunica#development-setup).
+* Read the guide on [contributing an actor](/docs/modify/getting_started/contribute_actor/).
 * [Use descriptive, imperative commit message](https://chris.beams.io/posts/git-commit/)
 * Pull requests should pass all checks
     * Unit tests with 100% branching coverage (`yarn test`)

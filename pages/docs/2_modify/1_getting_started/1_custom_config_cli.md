@@ -16,7 +16,7 @@ In a next guide, we will look into [querying with a custom config from a JavaScr
 <div class="note">
 This guide assumes basic knowledge on querying with Comunica.
 If you haven't looked into this yet, it is recommended to follow
-<a href="/docs/query/getting_started/query_cli">the getting started guide on querying from the command line</a>.
+<a href="/docs/query/getting_started/query_cli/">the getting started guide on querying from the command line</a>.
 </div>
 
 ## 1. Requirements of a config file

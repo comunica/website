@@ -11,7 +11,7 @@ but we will **split up our config across different files** for convenience.
 <div class="note">
 This guide assumes basic knowledge on querying with Comunica.
 If you haven't looked into this yet, it is recommended to follow
-<a href="/docs/query/getting_started/query_app">the getting started guide on querying within a JavaScript app</a>.
+<a href="/docs/query/getting_started/query_app/">the getting started guide on querying within a JavaScript app</a>.
 </div>
 
 ## 1. Installation
