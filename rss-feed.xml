@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Comunica – Blog]]></title>
+        <description><![CDATA[Blog posts, containing announcements or other news.]]></description>
+        <link>https://comunica.dev/blog</link>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Thu, 03 Sep 2020 07:07:00 GMT</lastBuildDate>
+        <item>
+            <title><![CDATA[A New Website for Comunica]]></title>
+            <link>https://comunica.dev/blogpages/blog/2020-08-19-intro.md</link>
+            <guid isPermaLink="false">pages/blog/2020-08-19-intro.md</guid>
+            <pubDate>Sat, 19 Sep 2020 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Release 1.16.0: Full spec compliance, property paths, CSV/TSV, basic auth, and fixes]]></title>
+            <link>https://comunica.dev/blogpages/blog/2020-08-24-release_1_16.md</link>
+            <guid isPermaLink="false">pages/blog/2020-08-24-release_1_16.md</guid>
+            <pubDate>Thu, 24 Sep 2020 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>
