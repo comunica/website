@@ -21,6 +21,8 @@ Before you open a pull request, it is considered a good practise to first
 
 Don't know on what to get started? Have a look at issues tagged with the [`good-first-issue`](https://github.com/comunica/comunica/issues?q=is%3Aissue+is%3Aopen+label%3Agood-first-issue) label
 or the [`dev-ready`](https://github.com/comunica/comunica/issues?q=is%3Aissue+is%3Aopen+label%3Adev-ready) label.
+Issues tagged with [`good-first-issue`](https://github.com/comunica/comunica/issues?q=is%3Aissue+is%3Aopen+label%3Agood-first-issue) are issues that should be implementable by new contributors.
+Issues tagged with [`dev-ready`](https://github.com/comunica/comunica/issues?q=is%3Aissue+is%3Aopen+label%3Adev-ready) are potentially harder issues, but they are directly implementable without research.
 
 When contributing, make sure to keep in mind the following:
 * Read how to [set up a development environment](https://github.com/comunica/comunica#development-setup).
@@ -78,11 +80,13 @@ The naming strategy of branches is as follows:
 ### Issue Strategy
 
 Issues should be assigned to people when possible, and must be progressed using the applicable GitHub project boards:
+
 * [Maintenance](https://github.com/orgs/comunica/projects/2)
 * [Development](https://github.com/orgs/comunica/projects/3)
 * [Documentation](https://github.com/orgs/comunica/projects/4)
 
 General issues progress:
+
 1. To Do: When the issue is accepted and assigned, but not in progress yet.
 2. In Progress: When the issue is being worked on by the assignee.
 3. To Review: When the issue is resolved, but must be reviewed. This can be attached to a PR.
