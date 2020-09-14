@@ -35,6 +35,7 @@ we would appreciate a citation of our [article](https://comunica.github.io/Artic
 
 The following publications make significant use of Comunica:
 
+* [**Optimizing Approximate Membership Metadata in Triple Pattern Fragments for Clients and Servers**. Taelman, R., Van Herwegen, J., Vander Sande, M., & Verborgh, R. (2020)](https://comunica.github.io/Article-SSWS2020-AMF/)
 * [**Discovering Data Sources in a Distributed Networkof Heritage Information**.  M., de Valk, S., Meijers, E., Taelman, R., Van De Sompel, H., & Verborgh, R. (2019)](https://biblio.ugent.be/publication/8629105/file/8629106.pdf)
 * [**Computational integrity for outsourced execution of SPARQL queries**. Morel, S (2019)](https://www.scriptiebank.be/sites/default/files/thesis/2019-10/main_0.pdf)
 * [**Querying heterogeneous linked building datasets with context-expanded GraphQL queries**. Werbrouck, J., Senthilvel, M., Beetz, J., & Pauwels, P. (2019)](https://biblio.ugent.be/publication/8623179/file/8623180)
