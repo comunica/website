@@ -99,22 +99,24 @@ This may be valuable in case your SPARQL query is used as a template with some v
 This can be done by passing a `Bindings` object as value to the `initialBindings` context entry:
 ```javascript
 import { Bindings } from '@comunica/bus-query-operation';
-import { literal } from '@rdfjs/data-model';
+import { DataFactory } from 'rdf-data-factory';
+
+const factory = new DataFactory();
 
 const result = await myEngine.query(`SELECT * WHERE {
   {?s ?p ?template1 } UNION { ?s ?p ?template2 }
 }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
   initialBindings: new Bindings({
-    '?template1': literal('Value1'),
-    '?template2': literal('Value2'),
+    '?template1': factory.literal('Value1'),
+    '?template2': factory.literal('Value2'),
   }),
 });
 ```
 
 The keys in the `Bindings` hash must be variable names starting with `?`.
 The values must be valid [RDF/JS](/docs/query/advanced/rdfjs/) terms,
-which can for example be constructed using [`@rdfjs/data-model`](https://www.npmjs.com/package/@rdfjs/data-model).
+which can for example be constructed using [`rdf-data-factory`](https://www.npmjs.com/package/rdf-data-factory).
 
 ## 6. Setting the query format
 

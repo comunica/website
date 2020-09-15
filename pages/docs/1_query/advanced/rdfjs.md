@@ -37,12 +37,14 @@ For the remainder of this document, I will just refer to RDF quads.
 
 Finally, a [Data Factory](http://rdf.js.org/data-model-spec/#datafactory-interface) interface is defined,
 which allows you to easily create terms and quads that conform to this interface.
-Different Data Factory implementations exist, such as [`@rdfjs/data-model`](https://github.com/rdfjs-base/data-model)
+Different Data Factory implementations exist, such as [`rdf-data-factory`](https://www.npmjs.com/package/rdf-data-factory)
 and the factory from [`N3.js`](https://github.com/rdfjs/N3.js#interface-specifications).
 For example, creating a quad for representing someone's name with a data factory can be done like this:
 
 ```javascript
-const factory = require('@rdfjs/data-model');
+import { DataFactory } from 'rdf-data-factory';
+
+const factory = new DataFactory();
 
 const quad = factory.quad(
   factory.namedNode('https://www.rubensworks.net/#me'), // subject
