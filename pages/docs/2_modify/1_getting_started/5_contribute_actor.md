@@ -103,7 +103,7 @@ which we will make use of in this guide.
 If you want to create an actor on another bus than `query-operation`, you will have to invoke `comunica:actor` instead.
 
 In this case, we want to create an actor on the `query-operation` bus for the `REDUCED` query operation.
-As such, we can **execute the generator** as follows:
+As such, we can **execute the generator** as follows in the repo root:
 ```bash
 $ yo comunica:actor-query-operation
 ? The SPARQL Algebra type name of the operator (lowercase) reduced
@@ -208,7 +208,7 @@ Since [testing is very important in Comunica](/docs/modify/advanced/testing/),
 the generator will automatically generate some unit tests for your class in `packages/actor-query-operation-reduced-my/test/ActorQueryOperationReducedMy-test.ts`.
 
 Since we don't actually do anything in our actor, all default unit test should already pass.
-Check this by executing:
+Check this by executing in the repo root:
 ```bash
 yarn run test ActorQueryOperationReducedMy-test.ts
 ```
