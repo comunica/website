@@ -44,6 +44,9 @@ we want to answer the following questions:
 2. Which movies are from directors who have directed movies with Brad Pitt?
 3. Who are the spouses and children of Whitney Houston?
 
+
+## 3. Query for zero or more occurrences of property
+
 ```
 PREFIX dbpedia: <http://dbpedia.org/resource/>
 PREFIX dbo: <http://dbpedia.org/ontology/>
@@ -52,6 +55,8 @@ WHERE {
   dbpedia:Samuel_L._Jackson dbo:spouse* ?person.
 }
 ```
+
+## 4. Query for inverse properties and sequence of properties
 
 ```
 PREFIX dbo: <http://dbpedia.org/ontology/>
@@ -63,6 +68,18 @@ WHERE {
 }
 ```
 
+## 5. Query for alternative properties
+
+The third question is "Who are the spouses and children of Whitney Houston?"
+To answer this one, 
+we want the query to return every person that is either a spouse or a child of Whitney Houston.
+The SPARQL specification offers AlternativePaths to do this.
+Their syntax is `property1 | property2`,
+where `property1` is the first property and `property2` the second, and
+they are separated by a `|`. 
+In our case, the properties are `dbo:spouse` and `dbo:child`.
+This results in the following query:
+
 ```
 PREFIX dbpedia: <http://dbpedia.org/resource/>
 PREFIX dbo: <http://dbpedia.org/ontology/>
@@ -72,3 +89,13 @@ WHERE {
     (dbo:spouse|dbo:child) ?person.
 }
 ```
+
+The results of this query are
+
+```
+<http://dbpedia.org/resource/Bobby_Brown>
+<http://dbpedia.org/resource/Bobbi_Kristina_Brown>
+```
+
+Bobby Brown is her spouse and
+Bobbi Kristina Brown is her child.
