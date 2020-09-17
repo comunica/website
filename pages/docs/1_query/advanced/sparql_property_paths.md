@@ -40,19 +40,20 @@ you first need to follow [this guide](/docs/query/getting_started/query_cli/).
 For this tutorial 
 we want to answer the following questions:
 
-1. Who are the in-laws of Samuel L. Jackson?
+1. What information is there about Cam Newton excluding types?
 2. Which movies are from directors who have directed movies with Brad Pitt?
 3. Who are the spouses and children of Whitney Houston?
 
 
-## 3. Query for zero or more occurrences of property
+## 3. Query for negated and alternative properties
 
 ```
 PREFIX dbpedia: <http://dbpedia.org/resource/>
-PREFIX dbo: <http://dbpedia.org/ontology/>
-SELECT ?person
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?o
 WHERE {
-  dbpedia:Samuel_L._Jackson dbo:spouse* ?person.
+  dbpedia:Cam_Newton !rdf:type ?o.
 }
 ```
 
