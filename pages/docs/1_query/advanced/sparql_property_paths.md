@@ -45,7 +45,18 @@ we want to answer the following questions:
 3. Who are the spouses and children of Whitney Houston?
 
 
-## 3. Query for negated and alternative properties
+## 3. Query for negated properties
+
+What information is there about [Cam Newton](http://dbpedia.org/page/Cam_Newton) excluding types?
+To answer this query,
+we want to return the object of every triple where Cam Newton is the subject (`dbpedia:Cam_Newton`),
+with exception to the triples that have `rdf:type` as predicate.
+The SPARQL specification offers NegatedPropertySets to do this.
+Their syntax is `!property`,
+where `property` is the property and 
+it is preceded with `!`.
+In our case, the property is `rdf:type`.
+This results in the following query:
 
 ```
 PREFIX dbpedia: <http://dbpedia.org/resource/>
