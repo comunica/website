@@ -243,6 +243,7 @@ Subscribed actors need to implement [`ActorRdfParseHtml`](https://comunica.githu
 | Name | Package | Description |
 | ---- | ------- | ----------- |
 | RDFa | [`@comunica/actor-rdf-parse-html-rdfa`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-rdfa) | Parses RDFa. |
+| Microdata | [`@comunica/actor-rdf-parse-html-microdata`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-microdata) | Parses Microdata to RDF. |
 | Script | [`@comunica/actor-rdf-parse-html-script`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-script) | Parses script tags and attempts to parse them by delegating to [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse). |
 
 
