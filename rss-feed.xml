@@ -4,7 +4,7 @@
         <description><![CDATA[Blog posts, containing announcements or other news.]]></description>
         <link>https://comunica.dev/blog</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Mon, 12 Oct 2020 07:59:56 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 02 Nov 2020 14:55:04 GMT</lastBuildDate>
         <item>
             <title><![CDATA[A New Website for Comunica]]></title>
             <link>https://comunica.dev/blogpages/blog/2020-08-19-intro.md</link>
@@ -22,6 +22,12 @@
             <link>https://comunica.dev/blogpages/blog/2020-09-25-release_1_17.md</link>
             <guid isPermaLink="false">pages/blog/2020-09-25-release_1_17.md</guid>
             <pubDate>Sun, 25 Oct 2020 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Release 1.18.0: Smaller Web bundles and Microdata parsing]]></title>
+            <link>https://comunica.dev/blogpages/blog/2020-11-02-release_1_18.md</link>
+            <guid isPermaLink="false">pages/blog/2020-11-02-release_1_18.md</guid>
+            <pubDate>Wed, 02 Dec 2020 00:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
