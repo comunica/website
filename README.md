@@ -1,4 +1,5 @@
 # Comunica website
+[![Build Status](https://github.com/comunica/website//workflows/Build%20and%20Deploy/badge.svg)](https://github.com/comunica/website/actions?query=workflow%3A%22Build+and+Deploy%22)
 
 Source code for the [Comunica](https://comunica.dev/) website.
 
