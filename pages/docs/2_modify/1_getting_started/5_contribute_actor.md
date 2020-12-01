@@ -90,11 +90,11 @@ For this, you can use the [generator-comunica](https://github.com/comunica/gener
 To install this generator, start a _new terminal session_ outside of the Comunica repo directory,
 and execute the following commands:
 ```bash
-$ yarn global add yo
+$ npm i -g yo
 $ git clone git@github.com:comunica/generate-comunica.git
 $ cd generate-comunica
-$ yarn install
-$ yarn link
+$ npm install
+$ npm link
 ```
 
 This will expose the `comunica:bus`, `comunica:mediator`, `comunica:actor`, and `comunica:actor-query-operation` generators for initializing projects of the respective types.
