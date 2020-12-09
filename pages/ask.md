@@ -10,10 +10,13 @@ Related pages:
 * [Roadmap](/roadmap/)
 * [Contribute](/contribute/)
 
-## Gitter
+## Questions
 
 The easiest way to get an answer to small questions is via our [Gitter channel](https://gitter.im/comunica/Lobby).
 There, we have an active community of Comunica developers, contributors and enthusiasts.
+
+Alternatively, if you want a place to talk about your question (or discussion topic),
+you can make use of the [discussions tab on GitHub](https://github.com/comunica/comunica/discussions).
 
 In case you have a more general question related to SPARQL or RDF in JavaScript,
 the [RDF/JS Gitter channel](https://gitter.im/rdfjs/public) should be of help.
