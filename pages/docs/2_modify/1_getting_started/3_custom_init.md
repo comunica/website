@@ -31,6 +31,37 @@ We recommend to also **install TypeScript** as a dev dependency:
 $ npm install -D typescript
 ```
 
+Add a `tsconfig.json` file with the following contents:
+```text
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "target": "es2017",
+    "noImplicitAny": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "declaration": true
+  },
+  "include": [
+    "index.ts",
+    "lib/**/*",
+    "bin/**/*"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/test/*"
+  ]
+}
+```
+
+
 <div class="note">
 If your custom config also depends on other packages
 that are not included in Comunica SPARQL,
