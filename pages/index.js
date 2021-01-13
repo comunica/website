@@ -45,7 +45,7 @@ export default function Home() {
         <div className="grid">
           <a href="docs/query/" className="card">
             <h3>Query with Comunica &rarr;</h3>
-            <p>Lean how to execute queries</p>
+            <p>Learn how to execute queries</p>
           </a>
 
           <a href="docs/modify/" className="card">
