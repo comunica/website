@@ -167,9 +167,23 @@ Learn more in the full Components.js documentation on [configs](https://componen
 ## Package.json contents
 
 If you want to expose components or use modular configs in your npm package,
-**Components.js must know where to find the required files (components, contexts, configs) in your npm package**.
+**you must enable a flag in your `package.json` file so that Components.js can find your npm package**:
+```text
+{
+  ...
+  "lsd:module": true
+  ...
+}
+```
 
-Therefore, it is required to add the following entries to your `package.json` file:
+Learn more in the full Components.js documentation on [exposing components](https://componentsjs.readthedocs.io/en/latest/getting_started/basics/exposing_components/).
+
+### More control over Components.js configuration (optional)
+
+While this is optional,
+you can configure yourself where Components.js can find required files (components, contexts, configs) in your npm package**.
+
+For this, you can add the following entries to your `package.json` file:
 ```text
 {
   ...
@@ -194,5 +208,3 @@ These entries have the following meaning:
 * `lsd:components`: Local path to your root components file. This will mostly be `components/components.jsonld`.
 * `lsd:contexts`: The mapping of context URLs to local context files. This will typically contain only one entry for `components/context.jsonld`, but can be empty. This is used by Components.js when looking up contexts to first look in the local file system, to avoid expensive HTTS(S) lookups if the file already exists locally.
 * `lsd:importPaths`: The mapping of component and config files to local files. This will typically contain entries for `components/` and `config/`. This is used by Components.js when looking up components or config imports to first look in the local file system, to avoid expensive HTTS(S) lookups if the file already exists locally.
-
-Learn more in the full Components.js documentation on [exposing components](https://componentsjs.readthedocs.io/en/latest/getting_started/basics/exposing_components/).

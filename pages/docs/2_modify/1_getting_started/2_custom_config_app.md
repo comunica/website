@@ -130,26 +130,17 @@ Before we can refer to other files within our config file,
 we have to add some entries to our `package.json` file
 so that the config files can be found during engine initialization.
 
-Concretely, we need to **add the following entries to `package.json`**:
+Concretely, we need to **add the following entry to `package.json`**:
 ```text
 {
   ...
-  "lsd:module": "https://linkedsoftwaredependencies.org/bundles/npm/my-package",
-  "lsd:contexts": {
-    "https://linkedsoftwaredependencies.org/bundles/npm/my-package/^1.0.0/components/context.jsonld": "components/context.jsonld"
-  },
-  "lsd:importPaths": {
-    "https://linkedsoftwaredependencies.org/bundles/npm/my-package/^1.0.0/components/": "components/",
-    "https://linkedsoftwaredependencies.org/bundles/npm/my-package/^1.0.0/config/": "config/"
-  }
+  "lsd:module": true
   ...
 }
 ```
 
-On each line, make sure to replace `my-package` with your package `name`.
-
 <div class="note">
-If you want to learn more about what these config entries mean,
+If you want to learn more about what this config entry mean,
 read our guide on <a href="/docs/modify/advanced/componentsjs/">Components.js</a>,
 a dependency injection framework that Comunica uses.
 </div>
