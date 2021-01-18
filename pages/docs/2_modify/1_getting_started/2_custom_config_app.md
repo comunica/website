@@ -154,7 +154,7 @@ Create the file **`components/context.jsonld`** with the following contents:
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/componentsjs/^3.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/componentsjs/^4.0.0/components/context.jsonld",
     {
       "files-ex": "https://linkedsoftwaredependencies.org/bundles/npm/my-package/^1.0.0/"
     }
