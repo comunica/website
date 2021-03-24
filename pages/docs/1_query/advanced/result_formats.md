@@ -30,7 +30,7 @@ the result format can be set using the `-t` option:
 ```bash
 $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
     "SELECT * WHERE { ?s ?p ?o } LIMIT 100" \
-    -t 'application/sparql-results+json'
+    -t "application/sparql-results+json"
 ```
 ```json
 {"head": {"vars":["s","p","o"]},
