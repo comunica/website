@@ -66,7 +66,17 @@ $ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
   -p 3001
 ```
 
-## 5. Learn more
+## 5. Increasing the number of worker threads
+
+Using the `-w` option, the number of parallel worker threads can be set:
+```bash
+$ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
+  -w 4
+```
+
+Setting this to the number of available CPU cores tends to give the best performance.
+
+## 6. Learn more
 
 This guide only discussed the basic functionality of `comunica-sparql-http`.
 You can learn more options by invoking the _help_ command:
@@ -83,6 +93,7 @@ Options:
   -c            Context should be a JSON object or the path to such a JSON file.
   -p            The HTTP port to run on (default: 3000)
   -t            The query execution timeout in seconds (default: 60)
+  -w            The number of worker threads (default: 1)
   -b            base IRI for the query (e.g., http://example.org/)
   -l            Sets the log level (e.g., debug, info, warn, ... defaults to warn)
   -i            A flag that enables cache invalidation before each query execution.
