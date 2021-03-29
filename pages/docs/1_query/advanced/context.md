@@ -45,6 +45,8 @@ The following table gives an overview of all possible context entries that can b
 | `httpProxyHandler` | A proxy for all HTTP requests |
 | `httpIncludeCredentials` | (_browser-only_) If current credentials should be included for HTTP requests |
 
+When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/context_entries.html). 
+
 ## 3. Defining sources
 
 Using the `sources` context entry, data sources can be defined that Comunica should query over.
