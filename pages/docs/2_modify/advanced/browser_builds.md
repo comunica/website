@@ -47,8 +47,8 @@ and add the following script (assuming your config exists at `config/config-defa
 Next, create a file called **`index-browser.ts`**, which will become the browser variant of `index.ts`.
 `index-browser.ts` should at least contain the following:
 ```typescript
-import {ActorInitSparql} from '@comunica/actor-init-sparql/lib/ActorInitSparql-browser';
-export function newEngine(): ActorInitSparql {
+import {IQueryEngine} from '@comunica/types';
+export function newEngine(): IQueryEngine {
   return require('./engine-browser.js');
 }
 ```
