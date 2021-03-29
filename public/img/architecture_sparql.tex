@@ -121,13 +121,15 @@
 	\node[bus,left=of bus-rdf-metadata-extract] (bus-rdf-metadata) {RDF Metadata};
 	\node[bus,left=6 of bus-rdf-metadata] (bus-rdf-dereference) {RDF Dereference};
 	\node[bus,right=of bus-rdf-metadata-extract] (bus-rdf-resolve-hypermedia-links) {RDF Hypermedia Links};
-	\node[bus,right=of bus-rdf-resolve-hypermedia-links] (bus-rdf-resolve-hypermedia) {RDF Resolve Hypermedia};
+    \node[bus,right=1 of bus-rdf-resolve-hypermedia-links] (bus-rdf-resolve-hypermedia-links-queue) {RDF Links Queue};
+	\node[bus,right=of bus-rdf-resolve-hypermedia-links-queue] (bus-rdf-resolve-hypermedia) {RDF Resolve Hypermedia};
 
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-metadata-extract.north);
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-metadata.north);
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-dereference.north);
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia.north);
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links.north);
+    \draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links-queue.north);
 
 	% RDF Dereference
 	\node[actor,below left=1 of bus-rdf-dereference] (actor-rdf-dereference-file) {File};
@@ -173,6 +175,10 @@
 	% RDF Resolve Hypermedia Links
 	\node[actor,below=1 of bus-rdf-resolve-hypermedia-links] (actor-rdf-resolve-hypermedia-links-next) {Next};
 	\draw[->,thick](bus-rdf-resolve-hypermedia-links) -- (actor-rdf-resolve-hypermedia-links-next.north);
+    
+	% RDF Resolve Hypermedia Links Queue
+	\node[actor,below=1 of bus-rdf-resolve-hypermedia-links-queue] (actor-rdf-resolve-hypermedia-links-queue-fifo) {FIFO};
+	\draw[->,thick](bus-rdf-resolve-hypermedia-links-queue) -- (actor-rdf-resolve-hypermedia-links-queue-fifo.north);
 	
 	% RDF Resolve Hypermedia
 	\node[actor,below=1 of bus-rdf-resolve-hypermedia] (actor-rdf-resolve-hypermedia-sparql) {SPARQL};

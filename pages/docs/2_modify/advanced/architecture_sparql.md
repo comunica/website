@@ -38,6 +38,7 @@ For a given SPARQL query, the following logic flow occurs: (_some parts are omit
                     * **RDF Metadata:** Extracts the quads relevant for metadata from the stream of data quads.
                     * **RDF Metadata Extract:** Create an object with metadata for a given metadata quad stream.
                     * **RDF Resolve Hypermedia Links:** Determines which links should be followed from the metadata of the current source.
+                    * **RDF Resolve Hypermedia Links Queue:** Creates a link queue that enables different strategies for queueing links.
                     * **RDF Resolve Hypermedia:** Handle a source based on the extracted metadata.
                         * **None:** The source is considered a raw RDF file, for which all data quads matching the quad pattern are returned.
                         * **SPARQL:** The source is considered a SPARQL endpoint if it has a service description, for which we use the SPARQL protocol.

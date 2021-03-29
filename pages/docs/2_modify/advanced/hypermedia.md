@@ -34,7 +34,8 @@ the hypermedia actor will always go through the following steps:
 2. Split data and metadata streams ([RDF Metadata bus](/docs/modify/advanced/buses/#rdf-metadata))
 3. Extract metadata as object ([RDF Metadata Extract bus](/docs/modify/advanced/buses/#rdf-metadata-extract))
 4. Determine links to other sources ([RDF Resolve Hypermedia Links bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia-links))
-5. Handle source based on metadata ([RDF Resolve Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia))
+5. Create a queue for managing links ([RDF Resolve Hypermedia Links Queue bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia-links-queue))
+6. Handle source based on metadata ([RDF Resolve Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia))
 
 Hereafter, we go over these three steps using three example sources:
 
@@ -260,7 +261,15 @@ For example:
 2. http://fragments.dbpedia.org/2016-04/en: https://fragments.dbpedia.org/2016-04/en?page=2
 3. https://ruben.verborgh.org/profile/: _None_
 
-## 5. Handle source based on metadata
+## 5. Create a queue for managing links
+
+Using the [RDF Resolve Hypermedia Links Queue bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia-links-queue),
+a [`ILinkQueue`](https://comunica.github.io/comunica/interfaces/bus_rdf_resolve_hypermedia_links_queue.ilinkqueue.html) instance is created
+using which the order is determined to process links.
+
+By default, this will be a queue that processes links in FIFO order.
+
+## 6. Handle source based on metadata
 
 Finally, the [RDF Resolve Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia)
 contains actors that can handle sources based on the extracted metadata.

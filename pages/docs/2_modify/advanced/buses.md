@@ -313,6 +313,21 @@ Subscribed actors need to implement [`ActorRdfResolveHypermediaLinks`](https://c
 | ---- | ------- | ----------- |
 | Next | [`@comunica/actor-rdf-resolve-hypermedia-links-next`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-links-next) | Follow next page links. |
 
+## RDF Resolve Hypermedia Links Queue
+
+_Package: [`@comunica/bus-rdf-resolve-hypermedia-links-queue`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-resolve-hypermedia-links-queue)_
+
+Creates [`ILinkQueue`](https://comunica.github.io/comunica/interfaces/bus_rdf_resolve_hypermedia_links_queue.ilinkqueue.html) instances,
+which enables different strategies for queueing links.
+
+Subscribed actors need to implement [`ActorRdfResolveHypermediaLinksQueue`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_hypermedia_links_queue.actorrdfresolvehypermedialinksqueue.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| FIFO | [`@comunica/actor-rdf-resolve-hypermedia-links-queue-fifo`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-links-queue-fifo) | Provides a link queue following the first in, first out strategy |
+
 
 ## RDF Resolve Hypermedia
 
