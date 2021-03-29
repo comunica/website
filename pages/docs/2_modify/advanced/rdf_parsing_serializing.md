@@ -16,7 +16,7 @@ and [serializers](/docs/query/advanced/specifications/#serializing-rdf) for the 
 
 ## Calling a parser
 
-RDF parsing actors implement the [`ActorRdfParse`](https://comunica.github.io/comunica/classes/bus_rdf_parse.actorrdfparse-1.html) abstract class,
+RDF parsing actors implement the [`ActorRdfParse`](https://comunica.github.io/comunica/classes/bus_rdf_parse.actorrdfparse.html) abstract class,
 which can handle two types of actions:
 
 * Retrieval of supported media types (`mediaTypes`), such as `'text/turtle'`, `application/ld+json`, ...
@@ -67,7 +67,7 @@ or in the [rdf-parse.js package](https://github.com/rubensworks/rdf-parse.js).
 
 ## Calling a serializer
 
-RDF serialzation actors implement the [`ActorRdfSerialize`](https://comunica.github.io/comunica/classes/bus_rdf_serialize.actorrdfserialize-1.html),
+RDF serialzation actors implement the [`ActorRdfSerialize`](https://comunica.github.io/comunica/classes/bus_rdf_serialize.actorrdfserialize.html),
 which can handle two types of actions:
 
 * Retrieval of supported media types (`mediaTypes`), such as `'text/turtle'`, `application/ld+json`, ...

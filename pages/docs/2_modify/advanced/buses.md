@@ -18,7 +18,7 @@ _Package: [`@comunica/bus-init`](https://github.com/comunica/comunica/tree/maste
 
 All Comunica engines start here. This is where they accept generic input parameters, such as CLI arguments.
 
-Subscribed actors need to implement [`ActorInit`](https://comunica.github.io/comunica/classes/bus_init.actorinit-1.html).
+Subscribed actors need to implement [`ActorInit`](https://comunica.github.io/comunica/classes/bus_init.actorinit.html).
 
 ### Actors
 
@@ -33,7 +33,7 @@ _Package: [`@comunica/bus-context-preprocess`](https://github.com/comunica/comun
 
 A bus in which actors can optionally modify the [query context](/docs/query/advanced/context/).
 
-Subscribed actors need to implement [`ActorContextPreprocess`](https://comunica.github.io/comunica/classes/bus_context_preprocess.actorcontextpreprocess-1.html).
+Subscribed actors need to implement [`ActorContextPreprocess`](https://comunica.github.io/comunica/classes/bus_context_preprocess.actorcontextpreprocess.html).
 
 _Contains no actors yet._
 
@@ -44,7 +44,7 @@ _Package: [`@comunica/bus-sparql-parse`](https://github.com/comunica/comunica/tr
 
 Parsing an input query into SPARQL algebra.
 
-Subscribed actors need to implement [`ActorSparqlParse`](https://comunica.github.io/comunica/classes/bus_sparql_parse.actorsparqlparse-1.html).
+Subscribed actors need to implement [`ActorSparqlParse`](https://comunica.github.io/comunica/classes/bus_sparql_parse.actorsparqlparse.html).
 
 ### Actors
 
@@ -60,7 +60,7 @@ _Package: [`@comunica/bus-optimize-query-operation`](https://github.com/comunica
 
 Apply optional optimizations to the SPARQL algebra before actual execution.
 
-Subscribed actors need to implement [`ActorOptimizeQueryOperation`](https://comunica.github.io/comunica/classes/bus_optimize_query_operation.actoroptimizequeryoperation-1.html).
+Subscribed actors need to implement [`ActorOptimizeQueryOperation`](https://comunica.github.io/comunica/classes/bus_optimize_query_operation.actoroptimizequeryoperation.html).
 
 ### Actors
 
@@ -75,8 +75,8 @@ _Package: [`@comunica/bus-query-operation`](https://github.com/comunica/comunica
 
 Evaluates [SPARQL algebra operations](/docs/modify/advanced/algebra/).
 
-Subscribed actors need to implement [`ActorQueryOperation`](https://comunica.github.io/comunica/classes/bus_query_operation.actorqueryoperation-1.html)
-or [`ActorQueryOperationTyped`](https://comunica.github.io/comunica/classes/bus_query_operation.actorqueryoperationtyped-1.html).
+Subscribed actors need to implement [`ActorQueryOperation`](https://comunica.github.io/comunica/classes/bus_query_operation.actorqueryoperation.html)
+or [`ActorQueryOperationTyped`](https://comunica.github.io/comunica/classes/bus_query_operation.actorqueryoperationtyped.html).
 
 ### Actors
 
@@ -125,7 +125,7 @@ _Package: [`@comunica/bus-sparql-serialize`](https://github.com/comunica/comunic
 
 Serializes the query result into a text-based serialization.
 
-Subscribed actors need to implement [`ActorSparqlSerialize`](https://comunica.github.io/comunica/classes/bus_sparql_serialize.actorsparqlserialize-1.html).
+Subscribed actors need to implement [`ActorSparqlSerialize`](https://comunica.github.io/comunica/classes/bus_sparql_serialize.actorsparqlserialize.html).
 
 ### Actors
 
@@ -149,7 +149,7 @@ _Package: [`@comunica/bus-rdf-serialize`](https://github.com/comunica/comunica/t
 
 Serializes quads to an RDF serialization format.
 
-Subscribed actors need to implement [`ActorRdfSerialize`](https://comunica.github.io/comunica/classes/bus_rdf_serialize.actorrdfserialize-1.html).
+Subscribed actors need to implement [`ActorRdfSerialize`](https://comunica.github.io/comunica/classes/bus_rdf_serialize.actorrdfserialize.html).
 
 ### Actors
 
@@ -165,7 +165,7 @@ _Package: [`@comunica/bus-rdf-join`](https://github.com/comunica/comunica/tree/m
 
 Handles joining of bindings streams.
 
-Subscribed actors need to implement [`ActorRdfJoin`](https://comunica.github.io/comunica/classes/bus_rdf_join.actorrdfjoin-1.html).
+Subscribed actors need to implement [`ActorRdfJoin`](https://comunica.github.io/comunica/classes/bus_rdf_join.actorrdfjoin.html).
 
 ### Actors
 
@@ -184,7 +184,7 @@ _Package: [`@comunica/bus-rdf-resolve-quad-pattern`](https://github.com/comunica
 
 Translates a quad pattern into a stream of quad.
 
-Subscribed actors need to implement [`ActorRdfResolveQuadPattern`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_quad_pattern.actorrdfresolvequadpattern-1.html).
+Subscribed actors need to implement [`ActorRdfResolveQuadPattern`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_quad_pattern.actorrdfresolvequadpattern.html).
 
 ### Actors
 
@@ -201,7 +201,7 @@ _Package: [`@comunica/bus-rdf-dereference`](https://github.com/comunica/comunica
 
 Dereferences a path or URL into a stream of quads.
 
-Subscribed actors need to implement [`ActorRdfDereference`](https://comunica.github.io/comunica/classes/bus_rdf_dereference.actorrdfdereference-1.html).
+Subscribed actors need to implement [`ActorRdfDereference`](https://comunica.github.io/comunica/classes/bus_rdf_dereference.actorrdfdereference.html).
 
 ### Actors
 
@@ -217,7 +217,7 @@ _Package: [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/
 
 Parses quads from a serialization format.
 
-Subscribed actors need to implement [`ActorRdfParse`](https://comunica.github.io/comunica/classes/bus_rdf_parse.actorrdfparse-1.html).
+Subscribed actors need to implement [`ActorRdfParse`](https://comunica.github.io/comunica/classes/bus_rdf_parse.actorrdfparse.html).
 
 ### Actors
 
@@ -236,7 +236,7 @@ _Package: [`@comunica/bus-rdf-parse-html`](https://github.com/comunica/comunica/
 
 Parses quads from an HTML document.
 
-Subscribed actors need to implement [`ActorRdfParseHtml`](https://comunica.github.io/comunica/classes/bus_rdf_parse_html.actorrdfparsehtml-1.html).
+Subscribed actors need to implement [`ActorRdfParseHtml`](https://comunica.github.io/comunica/classes/bus_rdf_parse_html.actorrdfparsehtml.html).
 
 ### Actors
 
@@ -253,7 +253,7 @@ _Package: [`@comunica/bus-http`](https://github.com/comunica/comunica/tree/maste
 
 Performs HTTP(S) requests.
 
-Subscribed actors need to implement [`ActorHttp`](https://comunica.github.io/comunica/classes/bus_http.actorhttp-1.html).
+Subscribed actors need to implement [`ActorHttp`](https://comunica.github.io/comunica/classes/bus_http.actorhttp.html).
 
 ### Actors
 
@@ -271,7 +271,7 @@ _Package: [`@comunica/bus-rdf-metadata`](https://github.com/comunica/comunica/tr
 
 Extracts the quads relevant for metadata from the stream of data quads.
 
-Subscribed actors need to implement [`ActorRdfMetadata`](https://comunica.github.io/comunica/classes/bus_rdf_metadata.actorrdfmetadata-1.html).
+Subscribed actors need to implement [`ActorRdfMetadata`](https://comunica.github.io/comunica/classes/bus_rdf_metadata.actorrdfmetadata.html).
 
 ### Actors
 
@@ -288,7 +288,7 @@ _Package: [`@comunica/bus-rdf-metadata-extract`](https://github.com/comunica/com
 
 Create an object with metadata for a given metadata quad stream.
 
-Subscribed actors need to implement [`ActorRdfMetadataExtract`](https://comunica.github.io/comunica/classes/bus_rdf_metadata_extract.actorrdfmetadataextract-1.html).
+Subscribed actors need to implement [`ActorRdfMetadataExtract`](https://comunica.github.io/comunica/classes/bus_rdf_metadata_extract.actorrdfmetadataextract.html).
 
 ### Actors
 
@@ -305,7 +305,7 @@ _Package: [`@comunica/bus-rdf-resolve-hypermedia-links`](https://github.com/comu
 
 Determines which links should be followed from the metadata of the current source.
 
-Subscribed actors need to implement [`ActorRdfResolveHypermediaLinks`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_hypermedia_links.actorrdfresolvehypermedialinks-1.html).
+Subscribed actors need to implement [`ActorRdfResolveHypermediaLinks`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_hypermedia_links.actorrdfresolvehypermedialinks.html).
 
 ### Actors
 
@@ -335,7 +335,7 @@ _Package: [`@comunica/bus-rdf-resolve-hypermedia`](https://github.com/comunica/c
 
 Handle a source based on the extracted metadata.
 
-Subscribed actors need to implement [`ActorRdfResolveHypermedia`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_hypermedia.actorrdfresolvehypermedia-1.html).
+Subscribed actors need to implement [`ActorRdfResolveHypermedia`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_hypermedia.actorrdfresolvehypermedia.html).
 
 ### Actors
 

@@ -6,7 +6,7 @@ description: 'Passively observe actions executed by actors on a given bus.'
 Observers are an optional element in [Comunica's core architecture](/docs/modify/advanced/architecture_core/).
 They allow you to **listen to all actions on a bus**, without modifying the action's input or output.
 
-Observers ([`ActionObserver`](https://comunica.github.io/comunica/classes/core.actionobserver-1.html)) require a `bus` parameter, which should be supplied in the config file.
+Observers ([`ActionObserver`](https://comunica.github.io/comunica/classes/core.actionobserver.html)) require a `bus` parameter, which should be supplied in the config file.
 Your observer implementation must override the following `onRun` method:
 ```typescript
 interface ActionObserver {
