@@ -12,6 +12,7 @@ The following standard query specifications are supported:
 | **Description** |
 | ------- |
 | [SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/) |
+| [SPARQL 1.1 Update](https://www.w3.org/TR/sparql11-update/) |
 | [SPARQL 1.1 Service Description](https://www.w3.org/TR/sparql11-service-description/) |
 | [SPARQL 1.1 Federated Query](https://www.w3.org/TR/sparql11-federated-query/) |
 | [SPARQL 1.1 Query Results JSON Format](https://www.w3.org/TR/sparql11-results-json/) |
@@ -23,7 +24,6 @@ The following notable specifications are not supported _yet_:
 
 | **Description** |
 | ------- |
-| [SPARQL 1.1 Update](https://www.w3.org/TR/sparql11-update/) |
 | [SPARQL 1.1 Entailment Regimes](https://www.w3.org/TR/sparql11-entailment/) |
 | [SPARQL 1.1 Graph Store HTTP Protocol](https://www.w3.org/TR/sparql11-http-rdf-update/) |
 

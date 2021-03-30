@@ -43,6 +43,11 @@ can also be used as a more lightweight alternative
 that <i>only</i> allows querying over RDF/JS sources.
 </div>
 
+<div class="note">
+If the RDF/JS `Source` also implements the RDF/JS <a href="http://rdf.js.org/stream-spec/#store-interface"><code>Store</code> interface</a>,
+then it is also supports <a href="/docs/query/advanced/rdfjs_updating/">update queries</a> to add, change or delete quads in the store.
+</div>
+
 ## Optional: query optimization
 
 The RDFJS [Source interface](http://rdf.js.org/#source-interface) by default only exposed the `match` method.

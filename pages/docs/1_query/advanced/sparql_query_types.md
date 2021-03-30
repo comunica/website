@@ -11,6 +11,9 @@ introduces four query types:
 * `DESCRIBE`: Create RDF triples about a resource.
 * `ASK`: Check if at least one match exists.
 
+The [SPARQL 1.1 update specification](https://www.w3.org/TR/sparql11-update/)
+also introduces query types that modify data, but return no output.
+
 This guide shows how to handle these query types from the [command line](/docs/query/getting_started/query_cli/)
 and via [a JavaScript application](/docs/query/getting_started/query_app/).
 
@@ -89,6 +92,14 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
 true
 ```
 
+### 1.5. Update
+
+Update queries will produce no output, unless an error occurs:
+```bash
+$ comunica-sparql https://example.org/file.ttl \
+    "INSERT DATA { <ex:s> <ex:p> <ex:o> }"
+```
+
 ## 2. Application
 
 Below, the different query type usages are summarized.
@@ -161,4 +172,20 @@ const result = await myEngine.query(`
   sources: ['http://fragments.dbpedia.org/2015/en'],
 })
 const hasMatches = await result.booleanResult;
+```
+
+### 1.5. Update
+
+Update queries will produce a void output:
+```javascript
+const result = await myEngine.query(`
+  PREFIX dc: <http://purl.org/dc/elements/1.1/>
+  INSERT DATA
+  { 
+    <http://example/book1> dc:title "A new book" ;
+                           dc:creator "A.N.Other" .
+  }`, {
+  sources: [ store ],
+});
+await result.updateResult;
 ```

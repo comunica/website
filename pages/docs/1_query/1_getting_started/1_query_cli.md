@@ -142,6 +142,7 @@ Usage:
 Options:
   -q            evaluate the given SPARQL query string
   -f            evaluate the SPARQL query in the given file
+  -d            the destination for update queries
   -c            use the given JSON configuration file (e.g., config.json)
   -t            the MIME type of the output (e.g., application/json)
   -i            the query input format (e.g., graphql, defaults to sparql)

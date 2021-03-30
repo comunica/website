@@ -55,7 +55,7 @@
 	\node[bus,left=of bus-query-operation] (bus-optimize-query-operation) {Optimize Query Operation};
 	\node[bus,left=1 of bus-optimize-query-operation] (bus-sparql-parse) {SPARQL Parse};
 	\node[bus,left=1 of bus-sparql-parse] (bus-context-preprocess) {Context Preprocess};
-	\node[bus,right=7 of bus-query-operation] (bus-sparql-serialize) {SPARQL Serialize};
+	\node[bus,right=18 of bus-query-operation] (bus-sparql-serialize) {SPARQL Serialize};
 	
 	\draw[->,thick](actor-init-sparql.south) -- (bus-query-operation.north);
 	\draw[->,thick](actor-init-sparql.south) -- (bus-optimize-query-operation.north);
@@ -75,9 +75,11 @@
 	\node[actor,below=1 of bus-query-operation] (actor-query-operation-union) {Union};
 	\node[actor,right=1 of actor-query-operation-union] (actor-query-operation-join) {Join};
 	\node[actor,left=1 of actor-query-operation-union] (actor-query-operation-quadpattern) {Quad Pattern};
+    \node[actor,right=6 of actor-query-operation-join] (actor-query-operation-update-deleteinsert) {Delete-Insert};
 	\draw[<->,thick](bus-query-operation) -- (actor-query-operation-union.north);
 	\draw[<->,thick](bus-query-operation) -- (actor-query-operation-join.north);
 	\draw[->,thick](bus-query-operation) -- (actor-query-operation-quadpattern.north);
+    \draw[->,thick](bus-query-operation) -- (actor-query-operation-update-deleteinsert.north);
 	
 	% SPARQL Serialize
 	\node[actor,below=1 of bus-sparql-serialize] (actor-sparql-serialize-xml) {SPARQL/XML};
@@ -104,6 +106,13 @@
 	\draw[->,thick](bus-rdf-join) -- (actor-rdf-join-symmetrichash.north);
 	\draw[->,thick](bus-rdf-join) -- (actor-rdf-join-nestedloop.north);
 	\draw[<->,thick](bus-rdf-join) -- (actor-rdf-join-multi-smallest.north);
+    
+	% RDF Update Quads
+	\node[bus,below=of actor-query-operation-update-deleteinsert] (bus-rdf-update-quads) {RDF Update Quads};
+	\draw[->,thick](actor-query-operation-update-deleteinsert.south) -- (bus-rdf-update-quads.north);
+    
+	\node[actor,below=1 of bus-rdf-update-quads] (actor-rdf-update-quads-rdfjs-store) {RDF/JS Store};
+	\draw[->,thick](bus-rdf-update-quads) -- (actor-rdf-update-quads-rdfjs-store.north);
 	
 	% RDF Resolve Quad Pattern
 	\node[bus,below left=of actor-query-operation-quadpattern] (bus-rdf-resolve-quad-pattern) {RDF Resolve Quad Pattern};

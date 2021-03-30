@@ -117,7 +117,15 @@ or [`ActorQueryOperationTyped`](https://comunica.github.io/comunica/classes/bus_
 | SPARQL endpoint | [`@comunica/actor-query-operation-sparql-endpoint`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-sparql-endpoint) | Delegates a full SPARQL query to a SPARQL endpoint if there is only a single SPARQL endpoint source. |
 | Union | [`@comunica/actor-query-operation-union`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-union) | Handles `UNION` operations. |
 | Values | [`@comunica/actor-query-operation-values`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-values) | Handles `VALUES` operations. |
-
+| Update Add | [`@comunica/actor-query-operation-update-add-rewrite`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-add-rewrite) | Handles `ADD` operations by rewriting the operation in terms of an insert. |
+| Update Clear | [`@comunica/actor-query-operation-update-clear`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-clear) | Handles `CLEAR` operations. |
+| Update Composite Update | [`@comunica/actor-query-operation-update-compositeupdate`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-compositeupdate) | Handles `composition of multiple SPARQL update operations. |
+| Update Copy | [`@comunica/actor-query-operation-update-copy-rewrite`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-copy-rewrite) | Handles `COPY` operations by rewriting the operation in terms of drop and add. |
+| Update Create | [`@comunica/actor-query-operation-update-create`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-create) | Handles `CREATE` operations. |
+| Update Delete Insert | [`@comunica/actor-query-operation-update-deleteinsert`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-deleteinsert) | Handles `INSERT DATA`, `DELETE DATA`, and `INSERT/DELETE` operations. |
+| Update Drop | [`@comunica/actor-query-operation-update-drop`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-drop) | Handles `DROP` operations. |
+| Update Load | [`@comunica/actor-query-operation-update-load`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-load) | Handles `LOAD` operations. |
+| Update Move | [`@comunica/actor-query-operation-update-move-rewrite`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-move-rewrite) | Handles `COPY` operations by rewriting the operation in terms of drop and add. |
 
 ## SPARQL Serialize
 
@@ -344,3 +352,18 @@ Subscribed actors need to implement [`ActorRdfResolveHypermedia`](https://comuni
 | None | [`@comunica/actor-rdf-resolve-hypermedia-none`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-none) | The source is considered a raw RDF file, for which all data quads matching the quad pattern are returned. |
 | QPF | [`@comunica/actor-rdf-resolve-hypermedia-qpf`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-qpf) | The source is considered a [Triple/Quad Pattern Fragments](https://linkeddatafragments.org/) interface. |
 | SPARQL | [`@comunica/actor-rdf-resolve-hypermedia-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-sparql) | The source is considered a SPARQL endpoint if it has a service description, for which we use the SPARQL protocol. |
+
+## RDF Update Quads
+
+_Package: [`@comunica/bus-rdf-update-quads`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-update-quads)_
+
+Handle the insertion and deletion of streams of quads for a given destination type.
+
+Subscribed actors need to implement [`ActorRdfUpdateQuads`](https://comunica.github.io/comunica/classes/bus_rdf_update_quads.actorrdfupdatequads.html)
+or [`ActorRdfUpdateQuadsDestination`](https://comunica.github.io/comunica/classes/bus_rdf_update_quads.actorrdfupdatequadsdestination.html)
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| RDF/JS Store | [`@comunica/actor-rdf-update-quads-rdfjs-store`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-update-quads-rdfjs-store) | The destination is considered an [RDF/JS Store](https://comunica.dev/docs/query/advanced/rdfjs_querying/). |

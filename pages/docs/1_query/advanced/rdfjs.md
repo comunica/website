@@ -80,3 +80,7 @@ which is of high important to Comunica.
 
 One interface of high importance is the [RDF/JS `Source` interface](http://rdf.js.org/stream-spec/#source-interface).
 You can [pass a custom `Source` to Comunica to execute queries over it](/docs/query/advanced/rdfjs_querying/).
+
+The [RDF/JS `Store` interface](http://rdf.js.org/stream-spec/#store-interface) is an extension of `Source`
+that also allows quads to be added and removed.
+You can [pass a custom `Store` to Comunica to execute update queries over it](/docs/query/advanced/rdfjs_updating/).
