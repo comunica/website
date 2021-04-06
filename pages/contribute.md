@@ -94,7 +94,7 @@ General issues progress:
 
 ### Making a new release
 
-Making a new release only requires invoking `yarn run publish` from the repository root, which does the following using [lerna](https://github.com/lerna/lerna):
+Making a new release only requires invoking `yarn run publish-release` from the repository root, which does the following using [lerna](https://github.com/lerna/lerna):
 
 * Prompts your for providing the new version (major, minor, patch).
 * Bump the versions from all changed packages.
@@ -102,3 +102,14 @@ Making a new release only requires invoking `yarn run publish` from the reposito
 * Release all changed packages to npm.
 * Push the tag to GitHub.
 * Push to master.
+
+### Making a new pre-release
+
+Making a new release only requires invoking `yarn run publish-canary` from the repository root, which does the following using [lerna](https://github.com/lerna/lerna):
+
+* Temporarily do a patch release increment on all packages in the form of `<version>-alpha.<git-head-sha>.0`.
+* Release all packages to npm with the `next` tag.
+* Undo temporary changes
+
+Pre-releases do not trigger changelog changes, git commits, and pushes.
+
