@@ -33,6 +33,7 @@ we would appreciate a citation of our [article](https://comunica.github.io/Artic
 
 The following experiments have been done with Comunica:
 
+* [Link Traversal](/research/link_traversal/)
 * [Approximate Membership Functions](/research/amf/)
 
 ## Publications
