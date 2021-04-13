@@ -3,7 +3,7 @@ title: 'Link Traversal'
 description: 'An overview of research that has been done on Link-Traversal-based Query Processing.'
 ---
 
-Link-Traversal-based Query Processing (LTQP) is a querying paradigm
+[Link-Traversal-based Query Processing (LTQP)](https://link.springer.com/content/pdf/10.1007/s13222-013-0122-1.pdf) is a querying paradigm
 that enables querying over an interlinked set of Linked Data documents
 by following links between them.
 
