@@ -1,6 +1,6 @@
 ---
 title: 'Link Traversal'
-description: 'TODO'
+description: 'An overview of research that has been done on Link-Traversal-based Query Processing.'
 ---
 
 Link-Traversal-based Query Processing (LTQP) is a querying paradigm
