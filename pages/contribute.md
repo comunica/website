@@ -103,6 +103,13 @@ Making a new release only requires invoking `yarn run publish-release` from the 
 * Push the tag to GitHub.
 * Push to master.
 
+<div class="note">
+If publication fails due to a random NPM server error,
+you can invoke the [`retry-republish.sh`](https://github.com/comunica/comunica/blob/master/.github/retry-publish.sh) scripts to retry the publication.
+This script can be safely called multiple times.
+You may have to stash your repo first.
+</div>
+
 ### Making a new pre-release
 
 Making a new release only requires invoking `yarn run publish-canary` from the repository root, which does the following using [lerna](https://github.com/lerna/lerna):
