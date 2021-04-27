@@ -59,6 +59,7 @@ Subscribed actors need to implement [`ActorSparqlParse`](https://comunica.github
 _Package: [`@comunica/bus-optimize-query-operation`](https://github.com/comunica/comunica/tree/master/packages/bus-optimize-query-operation)_
 
 Apply optional optimizations to the SPARQL algebra before actual execution.
+Optionally, a modified context can be returned.
 
 Subscribed actors need to implement [`ActorOptimizeQueryOperation`](https://comunica.github.io/comunica/classes/bus_optimize_query_operation.actoroptimizequeryoperation.html).
 
@@ -305,6 +306,7 @@ Subscribed actors need to implement [`ActorRdfMetadataExtract`](https://comunica
 | Hydra Controls | [`@comunica/actor-rdf-metadata-extract-hydra-controls`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-hydra-controls) | Extract controls using the Hydra vocabulary. |
 | Hydra Count | [`@comunica/actor-rdf-metadata-extract-hydra-count`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-hydra-count) | Extract count estimates using the Hydra vocabulary. |
 | SPARQL Service | [`@comunica/actor-rdf-metadata-extract-sparql-service`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-sparql-service) | Extract SPARQL service description metadata. |
+| Patch SPARQL Update | [`@comunica/actor-rdf-metadata-extract-patch-sparql-update`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-patch-sparql-update) | Checks for the presence of `application/sparql-update` in the `Accept-Patch` header. |
 
 
 ## RDF Resolve Hypermedia Links
@@ -367,3 +369,19 @@ or [`ActorRdfUpdateQuadsDestination`](https://comunica.github.io/comunica/classe
 | Name | Package | Description |
 | ---- | ------- | ----------- |
 | RDF/JS Store | [`@comunica/actor-rdf-update-quads-rdfjs-store`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-update-quads-rdfjs-store) | The destination is considered an [RDF/JS Store](https://comunica.dev/docs/query/advanced/rdfjs_querying/). |
+| Hypermedia | [`@comunica/actor-rdf-update-quads-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-update-quads-hypermedia) | The destination that handles updates by interpreting hypermedia links and controls. |
+
+
+## RDF Update Hypermedia
+
+_Package: [`@comunica/bus-rdf-update-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-update-hypermedia)_
+
+Handle a destination based on the extracted metadata.
+
+Subscribed actors need to implement [`ActorRdfUpdateHypermedia`](https://comunica.github.io/comunica/classes/bus_rdf_update_hypermedia.actorrdfupdatehypermedia.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| SPARQL | [`@comunica/actor-rdf-update-hypermedia-patch-sparql-update`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-update-hypermedia-patch-sparql-update) | The destination is considered an HTTP APIs accepting `PATCH` requests containing SPARQL Update queries (`application/sparql-update`), such as [Solid servers](https://github.com/solid/solid-spec/blob/master/api-rest.md#alternative-using-sparql-1). |

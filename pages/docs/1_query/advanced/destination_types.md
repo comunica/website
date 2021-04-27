@@ -3,11 +3,6 @@ title: 'Destination types'
 description: 'Comunica detects and handles different types of destinations.'
 ---
 
-<div class="note">
-Currently, only updating of <a href="/docs/query/advanced/rdfjs_updating/">in-memory RDF/JS Stores</a> is supported.
-So not all examples mentioned on this page are possible yet.
-</div>
-
 Comunica SPARQL supports _update_ queries to add, delete, or change data
 on both the [command line](/docs/query/getting_started/update_cli/)
 and when [calling Comunica from a JavaScript application](/docs/query/getting_started/update_app/).
@@ -46,7 +41,7 @@ Destination types can optionally be enforced by prefixing the URL with `<typeNam
 
 ```bash
 $ comunica-sparql https://example.org/file-in.ttl \
-    -d file@https://example.org/file-out.ttl \
+    --to patchSparqlUpdate@https://example.org/file-out.ttl \
     "INSERT DATA { <ex:s> <ex:p> <ex:o> }"
 ```
 
@@ -59,7 +54,7 @@ const result = await myEngine.query(`...`, {
   sources: [
     { type: 'file', value: 'https://example.org/file-in.ttl' },
   ],
-  destination: { type: 'file', value: 'https://example.org/file-out.ttl' },
+  destination: { type: 'patchSparqlUpdate', value: 'https://example.org/file-out.ttl' },
 });
 ```
 
@@ -70,8 +65,9 @@ The table below summarizes the different destination types that Comunica support
 | **Type name** | **Description** |
 | ------- | --------------- |
 | `rdfjsStore` | JavaScript objects implementing the [RDF/JS `store` interface](/docs/query/advanced/rdfjs_updating/) |
+| `patchSparqlUpdate` | HTTP APIs accepting `PATCH` requests containing SPARQL Update queries (`application/sparql-update`), such as [Solid servers](https://github.com/solid/solid-spec/blob/master/api-rest.md#alternative-using-sparql-1). |
 
 The default source type is `auto`,
 which will automatically detect the proper source type.
-For example, if a [SPARQL Service Description](https://www.w3.org/TR/sparql11-service-description/)
-is detected, the `sparql` type is used.
+For example, if an `Accept-Patch: application/sparql-update` header
+is detected, the `patchSparqlUpdate` type is used.

@@ -73,9 +73,9 @@
 	
 	% Query Operation
 	\node[actor,below=1 of bus-query-operation] (actor-query-operation-union) {Union};
-	\node[actor,right=1 of actor-query-operation-union] (actor-query-operation-join) {Join};
+    \node[actor,right=1 of actor-query-operation-union] (actor-query-operation-update-deleteinsert) {Delete-Insert};
 	\node[actor,left=1 of actor-query-operation-union] (actor-query-operation-quadpattern) {Quad Pattern};
-    \node[actor,right=6 of actor-query-operation-join] (actor-query-operation-update-deleteinsert) {Delete-Insert};
+    \node[actor,right=6 of actor-query-operation-update-deleteinsert] (actor-query-operation-join) {Join};
 	\draw[<->,thick](bus-query-operation) -- (actor-query-operation-union.north);
 	\draw[<->,thick](bus-query-operation) -- (actor-query-operation-join.north);
 	\draw[->,thick](bus-query-operation) -- (actor-query-operation-quadpattern.north);
@@ -111,8 +111,10 @@
 	\node[bus,below=of actor-query-operation-update-deleteinsert] (bus-rdf-update-quads) {RDF Update Quads};
 	\draw[->,thick](actor-query-operation-update-deleteinsert.south) -- (bus-rdf-update-quads.north);
     
-	\node[actor,below=1 of bus-rdf-update-quads] (actor-rdf-update-quads-rdfjs-store) {RDF/JS Store};
+	\node[actor,below=2.3 of bus-rdf-update-quads] (actor-rdf-update-quads-rdfjs-store) {RDF/JS Store};
+    \node[actor,left=1 of actor-rdf-update-quads-rdfjs-store] (actor-rdf-update-quads-hypermedia) {Hypermedia};
 	\draw[->,thick](bus-rdf-update-quads) -- (actor-rdf-update-quads-rdfjs-store.north);
+    \draw[->,thick](bus-rdf-update-quads) -- (actor-rdf-update-quads-hypermedia.north);
 	
 	% RDF Resolve Quad Pattern
 	\node[bus,below left=of actor-query-operation-quadpattern] (bus-rdf-resolve-quad-pattern) {RDF Resolve Quad Pattern};
@@ -132,6 +134,7 @@
 	\node[bus,right=of bus-rdf-metadata-extract] (bus-rdf-resolve-hypermedia-links) {RDF Hypermedia Links};
     \node[bus,right=1 of bus-rdf-resolve-hypermedia-links] (bus-rdf-resolve-hypermedia-links-queue) {RDF Links Queue};
 	\node[bus,right=of bus-rdf-resolve-hypermedia-links-queue] (bus-rdf-resolve-hypermedia) {RDF Resolve Hypermedia};
+    \node[bus,right=of bus-rdf-resolve-hypermedia] (bus-rdf-update-hypermedia) {RDF Update Hypermedia};
 
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-metadata-extract.north);
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-metadata.north);
@@ -139,6 +142,11 @@
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia.north);
 	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links.north);
     \draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links-queue.north);
+    
+	\draw[->,thick,dashed](actor-rdf-update-quads-hypermedia.south) -- (bus-rdf-metadata-extract.north);
+	\draw[->,thick,dashed](actor-rdf-update-quads-hypermedia.south) -- (bus-rdf-metadata.north);
+	\draw[->,thick,dashed](actor-rdf-update-quads-hypermedia.south) -- (bus-rdf-dereference.north);
+	\draw[->,thick,dashed](actor-rdf-update-quads-hypermedia.south) -- (bus-rdf-update-hypermedia.north);
 
 	% RDF Dereference
 	\node[actor,below left=1 of bus-rdf-dereference] (actor-rdf-dereference-file) {File};
@@ -196,6 +204,10 @@
 	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-sparql.north);
 	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-none.north);
 	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-qpf.north);
+    
+	% RDF Update Hypermedia
+	\node[actor,below=1 of bus-rdf-update-hypermedia] (actor-rdf-update-hypermedia-patch-sparql-update) {Patch SPARQL Update};
+	\draw[->,thick](bus-rdf-update-hypermedia) -- (actor-rdf-update-hypermedia-patch-sparql-update.north);
 
 \end{tikzpicture}
 \end{document}

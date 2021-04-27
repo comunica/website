@@ -115,3 +115,8 @@ await (await myEngine.query(`
   destination: store,
 })).updateResult;
 ```
+
+<div class="note">
+Instead of passing an RDF/JS store as destination,
+you may also pass <a href="/docs/query/advanced/destination_types/">other types of destinations</a>.  
+</div>
