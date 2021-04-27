@@ -4,7 +4,7 @@
         <description><![CDATA[Blog posts, containing announcements or other news.]]></description>
         <link>https://comunica.dev/blog</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 13 Apr 2021 07:01:32 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 27 Apr 2021 08:19:56 GMT</lastBuildDate>
         <item>
             <title><![CDATA[A New Website for Comunica]]></title>
             <link>https://comunica.dev/blogpages/blog/2020-08-19-intro.md</link>
@@ -40,6 +40,12 @@
             <link>https://comunica.dev/blogpages/blog/2021-03-30-release_1_20.md</link>
             <guid isPermaLink="false">pages/blog/2021-03-30-release_1_20.md</guid>
             <pubDate>Fri, 30 Apr 2021 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Release 1.21.0: Hypermedia-based SPARQL Updating]]></title>
+            <link>https://comunica.dev/blogpages/blog/2021-04-27-release_1_21.md</link>
+            <guid isPermaLink="false">pages/blog/2021-04-27-release_1_21.md</guid>
+            <pubDate>Thu, 27 May 2021 00:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
