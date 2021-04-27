@@ -13,6 +13,13 @@ communication will be done using SPARQL queries.
 While when providing a link to a plain RDF file (e.g. http://ruben.verborgh.org/profile/),
 the whole file will be downloaded and queried in-memory.
 
+<div class="note">
+This page only describes the handling of hypermedia for read queries.
+The handling of hypermedia for update queries happens in a very similar manner,
+with the main difference that the [RDF Resolve Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia)
+is replaced by the [RDF Update Hypermedia bus](/docs/modify/advanced/buses/#rdf-update-hypermedia).
+</div>
+
 ## Hypermedia actor
 
 The actor in Comunica that drives hypermedia handling is
