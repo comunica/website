@@ -369,5 +369,5 @@ you can remove any other actors you don't want to make it even more lightweight.
 
 <div class="note">
 Loading custom configs from the command line is limited to loading from a single config file.
-If you want to split up your config file over different parts, you have to <a href="/modify/getting_started/custom_config_app/">load it via the JavaScript API</a>.
+If you want to split up your config file over different parts, you have to <a href="/docs/modify/getting_started/custom_config_app/">load it via the JavaScript API</a>.
 </div>
