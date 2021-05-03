@@ -164,7 +164,7 @@ HttpServiceSparqlEndpoint.runArgsInProcess(process.argv.slice(2), process.stdout
   __dirname + '/../', process.env, __dirname + '/../config/config-default.json', () => process.exit(1));
 ```
 
-`bin/http.js`:
+`bin/query-dynamic.js`:
 ```typescript
 #!/usr/bin/env node
 import {runArgsInProcess} from "@comunica/runner-cli";
