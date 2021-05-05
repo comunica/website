@@ -1,5 +1,6 @@
 import Highlight from 'react-highlight';
 import ReactMarkdown from 'react-markdown';
+import React from 'react';
 import gfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
@@ -12,7 +13,12 @@ export default function Markdown({body}) {
             children={body}
             components={{
                 code: CodeBlock,
-                heading: Heading,
+                h1: Heading,
+                h2: Heading,
+                h3: Heading,
+                h4: Heading,
+                h5: Heading,
+                h6: Heading,
             }}
         />
     );
