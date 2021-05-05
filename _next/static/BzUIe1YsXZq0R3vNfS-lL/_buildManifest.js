@@ -1,1 +1,0 @@
-self.__BUILD_MANIFEST = {"/[...slug]":["static\u002Fchunks\u002F9f96d65d.fe7a32ff94d8b5e6c326.js"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
