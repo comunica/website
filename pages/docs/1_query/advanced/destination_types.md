@@ -31,7 +31,7 @@ which may produce incorrect results. For these cases, the <code>sparql</code> ty
 </div>
 
 <div class="note">
-When enabling the <a href="/docs/query/getting_started/logger/"><code>info</code> logger</a>,
+When enabling the <a href="/docs/modify/advanced/logging/"><code>info</code> logger</a>,
 you can derive what type Comunica has determined for each destination.
 </div>
 

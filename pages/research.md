@@ -10,7 +10,7 @@ as a framework for researching query execution over decentralized knowledge grap
 Since Comunica is open-source, anyone is free to use it to perform any research they want.
 
 If you are interested in **collaborating**, or working on Comunica as a **Bachelor/Master/PhD student**,
-feel free to [contact us](ask/#email).
+feel free to [contact us](/ask/#email).
 We always have interesting projects to offer on both applied development and fundamental research.
 
 ## Cite
@@ -48,7 +48,7 @@ The following publications make significant use of Comunica:
 * [**SAD Generator: eating our own dog food to generate KGs and websites for academic events**. Heyvaert, P., Chaves-Fraga, D., Priyatna, F., Sequeda, J., & Dimou, A. (2019, June).](https://link.springer.com/chapter/10.1007/978-3-030-32327-1_19)
 * [**Versioned Querying with OSTRICH and Comunica in MOCHA 2018**. Taelman, R., Vander Sande, M., & Verborgh, R. (2018, June)](https://biblio.ugent.be/publication/8566999/file/8567001.pdf)
 
-Also using Comunica in our work? [Let us know](ask/#email) so we can add a reference to this list.
+Also using Comunica in our work? [Let us know](/ask/#email) so we can add a reference to this list.
 
 ## Tutorials
 

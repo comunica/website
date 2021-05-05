@@ -93,7 +93,7 @@ For example, the imported config file `files-cais:config/sets/sparql-queryoperat
 }
 ```
 
-This example `files-cais:config/sets/sparql-queryoperators.json` config file contains three _[actors](/docs/modify/advanced/architecture/)_ that will be loaded into Comunica,
+This example `files-cais:config/sets/sparql-queryoperators.json` config file contains three _[actors](/docs/modify/advanced/architecture_core/)_ that will be loaded into Comunica,
 which each fulfill a specific task:
 
 * `ActorQueryOperationDistinctHash`: Executes the SPARQL `DISTINCT` operator.

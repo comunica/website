@@ -8,7 +8,7 @@ export default function Home() {
           description={'Flexible SPARQL and GraphQL over decentralized RDF on the Web.'}
       />
 
-      <main>
+      <main id="software">
         <div className={"intro"}>
           <img src="/img/comunica_red.svg" alt="Comunica" className="comunica-logo" />
           <h1 className="title">A knowledge graph querying framework</h1>

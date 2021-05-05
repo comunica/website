@@ -29,7 +29,7 @@ Due to the reduction of HTTP requests, complete results come in earlier.
 In some cases, the first result can be delayed.
 
 <center>
-  <img src="https://comunica.github.io/Article-SSWS2020-AMF/img/experiments/client_algos/query_times_F3.svg" style="width:75%" \>
+  <img src="https://comunica.github.io/Article-SSWS2020-AMF/img/experiments/client_algos/query_times_F3.svg" alt="Query times for F3" style="width:75%" \>
 </center>
 
 ### Caching significantly speeds up query execution
@@ -37,7 +37,7 @@ In some cases, the first result can be delayed.
 An HTTP cache like NGINX achieves the best results, but additionally caching AMF filters server-side is not worth the effort.
 
 <center>
-  <img src="https://comunica.github.io/Article-SSWS2020-AMF/img/experiments/caching/plot_no_c.svg" style="width:75%" \>
+  <img src="https://comunica.github.io/Article-SSWS2020-AMF/img/experiments/caching/plot_no_c.svg" alt="Query times for caching" style="width:75%" \>
 </center>
 
 ### Extreme false-positive probabilities slow down query execution
@@ -45,7 +45,7 @@ An HTTP cache like NGINX achieves the best results, but additionally caching AMF
 On average, a false-positive probability of 1/64 leads to the lowest overall query evaluation times for this experiment.
 
 <center>
-  <img src="https://comunica.github.io/Article-SSWS2020-AMF/img/experiments/probabilities/plot_no_c.svg" style="width:75%" \>
+  <img src="https://comunica.github.io/Article-SSWS2020-AMF/img/experiments/probabilities/plot_no_c.svg" alt="Query times for different false-positive probabilities" style="width:75%" \>
 </center>
 
 ## 3. Recommendations for data publishers

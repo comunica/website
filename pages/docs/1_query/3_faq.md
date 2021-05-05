@@ -65,7 +65,7 @@ and an `'end'` event will only be emitted when all of them have been consumed.
 ## I need a specific feature, how do I get it into Comunica?
 
 Since Comunica is an open-source project,
-the best way to get new features in, is by [contributing yourself](/contributing/).
+the best way to get new features in, is by [contributing yourself](/contribute/).
 
 Feel free to [contact us](/ask/) for commercial support or consultancy.
 
@@ -74,7 +74,7 @@ Feel free to [contact us](/ask/) for commercial support or consultancy.
 ### Simple statistics
 
 The easiest way to get statistics on the performance of a specific query
-is by using the `'stats'` [result format](/docs/query/advanced/result_format/).
+is by using the `'stats'` [result format](/docs/query/advanced/result_formats/).
 This will print the number of results, their delay from query start,
 and the number of HTTP requests that have been executed up until the result was available.
 

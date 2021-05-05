@@ -19,13 +19,13 @@ All relevant types and interfaces are exposed by the
 [`IActorQueryOperationOutput`](https://comunica.github.io/comunica/modules/bus_query_operation.html#iactorqueryoperationoutput-1)
 is a TypeScript union type over the following interfaces:
 
-* [`IActorQueryOperationOutputBindings`](https://comunica.github.io/comunica/interfaces/bus_query_operation.iactorqueryoperationoutputbindings.html): Represents a stream of bindings.
-* [`IActorQueryOperationOutputQuads`](https://comunica.github.io/comunica/interfaces/bus_query_operation.iactorqueryoperationoutputquads.html): Represents a stream of quads.
-* [`IActorQueryOperationOutputBoolean`](https://comunica.github.io/comunica/interfaces/bus_query_operation.iactorqueryoperationoutputboolean.html): Represents a boolean result.
+* [`IActorQueryOperationOutputBindings`](https://comunica.github.io/comunica/modules/bus_query_operation.html#iactorqueryoperationoutputbindings): Represents a stream of bindings.
+* [`IActorQueryOperationOutputQuads`](https://comunica.github.io/comunica/modules/bus_query_operation.html#iactorqueryoperationoutputquads): Represents a stream of quads.
+* [`IActorQueryOperationOutputBoolean`](https://comunica.github.io/comunica/modules/bus_query_operation.html#iactorqueryoperationoutputboolean): Represents a boolean result.
 
 ## Bindings output
 
-An output of type [`IActorQueryOperationOutputBindings`](https://comunica.github.io/comunica/interfaces/bus_query_operation.iactorqueryoperationoutputbindings.html)
+An output of type [`IActorQueryOperationOutputBindings`](https://comunica.github.io/comunica/modules/bus_query_operation.html#iactorqueryoperationoutputbindings)
 looks as follows:
 
 ```typescript
@@ -45,7 +45,7 @@ which are of type `Map<string, RDF.Term>` where keys are variable names prefixes
 
 ## Quads output
 
-An output of type [`IActorQueryOperationOutputQuads`](https://comunica.github.io/comunica/interfaces/bus_query_operation.iactorqueryoperationoutputquads.html)
+An output of type [`IActorQueryOperationOutputQuads`](https://comunica.github.io/comunica/modules/bus_query_operation.html#iactorqueryoperationoutputquads)
 looks as follows:
 
 ```typescript
@@ -62,7 +62,7 @@ containing [RDF/JS quads](/docs/query/advanced/rdfjs/).
 
 ## Boolean output
 
-An output of type [`IActorQueryOperationOutputBoolean`](https://comunica.github.io/comunica/interfaces/bus_query_operation.iactorqueryoperationoutputboolean.html)
+An output of type [`IActorQueryOperationOutputBoolean`](https://comunica.github.io/comunica/modules/bus_query_operation.html#iactorqueryoperationoutputboolean)
 looks as follows:
 
 ```typescript
