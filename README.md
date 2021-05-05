@@ -17,6 +17,8 @@ New pages should always have the `.md` extension.
 
 Run `npm run dev` to start a live development server.
 
+**Warning:** For compiling the bounties page, you will need to set a [`GITHUB_TOKEN`](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) in your environment variables to access the GitHub API.
+
 ## License
 This website is written by [Ruben Taelman](https://www.rubensworks.net/).
 

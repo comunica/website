@@ -255,6 +255,73 @@ pre {
     line-height: 1.5;
 }
 
+.card-bounty {
+    @extend .card-info;
+    flex-basis: 45%;
+
+    p {
+        font-size: 1rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+    h2 {
+        font-size: 1.5rem;
+        color: black;
+        font-weight: normal;
+        .issue-id {
+            color: #6a737d;
+        }
+    }
+    .issue-metadata {
+        color: #586069;
+        font-size: 0.85rem;
+        a {
+            text-decoration: none;
+        }
+    }
+    .issue-body p {
+        margin: 0;
+        font-size: 1.05rem;
+        line-height: 1.5;
+        word-wrap: break-word;
+        margin-top: 1rem;
+    }
+}
+
+.issue-bounty-base {
+    padding: 5px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 2em;
+    box-sizing: border-box;
+    margin: -0.5rem 0.5rem 0rem 0;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.issue-bounty-claimed {
+    @extend .issue-bounty-base;
+    background-color: #445588;
+}
+
+.issue-bounty-unclaimed {
+    @extend .issue-bounty-base;
+    background-color: #009926;
+}
+.issue-bounty-unclaimed:hover,
+.issue-bounty-unclaimed:focus,
+.issue-bounty-unclaimed:active {
+    color: $color-comunica-red-dark;
+    border-color: $color-comunica-red;
+    text-decoration: none;
+}
+
 .logo {
     height: 1em;
 }
@@ -343,7 +410,7 @@ pre {
 }
 
 .blog-entry .excerpt {
-    border-bottom: 1px solid #e5e3e3;;
+    border-bottom: 1px solid #e5e3e3;
 }
 
 .note {
