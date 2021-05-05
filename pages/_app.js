@@ -1,6 +1,7 @@
 import '../styles/main.scss'
 import '../node_modules/highlight.js/styles/github.css';
 import ReactGA from 'react-ga';
+import React from 'react';
 
 export default class MyApp extends React.Component {
 

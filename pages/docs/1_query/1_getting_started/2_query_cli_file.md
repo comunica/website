@@ -7,7 +7,7 @@ Using Comunica SPARQL File, you can query over RDF files that are stored on your
 
 <div class="note">
 While Comunica SPARQL allows you to <a href="/docs/query/getting_started/query_cli/">query sources exposed via URLs on the command line</a>,
-it does _not_ allow you to query RDF local files.
+it does <i>not</i> allow you to query RDF local files.
 This is because Comunica SPARQL can be used in a variety of use cases, of which deployment on a public server is one.
 In some of these cases, the ability to access the local file system can imply a major security risk,
 which is why we require the use of a separate package. 

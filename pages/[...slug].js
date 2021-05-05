@@ -4,6 +4,7 @@ import DocIndex from "../components/DocIndex";
 import BlogIndex from "../components/BlogIndex";
 import BreadCrumbs from "../components/Breadcrumbs";
 import Markdown from "../components/Markdown";
+import React from 'react';
 
 export default class Page extends React.Component {
     render() {

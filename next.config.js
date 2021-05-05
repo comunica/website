@@ -1,7 +1,7 @@
 // next.config.js
 module.exports = {
-    exportTrailingSlash: true,
     target: 'serverless',
+    trailingSlash: true,
     webpack: function (config) {
         config.module.rules.push({
             test: /\.md$/,

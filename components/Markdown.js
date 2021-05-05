@@ -1,31 +1,33 @@
 import Highlight from 'react-highlight';
 import ReactMarkdown from 'react-markdown';
+import gfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
 
 export default function Markdown({body}) {
     return (
         <ReactMarkdown
-            escapeHtml={false}
-            source={body}
-            renderers={{
+            rehypePlugins={[rehypeRaw/*, rehypeSanitize*/]}
+            plugins={[gfm]}
+            children={body}
+            components={{
                 code: CodeBlock,
-                inlineCode: CodeBlockInline,
                 heading: Heading,
             }}
         />
     );
 }
 
-const CodeBlock = ({value, language}) => {
+const CodeBlock = (ctx) => {
+    if (ctx.inline) {
+        return (
+            <code>{ctx.children}</code>
+        )
+    }
     return (
-        <Highlight className={language}>
-            {value}
+        <Highlight className={ctx.className}>
+            {ctx.children}
         </Highlight>
-    )
-}
-
-const CodeBlockInline = ({value, language}) => {
-    return (
-        <code>{value}</code>
     )
 }
 
