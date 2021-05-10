@@ -9,7 +9,7 @@ export default function Page({ githubData }) {
           <div className="issue-metadata">
               {node.assignees.totalCount > 0
                   ? <div className="issue-bounty-claimed">🔒 Claimed</div>
-                  : <a href={`mailto:ruben.taelman@ugent.be?subject=I want to claim a bounty&body=In am interested in claiming ${node.url}, please tell me more!`}><div className="issue-bounty-unclaimed">🖐️ Claim</div></a>}
+                  : <a href={`mailto:ruben.taelman@ugent.be?subject=I want to claim a bounty&body=In am interested in claiming ${node.url}, please tell me more!`}><div className="issue-bounty-unclaimed">🖐️ I want to work on this</div></a>}
               Created <span>{new Date(node.createdAt)
               .toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
           </div>
@@ -31,10 +31,11 @@ export default function Page({ githubData }) {
               at the <a href="/association/">Comunica Association</a>.
           </p>
           <p>
-              <strong>Developers</strong>: Click on the "Claim" button of any issue to express interest.
+              As a <strong>developer</strong>, express your interest to work on any issue,
+              after which we can discuss the details.
           </p>
           <p>
-              <strong>Organizations</strong>: <a href="mailto:ruben.taelman@ugent.be?subject=I want to place a bounty">Mail us</a> if you want to place a bounty.
+              As an <strong>organization</strong>, you can <a href="mailto:ruben.taelman@ugent.be?subject=I want to place a bounty">mail us</a> to add additional bounties regarding Comunica-related projects.
           </p>
           <div className="grid-wide">
               {entries}
