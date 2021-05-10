@@ -24,7 +24,8 @@ function generateRSS(posts) {
       date
     });
   }
-  return feed.xml({ indent: true });
+  return feed.xml({ indent: true })
+      .replace(/<lastBuildDate>.*<\/lastBuildDate>/, '');
 }
 
 function scanDir(dirPath, extension) {
