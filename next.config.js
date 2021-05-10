@@ -12,4 +12,7 @@ module.exports = {
     devIndicators: {
         autoPrerender: false,
     },
+    generateBuildId: async () => {
+        return 'git-sha-' + process.env.GITHUB_SHA;
+    },
 }
