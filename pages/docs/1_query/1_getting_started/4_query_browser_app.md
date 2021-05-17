@@ -45,7 +45,6 @@ and [browserify](http://browserify.org/).
 If you are not familiar with these tools,
 you can read the following guides:
 * [Webpack: Creating a Bundle – getting started](https://webpack.js.org/guides/getting-started/#creating-a-bundle)
-* [Introduction to browserify](https://writingjavascript.org/posts/introduction-to-browserify)
 
 You will need to create a "UMD bundle" and supply a name (e.g. with the -s Comunica option in browserify).
 
