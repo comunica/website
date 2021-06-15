@@ -47,5 +47,11 @@
             <guid isPermaLink="false">pages/blog/2021-04-27-release_1_21.md</guid>
             <pubDate>Thu, 27 May 2021 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Announcing the Comunica Association, and a Bounty Program]]></title>
+            <link>https://comunica.dev/blogpages/blog/2021-06-16-comunica_association_bounties.md</link>
+            <guid isPermaLink="false">pages/blog/2021-06-16-comunica_association_bounties.md</guid>
+            <pubDate>Fri, 16 Jul 2021 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
