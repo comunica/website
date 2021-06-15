@@ -31,7 +31,7 @@ in order to determine the long-term vision and roadmap of Comunica and the Assoc
   </a>
 </div>
 
-If you want to be notified when this association has been set up, submit your email address below!
+If you want to be notified about future developments around this association, submit your email address below!
 
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe9sewt6jInvp8BnbjsudQqeCyTeEPE9PgGofq9AbxRLPIpag/viewform?embedded=true" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">Loading...</iframe>
 
