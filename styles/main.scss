@@ -322,6 +322,18 @@ pre {
     text-decoration: none;
 }
 
+.bounty-company {
+    color: blue;
+}
+
+.bounty-dev {
+    color: green;
+}
+
+.bounty-assoc {
+    color: $color-comunica-red-dark;
+}
+
 .logo {
     height: 1em;
 }
