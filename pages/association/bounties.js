@@ -37,6 +37,9 @@ export default function Page({ githubData }) {
           <p>
               As an <strong>organization</strong>, you can <a href="mailto:ruben.taelman@ugent.be?subject=I want to place a bounty">mail us</a> to add additional bounties regarding Comunica-related projects.
           </p>
+          <p>
+              Learn more about the <a href="/association/bounty_process/">procedures for all parties</a> interacting with these bounties.
+          </p>
           <div className="grid-wide">
               {entries}
           </div>
