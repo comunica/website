@@ -12,17 +12,17 @@ and through which **developers** can take up these bounties and **get paid**.
 ## The need for an association
 
 Comunica started out as a small software project to drive query-related research.
-By now, it has grown into a large project that is being widely used within not only within research,
+By now, it has grown into a project that is being widely used not only within research,
 but also within companies and organizations as stable software.
 
 The original research-driven development approach is running into its limits,
-since features and bugs are reported regularly, but do not fit into a strict research agenda.
+since features and bugs are reported regularly that do not fit into a strict research agenda.
 Therefore, there is a need to broaden the development scope of Comunica,
 which is the purpose of the **Comunica Association**.
 
 ## Short-term goals
 
-As of now, the Comunica Association is a non-profit organization (activity within [Open Knowledge Belgium](https://openknowledge.be/))
+As of now, the Comunica Association is a **non-profit organization** (activity within [Open Knowledge Belgium](https://openknowledge.be/))
 that as a first step will act as an intermediary between people in need of development,
 and people that want to offer development at a price.
 For instance, a certain company may be in need of a specific feature in Comunica,
@@ -53,7 +53,7 @@ This will mean that important decisions will be shared on this website,
 and that all finances will visible for everyone via the [Open Collective platform](https://opencollective.com/).
 
 Even though the Comunica Association is a non-profit organization.
-It will attempt to raise funds through the bounty program and memberships
+It will raise funds through the bounty program and memberships
 in order to secure funding for hiring dedicated developers.
 Such developers can then become dedicated maintainers of Comunica,
 in order to make the open-source development of Comunica and related RDF/JS libraries more sustainable in the long-term.
