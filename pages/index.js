@@ -52,6 +52,16 @@ export default function Home() {
             <h3>Modify Comunica &rarr;</h3>
             <p>Learn how to configure or extend</p>
           </a>
+
+          <a href="https://opencollective.com/comunica-association" className="card">
+            <h3>Donate &rarr;</h3>
+            <p>Sponsor via Open Collective</p>
+          </a>
+
+          <a href="contribute/" className="card">
+            <h3>Contribute &rarr;</h3>
+            <p>Contribute to the development</p>
+          </a>
         </div>
       </main>
     </div>

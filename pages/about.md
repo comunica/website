@@ -82,5 +82,5 @@ and is being actively developed and maintained by a variety of [contributors](ht
 All development happens publicly via GitHub [project boards](https://github.com/orgs/comunica/projects), [issues](https://github.com/comunica/comunica/issues), and [pull requests](https://github.com/comunica/comunica/pulls).
 Anyone is welcome to [contribute](/contribute/) to this project.
 
-While IDLab is a research lab that prefers research-related projects,
-we are open to [discussing commercial support](mailto:ruben.taelman@ugent.be).
+As of recently, the [Comunica Association](/association/) has been founded as a non-profit organization
+to make Comunica development more sustainable in the long term.
