@@ -360,7 +360,7 @@ $ comunica-dynamic-sparql http://fragments.dbpedia.org/2016-04/en \
 Executing a `SELECT` query will still work:
 ```bash
 $ comunica-dynamic-sparql http://fragments.dbpedia.org/2016-04/en \
-    "SELECT WHERE { ?s ?p ?o } LIMIT 100"
+    "SELECT * WHERE { ?s ?p ?o } LIMIT 100"
 ```
 
 You have now successfully built your own custom Comunica engine that is a bit more lightweight than the default one.
