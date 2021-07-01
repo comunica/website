@@ -18,7 +18,7 @@ and developers may work on them for an agreed upon price.
 
 Additionally, you can also [**donate or become a member via Open Collective**](https://opencollective.com/comunica-association)
 to receive benefits such as placing your logo on our website.
-After this incubation phase, certain membership tiers will also give your organization or company access to the board meetings of the Comunica Associationm
+After this incubation phase, certain membership tiers will also give your organization or company access to the [board meetings](/association/board/) of the Comunica Association
 which will allow you to help shape the long-term vision and roadmap of Comunica and the Association.
 
 Feel free to [contact us](mailto:ruben.taelman@ugent.be) if you want to discuss alternative forms of support.
@@ -37,6 +37,11 @@ Feel free to [contact us](mailto:ruben.taelman@ugent.be) if you want to discuss 
   <a href="https://opencollective.com/comunica-association" className="card">
     <h3>Donate &rarr;</h3>
     <p>Sponsor via Open Collective</p>
+  </a>
+  
+  <a href="/association/board/" className="card">
+    <h3>Board of Directors &rarr;</h3>
+    <p>Members can join board meetings</p>
   </a>
 </div>
 
