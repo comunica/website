@@ -281,6 +281,41 @@ pre {
         a {
             text-decoration: none;
         }
+        line-height: 2;
+        .issue-metadata-label {
+            display: inline-block;
+            width: 80px;
+        }
+        img {
+            height: 40px;
+            margin: 5px;
+        }
+        table {
+            tr {
+                border: none;
+                td, th {
+                    border: none;
+                }
+            }
+        }
+    }
+    .issue-sponsors, .issue-assignees {
+        img {
+            vertical-align: middle;
+        }
+        table {
+            font-size: 1.2em;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            tr {
+                background: none;
+                td, th {
+                    padding: 0;
+                    text-align: center;
+                }
+            }
+        }
     }
     .issue-body p {
         margin: 0;
@@ -320,6 +355,12 @@ pre {
     color: $color-comunica-red-dark;
     border-color: $color-comunica-red;
     text-decoration: none;
+}
+
+.bounty-page-footer {
+    text-align: center;
+    color: #6a737d;
+    font-size: 0.8em;
 }
 
 .bounty-company {

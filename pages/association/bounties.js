@@ -1,19 +1,51 @@
 import Head from '../../components/Head';
+import Markdown from "../../components/Markdown";
 import 'cross-fetch/polyfill';
 
 export default function Page({ githubData }) {
   const entries = githubData.data.search.nodes
-      .map(node => <div className="card-bounty" id={node.url}>
-          <a href={node.repository.url} target="_blank"><h3>{node.repository.nameWithOwner}</h3></a>
-          <a href={node.url} target="_blank"><h2>{node.title} <span className="issue-id">#{node.number}</span></h2></a>
-          <div className="issue-metadata">
-              {node.assignees.totalCount > 0
-                  ? <div className="issue-bounty-claimed">🔒 Claimed</div>
-                  : <a href={`mailto:ruben.taelman@ugent.be?subject=I want to claim a bounty&body=In am interested in claiming ${node.url}, please tell me more!`}><div className="issue-bounty-unclaimed">🖐️ I want to work on this</div></a>}
-              Created <span>{new Date(node.createdAt)
-              .toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+      .map(node => {
+          // Determine sponsors
+          const sponsorsStart = node.body.indexOf('<!--bounty:placers:start-->');
+          const sponsorsEnd = node.body.indexOf('<!--bounty:placers:end-->');
+          const sponsors = sponsorsStart >= 0 && sponsorsEnd >= 0 && sponsorsStart < sponsorsEnd ? node.body.slice(sponsorsStart, sponsorsEnd) : '';
+
+          // Determine assignees
+          const assignees = node.assignees.nodes;
+
+          return <div className="card-bounty" id={node.url}>
+              <a href={node.repository.url} target="_blank"><h3>{node.repository.nameWithOwner}</h3></a>
+              <a href={node.url} target="_blank"><h2>{node.title} <span className="issue-id">#{node.number}</span></h2></a>
+              <div className="issue-metadata">
+                  {node.assignees.totalCount > 0
+                      ? <div className="issue-bounty-claimed">🔒 Claimed</div>
+                      : <a href={`mailto:ruben.taelman@ugent.be?subject=I want to claim a bounty&body=In am interested in claiming ${node.url}, please tell me more!`}><div className="issue-bounty-unclaimed">🖐️ I want to work on this</div></a>}
+                  <table>
+                      <tr>
+                          <td>Created</td>
+                          <td><span>{new Date(node.createdAt)
+                              .toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></td>
+                      </tr>
+                      {sponsors
+                          ? <tr>
+                              <td>Sponsors</td>
+                              <td className="issue-sponsors"><Markdown body={sponsors} /></td>
+                          </tr>
+                          : ''
+                      }
+                      {assignees.length > 0
+                          ? <tr>
+                              <td>Claimed by</td>
+                              <td>{assignees.map(assignee => <a id={assignee.url} href={assignee.url} >
+                                  <img alt={assignee.name} title={assignee.name} src={assignee.avatarUrl} />
+                              </a>)}</td>
+                          </tr>
+                          : ''
+                      }
+                  </table>
+              </div>
           </div>
-        </div>);
+      });
     //<hr />
     //<div className="issue-body" dangerouslySetInnerHTML={{__html: node.bodyHTML}} />
 
@@ -43,6 +75,9 @@ export default function Page({ githubData }) {
           <div className="grid-wide">
               {entries}
           </div>
+          <p className="bounty-page-footer">
+              All sponsorships (excluding VAT) are mainly indicative based on estimated time effort, and are open for negotiation.
+          </p>
       </main>
     </div>
   )
@@ -76,8 +111,16 @@ export async function getStaticProps({ ...ctx }) {
                 assignees {
                   totalCount
                 }
+                body
                 bodyHTML
                 createdAt
+                assignees {
+                  nodes {
+                    name
+                    avatarUrl
+                    url
+                  }
+                }
               }
             }
           }
