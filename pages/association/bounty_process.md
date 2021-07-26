@@ -28,6 +28,8 @@ and how the <span class="bounty-assoc">[Comunica Association](/association/)</sp
 4. After completion (or when the reserved time runs out), the <span class="bounty-dev">developer</span> presents the work to the <span class="bounty-company">company</span> and the <span class="bounty-assoc">association</span> for evaluation.
 5. The <span class="bounty-assoc">association</span> pays the bounty to the developer (minus 15% overhead).
 
+**The developer should not start working on the issue, before the <span class="bounty-company">company</span> and <span class="bounty-assoc">association</span> have confirmed the assignment.**
+
 ## Management of bounties
 
 The <span class="bounty-assoc">association</span> manages issues as follows:
