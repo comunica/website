@@ -58,7 +58,21 @@ $ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
     https://ruben.verborgh.org/profile/
 ```
 
-## 4. Changing the port
+## 4. SPARQL endpoint over one local file
+
+First install Comunica SPARQL for files:
+
+```bash
+$ npm install -g @comunica/actor-init-sparql-file
+```
+
+Then start the SPARQL server:
+
+```bash
+$ comunica-sparql-file-http path/to/my/file.ttl
+```
+
+## 5. Changing the port
 
 Using the `-p` option, the port can be changed:
 ```bash
@@ -66,7 +80,7 @@ $ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
   -p 3001
 ```
 
-## 5. Increasing the number of worker threads
+## 6. Increasing the number of worker threads
 
 Using the `-w` option, the number of parallel worker threads can be set:
 ```bash
@@ -76,7 +90,7 @@ $ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
 
 Setting this to the number of available CPU cores tends to give the best performance.
 
-## 6. Learn more
+## 7. Learn more
 
 This guide only discussed the basic functionality of `comunica-sparql-http`.
 You can learn more options by invoking the _help_ command:
