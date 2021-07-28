@@ -58,7 +58,7 @@ $ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
     https://ruben.verborgh.org/profile/
 ```
 
-## 4. SPARQL endpoint over one local file
+## 4. SPARQL endpoint over local files
 
 First install Comunica SPARQL for files:
 
