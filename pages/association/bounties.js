@@ -76,7 +76,8 @@ export default function Page({ githubData }) {
               {entries}
           </div>
           <p className="bounty-page-footer">
-              All sponsorships (excluding VAT) are mainly indicative based on estimated time effort, and are open for negotiation.
+              All sponsorships (excluding VAT) are mainly indicative based on estimated time effort, and are open for negotiation.<br />
+              The <a href="/association/bounty_process/">overhead of 15%</a> is already subtracted from these amounts.
           </p>
       </main>
     </div>
