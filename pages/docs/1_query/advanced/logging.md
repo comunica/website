@@ -79,5 +79,5 @@ const result = await myEngine.query('SELECT * WHERE { ?s ?p ?o }', {
 This logger makes use of `LoggerPretty`, which will print everything to standard error (`stderr`),
 just like Comunica SPARQL on the command line.
 
-Alternatively, more advanced logging can be achieved by making use of [`@comunica/logger-bunyan](https://github.com/comunica/comunica/tree/master/packages/logger-bunyan/),
+Alternatively, more advanced logging can be achieved by making use of [`@comunica/logger-bunyan`](https://github.com/comunica/comunica/tree/master/packages/logger-bunyan/),
 or by implementing your own logger that implements the [`Logger` interface](https://github.com/comunica/comunica/blob/master/packages/core/lib/Logger.ts).
