@@ -96,24 +96,26 @@ This guide only discussed the basic functionality of `comunica-sparql-http`.
 You can learn more options by invoking the _help_ command:
 ```text
 $ comunica-sparql-http --help
+comunica-sparql-http exposes a SPARQL endpoint
 
-Usage:
-  comunica-sparql-http http://fragments.dbpedia.org/2015/en
-  comunica-sparql-http http://fragments.dbpedia.org/2015/en hypermedia@http://fragments.dbpedia.org/2016-04/en
-  comunica-sparql-http -c context.json
-  comunica-sparql-http -c "{ \"sources\": [{ \"type\": \"hypermedia\", \"value\" : \"http://fragments.dbpedia.org/2015/en\" }]}"
+Recommended options:
+  -p, --port     HTTP port to run on                                                                                                    [number] [default: 3000]
+  -w, --workers  Number of worker threads                                                                                                  [number] [default: 1]
+  -t, --timeout  Query execution timeout in seconds                                                                                       [number] [default: 60]
+  -u, --update   Enable update queries (otherwise, only read queries are enabled)                                                     [boolean] [default: false]
 
 Options:
-  -d            the destination for update queries
-  -c            context should be a JSON object or the path to such a JSON file.
-  -p            the HTTP port to run on (default: 3000)
-  -t            the query execution timeout in seconds (default: 60)
-  -w            the number of worker threads (default: 1)
-  -b            base IRI for the query (e.g., http://example.org/)
-  -l            Sets the log level (e.g., debug, info, warn, ... defaults to warn)
-  -i            a flag that enables cache invalidation before each query execution.
-  -u            enable update queries (by default only read queries are enabled)
-  --lenient     if failing requests and parsing errors should be logged instead of causing a hard crash
-  --help        print this help message
-  --version     prints version information
+  -c, --context          Use the given JSON context string or file (e.g., config.json)                                                                  [string]
+      --to               Destination for update queries                                                                                                 [string]
+  -b, --baseIRI          base IRI for the query (e.g., http://example.org/)                                                                             [string]
+  -d, --dateTime         sets a datetime for querying Memento-enabled archives                                                                          [string]
+  -l, --logLevel         sets the log level (e.g., debug, info, warn, ...)                                                            [string] [default: "warn"]
+      --lenient          if failing requests and parsing errors should be logged instead of causing a hard crash                                       [boolean]
+  -v, --version          prints version information                                                                                                    [boolean]
+  -i, --invalidateCache  Enable cache invalidation before each query execution                                                        [boolean] [default: false]
+
+Examples:
+  comunica-sparql-http https://fragments.dbpedia.org/2016-04/en
+  comunica-sparql-http https://fragments.dbpedia.org/2016-04/en https://query.wikidata.org/sparql
+  comunica-sparql-http hypermedia@https://fragments.dbpedia.org/2016-04/en sparql@https://query.wikidata.org/sparql
 ```

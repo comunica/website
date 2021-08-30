@@ -185,6 +185,8 @@ As such, add the following **bin entries to `package.json`**:
 ```
 _You can replace `my-comunica` with any name you want.`
 
+If needed, [custom arguments may be added to CLI tools](/docs/modify/advanced/custom_cli_arguments/).
+
 ## 5. Exposing a JavaScript API
 
 In order to use your query engine as a dependency in other packages,

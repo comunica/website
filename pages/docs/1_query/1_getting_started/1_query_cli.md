@@ -130,28 +130,28 @@ All <a href="/docs/query/advanced/result_formats/">available formats</a> can be 
 This guide only discussed the basic functionality of `comunica-sparql`.
 You can learn more options by invoking the _help_ command:
 ```text
-$ comunica-sparql --help
+$ comunica-sparql evaluates SPARQL queries
 
-Usage:
-  comunica-sparql http://fragments.dbpedia.org/2016-04/en [-q] 'SELECT * WHERE { ?s ?p ?o }'
-  comunica-sparql http://fragments.dbpedia.org/2016-04/en [-q] '{ hero { name friends { name } } }' -i graphql
-  comunica-sparql http://fragments.dbpedia.org/2016-04/en [-f] query.sparql
-  comunica-sparql http://fragments.dbpedia.org/2016-04/en https://query.wikidata.org/sparql ...
-  comunica-sparql hypermedia@http://fragments.dbpedia.org/2016-04/en sparql@https://query.wikidata.org/sparql ...
+Recommended options:
+  -q, --query       Evaluate the given SPARQL query string                                                                                              [string]
+  -f, --file        Evaluate the SPARQL query in the given file                                                                                         [string]
+  -i, --inputType   Query input format (e.g., graphql, sparql)                                                                                          [string]
+  -t, --outputType  MIME type of the output (e.g., application/json)                                                                                    [string]
 
 Options:
-  -q            evaluate the given SPARQL query string
-  -f            evaluate the SPARQL query in the given file
-  --to          the destination for update queries
-  -c            use the given JSON configuration file (e.g., config.json)
-  -t            the MIME type of the output (e.g., application/json)
-  -i            the query input format (e.g., graphql, defaults to sparql)
-  -b            base IRI for the query (e.g., http://example.org/)
-  -l            sets the log level (e.g., debug, info, warn, ... defaults to warn)
-  -d            sets a datetime for querying Memento-enabled archives
-  -p            delegates all HTTP traffic through the given proxy (e.g. http://myproxy.org/?uri=)
-  --lenient     if failing requests and parsing errors should be logged instead of causing a hard crash
-  --help        print this help message
-  --listformats prints the supported MIME types
-  --version     prints version information
+  -c, --context      Use the given JSON context string or file (e.g., config.json)                                                                      [string]
+      --to           Destination for update queries                                                                                                     [string]
+  -b, --baseIRI      base IRI for the query (e.g., http://example.org/)                                                                                 [string]
+  -d, --dateTime     sets a datetime for querying Memento-enabled archives                                                                              [string]
+  -l, --logLevel     sets the log level (e.g., debug, info, warn, ...)                                                                [string] [default: "warn"]
+      --lenient      if failing requests and parsing errors should be logged instead of causing a hard crash                                           [boolean]
+  -v, --version      prints version information                                                                                                        [boolean]
+  -p, --proxy        delegates all HTTP traffic through the given proxy (e.g. http://myproxy.org/?uri=)                                                 [string]
+      --listformats  prints the supported MIME types                                                                                                   [boolean]
+
+Examples:
+  comunica-sparql https://fragments.dbpedia.org/2016-04/en -q 'SELECT * { ?s ?p ?o }'
+  comunica-sparql https://fragments.dbpedia.org/2016-04/en -f query.sparql
+  comunica-sparql https://fragments.dbpedia.org/2016-04/en https://query.wikidata.org/sparql ...
+  comunica-sparql hypermedia@https://fragments.dbpedia.org/2016-04/en sparql@https://query.wikidata.org/sparql ...
 ```
