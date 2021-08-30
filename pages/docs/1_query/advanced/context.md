@@ -44,6 +44,7 @@ The following table gives an overview of all possible context entries that can b
 | `datetime` | Specify a custom date |
 | `httpProxyHandler` | A proxy for all HTTP requests |
 | `httpIncludeCredentials` | (_browser-only_) If current credentials should be included for HTTP requests |
+| `extensionFunctions` or `extensionFunctionCreator` | SPARQL extension functions |
 
 When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/context_entries.html). 
 
@@ -189,3 +190,10 @@ const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
 
 Via HTTP Basic Authentication one can include **username and password** credentials in HTTP requests.
 More information on this can be found in the [HTTP basic authentication guide](/docs/query/advanced/basic_auth/).
+
+## 13. SPARQL extension functions
+
+SPARQL allows non-standard, [custom extension functions](https://www.w3.org/TR/sparql11-query/#extensionFunctions) to be used within queries.
+In order to provide an implementation to these extension functions,
+Comunica allows developers to plug them in via the context.
+More information on this can be found in the [SPARQL extension functions guide](/docs/query/advanced/extension_functions/).
