@@ -53,5 +53,11 @@
             <guid isPermaLink="false">pages/blog/2021-06-21-comunica_association_bounties.md</guid>
             <pubDate>Wed, 21 Jul 2021 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 1.22.0: Improved update support, extension functions, and improved CLI handling]]></title>
+            <link>https://comunica.dev/blogpages/blog/2021-08-30-release_1_22.md</link>
+            <guid isPermaLink="false">pages/blog/2021-08-30-release_1_22.md</guid>
+            <pubDate>Thu, 30 Sep 2021 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
