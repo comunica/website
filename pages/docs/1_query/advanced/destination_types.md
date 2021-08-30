@@ -65,7 +65,9 @@ The table below summarizes the different destination types that Comunica support
 | **Type name** | **Description** |
 | ------- | --------------- |
 | `rdfjsStore` | JavaScript objects implementing the [RDF/JS `store` interface](/docs/query/advanced/rdfjs_updating/) |
-| `patchSparqlUpdate` | HTTP APIs accepting `PATCH` requests containing SPARQL Update queries (`application/sparql-update`), such as [Solid servers](https://github.com/solid/solid-spec/blob/master/api-rest.md#alternative-using-sparql-1). |
+| `sparql` | [SPARQL endpoint](https://www.w3.org/TR/sparql11-protocol/) |
+| `putLdp` | [Linked Data Platform](https://www.w3.org/TR/ldp/) HTTP APIs accepting `PUT` requests containing an RDF document, such as [Solid servers](https://github.com/solid/solid-spec/blob/master/api-rest.md#alternative-using-sparql-1). |
+| `patchSparqlUpdate` | [Linked Data Platform](https://www.w3.org/TR/ldp/) HTTP APIs accepting `PATCH` requests containing SPARQL Update queries (`application/sparql-update`), such as [Solid servers](https://github.com/solid/solid-spec/blob/master/api-rest.md#alternative-using-sparql-1). |
 
 The default source type is `auto`,
 which will automatically detect the proper source type.
