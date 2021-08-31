@@ -9,12 +9,20 @@ import React from 'react';
 export default class Page extends React.Component {
     render() {
         const { frontmatter, body, path, paths, mattersData, excerpt } = this.props;
+        let dateString = '';
+        if (path.startsWith('/blog/')) {
+            const [_, year, month, day] = /^\/blog\/([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])-/.exec(path);
+            const date = new Date(`${month} ${day} ${year}`)
+                .toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+            dateString = <p className={"date"}>{date}</p>;
+        }
         return (
             <div className="container-page">
                 <Head title={frontmatter.title} description={excerpt || frontmatter.description}/>
                 <main>
                     <BreadCrumbs frontmatter={frontmatter} path={path} paths={paths} mattersData={mattersData}/>
                     <h1>{frontmatter.title}</h1>
+                    { dateString }
                     <hr />
                     {frontmatter.wip && <div className={'wip'}>
                         <h2>🚧 Under construction 🚧️</h2>
