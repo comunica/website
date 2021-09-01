@@ -27,8 +27,8 @@ which includes development by externals via the [Bounty Program](/association/bo
 
 There are two ways to become a Board Member:
 
-1. Become a financial contributor via [Open Collective](https://opencollective.com/comunica-association) of at least the Silver tier.
-2. Become a regular [contributor](/contribute/) in any other way, with a dedication of at least two hours per week.
+1. Become a financial contributor via [Open Collective](https://opencollective.com/comunica-association) of the the Board Member tier
+2. Become a regular [contributor](/contribute/) in any other way, with a dedication of at least four hours per week on average.
 
 ## Decision-making Process
 
