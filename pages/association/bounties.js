@@ -2,52 +2,73 @@ import Head from '../../components/Head';
 import Markdown from "../../components/Markdown";
 import 'cross-fetch/polyfill';
 
-export default function Page({ githubData }) {
-  const entries = githubData.data.search.nodes
-      .map(node => {
-          // Determine sponsors
-          const sponsorsStart = node.body.indexOf('<!--bounty:placers:start-->');
-          const sponsorsEnd = node.body.indexOf('<!--bounty:placers:end-->');
-          const sponsors = sponsorsStart >= 0 && sponsorsEnd >= 0 && sponsorsStart < sponsorsEnd ? node.body.slice(sponsorsStart, sponsorsEnd) : '';
+function issueToTags(node) {
+    // Determine sponsors
+    const sponsorsStart = node.body.indexOf('<!--bounty:placers:start-->');
+    const sponsorsEnd = node.body.indexOf('<!--bounty:placers:end-->');
+    const sponsors = sponsorsStart >= 0 && sponsorsEnd >= 0 && sponsorsStart < sponsorsEnd ? node.body.slice(sponsorsStart, sponsorsEnd) : '';
 
-          // Determine assignees
-          const assignees = node.assignees.nodes;
+    // Determine assignees
+    const assignees = node.assignees.nodes;
 
-          return <div className="card-bounty" id={node.url}>
-              <a href={node.repository.url} target="_blank"><h3>{node.repository.nameWithOwner}</h3></a>
-              <a href={node.url} target="_blank"><h2>{node.title} <span className="issue-id">#{node.number}</span></h2></a>
-              <div className="issue-metadata">
-                  {node.assignees.totalCount > 0
-                      ? <div className="issue-bounty-claimed">🔒 Claimed</div>
-                      : <a href={`mailto:ruben.taelman@ugent.be?subject=I want to claim a bounty&body=In am interested in claiming ${node.url}, please tell me more!`}><div className="issue-bounty-unclaimed">🖐️ I want to work on this</div></a>}
-                  <table>
-                      <tr>
-                          <td>Created</td>
-                          <td><span>{new Date(node.createdAt)
-                              .toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></td>
-                      </tr>
-                      {sponsors
-                          ? <tr>
-                              <td>Sponsors</td>
-                              <td className="issue-sponsors"><Markdown body={sponsors} /></td>
-                          </tr>
-                          : ''
-                      }
-                      {assignees.length > 0
-                          ? <tr>
-                              <td>Claimed by</td>
-                              <td>{assignees.map(assignee => <a id={assignee.url} href={assignee.url} >
-                                  <img alt={assignee.name} title={assignee.name} src={assignee.avatarUrl} />
-                              </a>)}</td>
-                          </tr>
-                          : ''
-                      }
-                  </table>
-              </div>
-          </div>
-      });
+    console.log(node.closedAt); // TODO
+
+    return <div className="card-bounty" id={node.url}>
+        <a href={node.repository.url} target="_blank"><h3>{node.repository.nameWithOwner}</h3></a>
+        <a href={node.url} target="_blank"><h2>{node.title} <span className="issue-id">#{node.number}</span></h2></a>
+        <div className="issue-metadata">
+            {node.state !== 'OPEN'
+                ? ''
+                : node.assignees.totalCount > 0
+                    ? <div className="issue-bounty-claimed">🔒 Claimed</div>
+                    : <a href={`mailto:ruben.taelman@ugent.be?subject=I want to claim a bounty&body=In am interested in claiming ${node.url}, please tell me more!`}><div className="issue-bounty-unclaimed">🖐️ I want to work on this</div></a>}
+            <table>
+                <tr>
+                    <td>Created</td>
+                    <td><span>{new Date(node.createdAt)
+                        .toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></td>
+                </tr>
+                {node.state !== 'OPEN'
+                    ? <tr>
+                        <td>Completed</td>
+                        <td><span>{new Date(node.closedAt)
+                            .toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span></td>
+                    </tr>
+                    : ''
+                }
+                {sponsors
+                    ? <tr>
+                        <td>Sponsors</td>
+                        <td className="issue-sponsors"><Markdown body={sponsors} /></td>
+                    </tr>
+                    : ''
+                }
+                {assignees.length > 0
+                    ? <tr>
+                        <td>Claimed by</td>
+                        <td>{assignees.map(assignee => <a id={assignee.url} href={assignee.url} >
+                            <img alt={assignee.name} title={assignee.name} src={assignee.avatarUrl} />
+                        </a>)}</td>
+                    </tr>
+                    : ''
+                }
+            </table>
+        </div>
+    </div>
     //<hr />
     //<div className="issue-body" dangerouslySetInnerHTML={{__html: node.bodyHTML}} />
+}
+
+export default function Page({ githubData }) {
+  githubData.data.search.nodes = githubData.data.search.nodes
+  const entriesOpen = githubData.data.search.nodes
+      .filter(node => node.state === 'OPEN')
+      .sort((nodeA, nodeB) => nodeA.createdAt - nodeB.createdAt)
+      .map(node => issueToTags(node));
+  const entriesCompleted = githubData.data.search.nodes
+      .filter(node => node.state === 'CLOSED')
+      .sort((nodeA, nodeB) => nodeA.closedAt - nodeB.closedAt)
+      .map(node => issueToTags(node));
 
   return (
     <div className="container-page">
@@ -72,9 +93,20 @@ export default function Page({ githubData }) {
           <p>
               Learn more about the <a href="/association/bounty_process/">procedures for all parties</a> interacting with these bounties.
           </p>
-          <div className="grid-wide">
-              {entries}
-          </div>
+          <p>
+              <h2>Open Bounties</h2>
+              <hr/>
+              <div className="grid-wide">
+                  {entriesOpen}
+              </div>
+          </p>
+          <p>
+              <h2>Completed Bounties</h2>
+              <hr/>
+              <div className="grid-wide">
+                  {entriesCompleted}
+              </div>
+          </p>
           <p className="bounty-page-footer">
               All sponsorships (excluding VAT) are mainly indicative based on estimated time effort, and are open for negotiation.<br />
               The <a href="/association/bounty_process/">overhead of 15%</a> is already subtracted from these amounts.
@@ -97,9 +129,10 @@ export async function getStaticProps({ ...ctx }) {
     body: JSON.stringify({
       query: `
         query {
-          search(type: ISSUE, query: "label:comunica-association-bounty state:open", first: 100) {
+          search(type: ISSUE, query: "label:comunica-association-bounty", first: 100) {
             nodes {
               ... on Issue {
+                state
                 title
                 url
                 number
@@ -115,6 +148,7 @@ export async function getStaticProps({ ...ctx }) {
                 body
                 bodyHTML
                 createdAt
+                closedAt
                 assignees {
                   nodes {
                     name
