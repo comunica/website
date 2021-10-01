@@ -16,9 +16,9 @@ The Association is currently in an **incubation phase**,
 during which companies can place [**bounties on issues**](/association/bounties/),
 and developers may work on them for an agreed upon price.
 
-Additionally, you can also [**donate or become a member via Open Collective**](https://opencollective.com/comunica-association)
-to receive benefits such as placing your logo on our website.
-After this incubation phase, certain membership tiers will also give your organization or company access to the [board meetings](/association/board/) of the Comunica Association
+Additionally, you can also [**donate or become a sponsor via Open Collective**](https://opencollective.com/comunica-association)
+to help fund development on the Comunica roadmap and get your issues prioritized (*).
+The Board Member tier will give your organization or company access to the [board meetings](/association/board/) of the Comunica Association
 which will allow you to help shape the long-term vision and roadmap of Comunica and the Association.
 
 Feel free to [contact us](mailto:ruben.taelman@ugent.be) if you want to discuss alternative forms of support.
@@ -51,3 +51,8 @@ If you want to be notified about future developments around this association, su
 
 The Comunica Association is an activity within [Open Knowledge Belgium](https://openknowledge.be/),
 and our budget is visible on [Open Collective](https://opencollective.com/comunica-association).
+
+<p className="bounty-page-footer">
+  * Sponsors that want to have an issue prioritized should <a href="mailto:ruben.taelman@ugent.be">contact us</a>.
+  The board will decide the final order of issue handling based on historical sponsorship contribution and developer availability.
+</p>
