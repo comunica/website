@@ -94,14 +94,14 @@ export default function Page({ githubData }) {
               Learn more about the <a href="/association/bounty_process/">procedures for all parties</a> interacting with these bounties.
           </p>
           <p>
-              <h2>Open Bounties</h2>
+              <h2 id={"open"}>Open Bounties</h2>
               <hr/>
               <div className="grid-wide">
                   {entriesOpen}
               </div>
           </p>
           <p>
-              <h2>Completed Bounties</h2>
+              <h2 id={"completed"}>Completed Bounties</h2>
               <hr/>
               <div className="grid-wide">
                   {entriesCompleted}
