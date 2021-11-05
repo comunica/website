@@ -6,22 +6,51 @@ description: 'Organization for ensuring the maintenance and development of the C
 The Comunica Association is a **non-profit organization** for establishing a roadmap,
 and ensuring the maintenance and development of the Comunica framework and its dependencies.
 
-It **connects organizations** that are in **need of improvements or features**, to **developers** seeking funding.
+## Members and sponsors
+
+If your organization is using Comunica, and you want to support its continued maintenance and future development,
+you may consider [**donating or becoming a sponsor via Open Collective**](https://opencollective.com/comunica-association).
+This will allow the association to fund development time on Comunica,
+and your organization will have the option to prioritize certain issues.
+Another option is to become a **board member**, which will give your organization access to [board meetings](/association/board/) of the Comunica Association
+which will enable your organization to collaboratively determine the long-term vision and roadmap of Comunica and the Association.
+
+<div class="docs-intro-img">
+  <img src="/img/association_members.svg" alt="Comunica Association Members and Sponsors" style="width:100%" \>
+</div>
+
+Feel free to [contact us](mailto:ruben.taelman@ugent.be) if you want to discuss alternative forms of support,
+or regarding any related questions.
+
+<div className="grid">
+
+  <a href="https://opencollective.com/comunica-association" className="card">
+    <h3>New Member/Sponsor &rarr;</h3>
+    <p>Join via Open Collective</p>
+  </a>
+
+  <a href="/association/board/" className="card">
+    <h3>Board of Directors &rarr;</h3>
+    <p>Learn more about the board</p>
+  </a>
+</div>
+
+## Bounties
+
+Another goal of the Comunica Association, is to
+**connect organizations** that are in **need of improvements or features**, to **developers** seeking funding.
 
 <div class="docs-intro-img">
   <img src="/img/association_overview.svg" alt="Comunica Association Overview" style="width:75%" \>
 </div>
 
-The Association is currently in an **incubation phase**,
-during which companies can place [**bounties on issues**](/association/bounties/),
+Using our Bounty Program,
+organizations can place [**bounties on issues**](/association/bounties/),
 and developers may work on them for an agreed upon price.
-
-Additionally, you can also [**donate or become a sponsor via Open Collective**](https://opencollective.com/comunica-association)
-to help fund development on the Comunica roadmap and get your issues prioritized (*).
-The Board Member tier will give your organization or company access to the [board meetings](/association/board/) of the Comunica Association
-which will allow you to help shape the long-term vision and roadmap of Comunica and the Association.
-
-Feel free to [contact us](mailto:ruben.taelman@ugent.be) if you want to discuss alternative forms of support.
+These bounties are primarily useful for issues that have a clearly defined scope, and are not too large.
+Larger issues with an unclear scope may be better suited for becoming part of the general roadmap,
+which is decided by Board Members,
+of which [your organization can also become a part of](#members-and-sponsors).
 
 <div className="grid">
   <a href="/association/bounties/" className="card">
@@ -33,17 +62,9 @@ Feel free to [contact us](mailto:ruben.taelman@ugent.be) if you want to discuss 
     <h3>Bounty procedures &rarr;</h3>
     <p>Learn more about how bounties are placed and managed</p>
   </a>
-  
-  <a href="https://opencollective.com/comunica-association" className="card">
-    <h3>Donate &rarr;</h3>
-    <p>Sponsor via Open Collective</p>
-  </a>
-  
-  <a href="/association/board/" className="card">
-    <h3>Board of Directors &rarr;</h3>
-    <p>Members can join board meetings</p>
-  </a>
 </div>
+
+## Learn more
 
 If you want to be notified about future developments around this association, submit your email address below!
 
