@@ -10,8 +10,8 @@ and ensuring the maintenance and development of the Comunica framework and its d
 
 If your organization is using Comunica, and you want to support its continued maintenance and future development,
 you may consider [**donating or becoming a sponsor via Open Collective**](https://opencollective.com/comunica-association).
-This will allow the association to fund development time on Comunica,
-and your organization will have the option to prioritize certain issues.
+This will allow the association to fund core maintainers of Comunica to manage issues and pull requests, and to fund overall development.
+Furthermore, your organization will have the option to prioritize certain issues.
 Another option is to become a **board member**, which will give your organization access to [board meetings](/association/board/) of the Comunica Association
 which will enable your organization to collaboratively determine the long-term vision and roadmap of Comunica and the Association.
 

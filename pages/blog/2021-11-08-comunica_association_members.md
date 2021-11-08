@@ -4,10 +4,10 @@ title: 'Comunica Association Memberships'
 
 [Earlier this year](/blog/2021-06-21-comunica_association_bounties/),
 we announced the [Comunica Association](/association/),
-which aims to make Comunica sustainable in the long term.
+which is a non-profit organization that aims to make Comunica sustainable in the long term.
 In this post, we announce the possibility to become a _member_ or _sponsor_ to the association,
-allows organizations to drive the future roadmap of Comunica.
-We plan an **official launch in fall 2022 🚀**, up until when organizations can choose
+allowing organizations to drive the future roadmap of Comunica.
+We plan an **official launch in fall 2022**, up until when organizations can choose
 to become a **founding member** of the Comunica Association.
 
 <!-- excerpt-end -->
@@ -35,7 +35,7 @@ To allow more organizations and individuals to determine what this roadmap shoul
 the Comunica Association now allows [_members_ to become part of the board](/association/board/).
 
 **Board members are able to determine Comunica's roadmap**, and the future of the association.
-One can become part of the board by either contributing time or a financial contribution,
+One can become part of the board by either contributing time or via a financial contribution,
 which will both be invested in core maintenance of Comunica,
 such as managing issues and pull requests, and working towards the roadmap.
 
@@ -55,10 +55,10 @@ This will allow everyone to see who contributed to the project, and how the budg
 
 ## 🚀 Next steps
 
-Organizations that are interested in supporting Comunica, can do so starting from today.
+Organizations that are interested in **supporting Comunica**, can do so **starting from today**.
 Becoming a board member or a sponsor can be done via our [Open Collective](https://opencollective.com/comunica-association) page,
 after which we will contact you about the practical next steps.
-If you want to become a board member by contributing time, feel free to [contact us](mailto:ruben.taelman@ugent.be).
+If you want to become a board member by contributing time, you can [contact us](mailto:ruben.taelman@ugent.be) directly.
 
 All members and sponsors that are active by our launch date in the fall of 2022 (exact date will be announced later),
 will be considered **founding members and sponsors**, and will receive a permanent mention on this website.
