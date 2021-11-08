@@ -45,6 +45,7 @@ The following table gives an overview of all possible context entries that can b
 | `httpProxyHandler` | A proxy for all HTTP requests |
 | `httpIncludeCredentials` | (_browser-only_) If current credentials should be included for HTTP requests |
 | `extensionFunctions` or `extensionFunctionCreator` | SPARQL extension functions |
+| `fetch` | A custom [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) function |
 
 When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/context_entries.html). 
 
@@ -163,7 +164,7 @@ const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
 ```
 
 This date is primarily used for the SPARQL `NOW()` operator.
-It is also used when performing time travel querying using the [Memento protocl](/docs/query/advanced/memento/).
+It is also used when performing time travel querying using the [Memento protocol](/docs/query/advanced/memento/).
 
 ## 10. Enabling an HTTP proxy
 
@@ -197,3 +198,20 @@ SPARQL allows non-standard, [custom extension functions](https://www.w3.org/TR/s
 In order to provide an implementation to these extension functions,
 Comunica allows developers to plug them in via the context.
 More information on this can be found in the [SPARQL extension functions guide](/docs/query/advanced/extension_functions/).
+
+## 14. Using a custom fetch function
+
+By default, Comunica will use the built-in [`fetch` function](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make HTTP requests.
+It is however possible to pass a custom function that will be used instead for making HTTP requests,
+as long as it follows the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+
+This can be done as follows:
+
+```javascript
+const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+  sources: ['http://fragments.dbpedia.org/2015/en'],
+  fetch: myfetchFunction,
+});
+```
+
+_If you want to perform authenticated HTTP requests for Solid, you may want to consider using [Comunica Solid](https://comunica.dev/docs/query/advanced/solid/)._
