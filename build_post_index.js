@@ -4,7 +4,7 @@ const RSS = require('rss');
 const matter = require('gray-matter');
 
 function generateRSS(posts) {
-  const siteUrl = 'https://comunica.dev/blog';
+  const siteUrl = 'https://comunica.dev/blog/';
   const feed = new RSS({
     title: 'Comunica – Blog',
     description: 'Blog posts, containing announcements or other news.',
@@ -15,7 +15,7 @@ function generateRSS(posts) {
     const date = new Date(Date.UTC(year, month, day)).toUTCString();
     const title = posts[p].data.title;
     const guid = p;
-    const url = siteUrl+p;
+    const url = siteUrl+p.slice(11, -3)+'/';
 
     feed.item({
       title,
