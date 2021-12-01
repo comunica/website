@@ -2,66 +2,66 @@
     <channel>
         <title><![CDATA[Comunica – Blog]]></title>
         <description><![CDATA[Blog posts, containing announcements or other news.]]></description>
-        <link>https://comunica.dev/blog</link>
+        <link>https://comunica.dev/blog/</link>
         <generator>RSS for Node</generator>
         
         <item>
             <title><![CDATA[A New Website for Comunica]]></title>
-            <link>https://comunica.dev/blogpages/blog/2020-08-19-intro.md</link>
+            <link>https://comunica.dev/blog/2020-08-19-intro/</link>
             <guid isPermaLink="false">pages/blog/2020-08-19-intro.md</guid>
             <pubDate>Sat, 19 Sep 2020 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Release 1.16.0: Full spec compliance, property paths, CSV/TSV, basic auth, and fixes]]></title>
-            <link>https://comunica.dev/blogpages/blog/2020-08-24-release_1_16.md</link>
+            <link>https://comunica.dev/blog/2020-08-24-release_1_16/</link>
             <guid isPermaLink="false">pages/blog/2020-08-24-release_1_16.md</guid>
             <pubDate>Thu, 24 Sep 2020 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Hacktoberfest and Release 1.17.0]]></title>
-            <link>https://comunica.dev/blogpages/blog/2020-09-25-release_1_17.md</link>
+            <link>https://comunica.dev/blog/2020-09-25-release_1_17/</link>
             <guid isPermaLink="false">pages/blog/2020-09-25-release_1_17.md</guid>
             <pubDate>Sun, 25 Oct 2020 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Release 1.18.0: Smaller Web bundles and Microdata parsing]]></title>
-            <link>https://comunica.dev/blogpages/blog/2020-11-02-release_1_18.md</link>
+            <link>https://comunica.dev/blog/2020-11-02-release_1_18/</link>
             <guid isPermaLink="false">pages/blog/2020-11-02-release_1_18.md</guid>
             <pubDate>Wed, 02 Dec 2020 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Release 1.19.0: Simplifications for extensions]]></title>
-            <link>https://comunica.dev/blogpages/blog/2021-01-18-release_1_19.md</link>
+            <link>https://comunica.dev/blog/2021-01-18-release_1_19/</link>
             <guid isPermaLink="false">pages/blog/2021-01-18-release_1_19.md</guid>
             <pubDate>Thu, 18 Feb 2021 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Release 1.20.0: SPARQL Update support]]></title>
-            <link>https://comunica.dev/blogpages/blog/2021-03-30-release_1_20.md</link>
+            <link>https://comunica.dev/blog/2021-03-30-release_1_20/</link>
             <guid isPermaLink="false">pages/blog/2021-03-30-release_1_20.md</guid>
             <pubDate>Fri, 30 Apr 2021 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Release 1.21.0: Hypermedia-based SPARQL Updating]]></title>
-            <link>https://comunica.dev/blogpages/blog/2021-04-27-release_1_21.md</link>
+            <link>https://comunica.dev/blog/2021-04-27-release_1_21/</link>
             <guid isPermaLink="false">pages/blog/2021-04-27-release_1_21.md</guid>
             <pubDate>Thu, 27 May 2021 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Announcing the Comunica Association, and a Bounty Program]]></title>
-            <link>https://comunica.dev/blogpages/blog/2021-06-21-comunica_association_bounties.md</link>
+            <link>https://comunica.dev/blog/2021-06-21-comunica_association_bounties/</link>
             <guid isPermaLink="false">pages/blog/2021-06-21-comunica_association_bounties.md</guid>
             <pubDate>Wed, 21 Jul 2021 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Release 1.22.0: Improved update support, extension functions, and improved CLI handling]]></title>
-            <link>https://comunica.dev/blogpages/blog/2021-08-30-release_1_22.md</link>
+            <link>https://comunica.dev/blog/2021-08-30-release_1_22/</link>
             <guid isPermaLink="false">pages/blog/2021-08-30-release_1_22.md</guid>
             <pubDate>Thu, 30 Sep 2021 00:00:00 GMT</pubDate>
         </item>
         <item>
             <title><![CDATA[Comunica Association Memberships]]></title>
-            <link>https://comunica.dev/blogpages/blog/2021-11-08-comunica_association_members.md</link>
+            <link>https://comunica.dev/blog/2021-11-08-comunica_association_members/</link>
             <guid isPermaLink="false">pages/blog/2021-11-08-comunica_association_members.md</guid>
             <pubDate>Wed, 08 Dec 2021 00:00:00 GMT</pubDate>
         </item>
