@@ -63,6 +63,21 @@ export default function Home() {
             <p>Contribute to the development</p>
           </a>
         </div>
+
+        <div className="container-page sponsors">
+          <h2>Supported By</h2>
+          <p>
+            Comunica is a community-driven project, sustained by the <a href="/association/">Comunica Association</a>.
+            If you are using Comunica, <a href="https://opencollective.com/comunica-association">becoming a sponsor or member</a> is a way to make Comunica sustainable in the long-term.
+          </p>
+          <div className="sponsors-gold">
+            <h3>Gold Sponsors</h3>
+            <p>The sponsors below are donating € 1.500 EUR / month.</p>
+            <a href="https://netwerkdigitaalerfgoed.nl/">
+              <img src="https://user-images.githubusercontent.com/440384/134636829-f730230c-bfec-4d40-86d1-67f28479cdcc.png" alt="Netwerk Digitaal Erfgoed" />
+            </a>
+          </div>
+        </div>
       </main>
     </div>
   )

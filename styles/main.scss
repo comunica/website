@@ -255,6 +255,38 @@ pre {
     line-height: 1.5;
 }
 
+.sponsors {
+    min-height: unset;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e3e3;
+
+    .sponsors-member {
+        img {
+            height: 150px;
+        }
+    }
+    .sponsors-gold {
+        img {
+            height: 100px;
+        }
+    }
+    .sponsors-silver {
+        img {
+            height: 80px;
+        }
+    }
+    .sponsors-bronze {
+        img {
+            height: 50px;
+        }
+    }
+}
+
 .card-bounty {
     @extend .card-info;
     flex-basis: 45%;
