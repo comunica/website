@@ -69,13 +69,43 @@ For this, add the following to your `package.json`:
 
 ## 4. Building for the browser
 
-Now you're ready to compile your application for the browser.
-For example, if you have an application `my-app.js` that makes use of `newEngine()` in your custom Comunica engine,
-you can compile it from the browser with [Webpack](https://www.npmjs.com/package/webpack) as follows:
+Now you're ready to compile your application for the browser using tools such as [Webpack](https://www.npmjs.com/package/webpack).
 
-```bash
-$ webpack my-app.js -o browser/my-app.js
+<div class="note">
+As of Webpack 5, the Node.js polyfills are not shipped anymore by default.
+Since Comunica requires those, they will have to be added manually, which can be done using the <a href="https://www.npmjs.com/package/node-polyfill-webpack-plugin"><code>node-polyfill-webpack-plugin</code></a>.
+</div>
+
+Please refer to the documentation of [Webpack](https://www.npmjs.com/package/webpack) on how to configure this build process.
+
+Below you can find an example configuration file for Webpack, which may require some fine-tuning depending on your use case:
+
+```javascript
+const path = require('path');
+const ProgressPlugin = require('webpack').ProgressPlugin;
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+
+module.exports = {
+  entry: [ '@babel/polyfill', path.resolve(__dirname, 'my-app.js') ],
+  output: {
+    filename: 'my-app-browser.js',
+    path: __dirname, 
+    libraryTarget: 'window',
+  },
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+    ]
+  },
+  plugins: [
+    new NodePolyfillPlugin(),
+    new ProgressPlugin(),
+  ]
+};
+
 ```
-
-Please refer to the documentation of [Webpack](https://www.npmjs.com/package/webpack)
-on how to configure this build process.
