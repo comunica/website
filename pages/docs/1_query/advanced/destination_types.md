@@ -50,7 +50,7 @@ $ comunica-sparql https://example.org/file-in.ttl \
 Via a [JavaScript application](/docs/query/getting_started/query_app/),
 the destination type can be set by using a hash containing `type` and `value`:
 ```javascript
-const result = await myEngine.query(`...`, {
+await myEngine.queryVoid(`...`, {
   sources: [
     { type: 'file', value: 'https://example.org/file-in.ttl' },
   ],

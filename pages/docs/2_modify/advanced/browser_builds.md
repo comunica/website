@@ -48,7 +48,7 @@ Next, create a file called **`index-browser.ts`**, which will become the browser
 `index-browser.ts` should at least contain the following:
 ```typescript
 import {IQueryEngine} from '@comunica/types';
-export function newEngine(): IQueryEngine {
+export function new QueryEngine(): IQueryEngine {
   return require('./engine-browser.js');
 }
 ```

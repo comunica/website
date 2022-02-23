@@ -5,7 +5,7 @@ description: 'Wrap your config in an npm package, and expose a CLI tool and a Ja
 
 In this guide, we will wrap our custom config into a new npm package,
 so that we can **expose it as a proper reusable query engine**.
-This package will be able to do everything packages such as Comunica SPARQL (`@comunica/actor-init-sparql`) can do.
+This package will be able to do everything packages such as Comunica SPARQL (`@comunica/query-sparql`) can do.
 This means that this package will have a CLI tool, and that it will expose a JavaScript API for use in other packages.
 
 <div class="note">
@@ -23,7 +23,7 @@ $ npm init
 All init packages have to extend from **Comunica SPARQL**.
 As such, add it as a dependency as follows:
 ```bash
-$ npm install @comunica/actor-init-sparql
+$ npm install @comunica/query-sparql
 ```
 
 We recommend to also **install TypeScript** as a dev dependency:
@@ -159,7 +159,7 @@ runArgsInProcessStatic(require('../engine-default.js'));
 `bin/http.js`:
 ```typescript
 #!/usr/bin/env node
-import {HttpServiceSparqlEndpoint} from "@comunica/actor-init-sparql";
+import {HttpServiceSparqlEndpoint} from "@comunica/query-sparql";
 HttpServiceSparqlEndpoint.runArgsInProcess(process.argv.slice(2), process.stdout, process.stderr,
   __dirname + '/../', process.env, __dirname + '/../config/config-default.json', () => process.exit(1));
 ```
@@ -195,13 +195,13 @@ We will also immediately make it browser-friendly.
 
 For this, first create a file **`index-browser.ts`**:
 ```typescript
-import {ActorInitSparql} from '@comunica/actor-init-sparql/lib/ActorInitSparql-browser';
+import {ActorInitSparql} from '@comunica/query-sparql/lib/ActorInitSparql-browser';
 
 /**
  * Create a new comunica engine from the default config.
  * @return {ActorInitSparql} A comunica engine.
  */
-export function newEngine(): ActorInitSparql {
+export function new QueryEngine(): ActorInitSparql {
   return require('./engine-default.js');
 }
 ```
@@ -210,8 +210,8 @@ Next, create a file **`index.ts`**:
 ```typescript
 export {newEngine} from './index-browser';
 
-import {ActorInitSparql} from '@comunica/actor-init-sparql/lib/ActorInitSparql-browser';
-import {IQueryOptions, newEngineDynamicArged} from "@comunica/actor-init-sparql/lib/QueryDynamic";
+import {ActorInitSparql} from '@comunica/query-sparql/lib/ActorInitSparql-browser';
+import {IQueryOptions, newEngineDynamicArged} from "@comunica/query-sparql/lib/QueryDynamic";
 
 /**
  * Create a new dynamic comunica engine from a given config file.

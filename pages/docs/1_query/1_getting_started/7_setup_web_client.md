@@ -22,7 +22,7 @@ $ npm install -g @comunica/web-client-generator
 
 ### 1.2. Building a static Website for production
 
-After installing, you can build a production-ready version of [Comunica SPARQL](https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql):
+After installing, you can build a production-ready version of [Comunica SPARQL](https://github.com/comunica/comunica/tree/master/engines/query-sparql):
 ```bash
 $ comunica-web-client-generator
 ```

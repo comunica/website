@@ -5,9 +5,9 @@ description: 'An overview of all buses in Comunica and their actors.'
 
 This page gives an **overview of all _buses_ and _actors_**
 that are used in the default Comunica engines,
-such as [Comunica SPARQL](https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql)
-and [Comunica SPARQL File](https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql-file)
-Other configurations such as [Comunica SPARQL HDT](https://github.com/comunica/comunica-actor-init-sparql-hdt) contain additional actors and buses.
+such as [Comunica SPARQL](https://github.com/comunica/comunica/tree/master/engines/query-sparql)
+and [Comunica SPARQL File](https://github.com/comunica/comunica/tree/master/engines/query-sparql-file)
+Other configurations such as [Comunica SPARQL HDT](https://github.com/comunica/comunica-query-sparql-hdt) contain additional actors and buses.
 
 This builds upon the [core architecture](/docs/modify/advanced/architecture_core/) of _actors_, _mediators_, and _buses_.
 An overview of how these buses and actors are connected can be found in the [SPARQL architecture](/docs/modify/advanced/architecture_sparql/).

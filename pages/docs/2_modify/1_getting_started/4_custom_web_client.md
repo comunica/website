@@ -32,7 +32,7 @@ $ yarn install
 
 ## 2. Plugging in your custom config
 
-By default, the Web client is configured with Comunica SPARQL (`@comunica/actor-init-sparql`).
+By default, the Web client is configured with Comunica SPARQL (`@comunica/query-sparql`).
 In this step, we will modify it so that our custom engine is configured instead.
 
 First, install our package as a dependency:

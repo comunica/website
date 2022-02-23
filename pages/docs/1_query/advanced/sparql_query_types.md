@@ -22,7 +22,7 @@ Query results for each of these query types can be represented in <a href="/docs
 </div>
 
 <div class="note">
-Learn more about how the <a href="/docs/modify/advanced/query_output_types/">output types are represented internally</a>.
+Learn more about how the <a href="/docs/modify/advanced/query_operation_result_types/">output types are represented internally</a>.
 </div>
 
 ## 1. Command line
@@ -109,16 +109,16 @@ More information can be found in the [application guide](/docs/query/getting_sta
 
 The following query retrieves the first 100 triples from [DBpedia](https://fragments.dbpedia.org/2016-04/en):
 ```javascript
-const result = await myEngine.query(`
+const bindingsStream = await myEngine.queryBindings(`
   SELECT ?s ?p ?o WHERE {
     ?s ?p ?o
   } LIMIT 100`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
 });
-result.bindingsStream.on('data', (binding) => {
-    console.log(binding.get('?s').value);
-    console.log(binding.get('?p').value);
-    console.log(binding.get('?o').value);
+bindingsStream.on('data', (binding) => {
+    console.log(binding.get('s').value);
+    console.log(binding.get('p').value);
+    console.log(binding.get('o').value);
 });
 ```
 
@@ -127,7 +127,7 @@ result.bindingsStream.on('data', (binding) => {
 Next to SPARQL `SELECT` queries,
 it is also possible to execute `CONSTRUCT` queries to produce RDF triples:
 ```javascript
-const result = await myEngine.query(`
+const quadStream = await myEngine.queryQuads(`
   CONSTRUCT WHERE {
     ?s ?p ?o
   } LIMIT 100`, {
@@ -135,7 +135,7 @@ const result = await myEngine.query(`
 });
 ```
 ```javascript
-result.quadStream.on('data', (quad) => {
+quadStream.on('data', (quad) => {
     console.log(quad.subject.value);
     console.log(quad.predicate.value);
     console.log(quad.object.value);
@@ -147,13 +147,13 @@ result.quadStream.on('data', (quad) => {
 
 Similar to `CONSTRUCT`, `DESCRIBE` will output triples that are connected to a given resource by any predicate:
 ```javascript
-const result = await myEngine.query(`
+const quadStream = await myEngine.queryQuads(`
   DESCRIBE <http://dbpedia.org/resource/List_of_Attorneys_General_of_Wisconsin>`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
 });
 ```
 ```javascript
-result.quadStream.on('data', (quad) => {
+quadStream.on('data', (quad) => {
     console.log(quad.subject.value);
     console.log(quad.predicate.value);
     console.log(quad.object.value);
@@ -165,20 +165,19 @@ result.quadStream.on('data', (quad) => {
 
 `ASK` queries will produce a boolean output:
 ```javascript
-const result = await myEngine.query(`
+const hasMatches = await myEngine.queryBoolean(`
   ASK {
     ?s ?p <http://dbpedia.org/resource/Belgium>
   }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
 })
-const hasMatches = await result.booleanResult;
 ```
 
 ### 1.5. Update
 
 Update queries will produce a void output:
 ```javascript
-const result = await myEngine.query(`
+await myEngine.queryVoid(`
   PREFIX dc: <http://purl.org/dc/elements/1.1/>
   INSERT DATA
   { 
@@ -187,5 +186,4 @@ const result = await myEngine.query(`
   }`, {
   sources: [ store ],
 });
-await result.updateResult;
 ```

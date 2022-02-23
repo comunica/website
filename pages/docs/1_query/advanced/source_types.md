@@ -37,7 +37,7 @@ $ comunica-sparql sparql@https://dbpedia.org/sparql \
 Via a [JavaScript application](/docs/query/getting_started/query_app/),
 the source type can be set by using a hash containing `type` and `value`:
 ```javascript
-const result = await myEngine.query(`...`, {
+const bindingsStream = await myEngine.queryBindings(`...`, {
   sources: [
     { type: 'sparql', value: 'https://dbpedia.org/sparql' },
   ],
@@ -55,7 +55,7 @@ The table below summarizes the different source types that Comunica supports by 
 | `hypermedia` | Sources that expose query capabilities via hypermedia metadata, such as [Triple Pattern Fragments](https://linkeddatafragments.org/specification/triple-pattern-fragments/) and [Quad Pattern Fragments](https://linkeddatafragments.org/specification/quad-pattern-fragments/) |
 | `rdfjsSource` | JavaScript objects implementing the [RDF/JS `source` interface](/docs/query/advanced/rdfjs_querying/) |
 | `hdtFile` | [HDT files](/docs/query/advanced/hdt/) |
-| `ostrichFile` | Versioned [OSTRICH archives](https://github.com/rdfostrich/comunica-actor-init-sparql-ostrich) |
+| `ostrichFile` | Versioned [OSTRICH archives](https://github.com/rdfostrich/comunica-query-sparql-ostrich) |
 
 The default source type is `auto`,
 which will automatically detect the proper source type.

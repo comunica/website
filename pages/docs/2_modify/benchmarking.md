@@ -68,7 +68,7 @@ measuring a query's execution time can be done as follows:
 // Start a timer
 console.time("myTimer");
 
-const result = await myEngine.query(`
+const bindingsStream = await myEngine.queryBindings(`
   SELECT ?s ?p ?o WHERE {
     ?s ?p <http://dbpedia.org/resource/Belgium>.
     ?s ?p ?o
@@ -76,10 +76,10 @@ const result = await myEngine.query(`
   sources: ['http://fragments.dbpedia.org/2015/en'],
 });
 
-result.bindingsStream.on('data', (binding) => {
+bindingsStream.on('data', (binding) => {
     // Optionally do some logging
 });
-result.bindingsStream.on('end', () => {
+bindingsStream.on('end', () => {
     // End the timer
     console.timeEnd("myTimer");
 });

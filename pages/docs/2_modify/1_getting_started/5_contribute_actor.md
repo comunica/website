@@ -47,7 +47,7 @@ $ yarn install
 
 This will install the dependencies of all modules.
 After that, all [Comunica packages](https://github.com/comunica/comunica/tree/master/packages) are available in the `packages/` folder
-and can be used in a development environment, such as querying with [Comunica SPARQL (`packages/actor-init-sparql`)](https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql).
+and can be used in a development environment, such as querying with [Comunica SPARQL (`engines/query-sparql`)](https://github.com/comunica/comunica/tree/master/engines/query-sparql).
 
 A good git practise is to develop on **feature branches**.
 For this, branch from the `master` as follows:
@@ -61,9 +61,9 @@ If you fix a bug, you can name your branch something like <code>fix/my-fix</code
 </div>
 
 If you want to make sure that everything has been installed correctly,
-navigate to `packages/actor-init-sparql`, and try out a simple query from the command line:
+navigate to `engines/query-sparql`, and try out a simple query from the command line:
 ```bash
-$ cd packages/actor-init-sparql
+$ cd engines/query-sparql
 $ node bin/query.js http://fragments.dbpedia.org/2016-04/en \
   'SELECT * WHERE { ?s ?p ?o } LIMIT 100'
 ```
@@ -159,7 +159,7 @@ If you want to fail the test in certain cases, you will have to <code>throw</cod
 The `runOperation` method will contain the actual logic for evaluation the `REDUCED` operator.
 
 Before we start, change the return type of this method from `Promise<IActorQueryOperationOutput>` to `Promise<IActorQueryOperationOutputBindings>`,
-because this method will always [return bindings as query result](/docs/modify/advanced/query_output_types/).
+because this method will always [return bindings as query result](/docs/modify/advanced/query_operation_result_types/).
 
 The first step of implementing the REDUCED actor,
 requires evaluating the sub-operation that this REDUCED operation exists over.
@@ -222,7 +222,7 @@ you may have to add additional unit tests to check different cases.
 If you want to make it so that your actor is enabled by default in Comunica SPARQL,
 then you'll have to make sure it is present in the default config.
 
-For this, first **add your package as a dependency** in `packages/actor-init-sparql/package.json`:
+For this, first **add your package as a dependency** in `engines/query-sparql/package.json`:
 ```text
 {
   ...
@@ -239,7 +239,7 @@ When creating a new actor, you can leave the version fixed at <code>"^1.0.0"</co
 This version will be incremented automatically upon each new Comunica release.
 </div>
 
-Next, we have to **configure the actor** in the default config set `packages/actor-init-sparql/config/sets/sparql-queryoperators.json`:
+Next, we have to **configure the actor** in the default config set `engines/query-sparql/config/sets/sparql-queryoperators.json`:
 ```text
 {
   "@context": [
@@ -292,7 +292,7 @@ and that our configuration file has been compiled:
 ```bash
 $ cd packages/actor-query-operation-reduced-my
 $ yarn run build # Compiles typescript
-$ cd ../../packages/actor-init-sparql
+$ cd ../../engines/query-sparql
 $ yarn run prepare # Compiles config
 ```
 
@@ -314,8 +314,8 @@ First, add the changed files, and commit your code.
 
 ```bash
 $ git add packages/actor-query-operation-reduced-my \
-  packages/actor-init-sparql/config \
-  packages/actor-init-sparql/package.json
+  engines/query-sparql/config \
+  engines/query-sparql/package.json
 $ git commit -m "Add my custom reduced operator" 
 ```
 

@@ -21,16 +21,16 @@ Comunica SPARQL by default does not allow you to query over local file for secur
 
 SELECT query results will be contained in a `bindingsStream`,
 where each data element is a `Binding`.
-Each `binding` is an [immutable](https://immutable-js.github.io/immutable-js/) object
-that contains mappings from variable names to RDF terms.
-Variable names are always preceded by `?`,
-and bound RDF terms are represented as [RDF/JS](/docs/query/advanced/rdfjs/).
+Each `binding` is an [RDF/JS `Bindings`](http://rdf.js.org/query-spec/#bindings-interface) object
+that contains mappings from variables to RDF terms.
+Variable names can either be obtained by string label (without the `?` prefix) or via [RDF/JS](/docs/query/advanced/rdfjs/) variable objects,
+and bound RDF terms are represented as [RDF/JS](/docs/query/advanced/rdfjs/) terms.
 For example:
 ```javascript
-const result = await myEngine.query(`SELECT ...`, {...});
-result.bindingsStream.on('data', (binding) => {
-    console.log(binding.get('?s').value);
-    console.log(binding.get('?s').termType);
+const bindingsStream = await myEngine.queryBindings(`SELECT ...`, {...});
+bindingsStream.on('data', (binding) => {
+    console.log(binding.get('s').value);
+    console.log(binding.get('s').termType);
 });
 ```
 
@@ -38,8 +38,8 @@ CONSTRUCT query results will be contained in a `quadStream`,
 where each data element is an [RDF/JS](/docs/query/advanced/rdfjs/) quad.
 For example:
 ```javascript
-const result = await myEngine.query(`CONSTRUCT ...`, {...});
-result.quadStream.on('data', (quad) => {
+const quadStream = await myEngine.queryQuads(`CONSTRUCT ...`, {...});
+quadStream.on('data', (quad) => {
     console.log(quad.subject.value);
     console.log(quad.predicate.value);
     console.log(quad.object.value);
@@ -67,7 +67,7 @@ and an `'end'` event will only be emitted when all of them have been consumed.
 Since Comunica is an open-source project,
 the best way to get new features in, is by [contributing yourself](/contribute/).
 
-Feel free to [contact us](/ask/) for commercial support or consultancy.
+Alternatively, you can delegate implementation work to a third-party via the [Comunica Association](/association/).
 
 ## How to measure query performance with Comunica?
 
@@ -80,7 +80,7 @@ and the number of HTTP requests that have been executed up until the result was 
 
 For example, stats can be printed via the command line as follows:
 ```bash
-$ comunica-sparql http://fragments.dbpedia.org/2016-04/en \
+$ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
     -t stats \
     'SELECT * WHERE { ?s ?p ?o } LIMIT 10'
 Result,Delay (ms),HTTP requests

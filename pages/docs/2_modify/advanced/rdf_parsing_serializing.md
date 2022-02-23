@@ -26,7 +26,7 @@ While the first action can be used to determine all available media types that c
 the second action is typically used afterwards to parse RDF for a specific media type.
 
 Since there are two types of actions, calling an RDF parser involves two respective mediators.
-An example of such two mediators can be found in [`rdf-dereference.json`](https://github.com/comunica/comunica/blob/master/packages/actor-init-sparql/config/sets/rdf-dereference.json).
+An example of such two mediators can be found in [`rdf-dereference.json`](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/sets/rdf-dereference.json).
 In TypeScript, these mediators will correspond to the following fields:
 ```typescript
 public readonly mediatorRdfParseMediatypes: Mediator<
@@ -79,7 +79,7 @@ the second action is used to identify media types by URL in things like SPARQL s
 and the third action is typically used afterwards to parse RDF for a specific media type.
 
 Since there are three types of actions, calling an RDF serializer involves three respective mediators.
-An example of such two mediators can be found in [`sparql-serializers.json`](https://github.com/comunica/comunica/blob/master/packages/actor-init-sparql/config/sets/sparql-serializers.json).
+An example of such two mediators can be found in [`sparql-serializers.json`](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/sets/sparql-serializers.json).
 In TypeScript, these mediators will correspond to the following fields:
 ```typescript
 public readonly mediatorRdfSerialize: Mediator<

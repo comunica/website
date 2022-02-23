@@ -21,7 +21,7 @@ When using [Comunica SPARQL in an application](/docs/query/getting_started/query
 ```javascript
 import { ProxyHandlerStatic } from "@comunica/actor-http-proxy";
 
-const result = await myEngine.query('SELECT * WHERE { ?s ?p ?o }', {
+const bindingsStream = await myEngine.queryBindings('SELECT * WHERE { ?s ?p ?o }', {
   sources: ['http://fragments.dbpedia.org/2015/en'],
   httpProxyHandler: new ProxyHandlerStatic('http://myproxy.org/?uri='),
 });

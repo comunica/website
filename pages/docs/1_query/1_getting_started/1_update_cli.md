@@ -3,7 +3,7 @@ title: 'Updating from the command line'
 description: 'Execute SPARQL Update queries directly from the command line.'
 ---
 
-Comunica SPARQL (`@comunica/actor-init-sparql`) allow you to initiate queries to _update_ data in a certain store.
+Comunica SPARQL (`@comunica/query-sparql`) allow you to initiate queries to _update_ data in a certain store.
 In this guide, we will build upon [the guide on querying from the command line](/docs/query/getting_started/query_cli/),
 and show how you can not only read, but also update data.
 

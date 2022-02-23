@@ -175,7 +175,7 @@ Using the `log` [context entry](/docs/query/advanced/context/), you can enable l
 ```javascript
 import {LoggerPretty} from "@comunica/logger-pretty";
 
-const result = await myEngine.query('SELECT * WHERE { ?s ?p ?o }', {
+const bindingsStream = await myEngine.queryBindings('SELECT * WHERE { ?s ?p ?o }', {
   sources: ['http://fragments.dbpedia.org/2015/en'],
   log: new LoggerPretty({ level: 'debug' }),
 });

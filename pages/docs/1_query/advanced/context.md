@@ -13,10 +13,10 @@ the context must be passed as second argument to the `query()` method of a Comun
 
 For example, a context that defines the `sources` to query over is passed as follows:
 ```javascript
-const newEngine = require('@comunica/actor-init-sparql').newEngine;
-const myEngine = newEngine();
+const QueryEngine = require('@comunica/query-sparql').QueryEngine;
+const myEngine = new QueryEngine();
 
-const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
 });
 ```
@@ -36,16 +36,20 @@ The following table gives an overview of all possible context entries that can b
 | **Key** | **Description** |
 | ------- | --------------- |
 | `sources` | An array of data sources |
+| `destination` | A data destination for update queries |
 | `lenient` | If HTTP and parsing failures are ignored |
 | `initialBindings` | Variables that have to be pre-bound to values in the query |
-| `queryFormat` | Name of the provided query's format |
+| `queryFormat` | The provided query's format |
 | `baseIRI` | Base IRI for relative IRIs in SPARQL queries |
 | `log` | A custom logger instance |
 | `datetime` | Specify a custom date |
 | `httpProxyHandler` | A proxy for all HTTP requests |
 | `httpIncludeCredentials` | (_browser-only_) If current credentials should be included for HTTP requests |
+| `httpAuth` | HTTP basic authentication value |
 | `extensionFunctions` or `extensionFunctionCreator` | SPARQL extension functions |
 | `fetch` | A custom [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) function |
+| `readOnly` | If update queries may not be executed |
+| `explain` | The query explain mode |
 
 When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/context_entries.html). 
 
@@ -72,7 +76,7 @@ which may produce incorrect results. For these cases, the <code>sparql</code> ty
 
 For example, all of the following source elements are valid:
 ```javascript
-const result = await myEngine.query(`...`, {
+const bindingsStream = await myEngine.queryBindings(`...`, {
   sources: [
     'http://fragments.dbpedia.org/2015/en',
     { type: 'hypermedia', value: 'http://fragments.dbpedia.org/2016/en' },
@@ -83,54 +87,60 @@ const result = await myEngine.query(`...`, {
 });
 ```
 
-## 4. Lenient execution
+## 4. Defining an update destination
+
+If you are executing an update query over more than one source,
+then you need to specify the `destination` of the resulting update.
+More details on this can be found in the guide on [updating in a JavaScript app](/docs/query/getting_started/update_app/).
+
+## 5. Lenient execution
 
 By default, Comunica will throw an error when it encounters an invalid **RDF document** or **HTTP URL**.
 It is possible to **ignore these errors** and make Comunica ignore such invalid documents and URLs
 by setting `lenient` to `true`:
 ```javascript
-const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
   lenient: true,
 });
 ```
 
-## 5. Binding variables
+## 6. Binding variables
 
 Using the `initialBindings` context entry, it is possible to **bind** certain variables in the given query to terms before the query execution starts.
 This may be valuable in case your SPARQL query is used as a template with some variables that need to be filled in.
 
-This can be done by passing a `Bindings` object as value to the `initialBindings` context entry:
+This can be done by passing an [RDF/JS `Bindings`](http://rdf.js.org/query-spec/#bindings-interface) object as value to the `initialBindings` context entry:
 ```javascript
-import { Bindings } from '@comunica/bus-query-operation';
+import { BindingsFactory } from '@comunica/bindings-factory';
 import { DataFactory } from 'rdf-data-factory';
 
-const factory = new DataFactory();
+const DF = new DataFactory();
+const BF = new BindingsFactory();
 
-const result = await myEngine.query(`SELECT * WHERE {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE {
   {?s ?p ?template1 } UNION { ?s ?p ?template2 }
 }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
-  initialBindings: new Bindings({
-    '?template1': factory.literal('Value1'),
-    '?template2': factory.literal('Value2'),
+  initialBindings: BF.fromRecord({
+    template1: factory.literal('Value1'),
+    template2: factory.literal('Value2'),
   }),
 });
 ```
 
-The keys in the `Bindings` hash must be variable names starting with `?`.
-The values must be valid [RDF/JS](/docs/query/advanced/rdfjs/) terms,
-which can for example be constructed using [`rdf-data-factory`](https://www.npmjs.com/package/rdf-data-factory).
+`Bindings` can be created using any [RDF/JS `BindingsFactory`](http://rdf.js.org/query-spec/#bindingsfactory-interface),
+such as [`@comunica/bindings-factory`](https://www.npmjs.com/package/@comunica/bindings-factory).
 
-## 6. Setting the query format
+## 7. Setting the query format
 
 By default, queries in Comunica are interpreted as SPARQL queries.
-As such, the `queryFormat` entry defaults to `sparql`.
+As such, the `queryFormat` entry defaults to `{ language: 'sparql', version: '1.1' }`.
 
-Since Comunica is not tied to any specific **query format**, it is possible to change this to something else, such as `graphql`.
-More information on this can be found in the [GraphQL-LD guide](/docs/query/advanced/rdfjs/).
+Since Comunica is not tied to any specific **query format**, it is possible to change this to something else, such as `{ language: 'graphql', version: '1.0' }`.
+More information on this can be found in the [GraphQL-LD guide](/docs/query/advanced/graphql_ld/).
 
-## 7. Setting a Base IRI
+## 8. Setting a Base IRI
 
 Terms in SPARQL queries can be relative to a certain **Base IRI**.
 Typically, you would use the `BASE` keyword in a SPARQL query to set this Base IRI.
@@ -138,26 +148,26 @@ If you want to set this Base IRI without modifying the query,
 then you can define it in the context using `baseIRI`:
 
 ```javascript
-const result = await myEngine.query(`SELECT * WHERE {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE {
   ?s </relative> ?o
 }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
   baseIRI: 'http://example.org/',
 });
 ```
 
-## 8. Enabling a logger
+## 9. Enabling a logger
 
 A logger can be set using `log`.
 More information on this can be found in the [logging guide](/docs/query/advanced/logging/).
 
-## 9. Setting a custom date
+## 10. Setting a custom date
 
 Using `datetime`, a custom **date** can be set in Comunica.
 The range of this field must always be a JavaScript `Date` object:
 
 ```javascript
-const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
   date: new Date(),
 });
@@ -166,12 +176,12 @@ const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
 This date is primarily used for the SPARQL `NOW()` operator.
 It is also used when performing time travel querying using the [Memento protocol](/docs/query/advanced/memento/).
 
-## 10. Enabling an HTTP proxy
+## 11. Enabling an HTTP proxy
 
 All HTTP requests can be run through a proxy using `httpProxyHandler`.
 More information on this can be found in the [HTTP proxy guide](/docs/query/advanced/proxying/).
 
-## 11. Include credentials in HTTP requests
+## 12. Include credentials in HTTP requests
 
 _Only applicable when running in the browser_
 
@@ -181,25 +191,25 @@ This includes cookies, authorization headers or TLS client certificates.
 Enabling this option has no effect on same-site requests.
 
 ```javascript
-const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
   httpIncludeCredentials: true,
 });
 ```
 
-## 12. Send requests via HTTP basic authentication
+## 13. Send requests via HTTP basic authentication
 
 Via HTTP Basic Authentication one can include **username and password** credentials in HTTP requests.
 More information on this can be found in the [HTTP basic authentication guide](/docs/query/advanced/basic_auth/).
 
-## 13. SPARQL extension functions
+## 14. SPARQL extension functions
 
 SPARQL allows non-standard, [custom extension functions](https://www.w3.org/TR/sparql11-query/#extensionFunctions) to be used within queries.
 In order to provide an implementation to these extension functions,
 Comunica allows developers to plug them in via the context.
 More information on this can be found in the [SPARQL extension functions guide](/docs/query/advanced/extension_functions/).
 
-## 14. Using a custom fetch function
+## 15. Using a custom fetch function
 
 By default, Comunica will use the built-in [`fetch` function](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make HTTP requests.
 It is however possible to pass a custom function that will be used instead for making HTTP requests,
@@ -208,7 +218,7 @@ as long as it follows the [Fetch API](https://developer.mozilla.org/en-US/docs/W
 This can be done as follows:
 
 ```javascript
-const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
   fetch: myfetchFunction,
 });

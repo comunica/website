@@ -26,13 +26,10 @@ INSERT DATA
 }
 `;
 
-// Initiate the update
-const result = await myEngine.query(query, {
+// Execute the update
+await myEngine.queryVoid(query, {
   sources: [store],
 });
-
-// Wait for the update to complete
-await result.updateResult;
 
 // Prints '2' => the store is updated
 console.log(store.size);

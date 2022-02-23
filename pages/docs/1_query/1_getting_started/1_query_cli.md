@@ -4,7 +4,7 @@ description: 'Execute SPARQL queries directly from the command line.'
 ---
 
 The default Comunica query engine that exposes most standard features is Comunica SPARQL,
-which uses the package name `@comunica/actor-init-sparql`.
+which uses the package name `@comunica/query-sparql`.
 In this guide, we will install it _globally_, and show how it can be invoked from the command line.
 
 <div class="note">
@@ -18,7 +18,7 @@ Since Comunica runs on Node.js, make sure you have [Node.js installed](https://n
 
 Next, we can install Comunica SPARQL on our machine:
 ```bash
-$ npm install -g @comunica/actor-init-sparql
+$ npm install -g @comunica/query-sparql
 ```
 
 ## 2. SPARQL querying over one source
@@ -125,7 +125,11 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
 All <a href="/docs/query/advanced/result_formats/">available formats</a> can be printed via <code>comunica-sparql --listformats</code>
 </div>
 
-## 7. Learn more
+## 7. Printing the query plan
+
+Using the `--explain` option, the query plan can be printed via [different explain modes](/docs/query/advanced/explain/).
+
+## 8. Learn more
 
 This guide only discussed the basic functionality of `comunica-sparql`.
 You can learn more options by invoking the _help_ command:
@@ -135,19 +139,21 @@ $ comunica-sparql evaluates SPARQL queries
 Recommended options:
   -q, --query       Evaluate the given SPARQL query string                                                                                              [string]
   -f, --file        Evaluate the SPARQL query in the given file                                                                                         [string]
-  -i, --inputType   Query input format (e.g., graphql, sparql)                                                                                          [string]
+  -i, --inputType   Query input format (e.g., graphql, sparql)                                                                      [string] [default: "sparql"]
   -t, --outputType  MIME type of the output (e.g., application/json)                                                                                    [string]
 
 Options:
-  -c, --context      Use the given JSON context string or file (e.g., config.json)                                                                      [string]
-      --to           Destination for update queries                                                                                                     [string]
-  -b, --baseIRI      base IRI for the query (e.g., http://example.org/)                                                                                 [string]
-  -d, --dateTime     sets a datetime for querying Memento-enabled archives                                                                              [string]
-  -l, --logLevel     sets the log level (e.g., debug, info, warn, ...)                                                                [string] [default: "warn"]
-      --lenient      if failing requests and parsing errors should be logged instead of causing a hard crash                                           [boolean]
-  -v, --version      prints version information                                                                                                        [boolean]
-  -p, --proxy        delegates all HTTP traffic through the given proxy (e.g. http://myproxy.org/?uri=)                                                 [string]
-      --listformats  prints the supported MIME types                                                                                                   [boolean]
+  -c, --context         Use the given JSON context string or file (e.g., config.json)                                                                   [string]
+      --to              Destination for update queries                                                                                                  [string]
+  -b, --baseIRI         base IRI for the query (e.g., http://example.org/)                                                                              [string]
+  -d, --dateTime        Sets a datetime for querying Memento-enabled archives                                                                           [string]
+  -l, --logLevel        Sets the log level (e.g., debug, info, warn, ...)                                                             [string] [default: "warn"]
+      --lenient         If failing requests and parsing errors should be logged instead of causing a hard crash                                        [boolean]
+  -v, --version         Prints version information                                                                                                     [boolean]
+      --showStackTrace  Prints the full stacktrace when errors are thrown                                                                              [boolean]
+  -p, --proxy           Delegates all HTTP traffic through the given proxy (e.g. http://myproxy.org/?uri=)                                              [string]
+      --listformats     Prints the supported MIME types                                                                                                [boolean]
+      --explain         Print the query plan                                                                 [string] [choices: "parsed", "logical", "physical"]
 
 Examples:
   comunica-sparql https://fragments.dbpedia.org/2016-04/en -q 'SELECT * { ?s ?p ?o }'

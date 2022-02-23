@@ -31,14 +31,14 @@ store.addQuad(
   namedNode('http://ex.org/Mouse')
 );
 
-const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: [store],
 });
 ```
 
 <div class="note">
-Instead of the default Comunica SPARQL package (<code>@comunica/actor-init-sparql</code>),
-the <a href="https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql-rdfjs#readme">Comunica SPARQL RDF/JS (<code>@comunica/actor-init-sparql-rdfjs</code>)</a>
+Instead of the default Comunica SPARQL package (<code>@comunica/query-sparql</code>),
+the <a href="https://github.com/comunica/comunica/tree/master/engines/query-sparql-rdfjs#readme">Comunica SPARQL RDF/JS (<code>@comunica/query-sparql-rdfjs</code>)</a>
 can also be used as a more lightweight alternative
 that <i>only</i> allows querying over RDF/JS sources.
 </div>

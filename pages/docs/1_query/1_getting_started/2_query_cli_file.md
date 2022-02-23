@@ -19,7 +19,7 @@ Since Comunica runs on Node.js, make sure you have [Node.js installed](https://n
 
 Next, we can install Comunica SPARQL on our machine:
 ```bash
-$ npm install -g @comunica/actor-init-sparql-file
+$ npm install -g @comunica/query-sparql-file
 ```
 
 ## 2. SPARQL querying over one local file

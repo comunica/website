@@ -77,10 +77,10 @@ $ comunica-sparql http://fragments.dbpedia.org/2015-10/en \
 If you want to execute GraphQL-LD queries in [your application](/docs/query/getting_started/query_app/),
 you can do this as follows:
 ```javascript
-const newEngine = require('@comunica/actor-init-sparql').newEngine;
+const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 const bindingsStreamToGraphQl = require('@comunica/actor-sparql-serialize-tree').bindingsStreamToGraphQl;
 
-const myEngine = newEngine();
+const myEngine = new QueryEngine();
 const result = await myEngine.query(`
 {
   label @single
@@ -100,5 +100,5 @@ const result = await myEngine.query(`
   }
 });
 // Converts raw Comunica results to GraphQL objects
-const data = bindingsStreamToGraphQl(result.bindingsStream, result.context);
+const data = bindingsStreamToGraphQl(await result.execute(), result.context);
 ```

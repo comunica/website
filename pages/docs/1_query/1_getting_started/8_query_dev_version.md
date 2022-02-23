@@ -36,9 +36,9 @@ If installation is successful, you can navigate to any package and make use of i
 similar to how you would when it has been installed via npm.
 
 For example, executing a SPARQL query from the command line with Comunica SPARQL
-can be done by navigating to `packages/actor-init-sparql`, and invoking `bin/query.js`:
+can be done by navigating to `engines/query-sparql`, and invoking `bin/query.js`:
 ```bash
-# cd packages/actor-init-sparql
+# cd engines/query-sparql
 $ node bin/query.js https://fragments.dbpedia.org/2016-04/en \
     "SELECT * WHERE { ?s ?p ?o } LIMIT 100"
 ``` 
@@ -56,19 +56,19 @@ then you can **link** it to your local Comunica development environment.
 
 This can be done by first indicating that Comunica SPARQL can be linked (starting from the Comunica development environment folder):
 ```bash
-$ cd packages/actor-init-sparql
+$ cd engines/query-sparql
 $ yarn link
 ```
 
 Next, in the folder of your JavaScript package,
 we can link Comunica SPARQL as follows:
 ```bash
-$ yarn link "@comunica/actor-init-sparql"
+$ yarn link "@comunica/query-sparql"
 ```
 
 Now, your application will use the development version of Comunica instead.
 
 <div class="note">
 If you want to go back to the npm version of Comunica SPARQL,
-then you first have to unlink it from your application by running <code>yarn unlink "@comunica/actor-init-sparql"</code>.
+then you first have to unlink it from your application by running <code>yarn unlink "@comunica/query-sparql"</code>.
 </div>

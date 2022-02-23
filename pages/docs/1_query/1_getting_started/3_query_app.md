@@ -4,7 +4,7 @@ description: 'Execute SPARQL queries from within your application using the Java
 ---
 
 The default Comunica query engine that exposes most standard features is Comunica SPARQL,
-which uses the package name `@comunica/actor-init-sparql`.
+which uses the package name `@comunica/query-sparql`.
 In this guide, we will install it as a dependency in a [Node.js](https://nodejs.org/en/) JavaScript application,
 and show how it can be used to execute queries.
 
@@ -19,7 +19,7 @@ You will also need a JavaScript file to write in, such as <code>main.js</code>.
 In order to add Comunica SPARQL as a _dependency_ to your [Node.js](https://nodejs.org/en/) application,
 we can execute the following command:
 ```bash
-$ npm install @comunica/actor-init-sparql
+$ npm install @comunica/query-sparql
 ```
 
 ## 2. Creating a new query engine
@@ -27,9 +27,9 @@ $ npm install @comunica/actor-init-sparql
 The easiest way to create an engine is as follows:
 
 ```javascript
-const newEngine = require('@comunica/actor-init-sparql').newEngine;
+const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 
-const myEngine = newEngine();
+const myEngine = new QueryEngine();
 ```
 
 You can reuse an engine as often as possible.
@@ -40,21 +40,21 @@ as [caching](/docs/query/advanced/caching/) can be performed.
 
 Once you engine has been created, you can use it to execute any SPARQL query, such as a `SELECT` query:
 ```javascript
-const result = await myEngine.query(`
+const bindingsStream = await myEngine.queryBindings(`
   SELECT ?s ?p ?o WHERE {
     ?s ?p <http://dbpedia.org/resource/Belgium>.
     ?s ?p ?o
   } LIMIT 100`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
 });
 ```
 
-The first argument of `query()` is a SPARQL query string,
+The first argument of `queryBindings()` is a SPARQL query string,
 and the second argument is a [query context](/docs/query/advanced/context/) containing options,
 which must at least contain an array of sources to query over. 
 
-The contents of the `result` depend on the executed query.
-If the query was a `SELECT` query, it will contain one or more **bindings** of the selected variables (`?s ?p ?o`).
+The resulting `bindingsStream` is a stream of **bindings**,
+where each binding contains values for the selected variables (`?s ?p ?o`).
 
 <div class="note">
 While the <code>sources</code> is the only required option in the query context,
@@ -67,13 +67,16 @@ to tweak how the engine executed the query.
 The most efficient way to make use of the result,
 is by adding a **data-listener** to the `bindingsStream`:
 ```javascript
-result.bindingsStream.on('data', (binding) => {
-    console.log(binding.get('?s').value);
-    console.log(binding.get('?s').termType);
+bindingsStream.on('data', (binding) => {
+    console.log(binding.toString()); // Quick way to print bindings for testing
 
-    console.log(binding.get('?p').value);
-
-    console.log(binding.get('?o').value);
+    console.log(binding.has('s')); // Will be true
+    
+    // Obtaining values
+    console.log(binding.get('s').value);
+    console.log(binding.get('s').termType);
+    console.log(binding.get('p').value);
+    console.log(binding.get('o').value);
 });
 ```
 
@@ -82,24 +85,24 @@ as soon as the query engine has detected it.
 This means that the data-listener can be invoked many times during query execution,
 even if not all results are available yet.
 
-Each `binding` is an [immutable](https://immutable-js.github.io/immutable-js/) object
-that contains mappings from variable names to RDF terms.
-Variable names are always preceded by `?`,
-and bound RDF terms are represented as [RDF/JS](/docs/query/advanced/rdfjs/).
+Each `binding` is an [RDF/JS `Bindings`](http://rdf.js.org/query-spec/#bindings-interface) object
+that contains mappings from variables to RDF terms.
+Variable names can either be obtained by string label (without the `?` prefix) or via [RDF/JS](/docs/query/advanced/rdfjs/) variable objects,
+and bound RDF terms are represented as [RDF/JS](/docs/query/advanced/rdfjs/) terms.
 
 To find out when the query execution has **ended**,
 and all results are passed to the data-listener,
 an **end-listener** can be attached as well.
 ```javascript
-result.bindingsStream.on('end', () => {
+bindingsStream.on('end', () => {
     // The data-listener will not be called anymore once we get here.
 });
 ```
 
 It is also considered good practise to add an **error-listener**,
-so you can detect any problems that have occured during query execution:
+so you can detect any problems that have occurred during query execution:
 ```javascript
-result.bindingsStream.on('error', (error) => {
+bindingsStream.on('error', (error) => {
     console.error(error);
 });
 ```
@@ -108,29 +111,31 @@ result.bindingsStream.on('error', (error) => {
 
 If performance is not an issue in your application,
 or you just want the results in a simple array,
-then you can make use of the asynchronous `bindings()` method:
+then you can call the asynchronous `toArray()` method on the `bindingsStream`:
 
 ```javascript
-const bindings = await result.bindings();
+const bindings = await bindingsStream.toArray();
 
-console.log(bindings[0].get('?s').value);
-console.log(bindings[0].get('?s').termType);
+console.log(bindings[0].get('s').value);
+console.log(bindings[0].get('s').termType);
 ```
 
 This method will return asychronously (using `await`) as soon as _all_ results have been found.
-If you have many results, it is recommended to consume results iteratively with `bindingsStream` instead.
+If you have many results, it is recommended to consume results iteratively via a data listener instead.
 
-Each binding in the array is again an [immutable](https://immutable-js.github.io/immutable-js/) object
-that contains mappings from variable names to RDF terms.
-Variable names are always preceded by `?`,
-and bound RDF terms are represented as [RDF/JS](/docs/query/advanced/rdfjs/).
+Each binding in the array is again an [RDF/JS `Bindings`](http://rdf.js.org/query-spec/#bindings-interface) object.
+
+If you want to limit the number of results in the array, you can optionally pass a limit:
+```javascript
+const bindings = await bindingsStream.toArray({ limit: 100 });
+```
 
 ## 4. Executing queries over multiple sources
 
 Querying over more than one source is trivial,
 as any number of sources can easily be passed via an array:
 ```javascript
-const result = await myEngine.query(`
+const bindingsStream = await myEngine.queryBindings(`
   SELECT ?s ?p ?o WHERE {
     ?s ?p <http://dbpedia.org/resource/Belgium>.
     ?s ?p ?o
@@ -147,7 +152,7 @@ const result = await myEngine.query(`
 
 Next to `SELECT` queries, you can also execute a `CONSTRUCT` query to generate RDF quads/triples:
 ```javascript
-const result = await myEngine.query(`
+const quadStream = await myEngine.queryQuads(`
   CONSTRUCT WHERE {
     ?s ?p ?o
   } LIMIT 100`, {
@@ -160,7 +165,7 @@ const result = await myEngine.query(`
 The most efficient way to make use of the resulting RDF quads,
 is by adding a **data-listener** to the `quadStream`:
 ```javascript
-result.quadStream.on('data', (quad) => {
+quadStream.on('data', (quad) => {
     console.log(quad.subject.value);
     console.log(quad.predicate.value);
     console.log(quad.object.value);
@@ -179,10 +184,10 @@ which contain `subject`, `predicate`, `object` and `graph` terms.
 Just like `bindingsStream`, **end-listener** and **error-listener** can also be attached:
 
 ```javascript
-result.quadStream.on('end', () => {
+quadStream.on('end', () => {
     // The data-listener will not be called anymore once we get here.
 });
-result.quadStream.on('error', (error) => {
+quadStream.on('error', (error) => {
     console.error(error);
 });
 ```
@@ -192,10 +197,10 @@ result.quadStream.on('error', (error) => {
 Just like with binding results,
 if performance is not an issue in your application,
 or you just want the results in a simple array,
-then you can make use of the asynchronous `quads()` method:
+then you can call the asynchronous `toArray()` method on the `bindingsStream`:
 
 ```javascript
-const quads = await result.quads();
+const quads = await quadStream.toArray();
 
 console.log(quads[0].subject.value);
 console.log(quads[0].predicate.value);
@@ -204,7 +209,7 @@ console.log(quads[0].graph.value);
 ```
 
 This method will return asychronously (using `await`) as soon as _all_ results have been found.
-If you have many results, it is recommended to consume results iteratively with `quadStream` instead.
+If you have many results, it is recommended to consume results iteratively via a data listener instead.
 
 Each `quad` is again an [RDF/JS](/docs/query/advanced/rdfjs/) quad,
 which contain `subject`, `predicate`, `object` and `graph` terms.
@@ -214,19 +219,61 @@ which contain `subject`, `predicate`, `object` and `graph` terms.
 One of the simplest forms SPARQL is the ASK query,
 which can be executed in Comunica as follows:
 ```javascript
-const result = await myEngine.query(`
+const hasMatches = await myEngine.queryBoolean(`
   ASK {
     ?s ?p <http://dbpedia.org/resource/Belgium>
   }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
 })
-const hasMatches = await result.booleanResult;
 ```
 
-The `booleanResult` field asychronously returns a boolean,
-which indicates if the query has at least one result. 
+The value of `hasMatches` indicates if the query has at least one result. 
 
-## 7. Serializing to a specific result format
+## 7. Executing a generic query
+
+If you don't know beforehand if your query is a `SELECT`, `CONSTRUCT`, or `ASK` (e.g. if your app accepts queries via user input),
+then you can make use of the generic `query` method that supports all query types:
+```javascript
+const result = await myEngine.query(`
+  SELECT ?s ?p ?o WHERE {
+    ?s ?p <http://dbpedia.org/resource/Belgium>.
+    ?s ?p ?o
+  } LIMIT 100`, {
+  sources: ['http://fragments.dbpedia.org/2015/en'],
+});
+
+if (result.resultType === 'bindings') {
+    const bindingsStream = await result.execute();
+
+    bindingsStream.on('data', (binding) => {
+        console.log(binding.toString());
+    });
+}
+```
+
+The resulting object represents a _future_ to the query results.
+If has a field `resultType` that indicates the query and result type, which can be `'bindings'`, `'quads'`, `'boolean'`, or `'void'`.
+The asynchronous `execute` method effectively executes the query, and returns a result depending on the `resultType`, corresponding to the `queryBindings`, `queryQuads`, ... methods.
+For example, if the result type is `'bindings'`, then the return type of `execute` will be a bindings stream.
+
+Optionally, you can also obtain metadata about the results via this `query` method for the `'bindings'` and `'quads'` result types:
+```javascript
+const result = await myEngine.query(`
+  SELECT ?s ?p ?o WHERE {
+    ?s ?p <http://dbpedia.org/resource/Belgium>.
+    ?s ?p ?o
+  } LIMIT 100`, {
+  sources: ['http://fragments.dbpedia.org/2015/en'],
+});
+
+if (result.resultType === 'bindings') {
+    const metadata = await result.metadata();
+    console.log(metadata.cardinality);
+    console.log(metadata.canContainUndefs);
+}
+```
+
+## 8. Serializing to a specific result format
 
 If you want your application to output query results in a certain text-based format,
 just like [executing Comunica on the command line](/docs/query/getting_started/query_cli/),

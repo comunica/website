@@ -24,7 +24,7 @@ import {DataFactory} from "rdf-data-factory";
 
 const DF = new DataFactory();
 
-const result = await myEngine.query(`
+const bindingsStream = await myEngine.queryBindings(`
 PREFIX func: <http://example.org/functions#>
 SELECT ?caps WHERE {
   ?s ?p ?o.
@@ -58,7 +58,7 @@ import {DataFactory} from "rdf-data-factory";
 
 const DF = new DataFactory();
 
-const result = await myEngine.query(`
+const bindingsStream = await myEngine.queryBindings(`
 PREFIX func: <http://example.org/functions#>
 SELECT ?caps WHERE {
   ?s ?p ?o.

@@ -23,7 +23,7 @@ When using [Comunica SPARQL in an application](/docs/query/getting_started/query
 
 Enabling basic authentication for _all_ HTTP requests:
 ```javascript
-const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
   httpAuth: 'username:password',
 });
@@ -31,7 +31,7 @@ const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
 
 Enabling basic authentication for _a specific source_:
 ```javascript
-const result = await myEngine.query(`SELECT * WHERE { ?s ?p ?o }`, {
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: ['http://username:password@example.org/page'],
 });
 ```

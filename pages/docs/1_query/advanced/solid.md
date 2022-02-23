@@ -19,9 +19,9 @@ The default [Comunica SPARQL engine](/docs/query/getting_started/query_cli/)
 can directly be used to query over public Solid data pods as long as you are querying over public data.
 
 If you want to **query over data pods that require authentication**,
-you can use [Comunica SPARQL Solid](https://github.com/comunica/comunica-feature-solid/tree/master/packages/actor-init-sparql-solid).
+you can use [Comunica SPARQL Solid](https://github.com/comunica/comunica-feature-solid/tree/master/engines/query-sparql-solid).
 Hereafter, we list some examples on how to use it from the command line.
-Please refer to the [README of Comunica SPARQL Solid](https://github.com/comunica/comunica-feature-solid/tree/master/packages/actor-init-sparql-solid#readme)
+Please refer to the [README of Comunica SPARQL Solid](https://github.com/comunica/comunica-feature-solid/tree/master/engines/query-sparql-solid#readme)
 for more details around using it in JavaScript apps, or exposing documents as a SPARQL endpoint.
 
 **Querying an existing document**:
@@ -45,6 +45,6 @@ $ comunica-sparql-solid --idp https://solidcommunity.net/ \
   "INSERT DATA { <ex:s> <ex:p> <ex:o> }"
 ```
 
-Please be aware that that there are several [open known issues](https://github.com/comunica/comunica-feature-solid/tree/master/packages/actor-init-sparql-solid#known-issues) relating to other software.
+Please be aware that that there are several [open known issues](https://github.com/comunica/comunica-feature-solid/tree/master/engines/query-sparql-solid#known-issues) relating to other software.
 
 [LDflex](/docs/query/usage/#ldflex) and [GraphQL-LD](/docs/query/usage/#graphql-ld) are examples of tools that ship with Comunica SPARQL Solid.

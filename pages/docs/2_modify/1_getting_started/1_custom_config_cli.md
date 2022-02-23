@@ -3,7 +3,7 @@ title: 'Querying with a custom configuration from the command line'
 description: 'Create a custom configuration of Comunica modules with reduced features, and query with it from the command line.'
 ---
 
-While packages such as [Comunica SPARQL](https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql)
+While packages such as [Comunica SPARQL](https://github.com/comunica/comunica/tree/master/engines/query-sparql)
 ship with a default configuration that offer specific querying functionality,
 it is possible to **override these configurations**,
 so that you can modify the internal capabilities of your query engine.
@@ -36,7 +36,7 @@ A **Comunica config is written in JSON**, and typically looks something like thi
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-sparql/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/query-sparql/^1.0.0/components/context.jsonld",
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^1.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:my",
@@ -62,7 +62,7 @@ For example, the imported config file `files-cais:config/sets/sparql-queryoperat
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-sparql/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/query-sparql/^1.0.0/components/context.jsonld",
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^1.0.0/components/context.jsonld",
 
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^1.0.0/components/context.jsonld",
@@ -113,7 +113,7 @@ Since we want to override the default config of **Comunica SPARQL**,
 we have to make sure its package is installed first:
 
 ```bash
-$ npm install -g @comunica/actor-init-sparql
+$ npm install -g @comunica/query-sparql
 ```
 
 ## 3. Start from an existing config file
@@ -124,12 +124,12 @@ Let's start by creating a new empty directory,
 and create a file called `config.json`.
 
 In this guide, we will start from
-the [Comunica SPARQL default config file](https://github.com/comunica/comunica/blob/master/packages/actor-init-sparql/config/config-default.json).
+the [Comunica SPARQL default config file](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/config-default.json).
 Let's **copy it's contents entirely into our `config.json`**:
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-sparql/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/query-sparql/^1.0.0/components/context.jsonld",
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^1.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:my",
@@ -261,16 +261,16 @@ To do this, first **remove** the following line from our `config.json`:
     "files-cais:config/sets/sparql-queryoperators.json",
 ```
 
-Next, **copy the `"actors"` entry** (including all values) from [`files-cais:config/sets/sparql-queryoperators.json`](https://raw.githubusercontent.com/comunica/comunica/master/packages/actor-init-sparql/config/sets/sparql-queryoperators.json) ([GitHub](https://github.com/comunica/comunica/blob/master/packages/actor-init-sparql/config/sets/sparql-queryoperators.json)),
+Next, **copy the `"actors"` entry** (including all values) from [`files-cais:config/sets/sparql-queryoperators.json`](https://raw.githubusercontent.com/comunica/comunica/master/engines/query-sparql/config/sets/sparql-queryoperators.json) ([GitHub](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/sets/sparql-queryoperators.json)),
 and paste it after the `"import"` entry in our `config.json`.
-Additionally, **copy all the `"@context"` entries** from [`files-cais:config/sets/sparql-queryoperators.json`](https://raw.githubusercontent.com/comunica/comunica/master/packages/actor-init-sparql/config/sets/sparql-queryoperators.json) ([GitHub](https://github.com/comunica/comunica/blob/master/packages/actor-init-sparql/config/sets/sparql-queryoperators.json)),
+Additionally, **copy all the `"@context"` entries** from [`files-cais:config/sets/sparql-queryoperators.json`](https://raw.githubusercontent.com/comunica/comunica/master/engines/query-sparql/config/sets/sparql-queryoperators.json) ([GitHub](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/sets/sparql-queryoperators.json)),
 and overwrite the `"@context"` from our `config.json` with it.
 
 Your `config.json` file should have the following structure now:
 ```text
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-sparql/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/query-sparql/^1.0.0/components/context.jsonld",
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^1.0.0/components/context.jsonld",
 	
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^1.0.0/components/context.jsonld",

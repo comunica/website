@@ -11,26 +11,26 @@ and as **client-side applications in Web browsers**.
 The easiest way to use Comunica in your Web app,
 is by using a pre-built Comunica SPARQL version that is served via a GitHub CDN:
 ```html
-<script src="http://rdf.js.org/comunica-browser/versions/1/packages/actor-init-sparql/comunica-browser.js"></script>
+<script src="http://rdf.js.org/comunica-browser/versions/2/engines/query-sparql/comunica-browser.js"></script>
 <script language="JavaScript">
-  Comunica.newEngine().query(`
+  new Comunica.QueryEngine().queryBindings(`
   SELECT * {
     ?s ?p <http://dbpedia.org/resource/Belgium>.
     ?s ?p ?o
   } LIMIT 100
 `, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
-}).then(function (result) {
-  result.bindingsStream.on('data', function (data) {
+}).then(function (bindingsStream) {
+  bindingsStream.on('data', function (data) {
     // Each variable binding is an RDFJS term
-    console.log(data.get('?s').value + ' ' + data.get('?p').value + ' ' + data.get('?o').value);
+    console.log(data.get('s').value + ' ' + data.get('p').value + ' ' + data.get('o').value);
   });
 });
 </script>
 ```
 
 <div class="note">
-The code example above will always make use of the the latest Comunica version in the 1.x.x range.
+The code example above will always make use of the the latest Comunica version in the 2.x.x range.
 Instead, you can <a href="https://github.com/rdfjs/comunica-browser#readme">use a specific version</a>.
 </div>
 

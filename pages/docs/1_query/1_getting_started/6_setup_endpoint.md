@@ -13,7 +13,7 @@ Since Comunica runs on Node.js, make sure you have [Node.js installed](https://n
 
 Next, we can install Comunica SPARQL on our machine:
 ```bash
-$ npm install -g @comunica/actor-init-sparql
+$ npm install -g @comunica/query-sparql
 ```
 
 ## 2. SPARQL endpoint over one source
@@ -63,7 +63,7 @@ $ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
 First install Comunica SPARQL for files:
 
 ```bash
-$ npm install -g @comunica/actor-init-sparql-file
+$ npm install -g @comunica/query-sparql-file
 ```
 
 Then start the SPARQL server:
@@ -108,10 +108,11 @@ Options:
   -c, --context          Use the given JSON context string or file (e.g., config.json)                                                                  [string]
       --to               Destination for update queries                                                                                                 [string]
   -b, --baseIRI          base IRI for the query (e.g., http://example.org/)                                                                             [string]
-  -d, --dateTime         sets a datetime for querying Memento-enabled archives                                                                          [string]
-  -l, --logLevel         sets the log level (e.g., debug, info, warn, ...)                                                            [string] [default: "warn"]
-      --lenient          if failing requests and parsing errors should be logged instead of causing a hard crash                                       [boolean]
-  -v, --version          prints version information                                                                                                    [boolean]
+  -d, --dateTime         Sets a datetime for querying Memento-enabled archives                                                                          [string]
+  -l, --logLevel         Sets the log level (e.g., debug, info, warn, ...)                                                            [string] [default: "warn"]
+      --lenient          If failing requests and parsing errors should be logged instead of causing a hard crash                                       [boolean]
+  -v, --version          Prints version information                                                                                                    [boolean]
+      --showStackTrace   Prints the full stacktrace when errors are thrown                                                                             [boolean]
   -i, --invalidateCache  Enable cache invalidation before each query execution                                                        [boolean] [default: false]
 
 Examples:

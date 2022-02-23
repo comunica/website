@@ -3,7 +3,7 @@ title: 'Updating in a JavaScript app'
 description: 'Execute SPARQL Update queries from within your application using the JavaScript API.'
 ---
 
-Comunica SPARQL (`@comunica/actor-init-sparql`) allow you to initiate queries to _update_ data in a certain store.
+Comunica SPARQL (`@comunica/query-sparql`) allow you to initiate queries to _update_ data in a certain store.
 In this guide, we will build upon [the guide on querying in a JavaScript app](/docs/query/getting_started/query_app/),
 and show how you can not only read, but also update data.
 
@@ -12,10 +12,10 @@ and show how you can not only read, but also update data.
 The easiest way to create an engine and store is as follows:
 
 ```javascript
-const newEngine = require('@comunica/actor-init-sparql').newEngine;
+const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 const N3 = require('n3');
 
-const myEngine = newEngine();
+const myEngine = new QueryEngine();
 
 const store = new N3.Store();
 ```
@@ -27,7 +27,7 @@ We make use of the [`Store` from `N3.js`](https://github.com/rdfjs/N3.js#storing
 Once you engine has been created, you can use it to execute any SPARQL Update query, such as a `INSERT DATA` query:
 ```javascript
 // Initiate the update
-const result = await myEngine.query(`
+await myEngine.queryVoid(`
   PREFIX dc: <http://purl.org/dc/elements/1.1/>
   INSERT DATA
   { 
@@ -37,17 +37,9 @@ const result = await myEngine.query(`
   sources: [ store ],
 });
 
-// Wait for the update to complete
-await result.updateResult;
-
 // Prints '2' => the store is updated
 console.log(store.size);
 ```
-
-When you obtain the result of the `query` method,
-this means that your query has been initiated.
-In order to wait until the update operation has been completed,
-you need to `await` the `updateResult`.
 
 ## 3. Executing DELETE/INSERT WHERE queries
 
@@ -56,7 +48,7 @@ based on quads that are already available:
 
 ```javascript
 // Insert initial data
-await (await myEngine.query(`
+await myEngine.queryVoid(`
   PREFIX foaf: <http://xmlns.com/foaf/0.1/>
   INSERT DATA
   { 
@@ -68,10 +60,10 @@ await (await myEngine.query(`
     <http://example/president42> foaf:familyName "Clinton" .
   }`, {
   sources: [ store ],
-})).updateResult;
+});
 
 // Rename all occurrences of "Bill" to "William"
-await (await myEngine.query(`
+await myEngine.queryVoid(`
   PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
   DELETE { ?person foaf:givenName 'Bill' }
   INSERT { ?person foaf:givenName 'William' }
@@ -80,7 +72,7 @@ await (await myEngine.query(`
     ?person foaf:givenName 'Bill' 
   }`, {
   sources: [ store ],
-})).updateResult;
+});
 ```
 
 <div class="note">
@@ -97,7 +89,7 @@ For example, if you have multiple sources, but you want to direct all changes to
 This can be done by passing a `destination` into the query context:
 ```javascript
 // Insert friends based on common friends from Ruben's
-await (await myEngine.query(`
+await myEngine.queryVoid(`
   PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
   INSERT
   {
@@ -113,7 +105,7 @@ await (await myEngine.query(`
     'https://ruben.verborgh.org/profile/',
   ],
   destination: store,
-})).updateResult;
+});
 ```
 
 <div class="note">

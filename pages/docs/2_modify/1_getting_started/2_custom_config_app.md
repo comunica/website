@@ -25,15 +25,15 @@ You will also need a JavaScript file to write in, such as <code>main.js</code>.
 In order to add Comunica SPARQL as a _dependency_ to your [Node.js](https://nodejs.org/en/) application,
 we can execute the following command:
 ```bash
-$ npm install @comunica/actor-init-sparql
+$ npm install @comunica/query-sparql
 ```
 
 ## 2. Creating a new query engine
 
-While [`newEngine()` is used to import Comunica SPARQL's default config](/docs/query/getting_started/query_app/),
+While [`QueryEngine` is used to import Comunica SPARQL's default config](/docs/query/getting_started/query_app/),
 we can load a custom config by creating our engine via `newEngineDynamic()`:
 ```javascript
-const newEngineDynamic = require('@comunica/actor-init-sparql').newEngineDynamic;
+const newEngineDynamic = require('@comunica/query-sparql').newEngineDynamic;
 
 const myEngine = await newEngineDynamic({
   configResourceUrl: 'config.json', // Relative or absolute path 
@@ -49,12 +49,12 @@ The easiest way to create a custom config, is to start from an existing one, and
 Let's create a file called `config.json` in your package.
 
 In this guide, we will start from
-the [Comunica SPARQL default config file](https://github.com/comunica/comunica/blob/master/packages/actor-init-sparql/config/config-default.json).
+the [Comunica SPARQL default config file](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/config-default.json).
 Let's **copy it's contents entirely into our `config.json`**:
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-sparql/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/query-sparql/^1.0.0/components/context.jsonld",
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^1.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:my",
@@ -86,7 +86,7 @@ Let's **copy it's contents entirely into our `config.json`**:
 Once your engine has been created based on your custom config,
 you can use it to execute any SPARQL query, such as a `SELECT` query:
 ```javascript
-const result = await myEngine.query(`
+const bindingsStream = await myEngine.queryBindings(`
   SELECT ?s ?p ?o WHERE {
     ?s ?p <http://dbpedia.org/resource/Belgium>.
     ?s ?p ?o
@@ -94,10 +94,10 @@ const result = await myEngine.query(`
   sources: ['http://fragments.dbpedia.org/2015/en'],
 });
 
-result.bindingsStream.on('data', (binding) => {
-    console.log(binding.get('?s').value);
-    console.log(binding.get('?p').value);
-    console.log(binding.get('?o').value);
+bindingsStream.on('data', (binding) => {
+    console.log(binding.get('s').value);
+    console.log(binding.get('p').value);
+    console.log(binding.get('o').value);
 });
 ```
 
@@ -169,7 +169,7 @@ Again, make sure to replace `my-package` with your package `name`.
 Next, we will create a local copy of `files-cais:config/sets/sparql-queryoperators.json`.
 
 For this, create a file **`config/sets/sparql-queryoperators.json`**,
-and paste in the contents of [`files-cais:config/sets/sparql-queryoperators.json`](https://raw.githubusercontent.com/comunica/comunica/master/packages/actor-init-sparql/config/sets/sparql-queryoperators.json) ([GitHub](https://github.com/comunica/comunica/blob/master/packages/actor-init-sparql/config/sets/sparql-queryoperators.json)).
+and paste in the contents of [`files-cais:config/sets/sparql-queryoperators.json`](https://raw.githubusercontent.com/comunica/comunica/master/engines/query-sparql/config/sets/sparql-queryoperators.json) ([GitHub](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/sets/sparql-queryoperators.json)).
 
 ### 5.4. Make config refer to local `sparql-queryoperators.json`
 
@@ -224,14 +224,14 @@ Concretely, we will remove the following entries from `config/sets/sparql-queryo
 After this change, you should now be unable to execute `CONSTRUCT` or `DESCRIBE` queries.
 Try this out by executing the following:
 ```bash
-const result = await myEngine.query(`
+const quadStream = await myEngine.queryQuads(`
   CONSTRUCT WHERE {
     ?s ?p ?o
   } LIMIT 100`, {
   sources: ['http://fragments.dbpedia.org/2015/en'],
 });
 
-result.quadStream.on('data', (quad) => {
+quadStream.on('data', (quad) => {
     console.log(quad.subject.value);
     console.log(quad.predicate.value);
     console.log(quad.object.value);
@@ -241,7 +241,7 @@ result.quadStream.on('data', (quad) => {
 
 Executing a `SELECT` query will still work:
 ```bash
-const result = await myEngine.query(`
+const bindingsStream = await myEngine.queryBindings(`
   SELECT ?s ?p ?o WHERE {
     ?s ?p <http://dbpedia.org/resource/Belgium>.
     ?s ?p ?o
@@ -249,10 +249,10 @@ const result = await myEngine.query(`
   sources: ['http://fragments.dbpedia.org/2015/en'],
 });
 
-result.bindingsStream.on('data', (binding) => {
-    console.log(binding.get('?s').value);
-    console.log(binding.get('?p').value);
-    console.log(binding.get('?o').value);
+bindingsStream.on('data', (binding) => {
+    console.log(binding.get('s').value);
+    console.log(binding.get('p').value);
+    console.log(binding.get('o').value);
 });
 ```
 

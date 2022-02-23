@@ -91,7 +91,7 @@ and refer to the new parameter we have defined in our TypeScript constructor.
 
 Everything has now been setup to define values for our parameter via the config file.
 
-As such, we can **modify our declaration of our actor in `packages/actor-init-sparql/config/sets/sparql-queryoperators.json`**:
+As such, we can **modify our declaration of our actor in `engines/query-sparql/config/sets/sparql-queryoperators.json`**:
 ```text
 {
   "@context": [
