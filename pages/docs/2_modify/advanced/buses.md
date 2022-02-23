@@ -24,7 +24,7 @@ Subscribed actors need to implement [`ActorInit`](https://comunica.github.io/com
 
 | Name | Package | Description |
 | ---- | ------- | ----------- |
-| Comunica SPARQL | [`@comunica/actor-init-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-init-sparql) | Initializes SPARQL query execution by parsing the given query, optimizing, executing, and serializing results. |
+| Query | [`@comunica/actor-init-query`](https://github.com/comunica/comunica/tree/master/packages/actor-init-query) | Initializes query execution by parsing a given query, optimizing, executing, and serializing results. |
 
 
 ## Context Preprocess
@@ -38,20 +38,20 @@ Subscribed actors need to implement [`ActorContextPreprocess`](https://comunica.
 _Contains no actors yet._
 
 
-## SPARQL Parse
+## Query Parse
 
-_Package: [`@comunica/bus-sparql-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-sparql-parse)_
+_Package: [`@comunica/bus-query-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-query-parse)_
 
-Parsing an input query into SPARQL algebra.
+Parsing an input query into (SPARQL) algebra.
 
-Subscribed actors need to implement [`ActorSparqlParse`](https://comunica.github.io/comunica/classes/bus_sparql_parse.actorsparqlparse.html).
+Subscribed actors need to implement [`ActorQueryParse`](https://comunica.github.io/comunica/classes/bus_query_parse.actorqueryparse.html).
 
 ### Actors
 
 | Name | Package | Description |
 | ---- | ------- | ----------- |
-| SPARQL Algebra | [`@comunica/actor-sparql-parse-algebra`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-parse-algebra) | Uses [SPARQLAlgebra.js](https://github.com/joachimvh/SPARQLAlgebra.js) for parsing SPARQL query strings into SPARQL algebra. |
-| GraphQL | [`@comunica/actor-sparql-parse-graphql`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-parse-graphql) | Parses GraphQL strings into SPARQL algebra following the [GraphQL-LD](/docs/query/advanced/graphql_ld/) approach. |
+| SPARQL | [`@comunica/actor-query-parse-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-query-parse-algebra) | Uses [SPARQLAlgebra.js](https://github.com/joachimvh/SPARQLAlgebra.js) for parsing SPARQL query strings into SPARQL algebra. |
+| GraphQL | [`@comunica/actor-query-parse-graphql`](https://github.com/comunica/comunica/tree/master/packages/actor-query-parse-graphql) | Parses GraphQL strings into SPARQL algebra following the [GraphQL-LD](/docs/query/advanced/graphql_ld/) approach. |
 
 
 ## Optimize Query Operation
@@ -67,7 +67,9 @@ Subscribed actors need to implement [`ActorOptimizeQueryOperation`](https://comu
 
 | Name | Package | Description |
 | ---- | ------- | ----------- |
+| BGP to Join | [`@comunica/actor-optimize-query-operation-bgp-to-join`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-bgp-to-join) | Converts BGPs into join operations. |
 | Join BGP | [`@comunica/actor-optimize-query-operation-join-bgp`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-join-bgp) | Merges joins of multiple BGPs into a single BGP. |
+| Join Connected | [`@comunica/actor-optimize-query-operation-join-connected`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-join-connected) | Clusters entries within a join operation into separate sub-joins if they are connected by variables. |
 
 
 ## Query Operation
@@ -84,10 +86,7 @@ or [`ActorQueryOperationTyped`](https://comunica.github.io/comunica/classes/bus_
 | Name | Package | Description |
 | ---- | ------- | ----------- |
 | Ask | [`@comunica/actor-query-operation-ask`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-ask) | Handles `ASK` operations. |
-| BGP empty | [`@comunica/actor-query-operation-bgp-empty`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-bgp-empty) | Handles empty BGPs. |
-| BGP left deep smallest | [`@comunica/actor-query-operation-bgp-left-deep-smallest`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-bgp-left-deep-smallest) | Handles BGPs in a left-deep manner based on the pattern with the smallest item count. |
-| BGP left deep smallest sort | [`@comunica/actor-query-operation-bgp-left-deep-smallest-sort`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-bgp-left-deep-smallest-sort) | Handles BGPs in a left-deep manner based on the pattern with the smallest item count and sorting by variable count in triple patterns. |
-| BGP single | [`@comunica/actor-query-operation-bgp-single`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-bgp-single) | Handles a BGP with one triple pattern. |
+| BGP join | [`@comunica/actor-query-operation-bgp-join`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-bgp-join) | Handles BGPs by delegating to [`@comunica/bus-rdf-join`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-join). |
 | Construct | [`@comunica/actor-query-operation-construct`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-construct) | Handles `CONSTRUCT` operations. |
 | Describe subject | [`@comunica/actor-query-operation-describe-subject`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-describe-subject) | Handles `DESCRIBE` operations. |
 | Distinct hash | [`@comunica/actor-query-operation-distinct-hash`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-distinct-hash) | Handles `DISTINCT` operations through hashing. |
@@ -96,10 +95,9 @@ or [`ActorQueryOperationTyped`](https://comunica.github.io/comunica/classes/bus_
 | Filter Sparqlee | [`@comunica/actor-query-operation-filter-sparqlee`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-filter-sparqlee) | Handles `FILTER` operations using [Sparqlee](/docs/modify/advanced/sparqlee/) |
 | From quad | [`@comunica/actor-query-operation-from-quad`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-from-quad) | handles `FROM` operations by considering FROM and FROM NAMED as target graph elements in quads. |
 | Group | [`@comunica/actor-query-operation-group`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-group) | Handles `GROUP BY` operations. |
-| Join | [`@comunica/actor-query-operation-join`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-join) | Handles join operations by delegating to [`@comunica/bus-rdf-join`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-join). |
-| Left join left deep | [`@comunica/actor-query-operation-leftjoin-left-deep`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-leftjoin-left-deep) | Handles `OPTIONAL` operations in a left-deep manner. |
-| Left join nested loop | [`@comunica/actor-query-operation-leftjoin-nested-loop`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-leftjoin-nested-loop) | Handles `OPTIONAL` operations in a nested loop manner. |
-| Minus | [`@comunica/actor-query-operation-minus`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-minus) | Handles `MINUS` operations. |
+| Join | [`@comunica/actor-query-operation-join`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-join) | Handles join operations by delegating as inner join to [`@comunica/bus-rdf-join`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-join). |
+| Left join | [`@comunica/actor-query-operation-leftjoin`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-leftjoin) | Handles `OPTIONAL` operations by delegating as optional join to [`@comunica/bus-rdf-join`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-join). |
+| Minus | [`@comunica/actor-query-operation-minus`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-minus) | Handles `MINUS` operations by delegating as minus join to [`@comunica/bus-rdf-join`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-join). |
 | Order by direct | [`@comunica/actor-query-operation-orderby-direct`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-orderby-direct) | Handles `ORDER BY` operations in a direct, but non-spec-compliant manner. |
 | Order by Sparqlee | [`@comunica/actor-query-operation-orderby-sparqlee`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-orderby-sparqlee) | Handles `ORDER BY` operations using [Sparqlee](/docs/modify/advanced/sparqlee/) |
 | Path Alt | [`@comunica/actor-query-operation-path-alt`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-path-alt) | Handles `alt` property path expressions. |
@@ -128,28 +126,28 @@ or [`ActorQueryOperationTyped`](https://comunica.github.io/comunica/classes/bus_
 | Update Load | [`@comunica/actor-query-operation-update-load`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-load) | Handles `LOAD` operations. |
 | Update Move | [`@comunica/actor-query-operation-update-move-rewrite`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-move-rewrite) | Handles `COPY` operations by rewriting the operation in terms of drop and add. |
 
-## SPARQL Serialize
+## Query Serialize
 
-_Package: [`@comunica/bus-sparql-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-sparql-serialize)_
+_Package: [`@comunica/bus-query-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-query-serialize)_
 
 Serializes the query result into a text-based serialization.
 
-Subscribed actors need to implement [`ActorSparqlSerialize`](https://comunica.github.io/comunica/classes/bus_sparql_serialize.actorsparqlserialize.html).
+Subscribed actors need to implement [`ActorQuerySerialize`](https://comunica.github.io/comunica/classes/bus_query_serialize.actorqueryserialize.html).
 
 ### Actors
 
 | Name | Package | Description |
 | ---- | ------- | ----------- |
-| JSON | [`@comunica/actor-sparql-serialize-json`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-json) | Serializes to a simple JSON format. |
-| RDF | [`@comunica/actor-sparql-serialize-rdf`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-rdf) | Serializes to an RDF format by delegating to [`@comunica/bus-rdf-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-serialize). |
-| Simple | [`@comunica/actor-sparql-serialize-simple`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-) | Serializes to a simple format. |
-| SPARQL CSV | [`@comunica/actor-sparql-serialize-sparql-csv`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-csv) | Serializes to SPARQL/CSV. |
-| SPARQL JSON | [`@comunica/actor-sparql-serialize-sparql-json`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-json) | Serializes to SPARQL/JSON. |
-| SPARQL TSV | [`@comunica/actor-sparql-serialize-sparql-tsv`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-tsv) | Serializes to SPARQL/TSV. |
-| SPARQL XML | [`@comunica/actor-sparql-serialize-sparql-xml`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-xml) | Serializes to SPARQL/XML. |
-| Stats | [`@comunica/actor-sparql-serialize-stats`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-stats) | Serializes basic statistics. |
-| Table | [`@comunica/actor-sparql-serialize-table`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-table) | Serializes in a simple table format. |
-| Tree | [`@comunica/actor-sparql-serialize-tree`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-tree) | Serializes to a JSON tree. |
+| JSON | [`@comunica/actor-query-serialize-json`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-json) | Serializes to a simple JSON format. |
+| RDF | [`@comunica/actor-query-serialize-rdf`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-rdf) | Serializes to an RDF format by delegating to [`@comunica/bus-rdf-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-serialize). |
+| Simple | [`@comunica/actor-query-serialize-simple`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-) | Serializes to a simple format. |
+| SPARQL CSV | [`@comunica/actor-query-serialize-sparql-csv`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-csv) | Serializes to SPARQL/CSV. |
+| SPARQL JSON | [`@comunica/actor-query-serialize-sparql-json`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-json) | Serializes to SPARQL/JSON. |
+| SPARQL TSV | [`@comunica/actor-query-serialize-sparql-tsv`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-tsv) | Serializes to SPARQL/TSV. |
+| SPARQL XML | [`@comunica/actor-query-serialize-sparql-xml`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-xml) | Serializes to SPARQL/XML. |
+| Stats | [`@comunica/actor-query-serialize-stats`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-stats) | Serializes basic statistics. |
+| Table | [`@comunica/actor-query-serialize-table`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-table) | Serializes in a simple table format. |
+| Tree | [`@comunica/actor-query-serialize-tree`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-tree) | Serializes to a JSON tree. |
 
 
 ## RDF Serialize
@@ -174,17 +172,57 @@ _Package: [`@comunica/bus-rdf-join`](https://github.com/comunica/comunica/tree/m
 
 Handles joining of bindings streams.
 
+It supports different logical join types, such as inner, optional, and minus joins.
+
 Subscribed actors need to implement [`ActorRdfJoin`](https://comunica.github.io/comunica/classes/bus_rdf_join.actorrdfjoin.html).
 
 ### Actors
 
 | Name | Package | Description |
 | ---- | ------- | ----------- |
-| Hash | [`@comunica/actor-rdf-join-jsonld`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-hash) | Hash join. |
-| Multi sequential | [`@comunica/actor-rdf-join-multi-sequential`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-multi-sequential) | Multi-join by just picking the two of them hierarchically. |
-| Multi smallest | [`@comunica/actor-rdf-join-multi-smallest`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-multi-smallest) | Multi-join by always picking the first two streams with smallest estimate cardinality. |
-| Nested loop | [`@comunica/actor-rdf-join-nestedloop`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-nestedloop) | Nested loop join. |
-| Symmetric hash | [`@comunica/actor-rdf-join-symmetrichash`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-symmetrichash) | Symmetric hash join. |
+| Inner Hash | [`@comunica/actor-rdf-join-inner-hash`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-hash) | Inner hash join of two entries. |
+| Inner Nested loop | [`@comunica/actor-rdf-join-inner-nestedloop`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-nestedloop) | Inner nested loop join of two entries. |
+| Inner None | [`@comunica/actor-rdf-join-inner-none`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-none) | Inner join between zero entries, and returns a single binding. |
+| Inner Single | [`@comunica/actor-rdf-join-inner-single`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-single) | Inner join of a single entry, and returns the entry itself. |
+| Inner Symmetric hash | [`@comunica/actor-rdf-join-inner-symmetrichash`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-symmetrichash) | Inner symmetric hash join of two entries. |
+| Inner Multi empty | [`@comunica/actor-rdf-join-inner-multi-empty`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-multi-empty) | Inner multi-join that accepts any number of inner-join entries of which at least one is empty and returns an empty stream. |
+| Inner Multi Bind | [`@comunica/actor-rdf-join-inner-multi-bind`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-multi-bind) | Inner multi-join that inner-joins 2 or more streams by picking the one with the lowest cardinality, binding each item with the remaining operations, and recursively resolving those operations by delegating to [`@comunica/bus-query-operation`](https://github.com/comunica/comunica/tree/master/packages/bus-query-operation). |
+| Inner Multi sequential | [`@comunica/actor-rdf-join-inner-multi-sequential`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-multi-sequential) | Inner multi-join by just picking the two of them hierarchically. |
+| Inner Multi smallest | [`@comunica/actor-rdf-join-inner-multi-smallest`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-inner-multi-smallest) | Inner multi-join by always picking the first two streams with smallest estimate cardinality. |
+| Minus Hash | [`@comunica/actor-rdf-join-minus-hash`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-minus-hash) | Anti-join (minus) of 2 streams using the hash join algorithm. This actor does _not_ support streams that can have undefined values. |
+| Minus Hash undef | [`@comunica/actor-rdf-join-minus-hash-undef`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-minus-hash-undef) | Anti-join (minus) of 2 streams using the hash join algorithm. This actor supports streams that can have undefined values. |
+| Optional Bind | [`@comunica/actor-rdf-join-optional-bind`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-optional-bind) | Left-join (optional) 2 streams using the bind join algorithm. It binds each item of the first stream with the second operation, and recursively resolving that operation by delegating to [`@comunica/bus-query-operation`](https://github.com/comunica/comunica/tree/master/packages/bus-query-operation). |
+| Optional Nested loop | [`@comunica/actor-rdf-join-optional-nestedloop`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-optional-nestedloop) | Left-join (optional) 2 streams using the nested loop join algorithm. |
+
+
+## RDF Join Entries Sort
+
+_Package: [`@comunica/bus-rdf-join-entries-sort`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-join-entries-sort)_
+
+Determines the order in which join entries should be ordered.
+
+Subscribed actors need to implement [`ActorRdfJoinEntriesSort`](https://comunica.github.io/comunica/classes/bus_rdf_join_entries_sort.actorrdfjoinentriessort.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| Cardinality | [`@comunica/actor-rdf-join-entries-sort-cardinality`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-entries-sort-cardinality) | Orders join entries by increasing cardinality. |
+
+
+## RDF Join Selectivity
+
+_Package: [`@comunica/bus-rdf-join-selectivity`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-join-selectivity)_
+
+Calculates or estimates the selectivity of joins.
+
+Subscribed actors need to implement [`ActorRdfJoinSelectivity`](https://comunica.github.io/comunica/classes/bus_rdf_join_selectivity.actorrdfjoinselectivity.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| Variable Counting | [`@comunica/actor-rdf-join-selectivity-variable-counting`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-selectivity-variable-counting) | Estimates the selectivity by counting the overlap of variables and non-variables in patterns. |
 
 
 ## RDF Resolve Quad Pattern
@@ -204,20 +242,35 @@ Subscribed actors need to implement [`ActorRdfResolveQuadPattern`](https://comun
 | RDF/JS Source | [`@comunica/actor-rdf-resolve-quad-pattern-rdfjs-source`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-rdfjs-source) | Resolves the quad stream from an [RDF/JS Source](/docs/query/advanced/rdfjs_querying/) |
 
 
-## RDF Dereference
+## Dereference
 
-_Package: [`@comunica/bus-rdf-dereference`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-dereference)_
+_Package: [`@comunica/bus-dereference`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference)_
 
-Dereferences a path or URL into a stream of quads.
+Dereferences a path or URL into a (generic) stream.
 
-Subscribed actors need to implement [`ActorRdfDereference`](https://comunica.github.io/comunica/classes/bus_rdf_dereference.actorrdfdereference.html).
+Subscribed actors need to implement [`ActorDereference`](https://comunica.github.io/comunica/classes/bus_dereference.actordereference.html).
 
 ### Actors
 
 | Name | Package | Description |
 | ---- | ------- | ----------- |
-| File | [`@comunica/actor-rdf-dereference-file`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-dereference-file) | Dereferences RDF from a local file. Invokes parsing with [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse). |
-| HTTP | [`@comunica/actor-rdf-dereference-http-parse`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-dereference-http-parse) | Dereferences RDF from a remote file. Invokes parsing with [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse), and HTTP lookups with [`@comunica/bus-http`](https://github.com/comunica/comunica/tree/master/packages/bus-http). |
+| File | [`@comunica/actor-dereference-file`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-file) | Dereferences a local file. |
+| HTTP | [`@comunica/actor-dereference-http-parse`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-http-parse) | Dereferences a remote file. |
+
+
+## Dereference RDF
+
+_Package: [`@comunica/bus-dereference-rdf`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference-rdf)_
+
+Dereferences a path or URL into a stream of quads.
+
+Subscribed actors need to implement [`ActorDereferenceRdf`](https://comunica.github.io/comunica/classes/bus_dereference_rdf.actordereferencerdf.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| Parse | [`@comunica/actor-dereference-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-rdf-parse) | Dereferences RDF using [`@comunica/bus-dereference`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference). Invokes parsing with [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse). |
 
 
 ## RDF Parse
@@ -274,6 +327,15 @@ Subscribed actors need to implement [`ActorHttp`](https://comunica.github.io/com
 | Proxy | [`@comunica/actor-http-proxy`](https://github.com/comunica/comunica/tree/master/packages/actor-http-proxy) | Run requests through a proxy. |
 
 
+## HTTP Invalidate
+
+_Package: [`@comunica/bus-http-invalidate`](https://github.com/comunica/comunica/tree/master/packages/bus-http-invalidate)_
+
+A bus for HTTP invalidation events.
+
+Subscribed actors need to implement [`ActorHttpInvalidate`](https://comunica.github.io/comunica/classes/bus_http.actorhttp.html).
+
+
 ## RDF Metadata
 
 _Package: [`@comunica/bus-rdf-metadata`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-metadata)_
@@ -288,7 +350,6 @@ Subscribed actors need to implement [`ActorRdfMetadata`](https://comunica.github
 | ---- | ------- | ----------- |
 | All | [`@comunica/actor-rdf-metadata-all`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-all) | Considers all incoming quads as both data and metadata quads. |
 | Primary topic | [`@comunica/actor-rdf-metadata-primary-topic`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-primary-topic) | Splits off the metadata based on the existence of a `foaf:primaryTopic` link. |
-| Triple predicate | [`@comunica/actor-rdf-metadata-triple-predicate`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-triple-predicate) | Splits off the metadata based on the existence of a preconfigured set of predicates with the page url as subject. |
 
 
 ## RDF Metadata Extract
@@ -303,10 +364,14 @@ Subscribed actors need to implement [`ActorRdfMetadataExtract`](https://comunica
 
 | Name | Package | Description |
 | ---- | ------- | ----------- |
+| Allow HTTP Methods | [`@comunica/actor-rdf-metadata-extract-allow-http-methods`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-allow-http-methods) | Extract the `Allow` HTTP response header. |
 | Hydra Controls | [`@comunica/actor-rdf-metadata-extract-hydra-controls`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-hydra-controls) | Extract controls using the Hydra vocabulary. |
 | Hydra Count | [`@comunica/actor-rdf-metadata-extract-hydra-count`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-hydra-count) | Extract count estimates using the Hydra vocabulary. |
-| SPARQL Service | [`@comunica/actor-rdf-metadata-extract-sparql-service`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-sparql-service) | Extract SPARQL service description metadata. |
+| Hydra Page size | [`@comunica/actor-rdf-metadata-extract-hydra-pagesize`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-hydra-pagesize) | Extract page sizes using the Hydra vocabulary. |
 | Patch SPARQL Update | [`@comunica/actor-rdf-metadata-extract-patch-sparql-update`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-patch-sparql-update) | Checks for the presence of `application/sparql-update` in the `Accept-Patch` header. |
+| Put Accepted | [`@comunica/actor-rdf-metadata-extract-put-accepted`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-put-accepted) | Extracts the [`Accept-Put`](https://solidproject.org/TR/protocol#accept-put) HTTP response header. |
+| Request Time | [`@comunica/actor-rdf-metadata-extract-request-time`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-request-time) | Extracts the time it took to request the page in milliseconds. |
+| SPARQL Service | [`@comunica/actor-rdf-metadata-extract-sparql-service`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-sparql-service) | Extract SPARQL service description metadata. |
 
 
 ## RDF Resolve Hypermedia Links
