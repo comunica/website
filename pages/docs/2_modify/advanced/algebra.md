@@ -19,9 +19,9 @@ handles algebra operations with type `'construct'`.
 
 ## SPARQLAlgebra.js
 
-Converting a SPARQL query string to SPARQL algebra
-happens in the [SPARQL Parse bus](/docs/modify/advanced/buses/#sparql-parse).
-The [`@comunica/actor-sparql-parse-algebra`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-parse-algebra) actor
+Converting a query string to SPARQL algebra
+happens in the [SPARQL Parse bus](/docs/modify/advanced/buses/#query-parse).
+The [`@comunica/actor-query-parse-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-query-parse-sparql) actor
 on this bus makes use of the [SPARQLAlgebra.js](https://github.com/joachimvh/SPARQLAlgebra.js) package.
 
 Examples on how the conversion between SPARQL query string and SPARQL algebra happens can be found in the tests: https://github.com/joachimvh/SPARQLAlgebra.js/tree/master/test
@@ -29,10 +29,9 @@ Examples on how the conversion between SPARQL query string and SPARQL algebra ha
 ## Converting a SPARQL query into algebra
 
 If you want to quickly check what the algebra of a given SPARQL query string looks like,
-you can install SPARQLAlgebra.js globally, and convert a query as follows:
+you can make use of Comunica's [explain functionality](/docs/query/advanced/explain/) as follows:
 ```bash
-$ npm install -g sparqlalgebrajs
-$ sparqlalgebrajs -q "SELECT ?x ?y ?z WHERE { ?x ?y ?z }"
+$ https://fragments.dbpedia.org/2016-04/en -q 'SELECT * { ?s ?p ?o }' --explain parsed
 
 {
   "type": "project",
@@ -40,40 +39,40 @@ $ sparqlalgebrajs -q "SELECT ?x ?y ?z WHERE { ?x ?y ?z }"
     "type": "bgp",
     "patterns": [
       {
-        "type": "pattern",
         "termType": "Quad",
         "value": "",
         "subject": {
           "termType": "Variable",
-          "value": "x"
+          "value": "s"
         },
         "predicate": {
           "termType": "Variable",
-          "value": "y"
+          "value": "p"
         },
         "object": {
           "termType": "Variable",
-          "value": "z"
+          "value": "o"
         },
         "graph": {
           "termType": "DefaultGraph",
           "value": ""
-        }
+        },
+        "type": "pattern"
       }
     ]
   },
   "variables": [
     {
       "termType": "Variable",
-      "value": "x"
+      "value": "s"
     },
     {
       "termType": "Variable",
-      "value": "y"
+      "value": "p"
     },
     {
       "termType": "Variable",
-      "value": "z"
+      "value": "o"
     }
   ]
 }
@@ -84,8 +83,10 @@ but you need to find out to what algebra operation this corresponds.
 
 ## Converting algebra into a SPARQL query
 
-Using, you can also apply the reverse transformation from algebra to SPARQL query string:
+You can also apply the reverse transformation from algebra to SPARQL query string,
+for which you will need to globally install [SPARQLAlgebra.js](https://github.com/joachimvh/SPARQLAlgebra.js):
 ```bash
+$ npm install -g sparqlalgebrajs
 $ sparqlalgebrajs -q -r '
 {
   "type": "project",
