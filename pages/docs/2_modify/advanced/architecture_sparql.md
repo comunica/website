@@ -34,7 +34,7 @@ For a given SPARQL query, the following logic flow occurs: (_some parts are omit
             * **Quad Pattern:** Evaluates triple/quad pattern operations via the *RDF Resolve Quad Pattern* bus, which translates a quad pattern into a stream of quad.
                 * **Federated:** Translates the array of sources in the [query context](/docs/query/advanced/context/) into the union of quad streams by resolving each source separately in the *RDF Resolve Quad Pattern* bus.
                 * **Hypermedia:** Resolves the quad stream of a resource by interpreting hypermedia links and controls.
-                    * **RDF Dereference:** Dereferences a path or URL into a stream of quads, which internally makes use of several parsers in the *RDF Parse* bus.
+                    * **Dereference RDF:** Dereferences a path or URL into a stream of quads, which internally makes use of several parsers in the *RDF Parse* bus, and it uses data lookup actors from the *Dereference* bus.
                     * **RDF Metadata:** Extracts the quads relevant for metadata from the stream of data quads.
                     * **RDF Metadata Extract:** Create an object with metadata for a given metadata quad stream.
                     * **RDF Resolve Hypermedia Links:** Determines which links should be followed from the metadata of the current source.
