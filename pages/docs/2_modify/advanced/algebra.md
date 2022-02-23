@@ -31,7 +31,7 @@ Examples on how the conversion between SPARQL query string and SPARQL algebra ha
 If you want to quickly check what the algebra of a given SPARQL query string looks like,
 you can make use of Comunica's [explain functionality](/docs/query/advanced/explain/) as follows:
 ```bash
-$ https://fragments.dbpedia.org/2016-04/en -q 'SELECT * { ?s ?p ?o }' --explain parsed
+$ comunica-sparql https://fragments.dbpedia.org/2016-04/en -q 'SELECT * { ?s ?p ?o }' --explain parsed
 
 {
   "type": "project",
