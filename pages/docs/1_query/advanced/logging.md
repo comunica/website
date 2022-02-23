@@ -21,14 +21,119 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
     -l debug
 ```
 ```text
-[2020-07-31T11:38:47.632Z]  INFO: Requesting https://fragments.dbpedia.org/2016-04/en {
-  actor: 'https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-sparql/^1.0.0/config/sets/http.json#myHttpFetcher'
+[2022-02-23T09:46:17.615Z]  INFO: Requesting https://fragments.dbpedia.org/2016-04/en {
+  headers: {
+    accept: 'application/n-quads,application/trig;q=0.95,application/ld+json;q=0.9,application/n-triples;q=0.8,text/turtle;q=0.6,application/rdf+xml;q=0.5,application/json;q=0.45,text/n3;q=0.35,application/xml;q=0.3,image/svg+xml;q=0.3,text/xml;q=0.3,text/html;q=0.2,application/xhtml+xml;q=0.18',
+    'user-agent': 'Comunica/actor-http-fetch (Node.js v14.17.0; darwin)'
+  },
+  method: 'GET',
+  actor: 'urn:comunica:default:http/actors#fetch'
 }
-[2020-07-31T11:38:47.775Z]  INFO: Identified as qpf source: https://fragments.dbpedia.org/2016-04/en {
-  actor: 'https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-sparql/^1.0.0/config/sets/resolve-hypermedia.json#myHypermediaQpfResolver'
+[2022-02-23T09:46:17.756Z]  INFO: Identified as qpf source: https://fragments.dbpedia.org/2016-04/en { actor: 'urn:comunica:default:rdf-resolve-hypermedia/actors#qpf' }
+[2022-02-23T09:46:17.761Z]  INFO: Requesting https://fragments.dbpedia.org/2016-04/en?predicate=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type {
+  headers: {
+    accept: 'application/n-quads,application/trig;q=0.95,application/ld+json;q=0.9,application/n-triples;q=0.8,text/turtle;q=0.6,application/rdf+xml;q=0.5,application/json;q=0.45,text/n3;q=0.35,application/xml;q=0.3,image/svg+xml;q=0.3,text/xml;q=0.3,text/html;q=0.2,application/xhtml+xml;q=0.18',
+    'user-agent': 'Comunica/actor-http-fetch (Node.js v14.17.0; darwin)'
+  },
+  method: 'GET',
+  actor: 'urn:comunica:default:http/actors#fetch'
 }
-[2020-07-31T11:38:47.777Z]  INFO: Requesting https://fragments.dbpedia.org/2016-04/en {
-  actor: 'https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-sparql/^1.0.0/config/sets/http.json#myHttpFetcher'
+[2022-02-23T09:46:17.785Z]  DEBUG: Determined physical join operator 'inner-bind' {
+  entries: 2,
+  variables: [ [ 's', 'p', 'o' ], [ 's', 'o' ] ],
+  costs: {
+    'inner-none': undefined,
+    'inner-single': undefined,
+    'inner-multi-empty': undefined,
+    'inner-bind': 6458426063925.053,
+    'inner-hash': undefined,
+    'inner-symmetric-hash': undefined,
+    'inner-nested-loop': 104059105829280600,
+    'optional-bind': undefined,
+    'optional-nested-loop': undefined,
+    'minus-hash': undefined,
+    'minus-hash-undef': undefined,
+    'inner-multi-smallest': undefined
+  },
+  coefficients: {
+    'inner-none': undefined,
+    'inner-single': undefined,
+    'inner-multi-empty': undefined,
+    'inner-bind': {
+      iterations: 6404592831613.728,
+      persistedItems: 0,
+      blockingItems: 0,
+      requestTime: 538332323.1132541
+    },
+    'inner-hash': {
+      iterations: 1140381039,
+      persistedItems: 1040358853,
+      blockingItems: 1040358853,
+      requestTime: 1391277679.44
+    },
+    'inner-symmetric-hash': {
+      iterations: 1140381039,
+      persistedItems: 1140381039,
+      blockingItems: 0,
+      requestTime: 1391277679.44
+    },
+    'inner-nested-loop': {
+      iterations: 104058966701512660,
+      persistedItems: 0,
+      blockingItems: 0,
+      requestTime: 1391277679.44
+    },
+    'optional-bind': undefined,
+    'optional-nested-loop': undefined,
+    'minus-hash': undefined,
+    'minus-hash-undef': undefined,
+    'inner-multi-smallest': undefined
+  }
+}
+[2022-02-23T09:46:17.786Z]  DEBUG: First entry for Bind Join:  {
+  entry: Quad {
+    termType: 'Quad',
+    value: '',
+    subject: Variable { termType: 'Variable', value: 's' },
+    predicate: NamedNode {
+      termType: 'NamedNode',
+      value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
+    },
+    object: Variable { termType: 'Variable', value: 'o' },
+    graph: DefaultGraph { termType: 'DefaultGraph', value: '' },
+    type: 'pattern'
+  },
+  metadata: {
+    requestTime: 18,
+    pageSize: 100,
+    cardinality: { type: 'estimate', value: 100022186 },
+    first: 'https://fragments.dbpedia.org/2016-04/en?predicate=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type&page=1',
+    next: 'https://fragments.dbpedia.org/2016-04/en?predicate=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type&page=2',
+    previous: null,
+    last: null,
+    searchForms: { values: [Array] },
+    canContainUndefs: false,
+    order: undefined,
+    availableOrders: undefined,
+    variables: [ [Variable], [Variable] ]
+  },
+  actor: 'urn:comunica:default:rdf-join/actors#inner-multi-bind'
+}
+[2022-02-23T09:46:17.794Z]  INFO: Requesting https://fragments.dbpedia.org/2016-04/en?subject=http%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FSpecial%3AFilePath%2F%21%21%21%E5%96%84%E7%A6%8F%E5%AF%BA.JPG&object=http%3A%2F%2Fdbpedia.org%2Fontology%2FImage {
+  headers: {
+    accept: 'application/n-quads,application/trig;q=0.95,application/ld+json;q=0.9,application/n-triples;q=0.8,text/turtle;q=0.6,application/rdf+xml;q=0.5,application/json;q=0.45,text/n3;q=0.35,application/xml;q=0.3,image/svg+xml;q=0.3,text/xml;q=0.3,text/html;q=0.2,application/xhtml+xml;q=0.18',
+    'user-agent': 'Comunica/actor-http-fetch (Node.js v14.17.0; darwin)'
+  },
+  method: 'GET',
+  actor: 'urn:comunica:default:http/actors#fetch'
+}
+[2022-02-23T09:46:17.795Z]  INFO: Requesting https://fragments.dbpedia.org/2016-04/en?subject=http%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FSpecial%3AFilePath%2F%21%21%21%E5%96%84%E7%A6%8F%E5%AF%BA.JPG&object=http%3A%2F%2Fwikidata.dbpedia.org%2Fontology%2FImage {
+  headers: {
+    accept: 'application/n-quads,application/trig;q=0.95,application/ld+json;q=0.9,application/n-triples;q=0.8,text/turtle;q=0.6,application/rdf+xml;q=0.5,application/json;q=0.45,text/n3;q=0.35,application/xml;q=0.3,image/svg+xml;q=0.3,text/xml;q=0.3,text/html;q=0.2,application/xhtml+xml;q=0.18',
+    'user-agent': 'Comunica/actor-http-fetch (Node.js v14.17.0; darwin)'
+  },
+  method: 'GET',
+  actor: 'urn:comunica:default:http/actors#fetch'
 }
 ```
 
