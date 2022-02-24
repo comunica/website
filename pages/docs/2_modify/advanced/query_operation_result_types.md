@@ -39,7 +39,8 @@ interface IQueryOperationResultBindings {
 ```
 
 The most important field in here is `bindingsStream`, which is of type [`BindingsStream`](https://comunica.github.io/comunica/modules/types.html#bindingsstream).
-This is a stream containing Bindings.
+This is a stream containing bindings.
+Learn more about the usage of these bindings objects in the [bindings guide](/docs/query/advanced/bindings/).
 
 ## Quads output
 

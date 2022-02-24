@@ -131,6 +131,7 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE {
 
 `Bindings` can be created using any [RDF/JS `BindingsFactory`](http://rdf.js.org/query-spec/#bindingsfactory-interface),
 such as [`@comunica/bindings-factory`](https://www.npmjs.com/package/@comunica/bindings-factory).
+Learn more about the creation of these bindings objects in the [bindings guide](/docs/query/advanced/bindings/).
 
 ## 7. Setting the query format
 

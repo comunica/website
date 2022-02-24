@@ -89,6 +89,7 @@ Each `binding` is an [RDF/JS `Bindings`](http://rdf.js.org/query-spec/#bindings-
 that contains mappings from variables to RDF terms.
 Variable names can either be obtained by string label (without the `?` prefix) or via [RDF/JS](/docs/query/advanced/rdfjs/) variable objects,
 and bound RDF terms are represented as [RDF/JS](/docs/query/advanced/rdfjs/) terms.
+Learn more about the usage of these bindings objects in the [bindings guide](/docs/query/advanced/bindings/).
 
 To find out when the query execution has **ended**,
 and all results are passed to the data-listener,

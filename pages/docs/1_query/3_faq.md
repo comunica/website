@@ -33,6 +33,7 @@ bindingsStream.on('data', (binding) => {
     console.log(binding.get('s').termType);
 });
 ```
+Learn more about the usage of these bindings objects in the [bindings guide](/docs/query/advanced/bindings/).
 
 CONSTRUCT query results will be contained in a `quadStream`,
 where each data element is an [RDF/JS](/docs/query/advanced/rdfjs/) quad.
