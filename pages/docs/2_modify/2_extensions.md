@@ -18,11 +18,18 @@ contains a number of example packages that explain and illustrate how to create 
 
 ## Solid
 
-[`@comunica/actor-http-solid-auth-fetch`](https://github.com/comunica/actor-http-solid-auth-fetch)
-is an [HTTP actor](/docs/modify/advanced/buses/#http) that takes into account Solid authentication
-when performing HTTP requests.
+[`@comunica/query-sparql-solid`](https://github.com/comunica/comunica-feature-solid)
+is Comunica SPARQL query engine that allows queries to be executed using your [Solid account](https://solidproject.org/).
 
 Read more about this in [our guide on Solid](/docs/query/advanced/solid/).
+
+## Link Traversal
+
+[`@comunica/query-sparql-link-traversal`](https://github.com/comunica/comunica-feature-link-traversal) and
+[`@comunica/query-sparql-link-traversal-solid`](https://github.com/comunica/comunica-feature-link-traversal-solid)
+are Comunica SPARQL query engine that follow links between documents during query execution.
+
+Read more about this in [our guide on Link Traversal](/research/link_traversal/).
 
 ## AMF
 

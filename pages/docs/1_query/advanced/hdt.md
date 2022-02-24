@@ -7,7 +7,7 @@ description: 'HDT offers highly compressed immutable RDF storage.'
 Comunica enables executing SPARQL queries over HDT files,
 as it is one of the supported [source types](/docs/query/advanced/source_types/).
 
-Querying over HDT requires [Comunica SPARQL HDT package (`@comunica/query-sparql-hdt`)](https://github.com/comunica/comunica-query-sparql-hdt).
+Querying over HDT requires [Comunica SPARQL HDT package (`@comunica/query-sparql-hdt`)](https://github.com/comunica/comunica-feature-hdt).
 
 ## 1. Installation
 
