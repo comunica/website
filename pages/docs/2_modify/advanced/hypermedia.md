@@ -37,7 +37,7 @@ shows how this hypermedia actor relates to all other actors and buses.
 For each URL-based data source,
 the hypermedia actor will always go through the following steps:
 
-1. Dereference RDF ([RDF Dereference bus](/docs/modify/advanced/buses/#rdf-dereference))
+1. Dereference RDF ([Dereference RDF bus](/docs/modify/advanced/buses/#dereference-rdf))
 2. Split data and metadata streams ([RDF Metadata bus](/docs/modify/advanced/buses/#rdf-metadata))
 3. Extract metadata as object ([RDF Metadata Extract bus](/docs/modify/advanced/buses/#rdf-metadata-extract))
 4. Determine links to other sources ([RDF Resolve Hypermedia Links bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia-links))
@@ -54,7 +54,7 @@ Hereafter, we go over these three steps using three example sources:
 
 An HTTP(S) request is done to retrieve the RDF data at the given location
 via [content negotiation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation).
-Different ways of doing this may exist in the [RDF Dereference bus](/docs/modify/advanced/buses/#rdf-dereference).
+Different ways of doing this may exist in the [Dereference RDF bus](/docs/modify/advanced/buses/#dereference-rdf).
 Concretely, the input is an URL, and the output is a stream of parsed RDF triples/quads.
 
 For example:

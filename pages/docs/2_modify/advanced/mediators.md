@@ -20,6 +20,7 @@ a different mediator can be configured without having to change any buses or act
 | All | [`@comunica/mediator-all`](https://github.com/comunica/comunica/tree/master/packages/mediator-all) | Special mediator that runs _all_ actors that resolve their test in parallel. |
 | Combine Pipeline | [`@comunica/mediator-combine-pipeline`](https://github.com/comunica/comunica/tree/master/packages/mediator-combine-pipeline) | Special mediator that goes over all actors in sequence and forwards I/O. This requires the action input and the actor output to be of the same type. |
 | Combine Union | [`@comunica/mediator-combine-union`](https://github.com/comunica/comunica/tree/master/packages/mediator-combine-union) | Special mediator that takes the union of all actor results. |
+| Join Coefficients Fixed | [`@comunica/mediator-join-coefficients-fixed`](https://github.com/comunica/comunica/tree/master/packages/mediator-join-coefficients-fixed) | Mediates over join actors implementing the [Join Coefficients mediator type](https://github.com/comunica/comunica/tree/master/packages/mediatortype-join-coefficients). |
 
 ## Mediator types
 
@@ -35,6 +36,7 @@ The following mediator types are available:
 | Iterations | [`@comunica/mediatortype-iterations`](https://github.com/comunica/comunica/tree/master/packages/mediatortype-iterations) | Number of iterations that are needed for joining streams. |
 | Priority | [`@comunica/mediatortype-priority`](https://github.com/comunica/comunica/tree/master/packages/mediatortype-priority) | Priority of an actor, for example used for parsers and serializers in content negotiation. |
 | Time | [`@comunica/mediatortype-time`](https://github.com/comunica/comunica/tree/master/packages/mediatortype-time) | Estimated time an action will take. |
+| Join Coefficients | [`@comunica/mediatortype-join-coefficients`](https://github.com/comunica/comunica/tree/master/packages/mediatortype-join-coefficients) | Represents the cost of a join operation on the [RDF Join bus](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-join). |
 
 ## Configuring and using a mediator
 
