@@ -26,15 +26,15 @@ While the first action can be used to determine all available media types that c
 the second action is typically used afterwards to parse RDF for a specific media type.
 
 Since there are two types of actions, calling an RDF parser involves two respective mediators.
-An example of such two mediators can be found in [`rdf-dereference.json`](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/sets/rdf-dereference.json).
+An example of such two mediators can be found in [`dereference-rdf/actors.json`](https://github.com/comunica/comunica/blob/master/engines/config-query-sparql/config/dereference-rdf/actors.json).
 In TypeScript, these mediators will correspond to the following fields:
 ```typescript
-public readonly mediatorRdfParseMediatypes: Mediator<
-  Actor<IActionMediaTypesRdfParse, IActorTestMediaTypesRdfParse, IActorOutputMediaTypesRdfParse>,
-  IActionMediaTypesRdfParse, IActorTestMediaTypesRdfParse, IActorOutputMediaTypesRdfParse>;
-public readonly mediatorRdfParseHandle: Mediator<
-  Actor<IActionHandleRdfParse, IActorTestHandleRdfParse, IActorOutputHandleRdfParse>,
-  IActionHandleRdfParse, IActorTestHandleRdfParse, IActorOutputHandleRdfParse>;
+public readonly mediatorRdfParseMediatypes: MediateMediaTypes;
+public readonly mediatorRdfParseHandle: MediateMediaTyped<
+  IActionParse<IActionRdfParseMetadata>,
+  IActorTest,
+  IActorParseOutput<RDF.Stream, IActorRdfParseOutputMetadata>
+>;
 ```
 
 All available media types can be retrieved as follows:
@@ -50,9 +50,10 @@ const { quads } = (await this.mediatorRdfParseHandle.mediate(
   {
     context,
     handle: {
-      baseIRI: 'http://example.org/',
+      context,
       headers: undefined, // Optional HTTP fetch headers
       input: textStream,
+      metadata: { baseIRI: 'http://example.org/' },
     },
     handleMediaType: 'text/turtle',
   },
@@ -62,7 +63,7 @@ Input `quadStream` must always be a text stream,
 output `quads` is am [RDF/JS stream](/docs/query/advanced/rdfjs/).
 
 More examples on how these parses are used can be found
-in actors on the [RDF Dereference bus](/docs/modify/advanced/buses/#rdf-dereference)
+in actors on the [Dereference RDF bus](/docs/modify/advanced/buses/#dereference-rdf)
 or in the [rdf-parse.js package](https://github.com/rubensworks/rdf-parse.js).
 
 ## Calling a serializer
@@ -82,19 +83,9 @@ Since there are three types of actions, calling an RDF serializer involves three
 An example of such two mediators can be found in [`sparql-serializers.json`](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/sets/sparql-serializers.json).
 In TypeScript, these mediators will correspond to the following fields:
 ```typescript
-public readonly mediatorRdfSerialize: Mediator<
-  Actor<IActionSparqlSerializeHandle, IActorTestSparqlSerializeHandle, IActorOutputSparqlSerializeHandle>,
-  IActionSparqlSerializeHandle, IActorTestSparqlSerializeHandle, IActorOutputSparqlSerializeHandle>;
-
-public readonly mediatorMediaTypeCombiner: Mediator<
-  Actor<IActionSparqlSerializeMediaTypes, IActorTestSparqlSerializeMediaTypes, IActorOutputSparqlSerializeMediaTypes>,
-  IActionSparqlSerializeMediaTypes, IActorTestSparqlSerializeMediaTypes, IActorOutputSparqlSerializeMediaTypes>;
-
-public readonly mediatorMediaTypeFormatCombiner: Mediator<
-  Actor<IActionSparqlSerializeMediaTypeFormats, IActorTestSparqlSerializeMediaTypeFormats,
-  IActorOutputSparqlSerializeMediaTypeFormats>,
-  IActionSparqlSerializeMediaTypeFormats, IActorTestSparqlSerializeMediaTypeFormats,
-  IActorOutputSparqlSerializeMediaTypeFormats>;
+public readonly mediatorRdfSerialize: MediatorRdfSerializeHandle;
+public readonly mediatorMediaTypeCombiner: MediatorRdfSerializeMediaTypes;
+public readonly mediatorMediaTypeFormatCombiner: MediatorRdfSerializeMediaTypeFormats;
 ```
 
 All available media types can be retrieved as follows:
