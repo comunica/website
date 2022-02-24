@@ -46,8 +46,8 @@ The following components file shows how a `mediatorJoin` parameter is added to [
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-join/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^1.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-join/^2.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^2.0.0/components/context.jsonld"
   ],
   "@id": "npmd:@comunica/actor-query-operation-join",
   "components": [
@@ -87,8 +87,8 @@ The following config file shows how we instantiate an actor with a race mediator
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-join/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/mediator-race/^1.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-join/^2.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/mediator-race/^2.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:my",
   "actors": [
@@ -109,7 +109,8 @@ The following config file shows how we instantiate an actor with a race mediator
 
 Invoking the mediator in a TypeScript actor implementation is done like this:
 ```typescript
-import { ActionContext, IActorTest, Mediator } from '@comunica/core';
+import { IActionContext } from '@comunica/types';
+import { AIActorTest, Mediator } from '@comunica/core';
 import { ActorRdfJoin, IActionRdfJoin } from '@comunica/bus-rdf-join';
 import { IMediatorTypeIterations } from '@comunica/mediatortype-iterations';
 
@@ -122,11 +123,11 @@ export class ActorQueryOperationJoin extends ActorQueryOperationTypedMediated<Al
     super(args, 'join');
   }
 
-  public async testOperation(pattern: Algebra.Join, context: ActionContext): Promise<IActorTest> {
+  public async testOperation(pattern: Algebra.Join, context: IActionContext): Promise<IActorTest> {
     return true;
   }
 
-  public async runOperation(pattern: Algebra.Join, context: ActionContext): Promise<IActorQueryOperationOutput> {
+  public async runOperation(pattern: Algebra.Join, context: IActionContext): Promise<IActorQueryOperationOutput> {
     const myAction: IActionRdfJoin = { ... }; 
     return this.mediatorJoin.mediate(myAction);
   }

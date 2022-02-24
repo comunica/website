@@ -10,7 +10,7 @@ This means that this package will have a CLI tool, and that it will expose a Jav
 
 <div class="note">
 A fully functional example can be found
-<a href="https://github.com/comunica/examples/tree/master/packages/configure-sparql-http-solid">here</a>.
+<a href="https://github.com/comunica/comunica-feature-solid/tree/master/engines/query-sparql-solid">here</a>.
 </div>
 
 ## 1. Initialize a new package
@@ -20,11 +20,16 @@ Initialize a new **empty npm package** as follows:
 $ npm init
 ```
 
-All init packages have to extend from **Comunica SPARQL**.
+The simplest way to include all required Comunica dependencies is to extend from **Comunica SPARQL**.
 As such, add it as a dependency as follows:
 ```bash
 $ npm install @comunica/query-sparql
 ```
+
+<div class="note">
+If you want to create a more lightweight package by selecting only those dependencies that are absolutely required,
+you can make use of the <a href="https://github.com/comunica/comunica/blob/master/packager/packager">Comunica Packager</a>.
+</div>
 
 We recommend to also **install TypeScript** as a dev dependency:
 ```bash
@@ -38,19 +43,24 @@ Add a `tsconfig.json` file with the following contents:
   "compilerOptions": {
     "module": "commonjs",
     "lib": [
-      "es6",
+      "es2020",
+      "es2021",
       "dom"
     ],
-    "target": "es2017",
-    "noImplicitAny": true,
+    "target": "es2020",
     "removeComments": false,
     "preserveConstEnums": true,
     "sourceMap": true,
     "inlineSources": true,
-    "declaration": true
+    "declaration": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+
+    "strict": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false
   },
   "include": [
-    "index.ts",
     "lib/**/*",
     "bin/**/*"
   ],
@@ -90,7 +100,7 @@ you may already have done this step.
 </div>
 
 Before we can refer to other files within our config file,
-we have to add some entries to our `package.json` file
+we have to add the `"lsd:module"` entry to our `package.json` file
 so that the config files can be found during engine initialization.
 
 Concretely, we need to **add the following entry to `package.json`**:
@@ -152,23 +162,24 @@ For this, **create the following files**:
 `bin/query.js`:
 ```typescript
 #!/usr/bin/env node
-import {runArgsInProcessStatic} from "@comunica/runner-cli";
+import { runArgsInProcessStatic } from '@comunica/runner-cli';
 runArgsInProcessStatic(require('../engine-default.js'));
 ```
 
 `bin/http.js`:
 ```typescript
 #!/usr/bin/env node
-import {HttpServiceSparqlEndpoint} from "@comunica/query-sparql";
-HttpServiceSparqlEndpoint.runArgsInProcess(process.argv.slice(2), process.stdout, process.stderr,
-  __dirname + '/../', process.env, __dirname + '/../config/config-default.json', () => process.exit(1));
+import { HttpServiceSparqlEndpoint } from '@comunica/actor-init-query';
+const defaultConfigPath = `${__dirname}/../config/config-default.json`;
+HttpServiceSparqlEndpoint.runArgsInProcess(process.argv.slice(2), process.stdout, process.stderr, `${__dirname}/../`, process.env, defaultConfigPath, code => process.exit(code))
+  .catch(error => process.stderr.write(`${error.message}/n`));
 ```
 
 `bin/query-dynamic.js`:
 ```typescript
 #!/usr/bin/env node
-import {runArgsInProcess} from "@comunica/runner-cli";
-runArgsInProcess(__dirname + '/../', __dirname + '/../config/config-default.json');
+import { runArgsInProcess } from '@comunica/runner-cli';
+runArgsInProcess(`${__dirname}/../`, `${__dirname}/../config/config-default.json`);
 ```
 
 As a final step, we have to make sure that we expose our CLI tools from the package.
@@ -193,34 +204,52 @@ In order to use your query engine as a dependency in other packages,
 we have to expose its JavaScript API.
 We will also immediately make it browser-friendly.
 
-For this, first create a file **`index-browser.ts`**:
+For this, create the following files:
+
+**`lib/QueryEngine.ts`**:
 ```typescript
-import {ActorInitSparql} from '@comunica/query-sparql/lib/ActorInitSparql-browser';
+import { QueryEngineBase } from '@comunica/actor-init-query';
+import type { ActorInitQueryBase } from '@comunica/actor-init-query';
+const engineDefault = require('../engine-default.js');
 
 /**
- * Create a new comunica engine from the default config.
- * @return {ActorInitSparql} A comunica engine.
+ * A Comunica SPARQL query engine.
  */
-export function new QueryEngine(): ActorInitSparql {
-  return require('./engine-default.js');
+export class QueryEngine extends QueryEngineBase {
+  public constructor(engine: ActorInitQueryBase = engineDefault) {
+    super(engine);
+  }
 }
 ```
 
-Next, create a file **`index.ts`**:
+**`lib/QueryEngineFactory.ts`**:
 ```typescript
-export {newEngine} from './index-browser';
-
-import {ActorInitSparql} from '@comunica/query-sparql/lib/ActorInitSparql-browser';
-import {IQueryOptions, newEngineDynamicArged} from "@comunica/query-sparql/lib/QueryDynamic";
+import { QueryEngineFactoryBase } from '@comunica/actor-init-query';
+import { QueryEngine } from './QueryEngine';
 
 /**
- * Create a new dynamic comunica engine from a given config file.
- * @param {IQueryOptions} options Optional options on how to instantiate the query evaluator.
- * @return {Promise<QueryEngine>} A promise that resolves to a fully wired comunica engine.
+ * A factory that can create query engines dynamically based on a given config.
  */
-export function newEngineDynamic(options?: IQueryOptions): Promise<ActorInitSparql> {
-  return newEngineDynamicArged(options || {}, __dirname, __dirname + '/config/config-default.json');
+export class QueryEngineFactory extends QueryEngineFactoryBase<QueryEngine> {
+  public constructor() {
+    super(
+      `${__dirname}/../`,
+      `${__dirname}/../config/config-default.json`,
+      actorInitQuery => new QueryEngine(actorInitQuery),
+    );
+  }
 }
+```
+
+**`lib/index.ts`**:
+```typescript
+export * from './QueryEngine';
+export * from './QueryEngineFactory';
+```
+
+**`lib/index-browser.ts`**:
+```typescript
+export * from './QueryEngine';
 ```
 
 As a final step,
@@ -228,9 +257,10 @@ make sure to expose the following entries in your **`package.json`** file:
 ```text
 {
   ...
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index",
   "browser": {
-    "./index.js": "./index-browser.js"
+    "./lib/index.js": "./lib/index-browser.js"
   }
 }
 ```
@@ -260,12 +290,6 @@ test/**/*.d.ts
 bin/**/*.js
 bin/**/*.js.map
 bin/**/*.d.ts
-index.js
-index.js.map
-index.d.ts
-index-browser.js
-index-browser.js.map
-index-browser.d.ts
 ```
 
 As a final step, **add following entries to `package.json`**:
@@ -277,10 +301,8 @@ As a final step, **add following entries to `package.json`**:
     "config",
     "bin/**/*.d.ts",
     "bin/**/*.js",
-    "index.js",
-    "index.d.ts",
-    "index-browser.d.ts",
-    "index-browser.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.js",
     "engine-default.js"
   ],
 }

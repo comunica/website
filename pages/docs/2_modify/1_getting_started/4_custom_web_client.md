@@ -45,10 +45,12 @@ Next, replace the `import` in `config/config-default.json` as follows:
 ```text
 {
   ...
-  "import": "npmd:my-package/^1.0.0/config/config-default.json"
+  "import": [
+    "my:config/config-default.json"
+  ]
 }
 ```
-Again, make sure to replace `my-package` the name of your package.
+Make sure to replace the `"my"` prefix so it refers to the scope of your package.
 
 ## 3. Build and run
 

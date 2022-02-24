@@ -9,23 +9,24 @@ custom command line tools can be created as follows:
 `bin/query.js`:
 ```typescript
 #!/usr/bin/env node
-import {runArgsInProcessStatic} from "@comunica/runner-cli";
+import { runArgsInProcessStatic } from '@comunica/runner-cli';
 runArgsInProcessStatic(require('../engine-default.js'));
 ```
 
 `bin/http.js`:
 ```typescript
 #!/usr/bin/env node
-import {HttpServiceSparqlEndpoint} from "@comunica/query-sparql";
-HttpServiceSparqlEndpoint.runArgsInProcess(process.argv.slice(2), process.stdout, process.stderr,
-  __dirname + '/../', process.env, __dirname + '/../config/config-default.json', () => process.exit(1));
+import { HttpServiceSparqlEndpoint } from '@comunica/actor-init-query';
+const defaultConfigPath = `${__dirname}/../config/config-default.json`;
+HttpServiceSparqlEndpoint.runArgsInProcess(process.argv.slice(2), process.stdout, process.stderr, `${__dirname}/../`, process.env, defaultConfigPath, code => process.exit(code))
+  .catch(error => process.stderr.write(`${error.message}/n`));
 ```
 
 `bin/query-dynamic.js`:
 ```typescript
 #!/usr/bin/env node
-import {runArgsInProcess} from "@comunica/runner-cli";
-runArgsInProcess(__dirname + '/../', __dirname + '/../config/config-default.json');
+import { runArgsInProcess } from '@comunica/runner-cli';
+runArgsInProcess(`${__dirname}/../`, `${__dirname}/../config/config-default.json`);
 ```
 
 This will cause the built-in CLI arguments from `comunica-sparql` to be inherited.
@@ -34,7 +35,7 @@ which can be processed in any way.
 
 ## Creating CLI Arguments Handlers
 
-This argument handling can be done using one or more instances of [`ICliArgsHandler`](https://comunica.github.io/comunica/interfaces/actor_init_sparql.ICliArgsHandler.html),
+This argument handling can be done using one or more instances of [`ICliArgsHandler`](https://comunica.github.io/comunica/interfaces/actor_init_query.ICliArgsHandler.html),
 which may be implemented as follows:
 ```typescript
 export class MyCliArgsHandler implements ICliArgsHandler {

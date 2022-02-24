@@ -29,52 +29,82 @@ it is important to understand the three following concepts:
 * **Component:** Something that can be instantiated. _For example, a JavaScript/TypeScript class._
 * **Instance:** An instantiated **component**. _For example, a JavaScript/TypeScript class instance._
 
-For example, the npm package `@comunica/actor-query-operation-distinct-hash` is a **module**
-that exposes a single **component** `ActorQueryOperationDistinctHash`,
-which implements the SPARQL `DISTINCT` operator.
-During dependency injection, any number of **instances** of the component `ActorQueryOperationDistinctHash`
+For example, the npm package `@comunica/actor-query-operation-reduced-hash` is a **module**
+that exposes a single **component** `ActorQueryOperationReducedHash`,
+which implements the SPARQL `REDUCED` operator.
+During dependency injection, any number of **instances** of the component `ActorQueryOperationReducedHash`
 can be created, possibly with different parameters values.
 
 ## Describing modules in JSON-LD
 
-A module and their components are described in JSON-LD,
-and they **describe how components can be instantiated**.
-Components are typically defined in a `components/` folder with the following structure: 
+The `components/` directory of each package contains JSON-LD representations of the module and its components,
+which **describe how components can be instantiated**.
+As of Comunica version 2.x, the contents of this directory are automatically generated
+using [Components-Generator.js](https://github.com/LinkedSoftwareDependencies/Components-Generator.js/),
+which is invoked when running `yarn run build`.
+
+While **these files should never be created or modified manually**,
+some examples below are shown to explain their most important parts.
 
 `components/components.jsonld`: (_root components file_)
 ```json
 {
-  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-distinct-hash/^1.0.0/components/context.jsonld",
-  "@id": "npmd:@comunica/actor-query-operation-distinct-hash",
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^2.0.0/components/context.jsonld"
+  ],
+  "@id": "npmd:@comunica/actor-query-operation-reduced-hash",
   "@type": "Module",
-  "requireName": "@comunica/actor-query-operation-distinct-hash",
+  "requireName": "@comunica/actor-query-operation-reduced-hash",
   "import": [
-    "files:components/Actor/QueryOperation/DistinctHash.jsonld"
+    "caqorh:components/ActorQueryOperationReducedHash.jsonld"
   ]
 }
 ```
 
-`components/Actor/QueryOperation/DistinctHash.jsonld`:
+`components/ActorQueryOperationReducedHash.jsonld` (simplified):
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-distinct-hash/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-abstract-bindings-hash/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^1.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^2.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/core/^2.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^2.0.0/components/context.jsonld"
   ],
-  "@id": "npmd:@comunica/actor-query-operation-distinct-hash",
+  "@id": "npmd:@comunica/actor-query-operation-reduced-hash",
   "components": [
     {
-      "@id": "caqodh:Actor/QueryOperation/DistinctHash",
-      "requireElement": "ActorQueryOperationDistinctHash",
+      "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash",
+      "@type": "Class",
+      "requireElement": "ActorQueryOperationReducedHash",
+      "extends": "cbqo:components/ActorQueryOperationTypedMediated.jsonld#ActorQueryOperationTypedMediated",
+      "comment": "A comunica Reduced Hash Query Operation Actor.",
       "parameters": [
         {
-          "@id":     "caqodh:Actor/QueryOperation/DistinctHash#hashAlgorithm",
-          "default": "sha1"
+          "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash_args_cacheSize",
+          "range": "xsd:integer",
+          "default": "100"
         },
         {
-          "@id":     "caqodh:Actor/QueryOperation/DistinctHash#digestAlgorithm",
-          "default": "base64"
+          "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash_args_mediatorQueryOperation",
+          "range": "cc:components/Mediator.jsonld#Mediator"
+        }
+      ],
+      "constructorArguments": [
+        {
+          "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash_args__constructorArgument",
+          "fields": [
+            {
+              "keyRaw": "cacheSize",
+              "value": {
+                "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash_args_cacheSize"
+              }
+            },
+            {
+              "keyRaw": "mediatorQueryOperation",
+              "value": {
+                "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash_args_mediatorQueryOperation"
+              }
+            }
+          ]
         }
       ]
     }
@@ -84,13 +114,14 @@ Components are typically defined in a `components/` folder with the following st
 
 The `import` key allows components to be defined across different files,
 where its values internally translate into a local file path.
-For example, `"files:components/Actor/QueryOperation/DistinctHash.jsonld"`
-corresponds to the local file `components/Actor/QueryOperation/DistinctHash.jsonld`.
+For example, `"caqorh:components/ActorQueryOperationReducedHash.jsonld"`
+corresponds to the local file `components/ActorQueryOperationReducedHash.jsonld`.
 
-The prefix `files:` is used to make it interpretable as a URL in JSON-LD.
-This makes all modules and components _semantic_ and fully dereferenceable.
-For example, `"files:components/Actor/QueryOperation/DistinctHash.jsonld"`
-expands to the URL https://linkedsoftwaredependencies.org/bundles/npm/%40comunica%2Factor-query-operation-distinct-hash/^1.0.0/components/Actor/QueryOperation/DistinctHash.jsonld.
+The prefix `caqorh:` identifies the scope of this package.
+Internally, this gives all files a unique URL
+that makes all modules and components _semantic_ and fully dereferenceable.
+For example, `"caqorh:components/ActorQueryOperationReducedHash.jsonld"`
+expands to the URL https://linkedsoftwaredependencies.org/bundles/npm/%40comunica%2Factor-query-operation-reduced-hash/^2.0.0/components/ActorQueryOperationReducedHash.jsonld.
 
 <div class="note">
 <a href="https://linkedsoftwaredependencies.org/">Linked Software Dependencies</a> is a service
@@ -103,28 +134,46 @@ and [components](https://componentsjs.readthedocs.io/en/latest/configuration/com
 
 ## Context files
 
-Our components and config files always make use of URLs as identifiers for things (`@id` in JSON-LD).
+The so-called context is another file in the `components/` directory that will be automatically generated using
+[Components-Generator.js](https://github.com/LinkedSoftwareDependencies/Components-Generator.js/)
+when invoking `yarn run build`.
+
+This context is needed because
+our components and config files always make use of URLs as identifiers for things (`@id` in JSON-LD).
 Since URLs sometimes can become long, we make use of _JSON-LD context files_
 to **define shortcuts and prefixes for some URLs**.
 
-For example, the context for our distinct actor(defined in `components/context.jsonld`) could look as follows:
+For example, the context for our reduced actor (defined in `components/context.jsonld`) could look as follows (simplified):
 ```json
 {
   "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/componentsjs/^4.0.0/components/context.jsonld",
     {
       "npmd": "https://linkedsoftwaredependencies.org/bundles/npm/",
-      "caqodh": "npmd:@comunica/actor-query-operation-distinct-hash/",
-      "ActorQueryOperationDistinctHash": "caqodh:Actor/QueryOperation/DistinctHash",
-      "hashAlgorithm": "caqodh:Actor/QueryOperation/DistinctHash#hashAlgorithm",
-      "digestAlgorithm": "caqodh:Actor/QueryOperation/DistinctHash#digestAlgorithm"
+      "caqorh": "npmd:@comunica/actor-query-operation-reduced-hash/^2.0.0/",
+      "ActorQueryOperationReducedHash": {
+        "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash",
+        "@prefix": true,
+        "@context": {
+          "cacheSize": {
+            "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash_args_cacheSize"
+          },
+          "mediatorQueryOperation": {
+            "@id": "caqorh:components/ActorQueryOperationReducedHash.jsonld#ActorQueryOperationReducedHash_args_mediatorQueryOperation"
+          }
+        }
+      }
     }
   ]
 }
 ```
 
+The relevant entries in this file that become reusable are `caqorh`, `ActorQueryOperationReducedHash`, `cacheSize`, and `mediatorQueryOperation`.
+Do note that `cacheSize` and `mediatorQueryOperation` will _only_ be usable within instances of `ActorQueryOperationReducedHash`, i.e., when instantiating `ActorQueryOperationReducedHash` via `"@type"`.
+
 If you want to use these prefixes in any other file,
 the full URL of this context has to be used in `"@context"`.
-This URL will always be in the form of `"https://linkedsoftwaredependencies.org/bundles/npm/<my-package>/^1.0.0/components/context.jsonld"`.
+This URL will always be in the form of `"https://linkedsoftwaredependencies.org/bundles/npm/<my-package>/^<major-version-of-my-package>.0.0/components/context.jsonld"`.
 
 ## Creating configurations in JSON-LD
 
@@ -137,26 +186,28 @@ The instantiation of a Comunica engine could look like this:
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/query-sparql/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-distinct-hash/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-construct/^1.0.0/components/context.jsonld"  
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^2.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-query/^2.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^2.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-construct/^2.0.0/components/context.jsonld"  
   ],
   "@id": "urn:comunica:my",
   "@type": "Runner",
   "actors": [
     {
-      "@id":           "myInitActor",
-      "@type":         "ActorInitSparql"
+      "@id": "urn:comunica:default:init/actors#query",
+      "@type": "ActorInitQuery"
     },
     {
-      "@id":           "#myDistinctQueryOperator",
-      "@type":         "ActorQueryOperationDistinctHash",
-      "hashAlgorithm": "RSA-SHA256"
+      "@id": "urn:comunica:default:query-operation/actors#reduced",
+      "@type": "ActorQueryOperationReducedHash",
+      "mediatorQueryOperation": { "@id": "urn:comunica:default:query-operation/mediators#main" },
+      "mediatorHashBindings": { "@id": "urn:comunica:default:hash-bindings/mediators#main" }
     },
     {
-      "@id":           "#myConstructQueryOperator",
-      "@type":         "ActorQueryOperationConstruct"
+      "@id": "urn:comunica:default:query-operation/actors#construct",
+      "@type": "ActorQueryOperationConstruct",
+      "mediatorQueryOperation": { "@id": "urn:comunica:default:query-operation/mediators#main" }
     }
   ]
 }

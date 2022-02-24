@@ -47,7 +47,9 @@ $ yarn install
 
 This will install the dependencies of all modules.
 After that, all [Comunica packages](https://github.com/comunica/comunica/tree/master/packages) are available in the `packages/` folder
-and can be used in a development environment, such as querying with [Comunica SPARQL (`engines/query-sparql`)](https://github.com/comunica/comunica/tree/master/engines/query-sparql).
+and can be used in a development environment.
+All pre-built [Comunica engines and configs](https://github.com/comunica/comunica/tree/master/engines) are available in the `engines/` folder
+such as querying with [Comunica SPARQL (`engines/query-sparql`)](https://github.com/comunica/comunica/tree/master/engines/query-sparql).
 
 A good git practise is to develop on **feature branches**.
 For this, branch from the `master` as follows:
@@ -64,7 +66,7 @@ If you want to make sure that everything has been installed correctly,
 navigate to `engines/query-sparql`, and try out a simple query from the command line:
 ```bash
 $ cd engines/query-sparql
-$ node bin/query.js http://fragments.dbpedia.org/2016-04/en \
+$ node bin/query.js https://fragments.dbpedia.org/2016-04/en \
   'SELECT * WHERE { ?s ?p ?o } LIMIT 100'
 ```
 
@@ -143,7 +145,7 @@ These two methods correspond to the [test and run phases that will be called by 
 Since the `ActorQueryOperationTypedMediated` class already implements the test phase by checking if the incoming operation is a `REDUCED` operation,
 we can just implement `testOperation` as follows:
 ```typescript
-  public async testOperation(pattern: Algebra.Reduced, context: ActionContext): Promise<IActorTest> {
+  public async testOperation(pattern: Algebra.Reduced, context: IActionContext): Promise<IActorTest> {
     return true;
   }
 ```
@@ -158,7 +160,7 @@ If you want to fail the test in certain cases, you will have to <code>throw</cod
 
 The `runOperation` method will contain the actual logic for evaluation the `REDUCED` operator.
 
-Before we start, change the return type of this method from `Promise<IActorQueryOperationOutput>` to `Promise<IActorQueryOperationOutputBindings>`,
+Before we start, change the return type of this method from `Promise<IQueryOperationResult>` to `Promise<IQueryOperationResultBindings>`,
 because this method will always [return bindings as query result](/docs/modify/advanced/query_operation_result_types/).
 
 The first step of implementing the REDUCED actor,
@@ -193,8 +195,6 @@ return {
   type: 'bindings',
   bindingsStream: output.bindingsStream,
   metadata: output.metadata,
-  variables: output.variables,
-  canContainUndefs: output.canContainUndefs,
 };
 ```
 
@@ -239,41 +239,22 @@ When creating a new actor, you can leave the version fixed at <code>"^1.0.0"</co
 This version will be incremented automatically upon each new Comunica release.
 </div>
 
-Next, we have to **configure the actor** in the default config set `engines/query-sparql/config/sets/sparql-queryoperators.json`:
+Next, we have to **configure the actor** by replacing the existing `REDUCED` actor in the default config file `engines/config-query-sparql/config/query-operation/actors/query/reduced.json`:
 ```text
 {
   "@context": [
-    ...
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-my/^1.0.0/components/context.jsonld",
-  ],
-  "@id": "urn:comunica:my",
-  "actors": [
-    ...
-    {
-      "@id": "config-sets:sparql-queryoperators.json#myReducedQueryOperator",
-      "@type": "ActorQueryOperationReducedMy",
-      "cbqo:mediatorQueryOperation": { "@id": "config-sets:sparql-queryoperators.json#mediatorQueryOperation" }
-    },
-  ]
-}
-```
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^2.0.0/components/context.jsonld",
 
-Since Comunica SPARQL already has a reduced operator,
-we'll have to **remove the following**:
-```
-{
-  "@context": [
-    ...
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-my/^2.0.0/components/context.jsonld"
   ],
-  "@id": "urn:comunica:my",
+  "@id": "urn:comunica:default:Runner",
+  "@type": "Runner",
   "actors": [
-    ...
     {
-      "@id": "config-sets:sparql-queryoperators.json#myReducedQueryOperator",
-      "@type": "ActorQueryOperationReducedHash",
-      "cbqo:mediatorQueryOperation": { "@id": "config-sets:sparql-queryoperators.json#mediatorQueryOperation" }
-    },
+      "@id": "urn:comunica:default:query-operation/actors#reduced",
+      "@type": "ActorQueryOperationReducedMy",
+      "mediatorQueryOperation": { "@id": "urn:comunica:default:query-operation/mediators#main" }
+    }
   ]
 }
 ```
@@ -290,9 +271,8 @@ we have to make sure that our actor actually works in practise.
 For this, we have to make sure our TypeScript is properly compiled to JavaScript,
 and that our configuration file has been compiled:
 ```bash
-$ cd packages/actor-query-operation-reduced-my
-$ yarn run build # Compiles typescript
-$ cd ../../engines/query-sparql
+$ yarn run build # Compile typescript and the components files at the ROOT OF THE REPO
+$ cd engines/query-sparql
 $ yarn run prepare # Compiles config
 ```
 
@@ -302,7 +282,7 @@ You can also just run <code>yarn install</code> again from the root package, whi
 
 After that, we should now be able to execute Comunica SPARQL from the command line with a given `REDUCED` query:
 ```bash
-$ node bin/query.js http://fragments.dbpedia.org/2016-04/en \
+$ node bin/query.js https://fragments.dbpedia.org/2016-04/en \
   'SELECT REDUCED * WHERE { ?s ?p ?o } LIMIT 100'
 ```
 
@@ -326,6 +306,9 @@ Before making the commit, make sure you are not any unneeded files. You can use 
 Several [pre-commit checks](/contribute/#report-bugs-or-request-features) will be done, such as linting and unit testing.
 Should any of these checks fail, your commit will not be done,
 and you have to retry again after fixing the problems.
+
+Also make sure to check in your new package if there are any `TODO`s remaining,
+such as in the `README.md` file.
 
 Once your commit is done, you can push your changes to your fork:
 ```bash

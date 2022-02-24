@@ -37,76 +37,32 @@ private readonly myParam: number;
 ```
 
 In order to temporarily check the passed parameter value,
-we can add a `console.log` statement in the `runOperation` method. 
+we can add a `console.log` statement in the `runOperation` method.
 
-## 2. Defining our parameter in the components file
+Make sure to run `yarn run build` in the repo root to make sure that your modifications
+to the TypeScript files have been compiled to JavaScript.
 
-Before we can set values of our parameter in the config file,
-we have to declaratively define this parameter in our [components file](/docs/modify/advanced/componentsjs/). 
-
-For this, **adjust `components/Actor/QueryOperation/ReducedMy.jsonld`** as follows:
-```jsonld
-{
-  "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-my/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^1.0.0/components/context.jsonld"
-  ],
-  "@id": "npmd:@comunica/actor-query-operation-reduced-my",
-  "components": [
-    {
-      "@id": "caqorm:Actor/QueryOperation/ReducedMy",
-      "@type": "Class",
-      "extends": "cbqo:Actor/QueryOperationTypedMediated",
-      "requireElement": "ActorQueryOperationReducedMy",
-      "comment": "A comunica Reduced My Query Operation Actor.",
-      "parameters": [
-        {
-          "@id": "caqorm:Actor/QueryOperation/ReducedMy#myParam",
-          "range": "xsd:integer",
-          "required": true,
-          "unique": true
-        }
-      ],
-      "constructorArguments": [
-        {
-          "@id": "caqorm:Actor/QueryOperation/ReducedMy#constructorArgumentsObject",
-          "extends": "cbqo:Actor/QueryOperationTypedMediated/constructorArgumentsObject",
-          "fields": [
-            {
-              "keyRaw": "myParam",
-              "value": "caqorm:Actor/QueryOperation/ReducedMy#myParam"
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-
-```
-The new entries are in `"parameters"` and `"constructorArguments"`,
-and refer to the new parameter we have defined in our TypeScript constructor.
-
-## 3. Set values in our config file
+## 2. Set values in our config file
 
 Everything has now been setup to define values for our parameter via the config file.
 
-As such, we can **modify our declaration of our actor in `engines/query-sparql/config/sets/sparql-queryoperators.json`**:
+As such, we can **modify our declaration of our actor in `engines/config-query-sparql/config/query-operation/actors/query/reduced.json`** by adding a value for `"myParam"`:
 ```text
 {
   "@context": [
-    ...
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-my/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^2.0.0/components/context.jsonld",
+
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-my/^2.0.0/components/context.jsonld"
   ],
-  "@id": "urn:comunica:my",
+  "@id": "urn:comunica:default:Runner",
+  "@type": "Runner",
   "actors": [
-    ...
     {
-      "@id": "config-sets:sparql-queryoperators.json#myReducedQueryOperator",
+      "@id": "urn:comunica:default:query-operation/actors#reduced",
       "@type": "ActorQueryOperationReducedMy",
-      "cbqo:mediatorQueryOperation": { "@id": "config-sets:sparql-queryoperators.json#mediatorQueryOperation" },
-      "caqorm:Actor/QueryOperation/ReducedMy#myParam": 123
-    },
+      "mediatorQueryOperation": { "@id": "urn:comunica:default:query-operation/mediators#main" }
+      "myParam": 123
+    }
   ]
 }
 ```
@@ -119,4 +75,10 @@ you should now see the value `123` on stdout.
 In this guide, we showed how to define an integer parameter.
 You can instead also define other parameter types,
 where parameters can even accept other components (such as mediators).
+</div>
+
+<div class="note">
+When running <code>yarn run build</code>, a JSON-LD representation of your TypeScript files
+will be created in the <code>components/</code> directory of your package.
+The <code>components/context.jsonld</code> will list all discovered parameters that you can pass within the config file. 
 </div>

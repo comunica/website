@@ -33,14 +33,14 @@ $ npm install @comunica/query-sparql
 While [`QueryEngine` is used to import Comunica SPARQL's default config](/docs/query/getting_started/query_app/),
 we can load a custom config by creating our engine via `newEngineDynamic()`:
 ```javascript
-const newEngineDynamic = require('@comunica/query-sparql').newEngineDynamic;
+const QueryEngineFactory = require('@comunica/query-sparql').QueryEngineFactory;
 
-const myEngine = await newEngineDynamic({
-  configResourceUrl: 'config.json', // Relative or absolute path 
+const myEngine = await new QueryEngineFactory().create({
+    configPath: 'config.json', // Relative or absolute path 
 });
 ```
 
-`configResourceUrl` refers to a config file, which we will create in the next step.
+`configPath` refers to a config file, which we will create in the next step.
 
 ## 3. Start from an existing config file
 
@@ -49,34 +49,62 @@ The easiest way to create a custom config, is to start from an existing one, and
 Let's create a file called `config.json` in your package.
 
 In this guide, we will start from
-the [Comunica SPARQL default config file](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/config-default.json).
+the [Comunica SPARQL default config file](https://github.com/comunica/comunica/blob/master/engines/config-query-sparql/config/config-default.json).
 Let's **copy it's contents entirely into our `config.json`**:
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/query-sparql/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^1.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/config-query-sparql/^2.0.0/components/context.jsonld"
   ],
-  "@id": "urn:comunica:my",
-  "@type": "Runner",
   "import": [
-    "files-cais:config/sets/http.json",
-    "files-cais:config/sets/http-memento.json",
-    "files-cais:config/sets/join.json",
-    "files-cais:config/sets/rdf-dereference.json",
-    "files-cais:config/sets/rdf-parsers.json",
-    "files-cais:config/sets/rdf-serializers.json",
-    "files-cais:config/sets/resolve-federated.json",
-    "files-cais:config/sets/resolve-hypermedia.json",
-    "files-cais:config/sets/resolve-rdfjs.json",
-    "files-cais:config/sets/resolve-sparql.json",
-    "files-cais:config/sets/sparql-init.json",
-    "files-cais:config/sets/graphql-parsers.json",
-    "files-cais:config/sets/sparql-optimize.json",
-    "files-cais:config/sets/sparql-parsers.json",
-    "files-cais:config/sets/sparql-queryoperators.json",
-    "files-cais:config/sets/sparql-queryoperators-path.json",
-    "files-cais:config/sets/sparql-serializers.json"
+    "ccqs:config/context-preprocess/actors.json",
+    "ccqs:config/context-preprocess/mediators.json",
+    "ccqs:config/hash-bindings/actors.json",
+    "ccqs:config/hash-bindings/mediators.json",
+    "ccqs:config/http/actors.json",
+    "ccqs:config/http/mediators.json",
+    "ccqs:config/http-invalidate/actors.json",
+    "ccqs:config/http-invalidate/mediators.json",
+    "ccqs:config/init/actors.json",
+    "ccqs:config/optimize-query-operation/actors.json",
+    "ccqs:config/optimize-query-operation/mediators.json",
+    "ccqs:config/query-operation/actors.json",
+    "ccqs:config/query-operation/mediators.json",
+    "ccqs:config/query-parse/actors.json",
+    "ccqs:config/query-parse/mediators.json",
+    "ccqs:config/query-result-serialize/actors.json",
+    "ccqs:config/query-result-serialize/mediators.json",
+    "ccqs:config/dereference/actors.json",
+    "ccqs:config/dereference/mediators.json",
+    "ccqs:config/dereference-rdf/actors.json",
+    "ccqs:config/dereference-rdf/mediators.json",
+    "ccqs:config/rdf-join/actors.json",
+    "ccqs:config/rdf-join/mediators.json",
+    "ccqs:config/rdf-join-entries-sort/actors.json",
+    "ccqs:config/rdf-join-entries-sort/mediators.json",
+    "ccqs:config/rdf-join-selectivity/actors.json",
+    "ccqs:config/rdf-join-selectivity/mediators.json",
+    "ccqs:config/rdf-metadata/actors.json",
+    "ccqs:config/rdf-metadata/mediators.json",
+    "ccqs:config/rdf-metadata-extract/actors.json",
+    "ccqs:config/rdf-metadata-extract/mediators.json",
+    "ccqs:config/rdf-parse/actors.json",
+    "ccqs:config/rdf-parse/mediators.json",
+    "ccqs:config/rdf-parse-html/actors.json",
+    "ccqs:config/rdf-resolve-hypermedia/actors.json",
+    "ccqs:config/rdf-resolve-hypermedia/mediators.json",
+    "ccqs:config/rdf-resolve-hypermedia-links/actors.json",
+    "ccqs:config/rdf-resolve-hypermedia-links/mediators.json",
+    "ccqs:config/rdf-resolve-hypermedia-links-queue/actors.json",
+    "ccqs:config/rdf-resolve-hypermedia-links-queue/mediators.json",
+    "ccqs:config/rdf-resolve-quad-pattern/actors.json",
+    "ccqs:config/rdf-resolve-quad-pattern/mediators.json",
+    "ccqs:config/rdf-serialize/actors.json",
+    "ccqs:config/rdf-serialize/mediators.json",
+    "ccqs:config/rdf-update-hypermedia/actors.json",
+    "ccqs:config/rdf-update-hypermedia/mediators.json",
+    "ccqs:config/rdf-update-quads/actors.json",
+    "ccqs:config/rdf-update-quads/mediators.json"
   ]
 }
 ```
@@ -115,13 +143,13 @@ Our goal in this step is to build a query engine that can **_only_ execute `SELE
 and we don't want to be able to execute `CONSTRUCT` and `DESCRIBE` queries.
 This will require us to remove some more actors.
 
-While the actors for `CONSTRUCT` and `DESCRIBE` are defined in `files-cais:config/sets/sparql-queryoperators.json`,
+While the actors for `CONSTRUCT` and `DESCRIBE` are defined in `ccqs:config/query-operation/actors.json`,
 we can not just simply remove that file from our imports,
 because it also contains actors for other SPARQL query operators which we don't want to remove, such as `SELECT`.
 
 In the [guide on querying with a custom config from the command line](/docs/modify/getting_started/custom_config_cli/),
-we achieved this by inlining `files-cais:config/sets/sparql-queryoperators.json` into our main config file.
-In this guide, we'll do this in a cleaner way by **redefining** the contents of `files-cais:config/sets/sparql-queryoperators.json`
+we achieved this by inlining `ccqs:config/query-operation/actors.json` into our main config file.
+In this guide, we'll do this in a cleaner way by **redefining** the contents of `ccqs:config/query-operation/actors.json`
 in a **separate local file**, and applying our changes there.
 
 ### 5.1. Declare config options in `package.json`
@@ -140,7 +168,7 @@ Concretely, we need to **add the following entry to `package.json`**:
 ```
 
 <div class="note">
-If you want to learn more about what this config entry mean,
+If you want to learn more about what this entry means,
 read our guide on <a href="/docs/modify/advanced/componentsjs/">Components.js</a>,
 a dependency injection framework that Comunica uses.
 </div>
@@ -156,7 +184,8 @@ Create the file **`components/context.jsonld`** with the following contents:
   "@context": [
     "https://linkedsoftwaredependencies.org/bundles/npm/componentsjs/^4.0.0/components/context.jsonld",
     {
-      "files-ex": "https://linkedsoftwaredependencies.org/bundles/npm/my-package/^1.0.0/"
+      "npmd": "https://linkedsoftwaredependencies.org/bundles/npm/",
+      "my": "npmd:my-package/^2.0.0/"
     }
   ]
 }
@@ -164,59 +193,50 @@ Create the file **`components/context.jsonld`** with the following contents:
 
 Again, make sure to replace `my-package` with your package `name`.
 
-### 5.3. Copying `sparql-queryoperators.json`
+<div class="note">
+To avoid collisions with other packages, it is recommended to use another prefix than <code>"my"</code> in your context.
+</div>
 
-Next, we will create a local copy of `files-cais:config/sets/sparql-queryoperators.json`.
+### 5.3. Copying `config/query-operation/actors.json`
 
-For this, create a file **`config/sets/sparql-queryoperators.json`**,
-and paste in the contents of [`files-cais:config/sets/sparql-queryoperators.json`](https://raw.githubusercontent.com/comunica/comunica/master/engines/query-sparql/config/sets/sparql-queryoperators.json) ([GitHub](https://github.com/comunica/comunica/blob/master/engines/query-sparql/config/sets/sparql-queryoperators.json)).
+Next, we will create a local copy of `ccqs:config/query-operation/actors.json`.
 
-### 5.4. Make config refer to local `sparql-queryoperators.json`
+For this, create a file **`config/query-operation/actors.json`**,
+and paste in the contents of [`ccqs:config/query-operation/actors.json`](https://raw.githubusercontent.com/comunica/comunica/master/engines/config-query-sparql/config/query-operation/actors.json) ([GitHub](https://github.com/comunica/comunica/blob/master/engines/config-query-sparql/config/query-operation/actors.json)).
+
+### 5.4. Make config refer to local `config/query-operation/actors.json`
 
 Now that we have declared config options in our `package.json`,
 created a context,
-and created a local copy of `sparql-queryoperators.json`,
-everything is ready to **modify our `config.json` to refer to our local `sparql-queryoperators.json`**.
+and created a local copy of `config/query-operation/actors.json`,
+everything is ready to **modify our `config.json` to refer to our local `config/query-operation/actors.json`**.
 
 For this, remove the following line from `config.json`:
-```text
-  "files-cais:config/sets/sparql-queryoperators.json",
+```diff
+-  "ccqs:config/query-operation/actors.json",
 ```
 And replace it with the following line:
-```text
-  "files-ex:config/sets/sparql-queryoperators.json",
+```diff
++  "my:config/query-operation/actors.json",
 ```
 
-This change means that Comunica will load its query operators from our local `config/sets/sparql-queryoperators.json` file,
-instead of the default `files-cais:config/sets/sparql-queryoperators.json` file.
+This change means that Comunica will load its query operators from our local `config/query-operation/actors.json` file,
+instead of the default `ccqs:config/query-operation/actors.json` file.
 
 If you run your app again, things should still function like before at this point.
 
 ### 5.5. Remove actors
 
 Next, we will remove the actors we don't need.
-Concretely, we will **remove the actors of the following types**:
+Concretely, we will remove the following imports to actors:
 
-* `ActorQueryOperationConstruct`: Handles `CONSTRUCT` queries.
-* `ActorQueryOperationDescribeSubject`: Handles `DESCRIBE` queries.
+* `ccqs:config/query-operation/actors/query/construct.json`: Handles `CONSTRUCT` queries.
+* `ccqs:config/query-operation/actors/query/describe.json`: Handles `DESCRIBE` queries.
 
-For this, find the actors (in the `"actors"` array),
-and remove all actors with `"@type"` set to one of the above.
-
-Concretely, we will remove the following entries from `config/sets/sparql-queryoperators.json`:
-
-```text
-   {
-      "@id": "config-sets:sparql-queryoperators.json#myConstructQueryOperator",
-      "@type": "ActorQueryOperationConstruct",
-      "cbqo:mediatorQueryOperation": { "@id": "config-sets:sparql-queryoperators.json#mediatorQueryOperation" }
-    },
-
-    {
-      "@id": "config-sets:sparql-queryoperators.json#myDescribeQueryOperator",
-      "@type": "ActorQueryOperationDescribeSubject",
-      "cbqo:mediatorQueryOperation": { "@id": "config-sets:sparql-queryoperators.json#mediatorQueryOperation" }
-    },
+For this, remove the following lines:
+```diff
+-    "ccqs:config/query-operation/actors/query/construct.json",
+-    "ccqs:config/query-operation/actors/query/describe.json",
 ```
 
 ### 5.6. Test changes
@@ -260,8 +280,8 @@ You have now successfully built your own custom Comunica engine that is a bit mo
 Just like the `CONSTRUCT` and `DESCRIBE` actors,
 you can remove any other actors you don't want to make it even more lightweight.
 
-If you want, you can create additional config file parts in `config/sets/`
-and refer to them from our main `config.json` with the `files-ex:` prefix.
+If you want, you can create additional config file parts in `config/`
+and refer to them from our main `config.json` with the `my:` prefix.
 
 <div class="note">
 If you want to <em>add</em> an actor that is not present in the default Comunica SPARQL config,
