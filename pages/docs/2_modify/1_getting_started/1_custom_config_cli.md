@@ -57,7 +57,7 @@ A **Comunica config is written in JSON**, and typically looks something like thi
 Essentially, this config file contains a list of imports to smaller config files,
 which are loaded in when Comunica reads this config file.
 
-These imported config files are fragmented by the buses components apply to.
+These imported config files each represent a component on a particular bus.
 For example `ccqs:config/query-operation/actors.json` refers to all actors that are registered on the query operation bus,
 and `ccqs:config/query-operation/mediators.json` refers to the mediators that are defined over the query operation bus.
 
@@ -104,7 +104,7 @@ For example, the imported config file `ccqs:config/query-operation/actors.json` 
 }
 ```
 
-This example `ccqs:config/query-operation/actors.json` config file imports to several smaller config files,
+This example config file imports several smaller config files,
 where each config file contains a single _[actor](/docs/modify/advanced/architecture_core/)_ that will be loaded into Comunica.
 
 For example, the `ccqs:config/query-operation/actors/query/ask.json` file could look as follows:
@@ -112,7 +112,6 @@ For example, the `ccqs:config/query-operation/actors/query/ask.json` file could 
 {
   "@context": [
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^2.0.0/components/context.jsonld",
-
     "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-ask/^2.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:default:Runner",
