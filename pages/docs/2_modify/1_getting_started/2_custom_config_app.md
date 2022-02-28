@@ -185,7 +185,7 @@ Create the file **`components/context.jsonld`** with the following contents:
     "https://linkedsoftwaredependencies.org/bundles/npm/componentsjs/^4.0.0/components/context.jsonld",
     {
       "npmd": "https://linkedsoftwaredependencies.org/bundles/npm/",
-      "my": "npmd:my-package/^2.0.0/"
+      "my": "npmd:my-package/^1.0.0/"
     }
   ]
 }
@@ -218,6 +218,14 @@ For this, remove the following line from `config.json`:
 And replace it with the following line:
 ```diff
 +  "my:config/query-operation/actors.json",
+```
+
+Also add the newly created config to the contexts of the config file (again replacing `my-package` with your package `name`):
+```diff
+    "@context": [
++     "https://linkedsoftwaredependencies.org/bundles/npm/my-package/^1.0.0/components/context.jsonld",
+      "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/config-query-sparql/^2.0.0/components/context.jsonld"
+    ],
 ```
 
 This change means that Comunica will load its query operators from our local `config/query-operation/actors.json` file,
