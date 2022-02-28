@@ -82,3 +82,13 @@ RDF triples/quads can be provided as input via the following RDF serializations:
 <div class="note">
 All parsers work in a <i>streaming</i> manner.
 </div>
+
+## RDF/JS
+
+Alignment with other JavaScript libraries is achieved via the following RDF/JS specifications:
+
+| **Description** |
+| ------- |
+| [RDF/JS Query specification](https://rdf.js.org/query-spec/) |
+| [RDF/JS Stream interfaces specification](https://rdf.js.org/stream-spec/) |
+| [RDF/JS Data model specification](https://rdf.js.org/data-model-spec/) |

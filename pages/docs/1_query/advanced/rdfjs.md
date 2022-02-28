@@ -14,13 +14,13 @@ This allows you to for example use an RDF parser from one developer, and pipe it
 
 For most of these specifications, corresponding [TypeScript typings exist](https://www.npmjs.com/package/@types/rdf-js),
 and many libraries ship with their own typings as well,
-which makes RDFJS especially useful if you want to develop more strongly-typed JavaScript applications.
+which makes RDF/JS especially useful if you want to develop more strongly-typed JavaScript applications.
 
 Comunica is conformant to the following RDF/JS specifications. 
 
 ## Data model specification
 
-The foundational part of RDFJS is its [low-level **data model** specification](http://rdf.js.org/data-model-spec/),
+The foundational part of RDF/JS is its [low-level **data model** specification](http://rdf.js.org/data-model-spec/),
 in which JavaScript interfaces are described for representing **RDF terms** and **RDF quads**.
 Five types of terms exist:
 
@@ -75,7 +75,7 @@ Comunica handles most parts of query execution in a **streaming** manner,
 which means that some query results may already be returned
 even though other results are still being processed.
 
-Next to the RDFJS data model, a dedicated specification exist for handling [RDF streams](http://rdf.js.org/stream-spec/),
+Next to the RDF/JS data model, a dedicated specification exist for handling [RDF streams](http://rdf.js.org/stream-spec/),
 which is of high important to Comunica.
 
 One interface of high importance is the [RDF/JS `Source` interface](http://rdf.js.org/stream-spec/#source-interface).
@@ -84,3 +84,20 @@ You can [pass a custom `Source` to Comunica to execute queries over it](/docs/qu
 The [RDF/JS `Store` interface](http://rdf.js.org/stream-spec/#store-interface) is an extension of `Source`
 that also allows quads to be added and removed.
 You can [pass a custom `Store` to Comunica to execute update queries over it](/docs/query/advanced/rdfjs_updating/).
+
+## Query interfaces
+
+The [RDF/JS query spec](http://rdf.js.org/query-spec/) is a specification that provides
+high-level and low-level interfaces that are common to query engines.
+For example, query engines implementing these high-level interfaces are mostly interchangeable when used within applications.
+
+The most important high-level interfaces that are implemented by Comunica
+are the [Queryable](https://rdf.js.org/query-spec/#queryable-interfaces)
+and [SparqlQueryable](https://rdf.js.org/query-spec/#sparql-queryable-interfaces) interfaces.
+Compared to these standard interfaces, the only additional requirement that Comunica places is the usage
+of a [source-based context](https://rdf.js.org/query-spec/#querysourcecontext-interface) as second argument to the query methods.
+
+Next to that, Comunica also implements the [`BindingsFactory`](http://rdf.js.org/query-spec/#bindingsfactory-interface)
+and  [`Bindings`](http://rdf.js.org/query-spec/#bindings-interface) interfaces via the
+[`@comunica/bindings-factory`](https://github.com/comunica/comunica/tree/master/packages/bindings-factory) package.
+Learn more about the usage of these bindings [here](/docs/query/advanced/bindings/).
