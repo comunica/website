@@ -147,7 +147,7 @@ For example, the context for our reduced actor (defined in `components/context.j
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/componentsjs/^4.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/componentsjs/^5.0.0/components/context.jsonld",
     {
       "npmd": "https://linkedsoftwaredependencies.org/bundles/npm/",
       "caqorh": "npmd:@comunica/actor-query-operation-reduced-hash/^2.0.0/",
