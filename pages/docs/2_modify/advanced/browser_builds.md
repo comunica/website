@@ -44,13 +44,10 @@ and add the following script (assuming your config exists at `config/config-defa
 
 ## 2. Create a browser-specific entrypoint
 
-Next, create a file called **`index-browser.ts`**, which will become the browser variant of `index.ts`.
-`index-browser.ts` should at least contain the following:
+Next, create a file called **`lib/index-browser.ts`**, which will become the browser variant of `lib/index.ts`.
+`lib/index-browser.ts` should at least contain the following:
 ```typescript
-import {IQueryEngine} from '@comunica/types';
-export function new QueryEngine(): IQueryEngine {
-  return require('./engine-browser.js');
-}
+export * from './QueryEngine';
 ```
 
 ## 3. Expose the browser-specific entrypoint
@@ -62,7 +59,7 @@ For this, add the following to your `package.json`:
 {
   ...
   "browser": {
-    "./index.js": "./index-browser.js"
+    "./lib/index.js": "./lib/index-browser.js"
   }
 }
 ```
