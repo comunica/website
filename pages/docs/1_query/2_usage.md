@@ -25,10 +25,10 @@ which can then be executed by any SPARQL query engine [such as Comunica](https:/
 It can also be used execute [authenticated queries over Solid data pods](https://github.com/rubensworks/GraphQL-LD-Comunica-Solid.js),
 for which [reusable React components](https://github.com/rubensworks/solid-react-graphql-ld.js) are available.
 
-## Node Quadstore
+## Quadstore
 
-[Node Quadstore](https://github.com/belayeng/quadstore) is a [LevelDB](https://github.com/google/leveldb)-based graph database for Node.js and the browser.
-[Node Quadstore Comunica](https://github.com/belayeng/quadstore-comunica) is a SPARQL engine on top of Node Quadstore that is powered by Comunica.
+[Quadstore](https://github.com/belayeng/quadstore) is a [LevelDB](https://github.com/google/leveldb)-based graph database for Node.js and the browser.
+[Quadstore Comunica](https://github.com/belayeng/quadstore-comunica) is a SPARQL engine on top of Quadstore that is powered by Comunica.
 
 ## RDF Parse
 
