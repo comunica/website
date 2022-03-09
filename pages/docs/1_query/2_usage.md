@@ -27,8 +27,8 @@ for which [reusable React components](https://github.com/rubensworks/solid-react
 
 ## Node Quadstore
 
-[Node Quadstore](https://github.com/beautifulinteractions/node-quadstore) is a [LevelDB](https://github.com/google/leveldb-backed) graph database for Node.js and the browser.
-[Node Quadstore SPARQL](https://github.com/beautifulinteractions/node-quadstore-sparql) is a SPARQL engine on top of Node Quadstore that is powered by Comunica.
+[Node Quadstore](https://github.com/belayeng/quadstore) is a [LevelDB](https://github.com/google/leveldb)-based graph database for Node.js and the browser.
+[Node Quadstore Comunica](https://github.com/belayeng/quadstore-comunica) is a SPARQL engine on top of Node Quadstore that is powered by Comunica.
 
 ## RDF Parse
 
