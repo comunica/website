@@ -77,7 +77,7 @@ where _links are followed_ on the Web to find data.
 
 A future goal of Comunica is the integration of such alternative forms of query execution.
 
-## Alternative query languages
+### Alternative query languages
 
 _Point of contact: [Ruben Taelman](https://www.rubensworks.net/contact/)_
 
