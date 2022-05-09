@@ -16,8 +16,8 @@ A [dedicated (mono)repository](https://github.com/comunica/comunica-feature-link
 that contains actors for enabling LTQP inside Comunica.
 
 Since there are multiple approaches for handling LTQP,
-multiple [configurations](https://github.com/comunica/comunica-feature-link-traversal/tree/master/packages/actor-init-sparql-link-traversal/config).
-The default configuration ([`config-default.json`](https://github.com/comunica/comunica-feature-link-traversal/blob/master/packages/actor-init-sparql-link-traversal/config/config-default.json))
+multiple [configurations](https://github.com/comunica/comunica-feature-link-traversal/tree/master/engines/config-query-sparql-link-traversal/config).
+The default configuration ([`config-default.json`](https://github.com/comunica/comunica-feature-link-traversal/blob/master/engines/config-query-sparql-link-traversal/config/config-default.json))
 contains actor configurations that work best on average.
 
 ## 2. Try it out
