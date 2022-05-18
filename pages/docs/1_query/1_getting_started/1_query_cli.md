@@ -12,6 +12,10 @@ This guide discusses querying over Linked Data on the Web, exposed via URLs.
 <a href="/docs/query/getting_started/query_cli_file/">Click here to query over local RDF files</a> instead.
 </div>
 
+<div class="video">
+Watch part of this guide in action <em>live</em> within this <a href="https://youtu.be/ydpdziVNw1k?t=671">Webinar recording</a>.
+</div>
+
 ## 1. Installation
 
 Since Comunica runs on Node.js, make sure you have [Node.js installed](https://nodejs.org/en/) on your machine.

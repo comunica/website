@@ -519,6 +519,19 @@ main .date {
     }
 }
 
+.video {
+    padding: 1rem;
+    margin: 1rem 0 1rem 0;
+    background: #faf5e7;
+    border: 1px solid #d0ae3e;
+    border-radius: 5px;
+    line-height: 1.5rem;
+    &:before {
+        content: '📹 ';
+        font-weight: bold;
+    }
+}
+
 .docs-intro-img {
     text-align: center;
     padding: 1rem;

@@ -10,6 +10,10 @@ This core architecture has been implemented in [`@comunica/core`](https://github
 
 On top of this architecture, the more high-level [SPARQL architecture](/docs/modify/advanced/architecture_sparql/) has been defined.
 
+<div class="video">
+Watch a <a href="https://youtu.be/ydpdziVNw1k?t=2494">Webinar recording</a> to gain a high-level overview of the core architecture.
+</div>
+
 ## Core components: Actor, Mediator, and Bus
 
 Comunica's architecture has been designed with flexibility and loose coupling of components as main goals.

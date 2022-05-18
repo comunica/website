@@ -8,6 +8,10 @@ which uses the package name `@comunica/query-sparql`.
 In this guide, we will install it as a dependency in a [Node.js](https://nodejs.org/en/) JavaScript application,
 and show how it can be used to execute queries.
 
+<div class="video">
+Watch part of this guide in action <em>live</em> within this <a href="https://youtu.be/ydpdziVNw1k?t=1175">Webinar recording</a>.
+</div>
+
 ## 1. Installation
 
 <div class="note">

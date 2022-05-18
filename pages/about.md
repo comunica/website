@@ -11,6 +11,10 @@ Related pages:
 * [Contribute](/contribute/)
 * [Logos](/logos/)
 
+<div class="video">
+Watch a <a href="https://youtu.be/ydpdziVNw1k">Webinar recording</a> to learn more about Comunica.
+</div>
+
 ## Flexible querying of Linked Data
 
 [**Linked Data**](https://www.w3.org/standards/semanticweb/data) on the Web exists in **many shapes and forms**.
