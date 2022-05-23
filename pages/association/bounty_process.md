@@ -48,3 +48,7 @@ The <span class="bounty-assoc">association</span> manages issues as follows:
 12. The <span class="bounty-assoc">association</span> pays the bounty to the developer (minus 15% overhead).
 
 Depending on the specific needs of certain issues or use cases, deviations from these procedures may take place.
+
+## Rules
+
+While anyone is allowed to take up bounties, if board members want to take up bounties, all other board members have to agree, to avoid conflicts of interest.
