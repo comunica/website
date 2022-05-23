@@ -35,7 +35,7 @@ There are two ways to become a Board Member:
 
 At least once every year, the board virtually meets for a board meeting.
 Not all members are required to be present at each meeting.
-The chair is expected to prepare an agenda ahead of time,
+The chair is expected to prepare an agenda ahead of time on https://github.com/comunica/association/blob/master/board-meetings/next.md,
 which should contain points raised by the board members.
 A meeting may be skipped if there are no objections from members.
 
@@ -43,14 +43,13 @@ The chair is appointed by the board members, and may be changed at any time thro
 The title of "codebase curator" is reserved for one person,
 and can only be passed on to someone else by the current codebase curator.
 
-Every decision must be represented by an issue on a (yet to be created) GitHub repository,
-and describe a concrete action once the issue is accepted. 
-During the meeting, such issues can be voted upon with either a 👍 (=1), 👎 (=-1), or a 👀 (=0),
+During the meeting, decisions can be made,
 and every member can place exactly one vote.
 In case of a tie, the final decision is up to the chair.
 The codebase curator may optionally overrule any (final) vote if this person considers this decision to be detrimental to the future of Comunica or the Comunica Association.
-Non-attending members may raise their vote for up to two weeks after the meeting.
+Non-attending members may raise their vote for up to two weeks after the meeting after reading the meeting minutes.
 Once a vote is final, an action will be carried out by the executive contributors.
 
 Minutes are scribed for each meeting by a volunteer,
-and are to appear afterwards on the (yet to be created) GitHub repository.
+and are to appear afterwards on https://github.com/comunica/association/tree/master/board-meetings
+The minutes are sent to all board members shortly after each meeting.
