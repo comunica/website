@@ -70,6 +70,13 @@ export default function Home() {
             Comunica is a community-driven project, sustained by the <a href="/association/">Comunica Association</a>.
             If you are using Comunica, <a href="https://opencollective.com/comunica-association">becoming a sponsor or member</a> is a way to make Comunica sustainable in the long-term.
           </p>
+          <div className="sponsors-member">
+            <h3>Board Members</h3>
+            <p>The members below are directly contributing, or are donating € 2500 EUR / month.</p>
+            <a href="https://www.ugent.be/ea/idlab/en">
+              <img src="img/members/idlab.png" alt="IDLab - Internet Technology and Data Science Lab" />
+            </a>
+          </div>
           <div className="sponsors-bronze">
             <h3>Bronze Sponsors</h3>
             <p>The sponsors below are donating € 250 EUR / month.</p>
