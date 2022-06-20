@@ -46,6 +46,8 @@ The following table gives an overview of all possible context entries that can b
 | `httpProxyHandler` | A proxy for all HTTP requests |
 | `httpIncludeCredentials` | (_browser-only_) If current credentials should be included for HTTP requests |
 | `httpAuth` | HTTP basic authentication value |
+| `httpTimeout` | HTTP timeout in milliseconds |
+| `httpBodyTimeout` | Makes the HTTP timeout apply until the response is fully consumed |
 | `extensionFunctions` or `extensionFunctionCreator` | SPARQL extension functions |
 | `fetch` | A custom [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) function |
 | `readOnly` | If update queries may not be executed |
@@ -226,3 +228,24 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
 ```
 
 _If you want to perform authenticated HTTP requests for Solid, you may want to consider using [Comunica Solid](https://comunica.dev/docs/query/advanced/solid/)._
+
+
+## 16. HTTP Timeout
+
+By default Communica does not apply any timeout on the HTTP requests done to external services. It is possible to add a timeout using the `httpTimeout` option which value is the timeout delay in milliseconds. For example to add an HTTP timeout of 60s:
+
+```javascript
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
+  sources: ['http://fragments.dbpedia.org/2015/en'],
+  httpTimeout: 60_000,
+});
+```
+
+It is also possible to make this timeout not only apply until the response starts streaming in but until the response body is fully consumed using the `httpBodyTimeout` boolean option. It is useful to limit cases like very long response streams:
+```javascript
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
+  sources: ['http://fragments.dbpedia.org/2015/en'],
+  httpTimeout: 60_000,
+  httpBodyTimeout: true
+});
+```
