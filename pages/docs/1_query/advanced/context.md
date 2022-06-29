@@ -17,7 +17,7 @@ const QueryEngine = require('@comunica/query-sparql').QueryEngine;
 const myEngine = new QueryEngine();
 
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
 });
 ```
 
@@ -52,6 +52,7 @@ The following table gives an overview of all possible context entries that can b
 | `fetch` | A custom [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) function |
 | `readOnly` | If update queries may not be executed |
 | `explain` | The query explain mode |
+| `unionDefaultGraph` | If the default graph should also contain the union of all named graphs |
 
 When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/context_entries.html). 
 
@@ -59,7 +60,7 @@ When developing Comunica modules, all context entry keys can be found in [`@comu
 
 Using the `sources` context entry, data sources can be defined that Comunica should query over.
 The value of this must be an array, where the array may contain both strings or objects:
-* Array elements that are strings are interpreted as URLs, such as `'https://www.rubensworks.net/'` or `'http://fragments.dbpedia.org/2016-04/en'`.
+* Array elements that are strings are interpreted as URLs, such as `'https://www.rubensworks.net/'` or `'https://fragments.dbpedia.org/2016-04/en'`.
 * Object array elements can be different things:
     * A hash containing `type` and `value`, such as `{ type: 'sparql', value: 'https://dbpedia.org/sparql' }`.
     * An [RDF/JS](/docs/query/advanced/rdfjs/) source object, such as [`new N3Store()`](https://github.com/rdfjs/N3.js#storing).
@@ -80,8 +81,8 @@ For example, all of the following source elements are valid:
 ```javascript
 const bindingsStream = await myEngine.queryBindings(`...`, {
   sources: [
-    'http://fragments.dbpedia.org/2015/en',
-    { type: 'hypermedia', value: 'http://fragments.dbpedia.org/2016/en' },
+    'https://fragments.dbpedia.org/2015/en',
+    { type: 'hypermedia', value: 'https://fragments.dbpedia.org/2016/en' },
     { type: 'file', value: 'https://www.rubensworks.net/' },
     new N3Store(),
     { type: 'sparql', value: 'https://dbpedia.org/sparql' },
@@ -102,7 +103,7 @@ It is possible to **ignore these errors** and make Comunica ignore such invalid 
 by setting `lenient` to `true`:
 ```javascript
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
   lenient: true,
 });
 ```
@@ -123,7 +124,7 @@ const BF = new BindingsFactory();
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE {
   {?s ?p ?template1 } UNION { ?s ?p ?template2 }
 }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
   initialBindings: BF.fromRecord({
     template1: factory.literal('Value1'),
     template2: factory.literal('Value2'),
@@ -171,7 +172,7 @@ The range of this field must always be a JavaScript `Date` object:
 
 ```javascript
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
   date: new Date(),
 });
 ```
@@ -195,7 +196,7 @@ Enabling this option has no effect on same-site requests.
 
 ```javascript
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
   httpIncludeCredentials: true,
 });
 ```
@@ -222,7 +223,7 @@ This can be done as follows:
 
 ```javascript
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
   fetch: myfetchFunction,
 });
 ```
@@ -236,7 +237,7 @@ By default Communica does not apply any timeout on the HTTP requests done to ext
 
 ```javascript
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
   httpTimeout: 60_000,
 });
 ```
@@ -244,8 +245,21 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
 It is also possible to make this timeout not only apply until the response starts streaming in but until the response body is fully consumed using the `httpBodyTimeout` boolean option. It is useful to limit cases like very long response streams:
 ```javascript
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
   httpTimeout: 60_000,
   httpBodyTimeout: true
+});
+```
+
+## 17. Union Default Graph
+
+By default, Comunica will only query over the [default graph](https://www.w3.org/TR/sparql11-query/#unnamedGraph).
+If you want to query over triples in other named graphs, you need to specify this via the `GRAPH`, `FROM`, or `FROM NAMED` clauses.
+However, by setting the `unionDefaultGraph` context option to `true`, triples patterns will also apply to triples in the non-default graph. 
+
+```javascript
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
+  sources: ['https://fragments.dbpedia.org/2015/en'],
+  unionDefaultGraph: true,
 });
 ```
