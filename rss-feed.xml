@@ -71,5 +71,11 @@
             <guid isPermaLink="false">pages/blog/2022-03-03-release_2_0.md</guid>
             <pubDate>Sun, 03 Apr 2022 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 2.3.0: Better timeout support and minor enhancements]]></title>
+            <link>https://comunica.dev/blog/2022-06-29-release_2_3/</link>
+            <guid isPermaLink="false">pages/blog/2022-06-29-release_2_3.md</guid>
+            <pubDate>Fri, 29 Jul 2022 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
