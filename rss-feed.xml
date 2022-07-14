@@ -77,5 +77,11 @@
             <guid isPermaLink="false">pages/blog/2022-06-29-release_2_3.md</guid>
             <pubDate>Fri, 29 Jul 2022 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Official launch of the Comunica Association]]></title>
+            <link>https://comunica.dev/blog/2022-07-14-association_launch/</link>
+            <guid isPermaLink="false">pages/blog/2022-07-14-association_launch.md</guid>
+            <pubDate>Sun, 14 Aug 2022 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
