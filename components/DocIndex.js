@@ -1,5 +1,5 @@
-export default function DocIndex ({ path, paths, mattersData }) {
-    const entries = paths
+export default function DocIndex ({ path, paths, mattersData, reverse }) {
+    let entries = paths
         .filter(p => p.startsWith(path) && p !== path + '/')
         .map(p => p.slice(path.length + 1, p.length))
         .filter(p => (p.match(/\//g) || []).length <= 2) // Max depth
@@ -15,6 +15,9 @@ export default function DocIndex ({ path, paths, mattersData }) {
                 <p>{entry.description}</p>
             </a>
         );
+    if (reverse) {
+        entries = entries.reverse();
+    }
     return (
         <div className="index">
             {entries}

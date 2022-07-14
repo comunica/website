@@ -40,7 +40,7 @@ export default class Page extends React.Component {
                         <ol className="headers-overview-elements"/>
                     </div>
                     <Markdown body={body} />
-                    {frontmatter.index && <DocIndex path={path} paths={paths} mattersData={mattersData}/>}
+                    {frontmatter.index && <DocIndex path={path} paths={paths} mattersData={mattersData} reverse={frontmatter.reverse}/>}
                     {frontmatter.blog_index && <BlogIndex path={path} paths={paths} mattersData={mattersData}/>}
                 </main>
             </div>
