@@ -34,6 +34,20 @@ _Additional speakers will be announced soon._
 At the Dutch Digital Heritage Network we’ve been building services that facilitate the discovery, use and sharing of linked data. Two examples are a realtime federated search engine (Network of Terms) and a dataset index (Dataset Register). Comunica is a great tool that allows us to efficiently query a variety of RDF sources. Plans for the future include a browser-based version and better support for fulltext SPARQL. These require some changes in Comunica, so I’ll take the opportunity to plug our wishlist.
 </p>
 
+### Building a linked data multi-store with Comunica Association components
+
+*By [Wouter Beek](https://github.com/wouterbeek/) - [Triply B.V.](https://triply.cc/)*
+
+<p>
+<img src="https://nightly.triplydb.com/imgs/logos/logo-lg.svg?v=3" alt="Triply B.V." class="events-speaker-img" />
+TriplyDB is a commercial multi-store that offers a wide variety of
+services over linked data knowledge graphs.
+Services include Comunica Association components like Linked Data
+Fragments, Linked Data Event Streams, and the Comunica SPARQL engine.
+In this talk we show how Comunica Association components can be used
+to strengthen the offering of commercial linked data products.
+</p>
+
 ### The more you know - easy access to enriched RDF using LDflex + Comunica
 
 *By [Jesse Wright](https://github.com/jeswr/)*
