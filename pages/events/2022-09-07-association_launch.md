@@ -63,5 +63,5 @@ Client side query and RDF reasoning has the compacity to unlock a plethora of po
 
 <p>
 <img src="https://pietercolpaert.be/img/pc.jpg" alt="Pieter Colpaert" class="events-speaker-img" />
-Comunica was conceived within IDLab as a next generation Linked Data Fragments client, that would be able to query over heterogeneous data sources. It has now grown into our flagship product that we certainly don’t want to keep only within academic mids. We believe a Comunica Association is the right step forward to also involve other universities, industry and start-ups, governments and hobbyists into a true quadruple helix collaboration. Today, we use Comunica ourselves to build a a governmental data space, and as the querying engine behind Solid applications.
+Comunica was conceived within IDLab as a next generation Linked Data Fragments client, that would be able to query over heterogeneous data sources. It has now grown into our flagship product that we certainly don’t want to keep only within academic mids. We believe a Comunica Association is the right step forward to also involve other universities, industry and start-ups, governments and hobbyists into a true quadruple helix collaboration. Today, we use Comunica ourselves to build a governmental data space, and as the querying engine behind Solid applications.
 </p>
