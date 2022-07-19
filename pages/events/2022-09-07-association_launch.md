@@ -48,6 +48,17 @@ In this talk we show how Comunica Association components can be used
 to strengthen the offering of commercial linked data products.
 </p>
 
+### Using Comunica to query Pods hosted on PodSpaces 2.0
+
+*By [Nicolas Mondada](https://github.com/nicolasmondada/) - Product Manager at [Inrupt](https://inrupt.com/)*
+
+<p>
+<img src="https://inrupt.com/static/footer-logo-770e76798431e454ca96c5bcc33b502f.png" alt="Inrupt" class="events-speaker-img" />
+We see Comunica as a great example of the growing Linked Data and Solid developer community and that's why we actively contribute to it. In particular, we find it to be a great showcase for querying Solid Pods.
+We recently released an update that allows Comunica to query Pods in PodSpaces 2.0 and we are looking forward to continue our commitment to Comunica and the rest of the Solid community.
+We are going to demo using Comunica to query Pods hosted on PodSpaces 2.0.
+</p>
+
 ### The more you know - easy access to enriched RDF using LDflex + Comunica
 
 *By [Jesse Wright](https://github.com/jeswr/)*
