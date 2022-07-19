@@ -19,7 +19,7 @@ is by using a pre-built Comunica SPARQL version that is served via a GitHub CDN:
     ?s ?p ?o
   } LIMIT 100
 `, {
-  sources: ['http://fragments.dbpedia.org/2015/en'],
+  sources: ['https://fragments.dbpedia.org/2015/en'],
 }).then(function (bindingsStream) {
   bindingsStream.on('data', function (data) {
     // Each variable binding is an RDFJS term
