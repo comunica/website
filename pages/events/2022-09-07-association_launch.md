@@ -12,12 +12,17 @@ This event will be open for everyone to watch.
 If you want to be notified about updates (such as when the livestream link becomes available),
 **be sure to [register for free](https://www.eventbrite.com/e/comunica-association-launch-tickets-383969391787)**.
 
-<div class="note">
-The livestream link will be communicated later on this page. 
-</div>
-
 In the week after this event, we will be physically attending the [Semantics conference](/events/2022-09-13-semantics_conference/),
 where we will have a booth and talk at the main conference.
+
+## Watch live
+
+Follow the launch event live on Wednesday 7 September at 16:00 (Brussels time).
+You can either watch on this page, or on [YouTube](https://www.youtube.com/watch?v=seXvRI-XtiM).
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/seXvRI-XtiM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ## Schedule
 
