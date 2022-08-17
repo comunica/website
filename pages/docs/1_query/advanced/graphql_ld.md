@@ -78,7 +78,7 @@ If you want to execute GraphQL-LD queries in [your application](/docs/query/gett
 you can do this as follows:
 ```javascript
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
-const bindingsStreamToGraphQl = require('@comunica/actor-sparql-serialize-tree').bindingsStreamToGraphQl;
+const bindingsStreamToGraphQl = require('@comunica/actor-query-result-serialize-tree').bindingsStreamToGraphQl;
 
 const myEngine = new QueryEngine();
 const result = await myEngine.query(`
@@ -91,7 +91,10 @@ const result = await myEngine.query(`
 }
 `, {
   sources: ['http://fragments.dbpedia.org/2016-04/en'],
-  queryFormat: 'graphql',
+  queryFormat: {
+    language: 'graphql',
+    version: '1.0'
+  },
   "@context": {
     "label": { "@id": "http://www.w3.org/2000/01/rdf-schema#label" },
     "label_en": { "@id": "http://www.w3.org/2000/01/rdf-schema#label", "@language": "en" },
@@ -100,5 +103,5 @@ const result = await myEngine.query(`
   }
 });
 // Converts raw Comunica results to GraphQL objects
-const data = bindingsStreamToGraphQl(await result.execute(), result.context);
+const data = await bindingsStreamToGraphQl(await result.execute(), result.context);
 ```
