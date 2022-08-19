@@ -11,7 +11,7 @@ and as **client-side applications in Web browsers**.
 The easiest way to use Comunica in your Web app,
 is by using a pre-built Comunica SPARQL version that is served via a GitHub CDN:
 ```html
-<script src="http://rdf.js.org/comunica-browser/versions/2/engines/query-sparql/comunica-browser.js"></script>
+<script src="https://rdf.js.org/comunica-browser/versions/v2/engines/query-sparql/comunica-browser.js"></script>
 <script language="JavaScript">
   new Comunica.QueryEngine().queryBindings(`
   SELECT * {
