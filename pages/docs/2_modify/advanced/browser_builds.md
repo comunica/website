@@ -69,8 +69,8 @@ For this, add the following to your `package.json`:
 Now you're ready to compile your application for the browser using tools such as [Webpack](https://www.npmjs.com/package/webpack).
 
 <div class="note">
-As of Webpack 5, the Node.js polyfills are not shipped anymore by default.
-Since Comunica requires those, they will have to be added manually, which can be done using the <a href="https://www.npmjs.com/package/node-polyfill-webpack-plugin"><code>node-polyfill-webpack-plugin</code></a>.
+While Comunica required polyfilling using tools such as <a href="https://www.npmjs.com/package/node-polyfill-webpack-plugin"><code>node-polyfill-webpack-plugin</code></a>,
+this is not required anymore as of Comunica 2.4.0.
 </div>
 
 Please refer to the documentation of [Webpack](https://www.npmjs.com/package/webpack) on how to configure this build process.
@@ -80,7 +80,6 @@ Below you can find an example configuration file for Webpack, which may require 
 ```javascript
 const path = require('path');
 const ProgressPlugin = require('webpack').ProgressPlugin;
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
   entry: [ '@babel/polyfill', path.resolve(__dirname, 'my-app.js') ],
@@ -100,7 +99,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new NodePolyfillPlugin(),
     new ProgressPlugin(),
   ]
 };
