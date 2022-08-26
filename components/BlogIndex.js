@@ -10,7 +10,7 @@ export default function DocIndex ({ path, paths, mattersData }) {
             const [_, year, month, day] = /^([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])-/.exec(p);
             return {
                 path: p,
-                date: `${new Date(`${month} ${day} ${year}`)
+                date: `${new Date(`${year}-${month}-${day}`)
                     .toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`,
                 title: mattersData[path + '/' + p].title,
                 excerpt: mattersData[path + '/' + p].excerpt,
