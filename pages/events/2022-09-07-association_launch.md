@@ -66,7 +66,7 @@ We are going to demo using Comunica to query Pods hosted on PodSpaces 2.0.
 
 ### The more you know - easy access to enriched RDF using LDflex + Comunica
 
-*By [Jesse Wright](https://github.com/jeswr/)*
+*By [Jesse Wright](https://github.com/jeswr/) - [University Medallist Alumni, Australian National University](https://cecs.anu.edu.au/) & Software Engineer at [Inrupt](https://inrupt.com/)*
 
 <p>
 <img src="https://avatars.githubusercontent.com/u/63333554?v=4" alt="Jesse Wright" class="events-speaker-img" />
