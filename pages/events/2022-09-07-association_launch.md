@@ -28,8 +28,6 @@ You can either watch on this page, or on [YouTube](https://www.youtube.com/watch
 
 Below, you can find the preliminary schedule of the launch event.
 
-_Additional speakers will be announced soon._
-
 ### Using Comunica for building foundational heritage network services
 
 *By [David de Boer](https://github.com/ddeboer) - [Dutch Digital Heritage Network (NDE)](https://netwerkdigitaalerfgoed.nl/)*
