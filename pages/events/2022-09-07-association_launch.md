@@ -3,7 +3,7 @@ title: '2022-09-07: Comunica Association Launch'
 description: 'An online event for the official launch of the Comunica Association'
 ---
 
-On [Wednesday 7 September 16:00 (Brussels time)](https://www.timeanddate.com/worldclock/converter.html?iso=20220907T160000&p1=48),
+On [Wednesday 7 September 16:00 (Brussels time)](https://www.timeanddate.com/worldclock/converter.html?iso=20220907T140000&p1=48),
 the official launch of the [Comunica Association](/association/) takes place online as a digital event.
 
 During this event, several invited speakers from various companies will talk about their experiences with Comunica, and show off some demo's.
