@@ -53,7 +53,7 @@ to strengthen the offering of commercial linked data products.
 
 ### Using Comunica to query Pods hosted on PodSpaces 2.0
 
-*By [Nicolas Mondada](https://github.com/nicolasmondada/) - Product Manager at [Inrupt](https://inrupt.com/)*
+*By [Pat McBennett](https://github.com/pmcb55/) - Technical Architect at [Inrupt](https://inrupt.com/)*
 
 <p>
 <img src="https://inrupt.com/static/footer-logo-770e76798431e454ca96c5bcc33b502f.png" alt="Inrupt" class="events-speaker-img" />
