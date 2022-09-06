@@ -19,21 +19,21 @@ Watch a <a href="https://youtu.be/ydpdziVNw1k?t=2494">Webinar recording</a> to g
 Comunica's architecture has been designed with flexibility and loose coupling of components as main goals.
 For this, Comunica consists of **three types of components**: **actors**, **mediators**, and **buses**.
 
-All logic in Comunica is separated into different **actors** ([`Actor`](https://comunica.github.io/comunica/classes/core.actor.html)),
+All logic in Comunica is separated into different **actors** ([`Actor`](https://comunica.github.io/comunica/classes/core.Actor.html)),
 following the [actor model](https://en.wikipedia.org/wiki/Actor_model).
 Each actor independently performs a specific task.
 For example, one actor can take implement the SPARQL `UNION` operator,
 another actor can parse JSON-LD documents,
 and another actor can parse JSON-LD documents _in a different way_.
 
-All actors are subscribed onto task-specific **buses** ([`Bus`](https://comunica.github.io/comunica/classes/core.bus.html)),
+All actors are subscribed onto task-specific **buses** ([`Bus`](https://comunica.github.io/comunica/classes/core.Bus.html)),
 following the [publish-subscribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern).
 For example, a SPARQL query operator bus could contain actors for `UNION`, `SELECT`, `FILTER`, and more.
 An RDF parsing bus could contain actors for JSON-LD, RDFa, Turtle, and more.
 
 Since multiple actors can exist for solving a specific task
 (for example if we have two actors for parsing JSON-LD documents),
-**mediators** ([`Mediator`](https://comunica.github.io/comunica/classes/core.mediator.html)) are used for determining the "best" actor on a bus for executing a certain action,
+**mediators** ([`Mediator`](https://comunica.github.io/comunica/classes/core.Mediator.html)) are used for determining the "best" actor on a bus for executing a certain action,
 following the [mediator pattern](https://en.wikipedia.org/wiki/Mediator_pattern).
 
 To ensure loose coupling of components, actors never communicate with each other directly.

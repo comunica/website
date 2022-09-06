@@ -14,7 +14,7 @@ This guide focuses on invoking a logger from within an actor implementation.
 
 ## Logging methods
 
-All actors ([`Actor`](https://comunica.github.io/comunica/classes/core.actor.html)) expose the following methods:
+All actors ([`Actor`](https://comunica.github.io/comunica/classes/core.Actor.html)) expose the following methods:
 
 * `logTrace(context, message, dataCb?)`
 * `logDebug(context, message, dataCb?)`
