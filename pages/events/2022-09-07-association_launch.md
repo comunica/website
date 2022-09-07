@@ -51,7 +51,9 @@ In this talk we show how Comunica Association components can be used
 to strengthen the offering of commercial linked data products.
 </p>
 
-### Using Comunica to query Pods hosted on PodSpaces 2.0
+### ~~Using Comunica to query Pods hosted on PodSpaces 2.0~~
+
+_**Cancelled due to availability issues, will take place at a later date**_
 
 *By [Pat McBennett](https://github.com/pmcb55/) - Technical Architect at [Inrupt](https://inrupt.com/)*
 
