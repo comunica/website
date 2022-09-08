@@ -28,6 +28,12 @@ You can either watch on this page, or on [YouTube](https://www.youtube.com/watch
 
 Below, you can find the preliminary schedule of the launch event.
 
+### Introduction
+
+*By [Ruben Taelman](https://www.rubensworks.net/) - [IDLab - Ghent University](https://knows.idlab.ugent.be/)*
+
+*[Slides](https://www.rubensworks.net/raw/slides/2022/comunica-launch-intro/)*
+
 ### Using Comunica for building foundational heritage network services
 
 *By [Enno Meijers](https://www.linkedin.com/in/ennomeijers/) - [Dutch Digital Heritage Network (NDE)](https://netwerkdigitaalerfgoed.nl/)*
@@ -67,6 +73,8 @@ We are going to demo using Comunica to query Pods hosted on PodSpaces 2.0.
 ### The more you know - easy access to enriched RDF using LDflex + Comunica
 
 *By [Jesse Wright](https://github.com/jeswr/) - [University Medallist Alumni, Australian National University](https://cecs.anu.edu.au/) & Software Engineer at [Inrupt](https://inrupt.com/)*
+
+*[Slides](http://jeswr.me/slides-2022-comunica-talk/) and [Examples](https://github.com/jeswr/slides-2022-comunica-talk/tree/main/examples)*
 
 <p>
 <img src="https://avatars.githubusercontent.com/u/63333554?v=4" alt="Jesse Wright" class="events-speaker-img" />
