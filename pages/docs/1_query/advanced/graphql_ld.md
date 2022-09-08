@@ -103,5 +103,5 @@ const result = await myEngine.query(`
   }
 });
 // Converts raw Comunica results to GraphQL objects
-const data = await bindingsStreamToGraphQl(await result.execute(), result.context);
+const data = await bindingsStreamToGraphQl(await result.execute(), result.context, {materializeRdfJsTerms: true});
 ```
