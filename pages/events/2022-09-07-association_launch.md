@@ -38,6 +38,8 @@ Below, you can find the preliminary schedule of the launch event.
 
 *By [Enno Meijers](https://www.linkedin.com/in/ennomeijers/) - [Dutch Digital Heritage Network (NDE)](https://netwerkdigitaalerfgoed.nl/)*
 
+*[Slides](https://docs.google.com/presentation/d/14MGwBoz-x-9XCk5v1OlnxLF5UGFMYxIObVohpX8uqOc/edit#slide=id.p5)*
+
 <p>
 <img src="https://user-images.githubusercontent.com/440384/134636829-f730230c-bfec-4d40-86d1-67f28479cdcc.png" alt="Netwerk Digitaal Erfgoed" class="events-speaker-img" />
 At the Dutch Digital Heritage Network we’ve been building services that facilitate the discovery, use and sharing of linked data. Two examples are a realtime federated search engine (Network of Terms) and a dataset index (Dataset Register). Comunica is a great tool that allows us to efficiently query a variety of RDF sources. Plans for the future include a browser-based version and better support for fulltext SPARQL. These require some changes in Comunica, so I’ll take the opportunity to plug our wishlist.
