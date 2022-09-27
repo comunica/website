@@ -28,7 +28,7 @@ $ npm install @comunica/query-sparql
 
 <div class="note">
 If you want to create a more lightweight package by selecting only those dependencies that are absolutely required,
-you can make use of the <a href="https://github.com/comunica/comunica/blob/master/packager/packager">Comunica Packager</a>.
+you can make use of the <a href="https://github.com/comunica/comunica/tree/master/packages/packager">Comunica Packager</a>.
 </div>
 
 We recommend to also **install TypeScript** as a dev dependency:
