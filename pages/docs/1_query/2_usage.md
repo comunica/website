@@ -30,6 +30,11 @@ for which [reusable React components](https://github.com/rubensworks/solid-react
 [Quadstore](https://github.com/belayeng/quadstore) is a [LevelDB](https://github.com/google/leveldb)-based graph database for Node.js and the browser.
 [Quadstore Comunica](https://github.com/belayeng/quadstore-comunica) is a SPARQL engine on top of Quadstore that is powered by Comunica.
 
+## LDkit
+[LDkit](https://ldkit.io) is a Linked Data query toolkit for TypeScript developers. It provides ORM-like abstraction over RDF data: you define a data source and a data schema and let LDkit handle SPARQL queries, data fetching and conversion of RDF to to JS/TS native types in background.
+
+LDkit provides built-in support to query SPARQL endpoints, but it is [fully compatible with Comunica](https://ldkit.io/docs/how-to/query-with-comunica) in case you need to access other RDF data sources.
+
 ## RDF Parse
 
 [RDF Parse](https://github.com/rubensworks/rdf-parse.js) is a JavaScript library parses RDF based on content type or file name in a streaming manner.
