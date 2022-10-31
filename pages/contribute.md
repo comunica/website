@@ -27,7 +27,9 @@ Issues tagged with [`dev-ready`](https://github.com/comunica/comunica/issues?q=i
 When contributing, make sure to keep in mind the following:
 * Read how to [set up a development environment](https://github.com/comunica/comunica#development-setup).
 * Read the guide on [contributing an actor](/docs/modify/getting_started/contribute_actor/).
-* [Use descriptive, imperative commit message](https://chris.beams.io/posts/git-commit/)
+* Commit messages:
+  * [Use descriptive, imperative commit message](https://chris.beams.io/posts/git-commit/). These commit messages will be used as input for release changelogs. Have a look at the [commit history](https://github.com/comunica/comunica/commits/master) for examples.
+  * Commit messages should include a reference to relevant issues. For example, `Closes #123`, or `Related to #456`.
 * Pull requests should pass all checks
     * Unit tests with 100% branching coverage (`yarn test`)
     * Clean code with passing linter (`yarn run lint`)
@@ -40,10 +42,10 @@ When contributing, make sure to keep in mind the following:
 
 Tips and tricks:
 * Only do `yarn install` in the repo root, and *never* in one of the sub-packages, as this can break your repo.
-* `yarn run build` will (re)build all TypeScript to JavaScript. This can also be executed on package-level.
-* `yarn run build-watch` will continuously build the TypeScript to JavaScript. This is useful during development.
+* `yarn run build` will (re)build all TypeScript to JavaScript and generate Components.js files. These can also be invoked separately via `yarn run build:ts` and `yarn run build:components`. These can also be executed on package-level.
+* `yarn run build-watch` will continuously build TypeScript to JavaScript and generate Components.js files, which is useful during development. These can also be invoked separately via `yarn run build-watch:ts` and `yarn run build-watch:components`.
 * `yarn test` and `yarn run lint` execute the tests and linter checks locally. Before a PR is opened, these must always pass, and testing coverage must be 100%.
-* When editing configuration files in packages like `actor-init-sparql`, `yarn run prepare` can be executed to compile the JSON files to JavaScript before they can be executed. (not needed when executing dynamically)
+* When editing configuration files in packages like `query-sparql`, `yarn run prepare` can be executed to compile the JSON files to JavaScript before they can be executed. (not needed when executing dynamically)
 * When modifying a dependency package such as [sparqlee](https://github.com/comunica/sparqlee), [Yarn's link functionality](https://classic.yarnpkg.com/en/docs/cli/link/) can be used to force your local version of that dependency to be used in Comunica.
 
 ## Write documentation
@@ -87,10 +89,19 @@ Issues should be assigned to people when possible, and must be progressed using 
 
 General issues progress:
 
-1. To Do: When the issue is accepted and assigned, but not in progress yet.
-2. In Progress: When the issue is being worked on by the assignee.
-3. To Review: When the issue is resolved, but must be reviewed. This can be attached to a PR.
+1. Triage: If the issue is not yet accepted or assigned.
+2. To Do (3 levels of priority): When the issue is accepted and assigned, but not in progress yet.
+3. In Progress: When the issue is being worked on by the assignee, or is under review.
 4. Done: When the issue is resolved and reviewed. If attached to a PR, this can be merged, or closed otherwise.
+5. On hold: If the issue is awaiting external input.
+
+### Merging Pull Requests
+
+All PRs must pass the following checklist:
+
+* All CI checks must pass. For unit tests, this includes 100% coverage, and coverage lines should not be skipped.
+* The PR must be approved by a [codebase curator](https://comunica.dev/association/board/).
+* If commits don't meet the commit message guidelines from above, the "Squash and merge" functionality of GitHub must be used, and a new commit message must be created. Otherwise, PRs can be merged via the "Rebase" button.
 
 ### Making a new release
 
@@ -120,3 +131,8 @@ Making a new release only requires invoking `yarn run publish-canary` from the r
 
 Pre-releases do not trigger changelog changes, git commits, and pushes.
 
+If the lerna script exited with an error, you may notice some issues with git. In that case, make sure to execute the following:
+
+```bash
+git update-index --no-assume-unchanged $(git ls-files | tr '\\n' ' ') && git checkout .
+```
