@@ -89,5 +89,11 @@
             <guid isPermaLink="false">pages/blog/2022-08-24-release_2_4.md</guid>
             <pubDate>Sat, 24 Sep 2022 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 2.5.0: Fixes, string sources, and HTTP error handling]]></title>
+            <link>https://comunica.dev/blog/2022-11-09-release_2_5/</link>
+            <guid isPermaLink="false">pages/blog/2022-11-09-release_2_5.md</guid>
+            <pubDate>Fri, 09 Dec 2022 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
