@@ -57,6 +57,7 @@ The following table gives an overview of all possible context entries that can b
 | `readOnly` | If update queries may not be executed |
 | `explain` | The query explain mode |
 | `unionDefaultGraph` | If the default graph should also contain the union of all named graphs |
+| `localizeBlankNodes` | If blank nodes should be localized per bindings entry |
 
 When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/context_entries.html). 
 
@@ -265,5 +266,30 @@ However, by setting the `unionDefaultGraph` context option to `true`, triples pa
 const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
   sources: ['https://fragments.dbpedia.org/2015/en'],
   unionDefaultGraph: true,
+});
+```
+
+## 18. HTTP Retries
+
+Using the `httpRetryOnServerError`, `httpRetryCount`, and `httpRetryDelay` options,
+you can make your engine retry requests for a number of times if the server produces an error for it.
+
+```javascript
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
+  sources: ['https://fragments.dbpedia.org/2015/en'],
+  httpRetryOnServerError: true,
+  httpRetryCount: 3,
+  httpRetryDelay: 100,
+});
+```
+
+## 18. Broken link recovery
+
+The `recoverBrokenLinks` option can make your engine fall back to the [WayBack Machine](https://archive.org/web/) if a document has become unavailable.
+
+```javascript
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
+  sources: ['http://xmlns.com/foaf/spec/20140114.rdf'],
+  recoverBrokenLinks: true,
 });
 ```
