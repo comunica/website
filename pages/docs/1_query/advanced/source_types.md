@@ -54,6 +54,7 @@ The table below summarizes the different source types that Comunica supports by 
 | `sparql` | [SPARQL endpoint](https://www.w3.org/TR/sparql11-protocol/) |
 | `hypermedia` | Sources that expose query capabilities via hypermedia metadata, such as [Triple Pattern Fragments](https://linkeddatafragments.org/specification/triple-pattern-fragments/) and [Quad Pattern Fragments](https://linkeddatafragments.org/specification/quad-pattern-fragments/) |
 | `rdfjsSource` | JavaScript objects implementing the [RDF/JS `source` interface](/docs/query/advanced/rdfjs_querying/) |
+| `stringSource` | An RDF dataset serialized as a string in a certain format. |
 | `hdtFile` | [HDT files](/docs/query/advanced/hdt/) |
 | `ostrichFile` | Versioned [OSTRICH archives](https://github.com/rdfostrich/comunica-query-sparql-ostrich) |
 
@@ -80,3 +81,21 @@ The following RDF serializations are supported:
 | [RDF/XML](https://www.w3.org/TR/rdf-syntax-grammar/) | `application/rdf+xml` | `.rdf`, `.rdfxml`, `.owl` |
 | [RDFa](https://www.w3.org/TR/rdfa-in-html/) and script RDF data tags [HTML](https://html.spec.whatwg.org/multipage/)/[XHTML](https://www.w3.org/TR/xhtml-rdfa/) | `text/html`, `application/xhtml+xml` | `.html`, `.htm`, `.xhtml`, `.xht` |
 | [RDFa](https://www.w3.org/TR/2008/REC-SVGTiny12-20081222/metadata.html#MetadataAttributes) in [SVG](https://www.w3.org/TR/SVGTiny12/)/[XML](https://html.spec.whatwg.org/multipage/) | `image/svg+xml`,`application/xml` | `.xml`, `.svg`, `.svgz` |
+
+## String source
+
+String-based sources allow you to query over sources that are represented as a string in a certain RDF serialization.
+
+For example, querying over a Turtle-based datasource:
+```javascript
+const bindingsStream = await myEngine.queryBindings(`...`, {
+  sources: [
+    {
+      type: 'stringSource',
+      value: '<ex:s> <ex:p> <ex:o>. <ex:s> <ex:p2> <ex:o2>.',
+      mediaType: 'text/turtle',
+      baseIRI: 'http://example.org/',
+    },
+  ],
+});
+```
