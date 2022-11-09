@@ -48,6 +48,10 @@ The following table gives an overview of all possible context entries that can b
 | `httpAuth` | HTTP basic authentication value |
 | `httpTimeout` | HTTP timeout in milliseconds |
 | `httpBodyTimeout` | Makes the HTTP timeout apply until the response is fully consumed |
+| `httpRetryCount` | The number of retries to perform on failed fetch requests |
+| `httpRetryDelay` | The number of milliseconds to wait between fetch retries |
+| `httpRetryOnServerError` | If fetch should be retried on 5xx server error responses, instead of being resolved. |
+| `recoverBrokenLinks`| Use the WayBack machine to recover broken links |
 | `extensionFunctions` or `extensionFunctionCreator` | SPARQL extension functions |
 | `fetch` | A custom [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) function |
 | `readOnly` | If update queries may not be executed |
