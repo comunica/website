@@ -100,7 +100,9 @@ General issues progress:
 All PRs must pass the following checklist:
 
 * All CI checks must pass. For unit tests, this includes 100% coverage, and coverage lines should not be skipped.
-* The PR must be approved by a [codebase curator](https://comunica.dev/association/board/).
+* The PR must be approved by at least 2 [core maintainers](https://comunica.dev/association/board/).
+  * If more than a week goes by, then the approval of 1 core maintainer is sufficient, unless another core maintainer explicitly indicated the desire for later review.
+  * The codebase curator can always merge immediately.
 * If commits don't meet the commit message guidelines from above, the "Squash and merge" functionality of GitHub must be used, and a new commit message must be created. Otherwise, PRs can be merged via the "Rebase" button.
 
 ### Making a new release

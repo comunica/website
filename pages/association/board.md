@@ -9,9 +9,9 @@ This page describes details on who are the members of this board, what it does, 
 
 ## Members
 
-* [Ruben Taelman](https://www.rubensworks.net/) [(IDLab, Ghent University – imec)](https://knows.idlab.ugent.be/) - Codebase curator and maintainer
+* [Ruben Taelman](https://www.rubensworks.net/) [(IDLab, Ghent University – imec)](https://knows.idlab.ugent.be/) - Codebase curator, Core maintainer
 * [Pieter Colpaert](https://pietercolpaert.be/) [(IDLab, Ghent University – imec)](https://knows.idlab.ugent.be/) - Strategic coordinator
-* [Jesse Wright](https://github.com/jeswr/) [(Australian National University)](https://cecs.anu.edu.au/) - Developer
+* [Jesse Wright](https://github.com/jeswr/) [(Australian National University)](https://cecs.anu.edu.au/) - Core maintainer
 
 ## Goals
 
