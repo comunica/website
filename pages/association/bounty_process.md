@@ -51,4 +51,5 @@ Depending on the specific needs of certain issues or use cases, deviations from 
 
 ## Rules
 
-While anyone is allowed to take up bounties, if board members want to take up bounties, all other board members have to agree, to avoid conflicts of interest.
+1. While anyone is allowed to take up bounties, if board members want to take up bounties, all other board members have to agree, to avoid conflicts of interest.
+2. Once assigned, bounties are expected to be delivered in a timely manner. If the developer does not communicate any progress for more than a week (without prior notification of unavailability), the bounty may become unassigned.
