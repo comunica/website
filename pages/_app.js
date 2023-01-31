@@ -1,6 +1,6 @@
 import '../styles/main.scss'
 import '../node_modules/highlight.js/styles/github.css';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import React from 'react';
 
 export default class MyApp extends React.Component {
@@ -11,8 +11,8 @@ export default class MyApp extends React.Component {
     }
 
     componentDidMount() {
-        ReactGA.initialize('UA-175823881-1');
-        ReactGA.pageview(window.location.pathname);
+        ReactGA.initialize('G-HT178MX8JL');
+        ReactGA.send({ hitType: 'pageview', page: window.location.pathname });
 
         // This should actually be in our Navigation component, but is not being called there for some reason
         const nav = document.querySelector('nav');
