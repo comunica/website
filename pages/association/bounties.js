@@ -11,8 +11,6 @@ function issueToTags(node) {
     // Determine assignees
     const assignees = node.assignees.nodes;
 
-    console.log(node.closedAt); // TODO
-
     return <div className="card-bounty" id={node.url}>
         <a href={node.repository.url} target="_blank"><h3>{node.repository.nameWithOwner}</h3></a>
         <a href={node.url} target="_blank"><h2>{node.title} <span className="issue-id">#{node.number}</span></h2></a>

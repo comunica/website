@@ -1,6 +1,6 @@
 // next.config.js
 module.exports = {
-    target: 'serverless',
+    output: 'standalone',
     trailingSlash: true,
     webpack: function (config) {
         config.module.rules.push({
