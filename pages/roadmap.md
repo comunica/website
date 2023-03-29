@@ -3,25 +3,10 @@ title: 'Roadmap'
 description: 'The long-term goals of Comunica'
 ---
 
-This page gives an overview of the long-term goals of Comunica,
+This page gives an overview of the long-term goals of Comunica in order of priority,
 which is determined by the [Comunica Association](/association/).
 
 [Interested in helping out? Find out more on how to contribute](/contribute/).
-
-## Future-oriented development
-
-_[All future-oriented issues](https://github.com/comunica/comunica/labels/future-oriented)_
-
-In addition to specification compliance, Comunica is being built with possible future specifications in mind.
-Comunica should become a testbed for easily testing out new query features and techniques.
-For instance, for efforts such as [RDF\*/SPARQL\*](https://blog.liu.se/olafhartig/2019/01/10/position-statement-rdf-star-and-sparql-star/)
-and [SPARQL 1.2](https://github.com/w3c/sparql-12/).
-This also includes making Comunica ready for new technologies such as [ESM](https://nodejs.org/api/esm.html) and [WebAssembly](https://webassembly.org/).
-
-While the architecture of Comunica has been built with this flexibility in mind,
-some specific changes will need to be made before this is possible.
-For instance, testing new SPARQL 1.2 query features will require the development of a new SPARQL query parser,
-since our current parser ([SPARQL.js](https://github.com/RubenVerborgh/SPARQL.js/)) is [not flexible enough in that respect](https://github.com/comunica/comunica/issues/403).
 
 ## Improving overall performance
 
@@ -60,6 +45,21 @@ which we can do by lowering the barrier to entry for developers from other commu
 This can for example be achieved by providing pre-packaged versions of Comunica that work out-of-the-box in other environments,
 such as for example [rollup.js](https://rollupjs.org/guide/en/).
 
+## Future-oriented development
+
+_[All future-oriented issues](https://github.com/comunica/comunica/labels/future-oriented)_
+
+In addition to specification compliance, Comunica is being built with possible future specifications in mind.
+Comunica should become a testbed for easily testing out new query features and techniques.
+For instance, for efforts such as [RDF\*/SPARQL\*](https://blog.liu.se/olafhartig/2019/01/10/position-statement-rdf-star-and-sparql-star/)
+and [SPARQL 1.2](https://github.com/w3c/sparql-12/).
+This also includes making Comunica ready for new technologies such as [ESM](https://nodejs.org/api/esm.html) and [WebAssembly](https://webassembly.org/).
+
+While the architecture of Comunica has been built with this flexibility in mind,
+some specific changes will need to be made before this is possible.
+For instance, testing new SPARQL 1.2 query features will require the development of a new SPARQL query parser,
+since our current parser ([SPARQL.js](https://github.com/RubenVerborgh/SPARQL.js/)) is [not flexible enough in that respect](https://github.com/comunica/comunica/issues/403).
+
 ## Tangents
 
 Below, you can find several topics that parts of the community are working on, but are not part of the general roadmap.
@@ -76,6 +76,8 @@ One alternative form of query execution is [Link-Traversal-based Query Execution
 where _links are followed_ on the Web to find data.
 
 A future goal of Comunica is the integration of such alternative forms of query execution.
+
+You can learn more about this work on our [experiments page](/research/#experiments).
 
 ### Alternative query languages
 
