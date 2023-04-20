@@ -70,7 +70,7 @@ If you want to be notified about future developments around this association, su
 
 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe9sewt6jInvp8BnbjsudQqeCyTeEPE9PgGofq9AbxRLPIpag/viewform?embedded=true" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">Loading...</iframe>
 
-The Comunica Association is an activity within [Open Knowledge Belgium](https://openknowledge.be/),
+The Comunica Association is hosted by [Open Collective Europe](https://opencollective.com/europe),
 and our budget is visible on [Open Collective](https://opencollective.com/comunica-association).
 
 <p className="bounty-page-footer">
