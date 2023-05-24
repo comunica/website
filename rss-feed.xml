@@ -95,5 +95,11 @@
             <guid isPermaLink="false">pages/blog/2022-11-09-release_2_5.md</guid>
             <pubDate>Fri, 09 Dec 2022 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 2.7.0: Better date support, better performance over SPARQL endpoints, and internal fixes]]></title>
+            <link>https://comunica.dev/blog/2023-05-24-release_2_7/</link>
+            <guid isPermaLink="false">pages/blog/2023-05-24-release_2_7.md</guid>
+            <pubDate>Sat, 24 Jun 2023 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
