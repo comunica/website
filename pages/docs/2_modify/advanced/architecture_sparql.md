@@ -37,6 +37,7 @@ For a given SPARQL query, the following logic flow occurs: (_some parts are omit
                     * **Dereference RDF:** Dereferences a path or URL into a stream of quads, which internally makes use of several parsers in the *RDF Parse* bus, and it uses data lookup actors from the *Dereference* bus.
                     * **RDF Metadata:** Extracts the quads relevant for metadata from the stream of data quads.
                     * **RDF Metadata Extract:** Create an object with metadata for a given metadata quad stream.
+                    * **RDF Metadata Accumulate:** Merge the metadata object with any previous metadata (only applies if multiple links are being followed).
                     * **RDF Resolve Hypermedia Links:** Determines which links should be followed from the metadata of the current source.
                     * **RDF Resolve Hypermedia Links Queue:** Creates a link queue that enables different strategies for queueing links.
                     * **RDF Resolve Hypermedia:** Handle a source based on the extracted metadata.

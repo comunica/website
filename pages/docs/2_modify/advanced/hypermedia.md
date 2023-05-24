@@ -16,8 +16,8 @@ the whole file will be downloaded and queried in-memory.
 <div class="note">
 This page only describes the handling of hypermedia for read queries.
 The handling of hypermedia for update queries happens in a very similar manner,
-with the main difference that the [RDF Resolve Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia)
-is replaced by the [RDF Update Hypermedia bus](/docs/modify/advanced/buses/#rdf-update-hypermedia).
+with the main difference that the <a href="/docs/modify/advanced/buses/#rdf-resolve-hypermedia">RDF Resolve Hypermedia bus</a>
+is replaced by the <a href="/docs/modify/advanced/buses/#rdf-update-hypermedia">RDF Update Hypermedia bus</a>.
 </div>
 
 ## Hypermedia actor
@@ -134,6 +134,10 @@ such as [Triple Pattern Fragments](https://linkeddatafragments.org/specification
 As such, there needs to be a way to distinguish between data and metadata triples,
 for which different strategies exist in the [RDF Metadata bus](/docs/modify/advanced/buses/#rdf-metadata).
 
+<div class="note">
+Learn more details about <a href="/docs/modify/advanced/metadata">metadata objects</a>.
+</div>
+
 For example:
 
 1. https://dbpedia.org/sparql
@@ -249,7 +253,7 @@ For example:
       }
     ]
   },
-  "totalItems": 1040358853
+  "cardinality": { "type": "estimate", "value": 1040358853, "dataset": "https://fragments.dbpedia.org/2016-04/en" }
 }
 ```
 3. https://ruben.verborgh.org/profile/
@@ -290,3 +294,10 @@ For example:
 1. https://dbpedia.org/sparql: SPARQL query to https://dbpedia.org/sparql
 2. http://fragments.dbpedia.org/2016-04/en: Fill in `https://fragments.dbpedia.org/2016-04/en{?subject,predicate,object}`, and follow all subsequent next-page links.
 3. https://ruben.verborgh.org/profile/: No hypermedia, so fallback to querying over all triples in the returned data stream.
+
+<div class="note">
+If multiple links are being followed, the metadata object corresponding to the current quad pattern will be
+incrementally updated after each link that is being followed.
+This is done using the rdf-metadata-accumulate bus, which has dedicated actors for handling how to merge specific
+metadata fields together.
+</div>

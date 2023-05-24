@@ -12,6 +12,92 @@ Other configurations such as [Comunica SPARQL HDT](https://github.com/comunica/c
 This builds upon the [core architecture](/docs/modify/advanced/architecture_core/) of _actors_, _mediators_, and _buses_.
 An overview of how these buses and actors are connected can be found in the [SPARQL architecture](/docs/modify/advanced/architecture_sparql/).
 
+## Context Preprocess
+
+_Package: [`@comunica/bus-context-preprocess`](https://github.com/comunica/comunica/tree/master/packages/bus-context-preprocess)_
+
+A bus in which actors can optionally modify the [query context](/docs/query/advanced/context/).
+
+Subscribed actors need to implement [`ActorContextPreprocess`](https://comunica.github.io/comunica/classes/bus_context_preprocess.ActorContextPreprocess.html).
+
+_Contains no actors yet._
+
+
+## Dereference
+
+_Package: [`@comunica/bus-dereference`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference)_
+
+Dereferences a path or URL into a (generic) stream.
+
+Subscribed actors need to implement [`ActorDereference`](https://comunica.github.io/comunica/classes/bus_dereference.ActorDereference.html).
+
+### Actors
+
+| Name     | Package                                                                                                                    | Description                                |
+|----------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| File     | [`@comunica/actor-dereference-file`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-file)     | Dereferences a local file.                 |
+| HTTP     | [`@comunica/actor-dereference-http`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-http)     | Dereferences a remote file.                |
+| Fallback | [`@comunica/actor-dereference-fallback`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-fallback) | A fallback actor with the lowest priority. |
+
+
+## Dereference RDF
+
+_Package: [`@comunica/bus-dereference-rdf`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference-rdf)_
+
+Dereferences a path or URL into a stream of quads.
+
+Subscribed actors need to implement [`ActorDereferenceRdf`](https://comunica.github.io/comunica/classes/bus_dereference_rdf.ActorDereferenceRdf.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| Parse | [`@comunica/actor-dereference-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-rdf-parse) | Dereferences RDF using [`@comunica/bus-dereference`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference). Invokes parsing with [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse). |
+
+
+## Hash Bindings
+
+_Package: [`@comunica/bus-hash-bindings`](https://github.com/comunica/comunica/tree/master/packages/bus-hash-bindings)_
+
+A bus for hashing `Bindings`.
+
+Subscribed actors need to implement [`ActorHashBindings`](https://comunica.github.io/comunica/classes/bus_hash_bindings.ActorHashBindings.html).
+
+### Actors
+
+| Name | Package                                                                                                                       | Description                 |
+|------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| SHA1 | [`@comunica/actor-hash-bindings-sha1`](https://github.com/comunica/comunica/tree/master/packages/actor-hash-bindings-sha1) | Hashes bindings using SHA1. |
+
+
+## HTTP
+
+_Package: [`@comunica/bus-http`](https://github.com/comunica/comunica/tree/master/packages/bus-http)_
+
+Performs HTTP(S) requests.
+
+Subscribed actors need to implement [`ActorHttp`](https://comunica.github.io/comunica/classes/bus_http.ActorHttp.html).
+
+### Actors
+
+| Name    | Package                                                                                                        | Description                                                       |
+|---------|----------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
+| Memento | [`@comunica/actor-http-memento`](https://github.com/comunica/comunica/tree/master/packages/actor-http-memento) | Implements the [Memento protocol](/docs/query/advanced/memento/). |
+| Native  | [`@comunica/actor-http-native`](https://github.com/comunica/comunica/tree/master/packages/actor-http-native)   | Performs requests using Node's request library.                   |
+| Fetch   | [`@comunica/actor-http-fetch`](https://github.com/comunica/comunica/tree/master/packages/actor-http-fetch)     | Performs requests using the fetch API.                            |
+| Proxy   | [`@comunica/actor-http-proxy`](https://github.com/comunica/comunica/tree/master/packages/actor-http-proxy)     | Run requests through a proxy.                                     |
+| Wayback | [`@comunica/actor-http-wayback`](https://github.com/comunica/comunica/tree/master/packages/actor-http-wayback)   | Run requests through the Wayback machine.                         |
+
+
+## HTTP Invalidate
+
+_Package: [`@comunica/bus-http-invalidate`](https://github.com/comunica/comunica/tree/master/packages/bus-http-invalidate)_
+
+A bus for HTTP invalidation events.
+
+Subscribed actors need to implement [`ActorHttpInvalidate`](https://comunica.github.io/comunica/classes/bus_http.ActorHttp.html).
+
+
 ## Init
 
 _Package: [`@comunica/bus-init`](https://github.com/comunica/comunica/tree/master/packages/bus-init)_
@@ -25,33 +111,6 @@ Subscribed actors need to implement [`ActorInit`](https://comunica.github.io/com
 | Name | Package | Description |
 | ---- | ------- | ----------- |
 | Query | [`@comunica/actor-init-query`](https://github.com/comunica/comunica/tree/master/packages/actor-init-query) | Initializes query execution by parsing a given query, optimizing, executing, and serializing results. |
-
-
-## Context Preprocess
-
-_Package: [`@comunica/bus-context-preprocess`](https://github.com/comunica/comunica/tree/master/packages/bus-context-preprocess)_
-
-A bus in which actors can optionally modify the [query context](/docs/query/advanced/context/).
-
-Subscribed actors need to implement [`ActorContextPreprocess`](https://comunica.github.io/comunica/classes/bus_context_preprocess.ActorContextPreprocess.html).
-
-_Contains no actors yet._
-
-
-## Query Parse
-
-_Package: [`@comunica/bus-query-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-query-parse)_
-
-Parsing an input query into (SPARQL) algebra.
-
-Subscribed actors need to implement [`ActorQueryParse`](https://comunica.github.io/comunica/classes/bus_query_parse.ActorQueryParse.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| SPARQL | [`@comunica/actor-query-parse-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-query-parse-sparql) | Uses [SPARQLAlgebra.js](https://github.com/joachimvh/SPARQLAlgebra.js) for parsing SPARQL query strings into SPARQL algebra. |
-| GraphQL | [`@comunica/actor-query-parse-graphql`](https://github.com/comunica/comunica/tree/master/packages/actor-query-parse-graphql) | Parses GraphQL strings into SPARQL algebra following the [GraphQL-LD](/docs/query/advanced/graphql_ld/) approach. |
 
 
 ## Optimize Query Operation
@@ -126,44 +185,45 @@ or [`ActorQueryOperationTyped`](https://comunica.github.io/comunica/classes/bus_
 | Update Load | [`@comunica/actor-query-operation-update-load`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-load) | Handles `LOAD` operations. |
 | Update Move | [`@comunica/actor-query-operation-update-move-rewrite`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-update-move-rewrite) | Handles `COPY` operations by rewriting the operation in terms of drop and add. |
 
-## Query Serialize
 
-_Package: [`@comunica/bus-query-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-query-serialize)_
+## Query Parse
+
+_Package: [`@comunica/bus-query-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-query-parse)_
+
+Parsing an input query into (SPARQL) algebra.
+
+Subscribed actors need to implement [`ActorQueryParse`](https://comunica.github.io/comunica/classes/bus_query_parse.ActorQueryParse.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| SPARQL | [`@comunica/actor-query-parse-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-query-parse-sparql) | Uses [SPARQLAlgebra.js](https://github.com/joachimvh/SPARQLAlgebra.js) for parsing SPARQL query strings into SPARQL algebra. |
+| GraphQL | [`@comunica/actor-query-parse-graphql`](https://github.com/comunica/comunica/tree/master/packages/actor-query-parse-graphql) | Parses GraphQL strings into SPARQL algebra following the [GraphQL-LD](/docs/query/advanced/graphql_ld/) approach. |
+
+
+## Query Result Serialize
+
+_Package: [`@comunica/bus-query-result-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-query-result-serialize)_
 
 Serializes the query result into a text-based serialization.
 
-Subscribed actors need to implement [`ActorQuerySerialize`](https://comunica.github.io/comunica/classes/bus_query_serialize.actorqueryserialize.html).
+Subscribed actors need to implement [`ActorQueryResultSerialize`](https://comunica.github.io/comunica/classes/bus_query_result_serialize.ActorQueryResultSerialize.html).
 
 ### Actors
 
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| JSON | [`@comunica/actor-query-serialize-json`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-json) | Serializes to a simple JSON format. |
-| RDF | [`@comunica/actor-query-serialize-rdf`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-rdf) | Serializes to an RDF format by delegating to [`@comunica/bus-rdf-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-serialize). |
-| Simple | [`@comunica/actor-query-serialize-simple`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-) | Serializes to a simple format. |
-| SPARQL CSV | [`@comunica/actor-query-serialize-sparql-csv`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-csv) | Serializes to SPARQL/CSV. |
-| SPARQL JSON | [`@comunica/actor-query-serialize-sparql-json`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-json) | Serializes to SPARQL/JSON. |
-| SPARQL TSV | [`@comunica/actor-query-serialize-sparql-tsv`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-tsv) | Serializes to SPARQL/TSV. |
-| SPARQL XML | [`@comunica/actor-query-serialize-sparql-xml`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-xml) | Serializes to SPARQL/XML. |
-| Stats | [`@comunica/actor-query-serialize-stats`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-stats) | Serializes basic statistics. |
-| Table | [`@comunica/actor-query-serialize-table`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-table) | Serializes in a simple table format. |
-| Tree | [`@comunica/actor-query-serialize-tree`](https://github.com/comunica/comunica/tree/master/packages/actor-query-serialize-tree) | Serializes to a JSON tree. |
-
-
-## RDF Serialize
-
-_Package: [`@comunica/bus-rdf-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-serialize)_
-
-Serializes quads to an RDF serialization format.
-
-Subscribed actors need to implement [`ActorRdfSerialize`](https://comunica.github.io/comunica/classes/bus_rdf_serialize.ActorRdfSerialize.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| JSON-LD | [`@comunica/actor-rdf-serialize-jsonld`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-serialize-jsonld) | Serializes to JSON-LD. |
-| N3 | [`@comunica/actor-rdf-serialize-n3`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-serialize-n3) | Serializes to Turtle, Trig, N-triples, or N-Quads. |
+| Name | Package                                                                                                                               | Description |
+| ---- |---------------------------------------------------------------------------------------------------------------------------------------| ----------- |
+| JSON | [`@comunica/actor-query-result-serialize-json`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-json) | Serializes to a simple JSON format. |
+| RDF | [`@comunica/actor-query-result-serialize-rdf`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-rdf)          | Serializes to an RDF format by delegating to [`@comunica/bus-rdf-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-serialize). |
+| Simple | [`@comunica/actor-query-result-serialize-simple`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-)          | Serializes to a simple format. |
+| SPARQL CSV | [`@comunica/actor-query-result-serialize-sparql-csv`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-csv)   | Serializes to SPARQL/CSV. |
+| SPARQL JSON | [`@comunica/actor-query-result-serialize-sparql-json`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-json) | Serializes to SPARQL/JSON. |
+| SPARQL TSV | [`@comunica/actor-query-result-serialize-sparql-tsv`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-tsv)   | Serializes to SPARQL/TSV. |
+| SPARQL XML | [`@comunica/actor-query-result-serialize-sparql-xml`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-xml)   | Serializes to SPARQL/XML. |
+| Stats | [`@comunica/actor-query-result-serialize-stats`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-stats)      | Serializes basic statistics. |
+| Table | [`@comunica/actor-query-result-serialize-table`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-table)      | Serializes in a simple table format. |
+| Tree | [`@comunica/actor-query-result-serialize-tree`](https://github.com/comunica/comunica/tree/master/packages/actor-query-result-serialize-tree)        | Serializes to a JSON tree. |
 
 
 ## RDF Join
@@ -225,117 +285,6 @@ Subscribed actors need to implement [`ActorRdfJoinSelectivity`](https://comunica
 | Variable Counting | [`@comunica/actor-rdf-join-selectivity-variable-counting`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-join-selectivity-variable-counting) | Estimates the selectivity by counting the overlap of variables and non-variables in patterns. |
 
 
-## RDF Resolve Quad Pattern
-
-_Package: [`@comunica/bus-rdf-resolve-quad-pattern`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-resolve-quad-pattern)_
-
-Translates a quad pattern into a stream of quad.
-
-Subscribed actors need to implement [`ActorRdfResolveQuadPattern`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_quad_pattern.ActorRdfResolveQuadPattern.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| Federated | [`@comunica/actor-rdf-resolve-quad-pattern-federated`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-federated) | Translates the array of sources in the [query context](/docs/query/advanced/context/) into the union of quad streams by resolving each source separately in the *RDF Resolve Quad Pattern* bus. |
-| Hypermedia | [`@comunica/actor-rdf-resolve-quad-pattern-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-hypermedia) | Resolves the quad stream of a resource by interpreting hypermedia links and controls. |
-| RDF/JS Source | [`@comunica/actor-rdf-resolve-quad-pattern-rdfjs-source`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-rdfjs-source) | Resolves the quad stream from an [RDF/JS Source](/docs/query/advanced/rdfjs_querying/) |
-
-
-## Dereference
-
-_Package: [`@comunica/bus-dereference`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference)_
-
-Dereferences a path or URL into a (generic) stream.
-
-Subscribed actors need to implement [`ActorDereference`](https://comunica.github.io/comunica/classes/bus_dereference.ActorDereference.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| File | [`@comunica/actor-dereference-file`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-file) | Dereferences a local file. |
-| HTTP | [`@comunica/actor-dereference-http-parse`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-http-parse) | Dereferences a remote file. |
-
-
-## Dereference RDF
-
-_Package: [`@comunica/bus-dereference-rdf`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference-rdf)_
-
-Dereferences a path or URL into a stream of quads.
-
-Subscribed actors need to implement [`ActorDereferenceRdf`](https://comunica.github.io/comunica/classes/bus_dereference_rdf.ActorDereferenceRdf.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| Parse | [`@comunica/actor-dereference-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/actor-dereference-rdf-parse) | Dereferences RDF using [`@comunica/bus-dereference`](https://github.com/comunica/comunica/tree/master/packages/bus-dereference). Invokes parsing with [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse). |
-
-
-## RDF Parse
-
-_Package: [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse)_
-
-Parses quads from a serialization format.
-
-Subscribed actors need to implement [`ActorRdfParse`](https://comunica.github.io/comunica/classes/bus_rdf_parse.ActorRdfParse.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| HTML | [`@comunica/actor-rdf-parse-html`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html) | Parses HTML documents by delegating to [`@comunica/bus-rdf-parse-html`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse-html). |
-| JSON-LD | [`@comunica/actor-rdf-parse-jsonld`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-jsonld) | Parses JSON-LD. |
-| N3 | [`@comunica/actor-rdf-parse-n3`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-n3) | Parses Turtle, Trig, N-triples, or N-Quads. |
-| RDF/XML | [`@comunica/actor-rdf-parse-rdfxml`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-rdfxml) | Parses RDF/XML. |
-| XML RDFa | [`@comunica/actor-rdf-parse-xml-rdfa`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-xml-rdfa) | Parses RDFa in XML. |
-
-
-## RDF Parse HTML
-
-_Package: [`@comunica/bus-rdf-parse-html`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse-html)_
-
-Parses quads from an HTML document.
-
-Subscribed actors need to implement [`ActorRdfParseHtml`](https://comunica.github.io/comunica/classes/bus_rdf_parse_html.ActorRdfParseHtml.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| RDFa | [`@comunica/actor-rdf-parse-html-rdfa`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-rdfa) | Parses RDFa. |
-| Microdata | [`@comunica/actor-rdf-parse-html-microdata`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-microdata) | Parses Microdata to RDF. |
-| Script | [`@comunica/actor-rdf-parse-html-script`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-script) | Parses script tags and attempts to parse them by delegating to [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse). |
-
-
-## HTTP
-
-_Package: [`@comunica/bus-http`](https://github.com/comunica/comunica/tree/master/packages/bus-http)_
-
-Performs HTTP(S) requests.
-
-Subscribed actors need to implement [`ActorHttp`](https://comunica.github.io/comunica/classes/bus_http.ActorHttp.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| Memento | [`@comunica/actor-http-memento`](https://github.com/comunica/comunica/tree/master/packages/actor-http-memento) | Implements the [Memento protocol](/docs/query/advanced/memento/). |
-| Native | [`@comunica/actor-http-native`](https://github.com/comunica/comunica/tree/master/packages/actor-http-native) | Performs requests using Node's request library. |
-| Fetch | [`@comunica/actor-http-fetch`](https://github.com/comunica/comunica/tree/master/packages/actor-http-fetch) | Performs requests using the fetch API. |
-| Proxy | [`@comunica/actor-http-proxy`](https://github.com/comunica/comunica/tree/master/packages/actor-http-proxy) | Run requests through a proxy. |
-
-
-## HTTP Invalidate
-
-_Package: [`@comunica/bus-http-invalidate`](https://github.com/comunica/comunica/tree/master/packages/bus-http-invalidate)_
-
-A bus for HTTP invalidation events.
-
-Subscribed actors need to implement [`ActorHttpInvalidate`](https://comunica.github.io/comunica/classes/bus_http.ActorHttp.html).
-
-
 ## RDF Metadata
 
 _Package: [`@comunica/bus-rdf-metadata`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-metadata)_
@@ -351,6 +300,23 @@ Subscribed actors need to implement [`ActorRdfMetadata`](https://comunica.github
 | All | [`@comunica/actor-rdf-metadata-all`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-all) | Considers all incoming quads as both data and metadata quads. |
 | Primary topic | [`@comunica/actor-rdf-metadata-primary-topic`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-primary-topic) | Splits off the metadata based on the existence of a `foaf:primaryTopic` link. |
 
+
+## RDF Metadata Accumulate
+
+_Package: [`@comunica/bus-rdf-metadata-accumulate`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-metadata-accumulate)_
+
+A bus for aggregating metadata objects together.
+
+Subscribed actors need to implement [`ActorRdfMetadataAccumulate`](https://comunica.github.io/comunica/classes/bus_rdf_metadata_accumulate.ActorRdfMetadataAccumulate.html).
+
+### Actors
+
+| Name               | Package                                                                                                                                                                | Description                              |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|
+| Can Contain Undefs | [`@comunica/actor-rdf-metadata-accumulate-cancontainundefs`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-accumulate-cancontainundefs) | Accumulate the `canContainUndefs` field. |
+| Cardinality        | [`@comunica/actor-rdf-metadata-accumulate-cardinality`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-accumulate-cardinality)           | Accumulate the `cardinality` field.      |
+| Page Size          | [`@comunica/actor-rdf-metadata-accumulate-pagesize`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-accumulate-pagesize)                 | Accumulate the `pageSize` field.         |
+| Request Time       | [`@comunica/actor-rdf-metadata-accumulate-requesttime`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-accumulate-requesttime)           | Accumulate the `requestTime` field.      |
 
 ## RDF Metadata Extract
 
@@ -372,6 +338,60 @@ Subscribed actors need to implement [`ActorRdfMetadataExtract`](https://comunica
 | Put Accepted | [`@comunica/actor-rdf-metadata-extract-put-accepted`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-put-accepted) | Extracts the [`Accept-Put`](https://solidproject.org/TR/protocol#accept-put) HTTP response header. |
 | Request Time | [`@comunica/actor-rdf-metadata-extract-request-time`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-request-time) | Extracts the time it took to request the page in milliseconds. |
 | SPARQL Service | [`@comunica/actor-rdf-metadata-extract-sparql-service`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-metadata-extract-sparql-service) | Extract SPARQL service description metadata. |
+
+
+## RDF Parse
+
+_Package: [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse)_
+
+Parses quads from a serialization format.
+
+Subscribed actors need to implement [`ActorRdfParse`](https://comunica.github.io/comunica/classes/bus_rdf_parse.ActorRdfParse.html).
+
+### Actors
+
+| Name     | Package                                                                                                                    | Description                                                                                                                                            |
+|----------|----------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| HTML     | [`@comunica/actor-rdf-parse-html`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html)         | Parses HTML documents by delegating to [`@comunica/bus-rdf-parse-html`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse-html). |
+| JSON-LD  | [`@comunica/actor-rdf-parse-jsonld`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-jsonld)     | Parses JSON-LD.                                                                                                                                        |
+| N3       | [`@comunica/actor-rdf-parse-n3`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-n3)             | Parses Turtle, Trig, N-triples, or N-Quads.                                                                                                            |
+| RDF/XML  | [`@comunica/actor-rdf-parse-rdfxml`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-rdfxml)     | Parses RDF/XML.                                                                                                                                        |
+| XML RDFa | [`@comunica/actor-rdf-parse-xml-rdfa`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-xml-rdfa) | Parses RDFa in XML.                                                                                                                                    |
+| SHACLC   | [`@comunica/actor-rdf-parse-shaclc`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-shaclc)     | Parses SHACLC.                                                                                                                                         |
+
+
+## RDF Parse HTML
+
+_Package: [`@comunica/bus-rdf-parse-html`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse-html)_
+
+Parses quads from an HTML document.
+
+Subscribed actors need to implement [`ActorRdfParseHtml`](https://comunica.github.io/comunica/classes/bus_rdf_parse_html.ActorRdfParseHtml.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| RDFa | [`@comunica/actor-rdf-parse-html-rdfa`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-rdfa) | Parses RDFa. |
+| Microdata | [`@comunica/actor-rdf-parse-html-microdata`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-microdata) | Parses Microdata to RDF. |
+| Script | [`@comunica/actor-rdf-parse-html-script`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-parse-html-script) | Parses script tags and attempts to parse them by delegating to [`@comunica/bus-rdf-parse`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-parse). |
+
+
+## RDF Resolve Hypermedia
+
+_Package: [`@comunica/bus-rdf-resolve-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-resolve-hypermedia)_
+
+Handle a source based on the extracted metadata.
+
+Subscribed actors need to implement [`ActorRdfResolveHypermedia`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_hypermedia.ActorRdfResolveHypermedia.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| None | [`@comunica/actor-rdf-resolve-hypermedia-none`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-none) | The source is considered a raw RDF file, for which all data quads matching the quad pattern are returned. |
+| QPF | [`@comunica/actor-rdf-resolve-hypermedia-qpf`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-qpf) | The source is considered a [Triple/Quad Pattern Fragments](https://linkeddatafragments.org/) interface. |
+| SPARQL | [`@comunica/actor-rdf-resolve-hypermedia-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-sparql) | The source is considered a SPARQL endpoint if it has a service description, for which we use the SPARQL protocol. |
 
 
 ## RDF Resolve Hypermedia Links
@@ -404,21 +424,54 @@ Subscribed actors need to implement [`ActorRdfResolveHypermediaLinksQueue`](http
 | FIFO | [`@comunica/actor-rdf-resolve-hypermedia-links-queue-fifo`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-links-queue-fifo) | Provides a link queue following the first in, first out strategy |
 
 
-## RDF Resolve Hypermedia
+## RDF Resolve Quad Pattern
 
-_Package: [`@comunica/bus-rdf-resolve-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-resolve-hypermedia)_
+_Package: [`@comunica/bus-rdf-resolve-quad-pattern`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-resolve-quad-pattern)_
 
-Handle a source based on the extracted metadata.
+Translates a quad pattern into a stream of quad.
 
-Subscribed actors need to implement [`ActorRdfResolveHypermedia`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_hypermedia.ActorRdfResolveHypermedia.html).
+Subscribed actors need to implement [`ActorRdfResolveQuadPattern`](https://comunica.github.io/comunica/classes/bus_rdf_resolve_quad_pattern.ActorRdfResolveQuadPattern.html).
 
 ### Actors
 
 | Name | Package | Description |
 | ---- | ------- | ----------- |
-| None | [`@comunica/actor-rdf-resolve-hypermedia-none`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-none) | The source is considered a raw RDF file, for which all data quads matching the quad pattern are returned. |
-| QPF | [`@comunica/actor-rdf-resolve-hypermedia-qpf`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-qpf) | The source is considered a [Triple/Quad Pattern Fragments](https://linkeddatafragments.org/) interface. |
-| SPARQL | [`@comunica/actor-rdf-resolve-hypermedia-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-hypermedia-sparql) | The source is considered a SPARQL endpoint if it has a service description, for which we use the SPARQL protocol. |
+| Federated | [`@comunica/actor-rdf-resolve-quad-pattern-federated`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-federated) | Translates the array of sources in the [query context](/docs/query/advanced/context/) into the union of quad streams by resolving each source separately in the *RDF Resolve Quad Pattern* bus. |
+| Hypermedia | [`@comunica/actor-rdf-resolve-quad-pattern-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-hypermedia) | Resolves the quad stream of a resource by interpreting hypermedia links and controls. |
+| RDF/JS Source | [`@comunica/actor-rdf-resolve-quad-pattern-rdfjs-source`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-rdfjs-source) | Resolves the quad stream from an [RDF/JS Source](/docs/query/advanced/rdfjs_querying/) |
+
+
+## RDF Serialize
+
+_Package: [`@comunica/bus-rdf-serialize`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-serialize)_
+
+Serializes quads to an RDF serialization format.
+
+Subscribed actors need to implement [`ActorRdfSerialize`](https://comunica.github.io/comunica/classes/bus_rdf_serialize.ActorRdfSerialize.html).
+
+### Actors
+
+| Name    | Package                                                                                                                        | Description                                        |
+|---------|--------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| JSON-LD | [`@comunica/actor-rdf-serialize-jsonld`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-serialize-jsonld) | Serializes to JSON-LD.                             |
+| N3      | [`@comunica/actor-rdf-serialize-n3`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-serialize-n3)         | Serializes to Turtle, Trig, N-triples, or N-Quads. |
+| SHACLC  | [`@comunica/actor-rdf-serialize-shaclc`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-serialize-shaclc) | Serializes to SHACLC.                              |
+
+
+## RDF Update Hypermedia
+
+_Package: [`@comunica/bus-rdf-update-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-update-hypermedia)_
+
+Handle a destination based on the extracted metadata.
+
+Subscribed actors need to implement [`ActorRdfUpdateHypermedia`](https://comunica.github.io/comunica/classes/bus_rdf_update_hypermedia.ActorRdfUpdateHypermedia.html).
+
+### Actors
+
+| Name | Package | Description |
+| ---- | ------- | ----------- |
+| SPARQL | [`@comunica/actor-rdf-update-hypermedia-patch-sparql-update`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-update-hypermedia-patch-sparql-update) | The destination is considered an HTTP APIs accepting `PATCH` requests containing SPARQL Update queries (`application/sparql-update`), such as [Solid servers](https://github.com/solid/solid-spec/blob/master/api-rest.md#alternative-using-sparql-1). |
+
 
 ## RDF Update Quads
 
@@ -435,18 +488,3 @@ or [`ActorRdfUpdateQuadsDestination`](https://comunica.github.io/comunica/classe
 | ---- | ------- | ----------- |
 | RDF/JS Store | [`@comunica/actor-rdf-update-quads-rdfjs-store`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-update-quads-rdfjs-store) | The destination is considered an [RDF/JS Store](https://comunica.dev/docs/query/advanced/rdfjs_querying/). |
 | Hypermedia | [`@comunica/actor-rdf-update-quads-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-update-quads-hypermedia) | The destination that handles updates by interpreting hypermedia links and controls. |
-
-
-## RDF Update Hypermedia
-
-_Package: [`@comunica/bus-rdf-update-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/bus-rdf-update-hypermedia)_
-
-Handle a destination based on the extracted metadata.
-
-Subscribed actors need to implement [`ActorRdfUpdateHypermedia`](https://comunica.github.io/comunica/classes/bus_rdf_update_hypermedia.ActorRdfUpdateHypermedia.html).
-
-### Actors
-
-| Name | Package | Description |
-| ---- | ------- | ----------- |
-| SPARQL | [`@comunica/actor-rdf-update-hypermedia-patch-sparql-update`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-update-hypermedia-patch-sparql-update) | The destination is considered an HTTP APIs accepting `PATCH` requests containing SPARQL Update queries (`application/sparql-update`), such as [Solid servers](https://github.com/solid/solid-spec/blob/master/api-rest.md#alternative-using-sparql-1). |
