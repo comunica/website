@@ -10,7 +10,7 @@ This metadata can then be used to determine how the remaining query execution sh
 
 ## Interface
 
-All bindings streams and quad streams are coupled with a [`IMetadata`](https://comunica.github.io/comunica/interfaces/types.IMetadata.html) object,
+All bindings streams and quad streams are coupled with a [`IMetadata`](https://comunica.github.io/comunica/interfaces/_comunica_types.IMetadata.html) object,
 which could look as follows:
 ```json
 {
@@ -106,7 +106,7 @@ CardinalityOut: { type: 'estimate', value: 105 }
 
 ## States
 
-All metadata objects have a `state` field, which refers to an [`IMetadataValidationState`](https://comunica.github.io/comunica/interfaces/types.IMetadataValidationState.html).
+All metadata objects have a `state` field, which refers to an [`IMetadataValidationState`](https://comunica.github.io/comunica/interfaces/_comunica_types.IMetadataValidationState.html).
 This state allows you to inspect if this metadata is still valid, or to listen to metadata invalidations.
 If a metadata object is invalid, it should not be used anymore, and a new version should be requested from the bindings or quad stream.
 

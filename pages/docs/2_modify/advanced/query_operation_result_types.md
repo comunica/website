@@ -16,17 +16,17 @@ This document gives an overview of how these different output types are represen
 All relevant types and interfaces are exposed by the
 [Comunica types package](https://github.com/comunica/comunica/tree/master/packages/types).
 
-[`IQueryOperationResult`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresult)
+[`IQueryOperationResult`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResult.html)
 is a TypeScript union type over the following interfaces:
 
-* [`IQueryOperationResultBindings`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresultbindings): Represents a stream of bindings.
-* [`IQueryOperationResultQuads`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresultquads): Represents a stream of quads.
-* [`IQueryOperationResultBoolean`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresultboolean): Represents a boolean result.
-* [`IQueryOperationResultVoid`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresultvoid): Represents a void result.
+* [`IQueryOperationResultBindings`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResultBindings.html): Represents a stream of bindings.
+* [`IQueryOperationResultQuads`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResultQuads.html): Represents a stream of quads.
+* [`IQueryOperationResultBoolean`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResultBoolean.html): Represents a boolean result.
+* [`IQueryOperationResultVoid`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResultVoid.html): Represents a void result.
 
 ## Bindings output
 
-An output of type [`IQueryOperationResultBindings`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresultbindings)
+An output of type [`IQueryOperationResultBindings`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResultBindings.html)
 looks as follows:
 
 ```typescript
@@ -38,13 +38,13 @@ interface IQueryOperationResultBindings {
 }
 ```
 
-The most important field in here is `bindingsStream`, which is of type [`BindingsStream`](https://comunica.github.io/comunica/modules/types.html#bindingsstream).
+The most important field in here is `bindingsStream`, which is of type [`BindingsStream`](https://comunica.github.io/comunica/modules/_comunica_types.BindingsStream.html).
 This is a stream containing bindings.
 Learn more about the usage of these bindings objects in the [bindings guide](/docs/query/advanced/bindings/).
 
 ## Quads output
 
-An output of type [`IQueryOperationResultQuads`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresultquads)
+An output of type [`IQueryOperationResultQuads`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResultQuads.html)
 looks as follows:
 
 ```typescript
@@ -61,7 +61,7 @@ containing [RDF/JS quads](/docs/query/advanced/rdfjs/).
 
 ## Boolean output
 
-An output of type [`IQueryOperationResultBoolean`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresultboolean)
+An output of type [`IQueryOperationResultBoolean`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResultBoolean.html)
 looks as follows:
 
 ```typescript
@@ -76,7 +76,7 @@ The most important method in here is `execute`, which returns a promise resolvin
 
 ## Void output
 
-An output of type [`IQueryOperationResultVoid`](https://comunica.github.io/comunica/modules/types.html#iqueryoperationresultvoid)
+An output of type [`IQueryOperationResultVoid`](https://comunica.github.io/comunica/modules/_comunica_types.IQueryOperationResultVoid.html)
 looks as follows:
 
 ```typescript

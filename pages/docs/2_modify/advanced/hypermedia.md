@@ -275,7 +275,7 @@ For example:
 ## 5. Create a queue for managing links
 
 Using the [RDF Resolve Hypermedia Links Queue bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia-links-queue),
-a [`ILinkQueue`](https://comunica.github.io/comunica/interfaces/bus_rdf_resolve_hypermedia_links_queue.ilinkqueue.html) instance is created
+a [`ILinkQueue`](https://comunica.github.io/comunica/interfaces/_comunica_bus_rdf_resolve_hypermedia_links_queue.ilinkqueue.html) instance is created
 using which the order is determined to process links.
 
 By default, this will be a queue that processes links in FIFO order.

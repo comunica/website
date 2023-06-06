@@ -59,7 +59,7 @@ The following table gives an overview of all possible context entries that can b
 | `unionDefaultGraph` | If the default graph should also contain the union of all named graphs |
 | `localizeBlankNodes` | If blank nodes should be localized per bindings entry |
 
-When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/context_entries.html). 
+When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/_comunica_context_entries.html). 
 
 ## 3. Defining sources
 

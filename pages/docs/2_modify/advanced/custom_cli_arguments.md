@@ -35,7 +35,7 @@ which can be processed in any way.
 
 ## Creating CLI Arguments Handlers
 
-This argument handling can be done using one or more instances of [`ICliArgsHandler`](https://comunica.github.io/comunica/interfaces/actor_init_query.ICliArgsHandler.html),
+This argument handling can be done using one or more instances of [`ICliArgsHandler`](https://comunica.github.io/comunica/interfaces/_comunica_actor_init_query.ICliArgsHandler.html),
 which may be implemented as follows:
 ```typescript
 export class MyCliArgsHandler implements ICliArgsHandler {
