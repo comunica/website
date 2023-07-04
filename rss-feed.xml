@@ -101,5 +101,11 @@
             <guid isPermaLink="false">pages/blog/2023-05-24-release_2_7.md</guid>
             <pubDate>Sat, 24 Jun 2023 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 2.8.0: Support for quoted triples (RDF-star and SPARQL-star)]]></title>
+            <link>https://comunica.dev/blog/2023-07-04-release_2_8/</link>
+            <guid isPermaLink="false">pages/blog/2023-07-04-release_2_8.md</guid>
+            <pubDate>Fri, 04 Aug 2023 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
