@@ -9,17 +9,18 @@ This page summarizes the specifications Comunica implements.
 
 The following standard query specifications are supported:
 
-| **Description**                                                                                                        |
-|------------------------------------------------------------------------------------------------------------------------|
-| [SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/)                                                     |
-| [SPARQL 1.1 Update](https://www.w3.org/TR/sparql11-update/)                                                            |
-| [SPARQL 1.1 Service Description](https://www.w3.org/TR/sparql11-service-description/)                                  |
-| [SPARQL 1.1 Federated Query](https://www.w3.org/TR/sparql11-federated-query/)                                          |
-| [SPARQL 1.1 Query Results JSON Format](https://www.w3.org/TR/sparql11-results-json/)                                   |
-| [SPARQL Query Results XML Format (Second Edition)](https://www.w3.org/TR/rdf-sparql-XMLres/)                           |
-| [SPARQL 1.1 Query Results CSV and TSV Formats](https://www.w3.org/TR/sparql11-results-csv-tsv/)                        |
-| [SPARQL 1.1 Protocol](https://www.w3.org/TR/sparql11-protocol/)                                                        |
-| [SPARQL 1.2 SEP 0002 - Excluding ADJUST function](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md) |
+| **Description**                                                                                                         |
+|-------------------------------------------------------------------------------------------------------------------------|
+| [SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/)                                                      |
+| [SPARQL 1.1 Update](https://www.w3.org/TR/sparql11-update/)                                                             |
+| [SPARQL 1.1 Service Description](https://www.w3.org/TR/sparql11-service-description/)                                   |
+| [SPARQL 1.1 Federated Query](https://www.w3.org/TR/sparql11-federated-query/)                                           |
+| [SPARQL 1.1 Query Results JSON Format](https://www.w3.org/TR/sparql11-results-json/)                                    |
+| [SPARQL Query Results XML Format (Second Edition)](https://www.w3.org/TR/rdf-sparql-XMLres/)                            |
+| [SPARQL 1.1 Query Results CSV and TSV Formats](https://www.w3.org/TR/sparql11-results-csv-tsv/)                         |
+| [SPARQL 1.1 Protocol](https://www.w3.org/TR/sparql11-protocol/)                                                         |
+| [SPARQL next SEP 0002 - Excluding ADJUST function](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md) |
+| [RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)                                                    | 
 
 The following notable specifications are not supported _yet_:
 
