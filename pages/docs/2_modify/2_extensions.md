@@ -60,3 +60,7 @@ and rewrites them to operations with a version context.
 
 The [Comunica SPARQL OSTRICH package](https://github.com/rdfostrich/comunica-query-sparql-ostrich#readme)
 provides a default configuration that adds full SPARQL query support using other actors from Comunica SPARQL.
+
+## SPARQL-OTFC
+
+[SPARQL-OTFC](https://github.com/Flanders-Make-vzw/sparql-otfc#readme) extends the SPARQL query language with on-the-fly computations. It enables developers to host special predicates that do not exist in a queried data source yet are computed at runtime. To the end-user asking a query, these predicates behave just like regular predicates.
