@@ -3,7 +3,7 @@ title: 'Expression Evaluator'
 description: 'The expression evaluation engine of Comunica.'
 ---
 
-The expression evalutor package of Comunica is used by different Comunica actors for evaluating expressions.
+The expression evaluator package of Comunica is used by different Comunica actors for evaluating expressions.
 
 Concretely, the following actors make use of this:
 * [`@comunica/actor-query-operation-extend`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-extend): Implements the extent operator.
