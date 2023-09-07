@@ -47,8 +47,6 @@ const result: RDF.Term = await evaluator.evaluate(
 const result: boolean = await evaluator.evaluateAsEBV(bindings);
 ```
 
-Note: If you want to use *aggregates*, or *exists* you should check out the [stream section](#streams).
-
 ## Config
 
 The expression evaluator accepts an optional config argument, that is not required for simple use cases,
@@ -74,9 +72,7 @@ interface AsyncEvaluatorContext {
 }
 ```
 
-See the [stream](#streams) and [context dependant function](#context_dependant_functions) sections for more info.
-
-### Errors
+## Errors
 
 This package exports an Error class called `ExpressionError` from which all SPARQL related errors inherit.
 These might include unbound variables, wrong types, invalid lexical forms, and much more.
@@ -118,7 +114,7 @@ If these hooks are not present, but an existence expression is encountered, then
 
 An example consumer/hook can be found in [Comunica](https://github.com/comunica/comunica/blob/master/packages/actor-query-operation-filter-sparqlee/lib/ActorQueryOperationFilterSparqlee.ts).;
 
-### Aggregates
+## Aggregates
 
 An `AggregateEvaluator` to which you can pass the individual bindings in the stream, and ask the aggregated result back, is provided.
 It uses the internal type system for operations such as `sum` and `avg`.
@@ -154,7 +150,7 @@ You should also note the order of calling and awaiting put while using the `Grou
 
 This section explains how to pass extension functions to the evaluator.
 You don't need to do this directly. If you want to provide extension function to a
-Communica engine follow the [extension function docs](https://comunica.dev/docs/query/advanced/extension_functions/).
+Comunica engine follow the [extension function docs](https://comunica.dev/docs/query/advanced/extension_functions/).
 
 Extension functions can be added by providing the `extensionFunctionCreator` in the config.
 Example
