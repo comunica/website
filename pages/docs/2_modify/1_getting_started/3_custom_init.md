@@ -194,7 +194,7 @@ As such, add the following **bin entries to `package.json`**:
   },
 }
 ```
-_You can replace `my-comunica` with any name you want.`
+_You can replace `my-comunica` with any name you want._
 
 If needed, [custom arguments may be added to CLI tools](/docs/modify/advanced/custom_cli_arguments/).
 

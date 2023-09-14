@@ -157,7 +157,7 @@ and create a file called `config.json`.
 
 In this guide, we will start from
 the [Comunica SPARQL default config file](https://github.com/comunica/comunica/blob/master/engines/config-query-sparql/config/config-default.json).
-Let's **copy it's contents entirely into our `config.json`**:
+Let's **copy its contents entirely into our `config.json`**:
 ```json
 {
   "@context": [

@@ -37,7 +37,7 @@ Next, we will **clone** your fork to the local file system as follows:
 ```bash
 $ git clone https://github.com/<my-username>/comunica.git
 ```
-_Make sure your replace `<my-username>` with your GitHub username._
+_Make sure you replace `<my-username>` with your GitHub username._
 
 As a final setup step, we can install all dependencies as follows:
 ```bash
@@ -72,7 +72,7 @@ $ node bin/query.js https://fragments.dbpedia.org/2016-04/en \
 
 If this command produces valid output, your development environment has been successfully setup.
 
-Let's navigate back to the repo root so we're ready for the next step:
+Let's navigate back to the repo root, so we're ready for the next step:
 ```bash
 $ cd ../..
 ```
@@ -166,7 +166,7 @@ because this method will always [return bindings as query result](/docs/modify/a
 The first step of implementing the REDUCED actor,
 requires evaluating the sub-operation that this REDUCED operation exists over.
 
-For example, `REDUCED` can applied over the following BGP:
+For example, `REDUCED` can be applied over the following BGP:
 ```
 SELECT REDUCED * WHERE {
   ?s ?p <http://dbpedia.org/resource/Belgium>.

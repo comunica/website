@@ -22,7 +22,7 @@ Next, we will **clone** your fork to the local file system as follows:
 ```bash
 $ git clone https://github.com/<my-username>/jQuery-Widget.js.git
 ```
-_Make sure your replace `<my-username>` with your GitHub username._
+_Make sure you replace `<my-username>` with your GitHub username._
 
 As a final setup step, we can install all dependencies as follows:
 ```bash
@@ -39,7 +39,7 @@ First, install our package as a dependency:
 ```bash
 $ npm install my-package
 ```
-Make sure to replace `my-package` the name of [the package you created before](/docs/modify/getting_started/custom_init/).
+Make sure to replace `my-package` by the name of [the package you created before](/docs/modify/getting_started/custom_init/).
 
 Next, replace the `import` in `config/config-default.json` as follows:
 ```text
@@ -50,7 +50,7 @@ Next, replace the `import` in `config/config-default.json` as follows:
   ]
 }
 ```
-Make sure to replace the `"my"` prefix so it refers to the scope of your package.
+Make sure to replace the `"my"` prefix, so it refers to the scope of your package.
 
 ## 3. Build and run
 
