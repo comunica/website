@@ -7,6 +7,8 @@ description: 'An overview of research that has been done on Link-Traversal-based
 that enables querying over an interlinked set of Linked Data documents
 by following links between them.
 
+If you're mainly interested in Link Traversal from a Solid perspective, you can find details [here](/docs/query/advanced/solid/).
+
 Research is being done on LTQP through various implementations in Comunica.
 This page summarizes ongoing work, and provides links to demos.
 
