@@ -27,10 +27,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
-      - name: Check HTML ✅
-        run: |
-          gem install html-proofer -v '~> 3.19.4'
-          .github/htmlproofer.sh
       - name: Deploy 🚀
         if: startsWith(github.ref, 'refs/heads/master')
         uses: JamesIves/github-pages-deploy-action@3.6.2

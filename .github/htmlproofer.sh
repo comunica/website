@@ -8,4 +8,4 @@ htmlproofer ./out/ \
     --url-ignore "https://query.2020.eswc-conferences.org/,https://2019.eswc-conferences.org/" \
     --disable_external true \
     --extension .html \
-    --empty-alt-ignore || true
+    --empty-alt-ignore
