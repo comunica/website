@@ -112,7 +112,19 @@ bindingsStream.on('error', (error) => {
 });
 ```
 
-### 3.2 Consuming binding results as an array
+### 3.2 Consuming binding results as an async iterable
+
+Using a for-await loop, you can consume bindings as an [async iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols).
+While this is more compact than the stream-based approach, it may lead to a slightly lower level of performance:
+
+```javascript
+for await (const bindings of bindingsStream) {
+    console.log(bindings.get('s').value);
+    console.log(bindings.get('s').termType);
+}
+```
+
+### 3.3 Consuming binding results as an array
 
 If performance is not an issue in your application,
 or you just want the results in a simple array,
@@ -197,7 +209,22 @@ quadStream.on('error', (error) => {
 });
 ```
 
-### 5.2 Consuming quad results as an array
+### 5.2 Consuming quad results as an async iterable
+
+Just like with binding results,
+quads can also be consumed using for-await.:
+
+```javascript
+for await (const quad of quadStream) {
+    console.log(quad.subject.value);
+    console.log(quad.predicate.value);
+    console.log(quad.object.value);
+    console.log(quad.graph.value);
+}
+
+```
+
+### 5.3 Consuming quad results as an array
 
 Just like with binding results,
 if performance is not an issue in your application,

@@ -283,7 +283,7 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
 });
 ```
 
-## 18. Broken link recovery
+## 19. Broken link recovery
 
 The `recoverBrokenLinks` option can make your engine fall back to the [WayBack Machine](https://archive.org/web/) if a document has become unavailable.
 

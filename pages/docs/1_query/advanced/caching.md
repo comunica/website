@@ -14,3 +14,12 @@ myEngine.invalidateHttpCache();
 // Invalidate a single document
 myEngine.invalidateHttpCache('http://example.org/page.html');
 ```
+
+Optionally, you can also pass the `noCache: true` flag to your context to invalidate the cache before query execution starts:
+
+```javascript
+const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }`, {
+  sources: ['http://xmlns.com/foaf/spec/20140114.rdf'],
+  noCache: true,
+});
+```

@@ -163,7 +163,7 @@ For this, **create the following files**:
 ```typescript
 #!/usr/bin/env node
 import { runArgsInProcessStatic } from '@comunica/runner-cli';
-runArgsInProcessStatic(require('../engine-default.js'));
+runArgsInProcessStatic(require('../engine-default.js')());
 ```
 
 `bin/http.js`:
@@ -216,7 +216,7 @@ const engineDefault = require('../engine-default.js');
  * A Comunica SPARQL query engine.
  */
 export class QueryEngine extends QueryEngineBase {
-  public constructor(engine: ActorInitQueryBase = engineDefault) {
+  public constructor(engine: ActorInitQueryBase = engineDefault()) {
     super(engine);
   }
 }

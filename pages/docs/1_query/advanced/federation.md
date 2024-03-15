@@ -62,3 +62,8 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
                    dc:title ?title.
      }'
 ```
+
+<div class="note">
+The TPF-based source https://fragments.dbpedia.org/2016-04/en is interchangeable with SPARQL-endpoint-based source https://dbpedia.org/sparql.
+The engine will produce similar results as the sources represent the same dataset.
+</div>

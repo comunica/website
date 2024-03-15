@@ -48,15 +48,17 @@ const bindingsStream = await myEngine.queryBindings(`...`, {
 
 The table below summarizes the different source types that Comunica supports by default:
 
-| **Type name** | **Description** |
-| ------- | --------------- |
-| `file` | plain RDF file in any RDF serialization, such as [Turtle](https://www.w3.org/TR/turtle/), [TriG](https://www.w3.org/TR/trig/), [JSON-LD](https://json-ld.org/), [RDFa](https://www.w3.org/TR/rdfa-primer/), ... |
-| `sparql` | [SPARQL endpoint](https://www.w3.org/TR/sparql11-protocol/) |
-| `hypermedia` | Sources that expose query capabilities via hypermedia metadata, such as [Triple Pattern Fragments](https://linkeddatafragments.org/specification/triple-pattern-fragments/) and [Quad Pattern Fragments](https://linkeddatafragments.org/specification/quad-pattern-fragments/) |
-| `rdfjsSource` | JavaScript objects implementing the [RDF/JS `source` interface](/docs/query/advanced/rdfjs_querying/) |
-| `stringSource` | An RDF dataset serialized as a string in a certain format. |
-| `hdtFile` | [HDT files](/docs/query/advanced/hdt/) |
-| `ostrichFile` | Versioned [OSTRICH archives](https://github.com/rdfostrich/comunica-query-sparql-ostrich) |
+| **Type name** | **Description**                                                                                                                                                                                                                                                                |
+|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `file`        | plain RDF file in any RDF serialization, such as [Turtle](https://www.w3.org/TR/turtle/), [TriG](https://www.w3.org/TR/trig/), [JSON-LD](https://json-ld.org/), [RDFa](https://www.w3.org/TR/rdfa-primer/), ...                                                                |
+| `sparql`      | [SPARQL endpoint](https://www.w3.org/TR/sparql11-protocol/)                                                                                                                                                                                                                    |
+| `hypermedia`  | Sources that expose query capabilities via hypermedia metadata, such as [Triple Pattern Fragments](https://linkeddatafragments.org/specification/triple-pattern-fragments/) and [Quad Pattern Fragments](https://linkeddatafragments.org/specification/quad-pattern-fragments/) |
+| `qpf`         | A hypermedia source that is enforced as [Triple Pattern Fragments](https://linkeddatafragments.org/specification/triple-pattern-fragments/) or [Quad Pattern Fragments](https://linkeddatafragments.org/specification/quad-pattern-fragments/)                                 |
+| `brtpf`       | A hypermedia source that is enforced as [bindings-restricted Triple Pattern Fragments](https://arxiv.org/abs/1608.08148)                                                                                                                                                       |
+| `rdfjs`       | JavaScript objects implementing the [RDF/JS `source` interface](/docs/query/advanced/rdfjs_querying/)                                                                                                                                                                          |
+| `serialized`  | An RDF dataset serialized as a string in a certain format.                                                                                                                                                                                                                     |
+| `hdtFile`     | [HDT files](/docs/query/advanced/hdt/)                                                                                                                                                                                                                                         |
+| `ostrichFile` | Versioned [OSTRICH archives](https://github.com/rdfostrich/comunica-query-sparql-ostrich)                                                                                                                                                                                      |
 
 The default source type is `auto`,
 which will automatically detect the proper source type.
@@ -91,7 +93,7 @@ For example, querying over a Turtle-based datasource:
 const bindingsStream = await myEngine.queryBindings(`...`, {
   sources: [
     {
-      type: 'stringSource',
+      type: 'serialized',
       value: '<ex:s> <ex:p> <ex:o>. <ex:s> <ex:p2> <ex:o2>.',
       mediaType: 'text/turtle',
       baseIRI: 'http://example.org/',

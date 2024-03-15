@@ -16,16 +16,17 @@ the whole file will be downloaded and queried in-memory.
 <div class="note">
 This page only describes the handling of hypermedia for read queries.
 The handling of hypermedia for update queries happens in a very similar manner,
-with the main difference that the <a href="/docs/modify/advanced/buses/#rdf-resolve-hypermedia">RDF Resolve Hypermedia bus</a>
+with the main difference that the <a href="/docs/modify/advanced/buses/#query-source-identify-hypermedia">RDF Resolve Hypermedia bus</a>
 is replaced by the <a href="/docs/modify/advanced/buses/#rdf-update-hypermedia">RDF Update Hypermedia bus</a>.
 </div>
 
 ## Hypermedia actor
 
 The actor in Comunica that drives hypermedia handling is
-[`@comunica/actor-rdf-resolve-quad-pattern-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-hypermedia).
-This actor is registered to the [RDF Resolve Quad Pattern bus](/docs/modify/advanced/buses/#rdf-resolve-quad-pattern).
-This means that this actor will be invoked for every triple/quad pattern in the query.
+[`@comunica/actor-query-source-identify-hypermedia`](https://github.com/comunica/comunica/tree/master/packages/actor-rdf-resolve-quad-pattern-hypermedia).
+This actor is registered to the [Query Source Identify bus](/docs/modify/advanced/buses/#query-source-identify).
+This actor will be invoked once for each query during context preprocessing,
+and the identified source will be assigned to suboperations within the query.
 
 <div class="note">
 The <a href="/docs/modify/advanced/architecture_sparql/">SPARQL architecture</a>
@@ -42,7 +43,7 @@ the hypermedia actor will always go through the following steps:
 3. Extract metadata as object ([RDF Metadata Extract bus](/docs/modify/advanced/buses/#rdf-metadata-extract))
 4. Determine links to other sources ([RDF Resolve Hypermedia Links bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia-links))
 5. Create a queue for managing links ([RDF Resolve Hypermedia Links Queue bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia-links-queue))
-6. Handle source based on metadata ([RDF Resolve Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia))
+6. Handle source based on metadata ([Query Source Identify Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia))
 
 Hereafter, we go over these three steps using three example sources:
 
@@ -282,7 +283,7 @@ By default, this will be a queue that processes links in FIFO order.
 
 ## 6. Handle source based on metadata
 
-Finally, the [RDF Resolve Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia)
+Finally, the [Query Source Identify Hypermedia bus](/docs/modify/advanced/buses/#rdf-resolve-hypermedia)
 contains actors that can handle sources based on the extracted metadata.
 
 Concretely, the detected metadata will be given to each actor on the bus,
