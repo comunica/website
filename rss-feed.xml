@@ -107,5 +107,11 @@
             <guid isPermaLink="false">pages/blog/2023-07-04-release_2_8.md</guid>
             <pubDate>Fri, 04 Aug 2023 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 3.0: 🔥 Blazingly fast federation over heterogeneous sources]]></title>
+            <link>https://comunica.dev/blog/2024-03-19-release_3_0/</link>
+            <guid isPermaLink="false">pages/blog/2024-03-19-release_3_0.md</guid>
+            <pubDate>Fri, 19 Apr 2024 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>

@@ -57,24 +57,35 @@
 	\node[actor,below=1 of bus-init] (actor-init-query) {Query};
 	\draw[->,thick](bus-init.south) -- (actor-init-query.north);
 
-	\node[bus,below=of actor-init-query] (bus-query-operation) {Query Operation};
-	\node[bus,left=of bus-query-operation] (bus-optimize-query-operation) {Optimize Query Operation};
-	\node[bus,left=1 of bus-optimize-query-operation] (bus-query-parse) {Query Parse};
-	\node[bus,left=1 of bus-query-parse] (bus-context-preprocess) {Context Preprocess};
-	\node[bus,right=18 of bus-query-operation] (bus-query-serialize) {Query Serialize};
+    % Query Process
+    \node[bus,below=1 of actor-init-query] (bus-query-process) {Query Process};
+    \draw[->,thick](actor-init-query.south) -- (bus-query-process.north);
+    \node[actor,below=1 of bus-query-process] (actor-query-process-sequential) {Sequential};
+    \draw[->,thick](bus-query-process.south) -- (actor-query-process-sequential.north);
 
-	\draw[->,thick](actor-init-query.south) -- (bus-query-operation.north);
-	\draw[->,thick](actor-init-query.south) -- (bus-optimize-query-operation.north);
-	\draw[->,thick](actor-init-query.south) -- (bus-query-parse.north);
-	\draw[->,thick](actor-init-query.south) -- (bus-context-preprocess.north);
-	\draw[->,thick](actor-init-query.south) -- (bus-query-serialize.north);
+    \node[bus,below=of actor-query-process-sequential] (bus-query-operation) {Query Operation};
+    \node[bus,left=of bus-query-operation] (bus-optimize-query-operation) {Optimize Query Operation};
+    \node[bus,left=1 of bus-optimize-query-operation] (bus-query-parse) {Query Parse};
+    \node[bus,left=1 of bus-query-parse] (bus-context-preprocess) {Context Preprocess};
+
+    \draw[->,thick](actor-query-process-sequential.south) -- (bus-query-operation.north);
+	\draw[->,thick](actor-query-process-sequential.south) -- (bus-optimize-query-operation.north);
+	\draw[->,thick](actor-query-process-sequential.south) -- (bus-query-parse.north);
+	\draw[->,thick](actor-query-process-sequential.south) -- (bus-context-preprocess.north);
+
+	\node[bus,right=18 of bus-query-process] (bus-query-serialize) {Query Serialize};
+    \draw[->,thick](actor-init-query.south) -- (bus-query-serialize.north);
+
+    % Context Preprocess
+    \node[actor,below=1 of bus-context-preprocess] (actor-context-preprocess-query-source-identify) {Query Source Identify};
+	\draw[->,thick](bus-context-preprocess.south) -- (actor-context-preprocess-query-source-identify.north);
 
 	% Query Parse
 	\node[actor,below=1 of bus-query-parse] (actor-query-parse-algebra) {Algebra};
 	\draw[->,thick](bus-query-parse.south) -- (actor-query-parse-algebra.north);
 
 	% Optimize Query Operation
-	\node[actor,below=1 of bus-optimize-query-operation] (actor-optimize-query-operation-join-bgp) {Optimize Join BGP};
+	\node[actor,below=1 of bus-optimize-query-operation] (actor-optimize-query-operation-join-bgp) {Join BGP};
 	\draw[->,thick](bus-optimize-query-operation) -- (actor-optimize-query-operation-join-bgp.north);
 
 	% Query Operation
@@ -122,32 +133,32 @@
 	\draw[->,thick](bus-rdf-update-quads) -- (actor-rdf-update-quads-rdfjs-store.north);
     \draw[->,thick](bus-rdf-update-quads) -- (actor-rdf-update-quads-hypermedia.north);
 
-	% RDF Resolve Quad Pattern
-	\node[bus,below left=of actor-query-operation-quadpattern] (bus-rdf-resolve-quad-pattern) {RDF Resolve Quad Pattern};
-	\draw[->,thick](actor-query-operation-quadpattern.south) -- (bus-rdf-resolve-quad-pattern.north);
+	% Query Source Identify
+	\node[bus,below=1 of actor-context-preprocess-query-source-identify] (bus-query-source-identify) {Query Source Identify};
+	\draw[->,thick](actor-context-preprocess-query-source-identify.south) -- (bus-query-source-identify.north);
 
-	\node[actor,below=of bus-rdf-resolve-quad-pattern] (actor-rdf-resolve-quad-pattern-federated) {Federated};
-	\node[actor,right=of actor-rdf-resolve-quad-pattern-federated] (actor-rdf-resolve-quad-pattern-hypermedia) {Hypermedia};
-	\node[actor,left=of actor-rdf-resolve-quad-pattern-federated] (actor-rdf-resolve-quad-pattern-rdfjs) {RDF/JS};
-	\draw[<->,thick](bus-rdf-resolve-quad-pattern) -- (actor-rdf-resolve-quad-pattern-federated.north);
-	\draw[->,thick](bus-rdf-resolve-quad-pattern) -- (actor-rdf-resolve-quad-pattern-rdfjs.north);
-	\draw[->,thick](bus-rdf-resolve-quad-pattern) -- (actor-rdf-resolve-quad-pattern-hypermedia.north);
+	\node[actor,below=of bus-query-source-identify] (actor-query-source-identify-serialized) {Serialized};
+	\node[actor,right=of actor-query-source-identify-serialized] (actor-query-source-identify-hypermedia) {Hypermedia};
+	\node[actor,left=of actor-query-source-identify-serialized] (actor-query-source-identify-rdfjs) {RDF/JS};
+	\draw[<->,thick](bus-query-source-identify) -- (actor-query-source-identify-serialized.north);
+	\draw[->,thick](bus-query-source-identify) -- (actor-query-source-identify-rdfjs.north);
+	\draw[->,thick](bus-query-source-identify) -- (actor-query-source-identify-hypermedia.north);
 
-	% RDF Resolve Quad Pattern Hypermedia
-	\node[bus,below=of actor-rdf-resolve-quad-pattern-hypermedia] (bus-rdf-metadata-extract) {RDF Metadata Extract};
+	% Query Source Identify Hypermedia
+	\node[bus,below=of actor-query-source-identify-hypermedia] (bus-rdf-metadata-extract) {RDF Metadata Extract};
 	\node[bus,left=of bus-rdf-metadata-extract] (bus-rdf-metadata) {RDF Metadata};
 	\node[bus,left=6 of bus-rdf-metadata] (bus-dereference-rdf) {Dereference RDF};
 	\node[bus,right=of bus-rdf-metadata-extract] (bus-rdf-resolve-hypermedia-links) {RDF Hypermedia Links};
     \node[bus,right=1 of bus-rdf-resolve-hypermedia-links] (bus-rdf-resolve-hypermedia-links-queue) {RDF Links Queue};
-	\node[bus,right=of bus-rdf-resolve-hypermedia-links-queue] (bus-rdf-resolve-hypermedia) {RDF Resolve Hypermedia};
-    \node[bus,right=of bus-rdf-resolve-hypermedia] (bus-rdf-update-hypermedia) {RDF Update Hypermedia};
+	\node[bus,right=of bus-rdf-resolve-hypermedia-links-queue] (bus-query-source-identify-hypermedia) {Query Source Identify Hypermedia};
+    \node[bus,right=of bus-query-source-identify-hypermedia] (bus-rdf-update-hypermedia) {RDF Update Hypermedia};
 
-	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-metadata-extract.north);
-	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-metadata.north);
-	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-dereference-rdf.north);
-	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia.north);
-	\draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links.north);
-    \draw[->,thick](actor-rdf-resolve-quad-pattern-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links-queue.north);
+	\draw[->,thick](actor-query-source-identify-hypermedia.south) -- (bus-rdf-metadata-extract.north);
+	\draw[->,thick](actor-query-source-identify-hypermedia.south) -- (bus-rdf-metadata.north);
+	\draw[->,thick](actor-query-source-identify-hypermedia.south) -- (bus-dereference-rdf.north);
+	\draw[->,thick](actor-query-source-identify-hypermedia.south) -- (bus-query-source-identify-hypermedia.north);
+	\draw[->,thick](actor-query-source-identify-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links.north);
+    \draw[->,thick](actor-query-source-identify-hypermedia.south) -- (bus-rdf-resolve-hypermedia-links-queue.north);
 
 	\draw[->,thick,dashed](actor-rdf-update-quads-hypermedia.south) -- (bus-rdf-metadata-extract.north);
 	\draw[->,thick,dashed](actor-rdf-update-quads-hypermedia.south) -- (bus-rdf-metadata.north);
@@ -208,13 +219,13 @@
 	\node[actor,below=1 of bus-rdf-resolve-hypermedia-links-queue] (actor-rdf-resolve-hypermedia-links-queue-fifo) {FIFO};
 	\draw[->,thick](bus-rdf-resolve-hypermedia-links-queue) -- (actor-rdf-resolve-hypermedia-links-queue-fifo.north);
 
-	% RDF Resolve Hypermedia
-	\node[actor,below=1 of bus-rdf-resolve-hypermedia] (actor-rdf-resolve-hypermedia-sparql) {SPARQL};
-	\node[actor,left=1 of actor-rdf-resolve-hypermedia-sparql] (actor-rdf-resolve-hypermedia-none) {None};
-	\node[actor,right=1 of actor-rdf-resolve-hypermedia-sparql] (actor-rdf-resolve-hypermedia-qpf) {QPF};
-	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-sparql.north);
-	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-none.north);
-	\draw[->,thick](bus-rdf-resolve-hypermedia) -- (actor-rdf-resolve-hypermedia-qpf.north);
+	% Query Source Identify Hypermedia
+	\node[actor,below=1 of bus-query-source-identify-hypermedia] (actor-query-source-identify-hypermedia-sparql) {SPARQL};
+	\node[actor,left=1 of actor-query-source-identify-hypermedia-sparql] (actor-query-source-identify-hypermedia-none) {None};
+	\node[actor,right=1 of actor-query-source-identify-hypermedia-sparql] (actor-query-source-identify-hypermedia-qpf) {QPF};
+	\draw[->,thick](bus-query-source-identify-hypermedia) -- (actor-query-source-identify-hypermedia-sparql.north);
+	\draw[->,thick](bus-query-source-identify-hypermedia) -- (actor-query-source-identify-hypermedia-none.north);
+	\draw[->,thick](bus-query-source-identify-hypermedia) -- (actor-query-source-identify-hypermedia-qpf.north);
 
 	% RDF Update Hypermedia
 	\node[actor,below=1 of bus-rdf-update-hypermedia] (actor-rdf-update-hypermedia-patch-sparql-update) {Patch SPARQL Update};
