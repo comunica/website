@@ -30,7 +30,7 @@ export default function Home() {
             <img src="/img/ldf.svg" alt="Web" className="feature-icon" />
             <h3>Heterogeneous</h3>
             <p>
-              Execute queries over multiple data sources of different types.
+              Execute queries over multiple federated data sources of different types.
             </p>
           </div>
           <div className="card-info">
