@@ -46,8 +46,8 @@ The following components file shows how a `mediatorJoin` parameter is added to [
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-join/^2.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^2.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-join/^3.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^3.0.0/components/context.jsonld"
   ],
   "@id": "npmd:@comunica/actor-query-operation-join",
   "components": [
@@ -87,8 +87,8 @@ The following config file shows how we instantiate an actor with a race mediator
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-join/^2.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/mediator-race/^2.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-join/^3.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/mediator-race/^3.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:my",
   "actors": [

@@ -50,7 +50,7 @@ some examples below are shown to explain their most important parts.
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^2.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^3.0.0/components/context.jsonld"
   ],
   "@id": "npmd:@comunica/actor-query-operation-reduced-hash",
   "@type": "Module",
@@ -65,9 +65,9 @@ some examples below are shown to explain their most important parts.
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^2.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/core/^2.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^2.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^3.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/core/^3.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-query-operation/^3.0.0/components/context.jsonld"
   ],
   "@id": "npmd:@comunica/actor-query-operation-reduced-hash",
   "components": [
@@ -121,7 +121,7 @@ The prefix `caqorh:` identifies the scope of this package.
 Internally, this gives all files a unique URL
 that makes all modules and components _semantic_ and fully dereferenceable.
 For example, `"caqorh:components/ActorQueryOperationReducedHash.jsonld"`
-expands to the URL https://linkedsoftwaredependencies.org/bundles/npm/%40comunica%2Factor-query-operation-reduced-hash/^2.0.0/components/ActorQueryOperationReducedHash.jsonld.
+expands to the URL https://linkedsoftwaredependencies.org/bundles/npm/%40comunica%2Factor-query-operation-reduced-hash/^3.0.0/components/ActorQueryOperationReducedHash.jsonld.
 
 <div class="note">
 <a href="https://linkedsoftwaredependencies.org/">Linked Software Dependencies</a> is a service
@@ -186,10 +186,10 @@ The instantiation of a Comunica engine could look like this:
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^2.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-query/^2.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^2.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-construct/^2.0.0/components/context.jsonld"  
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^3.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-init-query/^3.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-reduced-hash/^3.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-construct/^3.0.0/components/context.jsonld"  
   ],
   "@id": "urn:comunica:my",
   "@type": "Runner",

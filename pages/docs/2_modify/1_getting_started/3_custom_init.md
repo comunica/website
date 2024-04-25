@@ -41,34 +41,37 @@ Add a `tsconfig.json` file with the following contents:
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "es2021",
     "lib": [
-      "es2020",
       "es2021",
       "dom"
     ],
-    "target": "es2020",
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "inlineSources": true,
-    "declaration": true,
+    "module": "commonjs",
     "resolveJsonModule": true,
-    "downlevelIteration": true,
 
     "strict": true,
-    "strictFunctionTypes": false,
-    "strictPropertyInitialization": false
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": false,
+    "noImplicitOverride": true,
+    "declaration": true,
+    "downlevelIteration": true,
+    "inlineSources": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "sourceMap": true
   },
   "include": [
-    "lib/**/*",
-    "bin/**/*"
+    "engines/*/bin/**/*",
+    "engines/*/lib/**/*",
+    "packages/*/bin/**/*",
+    "packages/*/lib/**/*",
+    "packages/*/benchmarks/**/*"
   ],
   "exclude": [
-    "**/node_modules",
-    "**/test/*"
+    "**/node_modules"
   ]
 }
+
 ```
 
 
