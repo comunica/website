@@ -19,7 +19,7 @@ function issueToTags(node) {
                 ? ''
                 : node.assignees.totalCount > 0
                     ? <div className="issue-bounty-claimed">🔒 Claimed</div>
-                    : <a href={`mailto:ruben.taelman@ugent.be?subject=I want to claim a bounty&body=In am interested in claiming ${node.url}, please tell me more!`}><div className="issue-bounty-unclaimed">🖐️ I want to work on this</div></a>}
+                    : <a href={`mailto:ruben.taelman@ugent.be?subject=I want to claim a bounty&body=I am interested in claiming ${node.url}, please tell me more!`}><div className="issue-bounty-unclaimed">🖐️ I want to work on this</div></a>}
             <table>
                 <tr>
                     <td>Created</td>
