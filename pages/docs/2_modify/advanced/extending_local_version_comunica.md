@@ -1,9 +1,9 @@
 ---
-title: 'Using Local Changes to Base Comunica in Comunica Extensions'
-description: 'Guide on how to extend a local version of Comunica or use a local version of Comunica with an existing extension'
+title: 'Linking Comunica development environment to other projects
+description: 'Guide on how to use a local development version of Comunica with another local project'
 ---
 
-Various  [extensions](https://comunica.dev/docs/modify/extensions/) of Comunica exist. 
+Various [extensions](https://comunica.dev/docs/modify/extensions/) of Comunica exist. 
 These extensions utilize packages from the [base Comunica](https://github.com/comunica/comunica) framework and add additional packages or engine configurations. 
 When working on local changes to the base Comunica and needing to use these changes in an extension, you must link your local development version of Comunica with your extension project.
 This page introduces some methods to achieve this, though other methods are possible.
@@ -22,7 +22,7 @@ $ npm install -g lerna-linker
 
 ### Usage
 
-Assume the local version of Comunica is located at `path/to/comunica` and the extension at `path/to/comunica-extension`.
+Assume the local version of Comunica is located at `path/to/comunica` and the extension at `path/to/my-project`.
 
 1. Link Source Packages by navigating to the base Comunica directory and running:
 
