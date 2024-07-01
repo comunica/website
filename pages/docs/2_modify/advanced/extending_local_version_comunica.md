@@ -1,12 +1,13 @@
 ---
-title: 'Linking Comunica development environment to other projects
+title: 'Linking local Comunica versions to other projects'
 description: 'Guide on how to use a local development version of Comunica with another local project'
 ---
 
-Various [extensions](https://comunica.dev/docs/modify/extensions/) of Comunica exist. 
-These extensions utilize packages from the [base Comunica](https://github.com/comunica/comunica) framework and add additional packages or engine configurations. 
-When working on local changes to the base Comunica and needing to use these changes in an extension, you must link your local development version of Comunica with your extension project.
-This page introduces some methods to achieve this, though other methods are possible.
+In cases where a local development version of Comunica is consumed as a dependency of another project, linking the local development version of Comunica to the project is required.
+
+For example, various extensions of Comunica exist. These extensions utilize packages from the base Comunica framework and add additional packages or engine configurations. When working on local changes to base Comunica and needing to use these changes in an extension, you must link the local development version of  Comunica with the extension project. This page introduces a method to achieve this, though other methods are possible.
+
+This method does not require publishing the development version of Comunica to NPM, thus it is useful for testing changes before they are made public.
 
 ## Lerna-linker
 
@@ -43,10 +44,16 @@ Assume the local version of Comunica is located at `path/to/comunica` and the ex
 
 3. Undo Linking of the base Comunica packages by navigating to the Comunica extension directory and running:
  ```bash
-    $ cd path/to/comunica-extension
-    $ lerna-linker unlinkTarget
+    $ cd path/to/comunica-extension
+    $ lerna-linker unlinkTarget
+    $ yarn install
+
  ```
 
  This command will unlink the base Comunica packages from the extension.
 
-By following these steps, you can effectively manage local changes to the base Comunica framework and ensure they are utilized within your extensions. Note that linking multiple different development versions simultaneously does not work, as running `$ lerna-linker linkSource` will overwrite all previously made links.
+By following these steps, you can effectively manage local changes to the base Comunica framework and ensure they are utilized within the extensions. 
+
+<div class="note">
+Linking multiple different development versions simultaneously will not work, as running <code>$lerna-linker linkSource</code> will overwrite all previously made links.
+</div>
