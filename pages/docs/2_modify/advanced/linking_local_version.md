@@ -3,6 +3,7 @@ title: 'Linking local Comunica versions to other projects'
 description: 'Guide on how to use a local development version of Comunica with another local project'
 ---
 
+
 In cases where a local development version of Comunica is consumed as a dependency of another project, linking the local development version of Comunica to the project is required.
 
 For example, various extensions of Comunica exist. These extensions utilize packages from the base Comunica framework and add additional packages or engine configurations. When working on local changes to base Comunica and needing to use these changes in an extension, you must link the local development version of  Comunica with the extension project. This page introduces a method to achieve this, though other methods are possible.
