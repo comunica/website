@@ -148,8 +148,53 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
 ### Explain physical on the command line
 
 ```bash
+$ node bin/query.js https://fragments.dbpedia.org/2016-04/en \
+  -q 'SELECT ?movie ?title ?name
+WHERE {
+  ?movie dbpedia-owl:starring [ rdfs:label "Brad Pitt"@en ];
+         rdfs:label ?title;
+         dbpedia-owl:director [ rdfs:label ?name ].
+  FILTER LANGMATCHES(LANG(?title), "EN")
+  FILTER LANGMATCHES(LANG(?name),  "EN")
+}' --explain physical
+
+project (movie,title,name)
+  join
+    join-inner(bind) bindOperation:(?g_0 http://www.w3.org/2000/01/rdf-schema#label "Brad Pitt"@en) bindCardEst:~2 cardReal:43 timeSelf:2.567ms timeLife:667.726ms
+      join compacted-occurrences:1
+        join-inner(bind) bindOperation:(?movie http://dbpedia.org/ontology/starring http://dbpedia.org/resource/Brad_Pitt) bindCardEst:~40 cardReal:43 timeSelf:6.011ms timeLife:641.139ms
+          join compacted-occurrences:38
+            join-inner(bind) bindOperation:(http://dbpedia.org/resource/12_Monkeys http://dbpedia.org/ontology/director ?g_1) bindCardEst:~1 cardReal:1 timeSelf:0.647ms timeLife:34.827ms
+              filter compacted-occurrences:1
+                join
+                  join-inner(nested-loop) cardReal:1 timeSelf:0.432ms timeLife:4.024ms
+                    pattern (http://dbpedia.org/resource/12_Monkeys http://www.w3.org/2000/01/rdf-schema#label ?title) cardEst:~1 src:0
+                    pattern (http://dbpedia.org/resource/Terry_Gilliam http://www.w3.org/2000/01/rdf-schema#label ?name) cardEst:~1 src:0
+          join compacted-occurrences:2
+            join-inner(multi-empty) timeSelf:0.004ms timeLife:0.053ms
+              pattern (http://dbpedia.org/resource/Contact_(1992_film) http://dbpedia.org/ontology/director ?g_1) cardEst:~0 src:0
+              filter cardEst:~5,188,789.667
+                join
+                  join-inner(nested-loop) timeLife:0.6ms
+                    pattern (http://dbpedia.org/resource/Contact_(1992_film) http://www.w3.org/2000/01/rdf-schema#label ?title) cardEst:~1 src:0
+                    pattern (?g_1 http://www.w3.org/2000/01/rdf-schema#label ?name) cardEst:~20,013,903 src:0
+      join compacted-occurrences:1
+        join-inner(multi-empty) timeSelf:0.053ms timeLife:0.323ms
+          pattern (?movie http://dbpedia.org/ontology/director ?g_1) cardEst:~118,505 src:0
+          pattern (?movie http://dbpedia.org/ontology/starring http://wikidata.dbpedia.org/resource/Q35332) cardEst:~0 src:0
+          filter cardEst:~242,311,843,844,161
+            join
+              join-inner(symmetric-hash) timeLife:36.548ms
+                pattern (?movie http://www.w3.org/2000/01/rdf-schema#label ?title) cardEst:~20,013,903 src:0
+                pattern (?g_1 http://www.w3.org/2000/01/rdf-schema#label ?name) cardEst:~20,013,903 src:0
+
+sources:
+  0: QuerySourceHypermedia(https://fragments.dbpedia.org/2016-04/en)(SkolemID:0)
+```
+
+```bash
 $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
-  -q 'SELECT * { ?s ?p ?o. ?s a ?o } LIMIT 100' --explain physical
+  -q 'SELECT * { ?s ?p ?o. ?s a ?o } LIMIT 100' --explain physical-json
 
 {
   "logical": "slice",
@@ -157,56 +202,54 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
     {
       "logical": "project",
       "variables": [
-        "s",
+        "o",
         "p",
-        "o"
+        "s"
       ],
       "children": [
         {
           "logical": "join",
           "children": [
             {
-              "logical": "pattern",
-              "pattern": "?s ?p ?o"
-            },
-            {
-              "logical": "pattern",
-              "pattern": "?s http://www.w3.org/1999/02/22-rdf-syntax-ns#type ?o"
-            },
-            {
               "logical": "join-inner",
               "physical": "bind",
               "bindIndex": 1,
+              "bindOperation": {
+                "source": "QuerySourceHypermedia(https://fragments.dbpedia.org/2016-04/en)(SkolemID:0)",
+                "pattern": "?s http://www.w3.org/1999/02/22-rdf-syntax-ns#type ?o"
+              },
+              "bindOperationCardinality": {
+                "type": "estimate",
+                "value": 100022186,
+                "dataset": "https://fragments.dbpedia.org/2016-04/en?predicate=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type"
+              },
               "bindOrder": "depth-first",
               "cardinalities": [
                 {
                   "type": "estimate",
-                  "value": 1040358853
+                  "value": 1040358853,
+                  "dataset": "https://fragments.dbpedia.org/2016-04/en"
                 },
                 {
                   "type": "estimate",
-                  "value": 100022186
+                  "value": 100022186,
+                  "dataset": "https://fragments.dbpedia.org/2016-04/en?predicate=http%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23type"
                 }
               ],
               "joinCoefficients": {
                 "iterations": 6404592831613.728,
                 "persistedItems": 0,
                 "blockingItems": 0,
-                "requestTime": 556926378.1422498
+                "requestTime": 8902477556686.99
               },
-              "children": [
+              "childrenCompact": [
                 {
-                  "logical": "pattern",
-                  "pattern": "http://commons.wikimedia.org/wiki/Special:FilePath/!!!善福寺.JPG ?p http://dbpedia.org/ontology/Image"
-                },
-                {
-                  "logical": "pattern",
-                  "pattern": "http://commons.wikimedia.org/wiki/Special:FilePath/!!!善福寺.JPG ?p http://wikidata.dbpedia.org/ontology/Image"
-                },
-                ...
-                {
-                  "logical": "pattern",
-                  "pattern": "http://commons.wikimedia.org/wiki/Special:FilePath/%22..._WAAC_cooks_prepare_dinner_for_the_first_time_in_new_kitchen_at_Fort_Huachuca,_Arizona.%22,_12-05-1942_-_NARA_-_531152.jpg ?p http://wikidata.dbpedia.org/ontology/Image"
+                  "occurrences": 100,
+                  "firstOccurrence": {
+                    "logical": "pattern",
+                    "source": "QuerySourceHypermedia(https://fragments.dbpedia.org/2016-04/en)(SkolemID:0)",
+                    "pattern": "http://commons.wikimedia.org/wiki/Special:FilePath/!!!善福寺.JPG ?p http://dbpedia.org/ontology/Image"
+                  }
                 }
               ]
             }
@@ -318,21 +361,15 @@ Will print:
 {
   explain: true,
   type: 'physical',
-  data: {
-    logical: 'project',
-    variables: [ 's', 'p', 'o' ],
-    children: [
-      {
-        logical: 'join',
-        children: [
-          {
-            logical: 'pattern',
-            pattern: '?s ?p ?o',
-          },
-        ],
-      },
-    ],
-  },
+  data: `slice
+  project (o,p,s)
+    join
+      join-inner(bind) bindOperation:(?s http://www.w3.org/1999/02/22-rdf-syntax-ns#type ?o) bindCardEst:~100,022,186
+        pattern (http://commons.wikimedia.org/wiki/Special:FilePath/!!!善福寺.JPG ?p http://dbpedia.org/ontology/Image) src:0 compacted-occurrences:100
+
+sources:
+  0: QuerySourceHypermedia(https://fragments.dbpedia.org/2016-04/en)(SkolemID:0)
+`,
 }
  */
 ```
