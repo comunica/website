@@ -146,7 +146,7 @@ You can use the build script later as follows:
 $ npm run build
 ```
 
-At this moment however, that will still fail due to missing files, but you can already build the engine like this:
+At this moment however, that will still fail due to missing files, but you can already do this now:
 ```bash
 $ npm run build:engine
 ```
