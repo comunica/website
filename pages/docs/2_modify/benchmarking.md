@@ -27,8 +27,22 @@ When measuring execution time, one should _only_ measure the actual time it take
 excluding the query engine's startup time.
 
 As such, simply measuring the execution time via the command line is not advised.
-Instead, one should either make use of the `stats` writer on the command line,
+Instead, one should either make use of a [SPARQL endpoint](/docs/query/getting_started/setup_endpoint/),
+the `stats` writer on the command line,
 or measure query execution via JavaScript.
+
+### Warming up the JavaScript engine
+
+Since most modern JavaScript engines (such as the V8 engine used by Node.js) are based on Just In Time (JIT) compilation,
+they take some time to compile and to learn about the application's structure to apply optimizations.
+As such, it is important to warm up your query engine before doing measurements over it,
+unless you specifically want to measure the cold-start performance.
+The **recommended way to do this is to set up [a Comunica SPARQL endpoint](/docs/query/getting_started/setup_endpoint/)**,
+do some warmup queries over it, and only then execute the actual benchmark.
+
+Engines such as V8 tend to each an optimal state rather quickly,
+so not too many warmup rounds are required for execution time to stabilize.
+The number of warmup rounds can depend on your engine's version, machine, and query set.
 
 ## Simple benchmarking using the stats writer
 
@@ -89,12 +103,12 @@ Measuring execution time from JavaScript gives you more flexibility compared to 
 
 Examples for more advanced benchmarking in JavaScript can be found in the [examples repo](https://github.com/comunica/examples/).
 
-## Reproducible benchmarking via Comunica Bencher
+## Reproducible benchmarking via JBR
 
-[Comunica Bencher](https://github.com/comunica/comunica-bencher)
-is a Docker-based benchmarking framework
-for easily creating and running benchmarks with Comunica and [LDF Server](https://github.com/LinkedDataFragments/Server.js).
-It is useful if you want to compare different configurations of Comunica with each other.
+[JBR](https://github.com/rubensworks/jbr.js)
+is a JavaScript-based benchmarking framework
+for easily creating and running various benchmarks with engines such as Comunica and [LDF Server](https://github.com/LinkedDataFragments/Server.js).
+It is useful if you want to compare different configurations of Comunica or other engines with each other.
 
 Together with the (semantic) configuration files of Comunica and LDF Server,
 this tool completes the whole provenance chain of experimental results:
