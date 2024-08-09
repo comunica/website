@@ -162,6 +162,7 @@ Options:
       --httpRetryOnServerError  If fetch should be retried on 5xx server error responses, instead of being resolved.                                   [boolean]
       --unionDefaultGraph       If the default graph should also contain the union of all named graphs                                                 [boolean]
       --noCache                 If the cache should be disabled                                                                                        [boolean]
+      --distinctConstruct       If the query engine should deduplicate resulting triples                                                               [boolean]
   -p, --proxy                   Delegates all HTTP traffic through the given proxy (e.g. http://myproxy.org/?uri=)                                      [string]
       --listformats             Prints the supported MIME types                                                                                        [boolean]
       --explain                 Print the query plan                                                         [string] [choices: "parsed", "logical", "physical"]

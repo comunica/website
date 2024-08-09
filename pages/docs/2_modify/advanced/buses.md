@@ -76,6 +76,21 @@ Subscribed actors need to implement [`ActorHashBindings`](https://comunica.githu
 | SHA1 | [`@comunica/actor-hash-bindings-sha1`](https://github.com/comunica/comunica/tree/master/packages/actor-hash-bindings-sha1) | Hashes bindings using SHA1. |
 
 
+## Hash Quads
+
+_Package: [`@comunica/bus-hash-quads`](https://github.com/comunica/comunica/tree/master/packages/bus-hash-quads)_
+
+A bus for hashing `RDF.Quad`.
+
+Subscribed actors need to implement [`ActorHashQuads`](https://comunica.github.io/comunica/classes/_comunica_bus_hash_quads.ActorHashQuads.html).
+
+### Actors
+
+| Name | Package                                                                                                              | Description              |
+|------|----------------------------------------------------------------------------------------------------------------------|--------------------------|
+| SHA1 | [`@comunica/actor-hash-quads-sha1`](https://github.com/comunica/comunica/tree/master/packages/actor-hash-quads-sha1) | Hashes quads using SHA1. |
+
+
 ## HTTP
 
 _Package: [`@comunica/bus-http`](https://github.com/comunica/comunica/tree/master/packages/bus-http)_
@@ -149,6 +164,7 @@ Subscribed actors need to implement [`ActorOptimizeQueryOperation`](https://comu
 |--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Assign Sources Exhaustive      | [`@comunica/actor-optimize-query-operation-assign-sources-exhaustive`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-assign-sources-exhaustive)         | Converts every quad pattern in the query to a union of quad patterns per source.                                                                          |
 | BGP to Join                    | [`@comunica/actor-optimize-query-operation-bgp-to-join`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-bgp-to-join)                                     | Converts BGPs into join operations.                                                                                                                       |
+| Construct Distinct             | [`@comunica/actor-optimize-query-operation-construct-distinct`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-construct-distinctv)                      | Wraps the top-level Construct clause in Distinct if --distinct flag is on.                                                                                |
 | Describe To Constructs Subject | [`@comunica/actor-optimize-query-operation-describe-to-constructs-subject`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-assign-sources-exhaustive)    | Converts [SPARQL `DESCRIBE`](https://www.w3.org/TR/sparql11-query/#describe) operations to construct queries with all triples related to a given subject. |
 | Filter Pushdown                | [`@comunica/actor-optimize-query-operation-filter-pushdown`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-filter-pushdown)                             | Pushes down filter expressions into the query plan as deep as possible.                                                                                   |
 | Join BGP                       | [`@comunica/actor-optimize-query-operation-join-bgp`](https://github.com/comunica/comunica/tree/master/packages/actor-optimize-query-operation-join-bgp)                                           | Merges joins of multiple BGPs into a single BGP.                                                                                                          |

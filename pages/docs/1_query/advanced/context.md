@@ -293,3 +293,15 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
   recoverBrokenLinks: true,
 });
 ```
+
+## 20. Deduplicate quads in construct queries
+
+The `distinctConstruct` option can remove duplicate quads from CONSTRUCT query outputs.
+This corresponds to placing a `DISTINCT` onto a `CONSTRUCT` operator (which is not allowed by the SPARQL specification).
+
+```javascript
+const bindingsStream = await myEngine.queryBindings(`CONSTRUCT WHERE { ?s1 ?p1 ?o1. ?s2 ?p2 ?o2 }`, {
+  sources: ['https://fragments.dbpedia.org/2015/en'],
+  distinctConstruct: true,
+});
+```
