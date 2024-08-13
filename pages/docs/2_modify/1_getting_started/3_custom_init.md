@@ -135,8 +135,7 @@ For this, add the following **scripts to our `package.json`** file:
     "prepublishOnly": "npm run build",
     "build:engine": "comunica-compile-config config/config-default.json > engine-default.js",
     "build:lib": "tsc",
-    "build": "npm run build:lib && npm run build:engine",
-    "postinstall": "npm run build"
+    "build": "npm run build:lib && npm run build:engine"
   },
 }
 ```
@@ -265,7 +264,8 @@ make sure to expose the following entries in your **`package.json`** file:
   "main": "lib/index.js",
   "types": "lib/index",
   "browser": {
-    "./lib/index.js": "./lib/index-browser.js"
+    "./lib/index.js": "./lib/index-browser.js",
+    "./lib/index.js.map": "./lib/index-browser.js.map"
   }
 }
 ```
@@ -306,8 +306,10 @@ As a final step, **add following entries to `package.json`**:
     "config",
     "bin/**/*.d.ts",
     "bin/**/*.js",
+    "bin/**/*.js.map",
     "lib/**/*.d.ts",
     "lib/**/*.js",
+    "lib/**/*.js.map",
     "engine-default.js"
   ],
 }
