@@ -132,10 +132,10 @@ For this, add the following **scripts to our `package.json`** file:
   ...
   "scripts": {
     ...
-    "prepublishOnly": "npm run build",
     "build:engine": "comunica-compile-config config/config-default.json > engine-default.js",
     "build:lib": "tsc",
-    "build": "npm run build:lib && npm run build:engine"
+    "build": "npm run build:lib && npm run build:engine",
+    "prepare": "npm run build"
   },
 }
 ```
