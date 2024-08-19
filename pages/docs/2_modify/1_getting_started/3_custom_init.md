@@ -61,11 +61,8 @@ Add a `tsconfig.json` file with the following contents:
     "sourceMap": true
   },
   "include": [
-    "engines/*/bin/**/*",
-    "engines/*/lib/**/*",
-    "packages/*/bin/**/*",
-    "packages/*/lib/**/*",
-    "packages/*/benchmarks/**/*"
+    "bin/**/*",
+    "lib/**/*"
   ],
   "exclude": [
     "**/node_modules"
@@ -90,7 +87,7 @@ We assume here that **you already have created a custom config file**.
 
 Create a `config/` folder, and add your config file (`config-default.json`) in here.
 
-If you config file includes other config sets, you can include them in this folder as well.
+If your config file includes other config sets, you can include them in this folder as well.
 In this case, you also have to make sure to include the context file in `components/context.jsonld`.
 
 The only requirement here is that there is at least a file **`config/config-default.json`**.
@@ -135,18 +132,22 @@ For this, add the following **scripts to our `package.json`** file:
   ...
   "scripts": {
     ...
-    "prepublishOnly": "npm run build",
     "build:engine": "comunica-compile-config config/config-default.json > engine-default.js",
     "build:lib": "tsc",
     "build": "npm run build:lib && npm run build:engine",
-    "postinstall": "npm run build"
+    "prepare": "npm run build"
   },
 }
 ```
 
-Try if your script works correctly by running:
+You can use the build script later as follows:
 ```bash
 $ npm run build
+```
+
+At this moment however, that will still fail due to missing files, but you can already do this now:
+```bash
+$ npm run build:engine
 ```
 
 Afterwards, you should have an `engine-default.js` file in your folder.
@@ -263,7 +264,8 @@ make sure to expose the following entries in your **`package.json`** file:
   "main": "lib/index.js",
   "types": "lib/index",
   "browser": {
-    "./lib/index.js": "./lib/index-browser.js"
+    "./lib/index.js": "./lib/index-browser.js",
+    "./lib/index.js.map": "./lib/index-browser.js.map"
   }
 }
 ```
@@ -304,8 +306,10 @@ As a final step, **add following entries to `package.json`**:
     "config",
     "bin/**/*.d.ts",
     "bin/**/*.js",
+    "bin/**/*.js.map",
     "lib/**/*.d.ts",
     "lib/**/*.js",
+    "lib/**/*.js.map",
     "engine-default.js"
   ],
 }
