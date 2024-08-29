@@ -84,6 +84,7 @@ export default function Page({ githubData }) {
           <p>
               As a <strong>developer</strong>, express your interest to work on any issue,
               after which we can discuss the details.
+              Note that you will only be able to get paid if you can <a href="/association/bounty_process/#claiming-a-bounty">submit valid invoices</a>.
           </p>
           <p>
               As an <strong>organization</strong>, you can <a href="mailto:ruben.taelman@ugent.be?subject=I want to place a bounty">mail us</a> to add additional bounties regarding Comunica-related projects.

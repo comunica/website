@@ -49,6 +49,22 @@ The <span class="bounty-assoc">association</span> manages issues as follows:
 
 Depending on the specific needs of certain issues or use cases, deviations from these procedures may take place.
 
+## Claiming a bounty
+
+Once a bounty has been fully finalized, you can request your payment by _submitting an expense_ via [Open Collective](https://opencollective.com/comunica-association/).
+When submitting an expense, you must attach an invoice, which must be a valid fiscal document.
+This document must at least contain your VAT ID and your address and the Comunica Association's address:
+
+```
+Comunica Association
+Cantorsteen 10  
+1000 Bruxelles  
+België
+```
+
+All expenses are handled by [Open Collective Europe](https://docs.opencollective.com/oceurope).
+More details on expenses can be found on [Open Collective Europe's wiki](https://docs.opencollective.com/oceurope/how-it-works/expenses).
+
 ## Rules
 
 1. While anyone is allowed to take up bounties, if board members want to take up bounties, all other board members have to agree, to avoid conflicts of interest.
