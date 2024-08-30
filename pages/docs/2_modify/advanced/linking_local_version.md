@@ -12,7 +12,7 @@ This method does not require publishing the development version of Comunica to N
 
 ## Lerna-linker
 
-Lerna-linker is a script designed to facilitate package linking in a Lerna monorepo. It iterates over all packages, executing `yarn unlink` and `yarn link` on each. It then saves all linked packages and runs `yarn link <package>` for each linked package in the Comunica extension.
+[lerna-linker](https://www.npmjs.com/package/lerna-linker) is a script designed to facilitate package linking in a Lerna monorepo. It iterates over all packages, executing `yarn unlink` and `yarn link` on each. It then saves all linked packages and runs `yarn link <package>` for each linked package in the Comunica extension.
 
 ### Installation
 
