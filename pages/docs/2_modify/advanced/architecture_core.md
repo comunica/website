@@ -68,7 +68,7 @@ For instance, the following figure shows an example of a mediator that will alwa
 Therefore, an actor must at least expose the following methods:
 ```typescript
 export interface Actor {
-  test(action: IAction): Promise<IActorTest>;
+  test(action: IAction): Promise<TestResult<IActorTest>>;
   run(action: IAction): Promise<IActorOutput>;
 }
 ```
