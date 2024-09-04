@@ -113,6 +113,8 @@ import { IActionContext } from '@comunica/types';
 import { AIActorTest, Mediator } from '@comunica/core';
 import { ActorRdfJoin, IActionRdfJoin } from '@comunica/bus-rdf-join';
 import { IMediatorTypeIterations } from '@comunica/mediatortype-iterations';
+import type { TestResult } from '@comunica/core';
+import { passTestVoid } from '@comunica/core';
 
 export class ActorQueryOperationJoin extends ActorQueryOperationTypedMediated<Algebra.Join> {
 
@@ -123,8 +125,8 @@ export class ActorQueryOperationJoin extends ActorQueryOperationTypedMediated<Al
     super(args, 'join');
   }
 
-  public async testOperation(pattern: Algebra.Join, context: IActionContext): Promise<IActorTest> {
-    return true;
+  public async testOperation(pattern: Algebra.Join, context: IActionContext): Promise<TestResult<IActorTest>> {
+    return passTestVoid();
   }
 
   public async runOperation(pattern: Algebra.Join, context: IActionContext): Promise<IActorQueryOperationOutput> {

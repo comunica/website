@@ -145,15 +145,15 @@ These two methods correspond to the [test and run phases that will be called by 
 Since the `ActorQueryOperationTypedMediated` class already implements the test phase by checking if the incoming operation is a `REDUCED` operation,
 we can just implement `testOperation` as follows:
 ```typescript
-  public async testOperation(pattern: Algebra.Reduced, context: IActionContext): Promise<IActorTest> {
-    return true;
+  public async testOperation(pattern: Algebra.Reduced, context: IActionContext): Promise<TestResult<IActorTest>> {
+    return passTestVoid();
   }
 ```
 
 <div class="note">
 If you want to make your actor only handle specific types of this operation,
 you can add additional checks in here.
-If you want to fail the test in certain cases, you will have to <code>throw</code> an error.
+If you want to fail the test in certain cases, you will have to return <code>failTest(`a message describing the failure`)</code>.
 </div>
 
 ### 4.2. Run phase
