@@ -17,15 +17,42 @@ The [workspaces functionality of Yarn](https://yarnpkg.com/features/workspaces) 
 This approach involves the editing of <code>package.json</code> using local relative paths, as well as probable automated modifications to <code>yarn.lock</code> upon install. Such changes will need to be reverted prior to publishing the target project anywhere.
 </div>
 
-For example, to set up the Comunica base and a feature repository for local development, one could clone them next to each other:
+### Using with a simple local project
+
+For example, given a local project and the Comunica base repository cloned next to each other as follows,
+
+```text
+/path/to/comunica
+/path/to/project
+```
+
+it is possible to include the local versions of Comunica base packages in the project by editing the `package.json` of the local project to include workspace references to the Comunica workspace packages:
+
+```json
+{
+  "name": "project",
+  "private": true,
+  "workspaces": [
+    "../comunica/engines/*",
+    "../comunica/packages/*"
+  ],
+  ...
+}
+```
+
+Afterwards, running `yarn install` in the local project directory should result in Yarn simply linking the local Comunica packages in it.
+
+
+### Using with a local monorepository with Comunica dependencies
+
+The process is identical to that of a simple project structure, except the `package.json` workspaces paths should be added alongside existing ones. For example, to set up the Comunica base and a feature repository for local development, one could clone them next to each other,
 
 ```text
 /path/to/comunica
 /path/to/comunica-feature-repository
 ```
 
-Then, the dependencies for the base could be installed as usual, by entering the directory and doing `yarn install`,
-after which the `package.json` of the feature repository could be edited to include the packages from the base:
+after which the `package.json` of the feature repository could be modified to include both the existing packages and the local Comunica ones:
 
 ```json
 {
@@ -40,8 +67,6 @@ after which the `package.json` of the feature repository could be edited to incl
   ...
 }
 ```
-
-Afterwards, running `yarn install` in the feature repository directory should result in Yarn simply linking the local Comunica packages in it.
 
 <div class="note">
 Because Yarn will use symbolic links for the workspaces packages, they will be linked as they are on disk, rather than through an emulated package install process. This means the packages must have their own dependencies installed and their code built at their source directory.
