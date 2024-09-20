@@ -17,9 +17,6 @@ If you want to do benchmarking with Comunica in Node.js, make sure to **run Node
 NODE_ENV=production node packages/some-package/bin/some-bin.js
 ```
 
-The reason for this is that Comunica extensively generates internal `Error` objects.
-In non-production mode, these also produce long stacktraces, which may in some cases impact performance.
-
 ### Taking into account startup time of the engine
 
 If you want to run experiments, it is important to take into account the **time it takes for the query engine to start**.
