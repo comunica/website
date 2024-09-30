@@ -53,12 +53,12 @@ Depending on the specific needs of certain issues or use cases, deviations from 
 
 Once a bounty has been fully finalized, you can request your payment by _submitting an expense_ via [Open Collective](https://opencollective.com/comunica-association/).
 When submitting an expense, you must attach an invoice, which must be a valid fiscal document.
-This document must at least contain your VAT ID and your address and the Comunica Association's address:
+This document must at least contain your VAT ID and your address, the Comunica Association (Open Collective Europe must not be mentioned), and the Comunica Association's address:
 
 ```
-Comunica Association
-Cantorsteen 10  
-1000 Bruxelles  
+AA Tower (Ghent University – imec)
+Technologiepark-Zwijnaarde 122
+9052 Ghent, Belgium
 België
 ```
 
