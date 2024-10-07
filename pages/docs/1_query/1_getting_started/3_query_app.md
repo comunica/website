@@ -288,6 +288,8 @@ If has a field `resultType` that indicates the query and result type, which can 
 The asynchronous `execute` method effectively executes the query, and returns a result depending on the `resultType`, corresponding to the `queryBindings`, `queryQuads`, ... methods.
 For example, if the result type is `'bindings'`, then the return type of `execute` will be a bindings stream.
 
+### 7.1. Obtaining metadata
+
 Optionally, you can also obtain metadata about the results via this `query` method for the `'bindings'` and `'quads'` result types:
 ```javascript
 const result = await myEngine.query(`
@@ -301,7 +303,44 @@ const result = await myEngine.query(`
 if (result.resultType === 'bindings') {
     const metadata = await result.metadata();
     console.log(metadata.cardinality);
-    console.log(metadata.canContainUndefs);
+    console.log(metadata.variables);
+}
+```
+
+### 7.2. Iterating bindings in the SELECTed order
+
+Iteration over a single bindings object can be done as follows:
+```typescript
+// Iterate over all entries
+for (const [ key, value ] of bindings) {
+  console.log(key);
+  console.log(value);
+}
+```
+
+Due to performance reasons,
+the iteration order of these bindings is not defined,
+and may vary across runs and queries.
+
+If you have a `SELECT` query, and you want to iterate in bindings
+using the same order as your variables are listed in the `SELECT` clause,
+then you can make use of the metadata's variables as follows:
+```javascript
+const result = await myEngine.query(`
+  SELECT ?s ?p ?o WHERE {
+    ?s ?p <http://dbpedia.org/resource/Belgium>.
+    ?s ?p ?o
+  } LIMIT 100`, {
+  sources: ['http://fragments.dbpedia.org/2015/en'],
+});
+
+if (result.resultType === 'bindings') {
+    const variables = (await result.metadata()).variables; // Variables are always in ?s, ?p, ?o order
+    for await (const bindings of await result.execute()) {
+        for (const variable of variables) {
+            console.log(bindings.get(variable).value);
+        }
+    }
 }
 ```
 
