@@ -63,6 +63,12 @@ for (const [ key, value ] of bindings) {
 const entries = [ ...bindings ];
 ```
 
+<div class="note">
+The iteration order is undefined,
+so you should not assume a specific order of keys.
+Instead, you can rely on the <a href="/docs/query/getting_started/query_app/#7-2-iterating-bindings-in-the-SELECTed-order">query result's metadata</a> which defines variables in a fixed order.
+</div>
+
 ### `Bindings.toString`
 
 The `toString()` method returns a compact string representation of the bindings object,
