@@ -138,3 +138,10 @@ If the lerna script exited with an error, you may notice some issues with git. I
 ```bash
 git update-index --no-assume-unchanged $(git ls-files | tr '\\n' ' ') && git checkout .
 ```
+
+### Preparing a major release
+
+* Bump the version (select `major`) and prepare the changelog: `npx lerna version --no-push --no-git-tag-version`
+* Do a search/replace of `/^OLD.0.0/` to `/^NEW.0.0/` in your editor to update config files to the new version.
+* Run `yarn install` and `yarn run test` to ensure everything works.
+* Follow the steps of `Making a new release`, and select a `patch` select.
