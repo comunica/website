@@ -3,18 +3,26 @@ title: 'Expression Evaluator'
 description: 'The expression evaluation engine of Comunica.'
 ---
 
-The expression evaluator package of Comunica is used by different Comunica actors for evaluating expressions.
+To evaluate expressions, Comunica uses a collection of packages that are part of the Comunica monorepo.
+Two buses specifically are of importance:
+* [`@comunica/bus-expression-evaluator-factory`](): Creates an expression evaluator, more info listed bellow.
+* [`@comunica/bus-function factory`](): creates function, more specifically it creates objects that are able to evaluate the desired function given the arguments.
 
-Concretely, the following actors make use of this:
-* [`@comunica/actor-query-operation-extend`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-extend): Implements the extent operator.
-* [`@comunica/actor-query-operation-filter-sparqlee`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-filter-sparqlee): Implements the filter operator.
-* [`@comunica/actor-query-operation-group`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-group): Implements the group operator.
-* [`@comunica/actor-query-operation-leftjoin`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-leftjoin): Implements the left join operator.
-* [`@comunica/actor-query-operation-orderby-sparqlee`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-extend): Implements the order by operator.
+Two different kind of functions are used `TermFunctions` and `ExpressionFunctions`, and TermFunction extends ExpressionFunction.
+An `ExpressionFunction` is a function that takes control over the evaluation of its arguments, meaning that the argument of an ExpressionFunction are Expressions and not Terms.
+The evaluation of the function is async.
+A `TermFunction` on the other hand does not take control over the evolution of its arguments, and is synchronous.
+In scenarios where you already have the term and can only are in a synchronous context, you can use a `TermFunction`.
+Besides easier usage of TermFunctions, they are also easier to implement since the `declare` function of [the expression evaluator utils package]() can be used.
+This `declare` function allows for easy definition of functions that have function overloading.
+Functions created using `declare` use the OverloadTree, thereby also allowing for type promotion and subtype substitution.
+TLDR: Use `TermFunction` when you can using `declare`, and `ExpressionFunction` when you need to.
+
 
 ## Using The Expression Evaluator
 
 ```ts
+import type { MediatorExpressionEvaluatorFactory } from '@comunica/bus-expression-evaluator-factory';
 import { translate } from "sparqlalgebrajs";
 import { stringToTerm } from "rdf-string";
 
@@ -32,7 +40,8 @@ const expression = query.input.expression;
 
 // We create an evaluator for this expression.
 // A sync version exists as well.
-const evaluator = new AsyncEvaluator(expression);
+const evaluator = await mediatorExpressionEvaluatorFactory
+    .mediate({ algExpr: expression, context });
 
 // We can now evaluate some bindings as a term, ...
 const result: RDF.Term = await evaluator.evaluate(
@@ -45,39 +54,30 @@ const result: RDF.Term = await evaluator.evaluate(
 
 // ... or as an Effective Boolean Value (e.g. for use in FILTER)
 const result: boolean = await evaluator.evaluateAsEBV(bindings);
+// ... or as an inetrnal Expression
+evaluateAsEvaluatorExpression.evaluateAsEvaluatorExpression(bindings);
 ```
+
 
 ## Config
 
-The expression evaluator accepts an optional config argument, that is not required for simple use cases,
-but for feature completeness and spec compliance it should receive `now, baseIRI, exists, aggregate and bnode`.
+Just like many other actors, the ExpressionEvaluatorFactoryDefault expects a context object.
+The following keys are of importance:
+* KeysInitQuery.extensionFunctionCreator: A function that creates an extension function.
+* KeysInitQuery.extensionFunctions: A map of function names to function implementations.
+* KeysInitQuery.queryTimestamp: The timestamp to use for functions requiring a notion of "now".
+* KeysInitQuery.functionArgumentsCache: see [later in this document](#functionArgumentsCache).
+* KeysExpressionEvaluator.defaultTimeZone: The default timezone to use for date functions, if none given, extracts the timezone from the `queryTimestamp` value. It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time). 
+* KeysExpressionEvaluator.superTypeProvider: A way of interacting with the type system, it's a callback that given a type unknown to the system, returns the super type of that type.
+* KeysExpressionEvaluator.baseIRI: The base IRI to use for functions that require it.
 
-For the extended date functionality (see later), an additional context item has been added: `implicitTimezone`.
-The choice was made to default to the timezone `now` has.
-It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time).
-
-```ts
-interface AsyncEvaluatorContext {
-  now?: Date;
-  baseIRI?: string;
-
-  exists?: (expression: Alg.ExistenceExpression, mapping: Bindings) => Promise<boolean>;
-  aggregate?: (expression: Alg.AggregateExpression) => Promise<RDF.Term>;
-  bnode?: (input?: string) => Promise<RDF.BlankNode>;
-  extensionFunctionCreator?: (functionNamedNode: RDF.NamedNode) => (args: RDF.Term[]) => Promise<RDF.Term> | undefined;
-  overloadCache?: LRUCache<string, SomeInternalType>;
-  typeCache?: LRUCache<string, SomeInternalType>;
-  getSuperType?: (unknownType: string) => string;
-  implicitTimezone?: { zoneHours: number; zoneMinutes: number;}; 
-}
-```
 
 ## Errors
 
-This package exports an Error class called `ExpressionError` from which all SPARQL related errors inherit.
+The utils-expression-evaluator exports an Error class called `ExpressionError` from which all SPARQL related errors inherit.
 These might include unbound variables, wrong types, invalid lexical forms, and much more.
 These errors can be caught, and may impact program execution in an expected way.
-All other errors are unexpected, and are thus programmer mistakes or mistakes in this package.
+All other errors are unexpected, and are thus programmer mistakes or mistakes in the context of the expression evaluator.
 
 There is also the utility function `isExpressionError` for detecting these cases.
 
@@ -96,80 +96,27 @@ try {
 }
 ```
 
-## Exists
-
-'Exists' operations are an annoying problem to tackle in the context of an expression evaluator,
-since they make the operation stateful and context dependant.
-They might span entire streams and, depending on the use case, have very different requirements for speed and memory consumption.
-This package has therefore decided to delegate this responsibility back to you.
-
-You can, if you want, pass hooks to the evaluators of the shape:
-
-```ts
-exists?: (expression: Alg.ExistenceExpression, mapping: Bindings) => Promise<boolean>;
-```
-
-If this package encounters any or existence expression, it will call this hook with the relevant information, so you can resolve it yourself.
-If these hooks are not present, but an existence expression is encountered, then an error is thrown.
-
-An example consumer/hook can be found in [Comunica](https://github.com/comunica/comunica/blob/master/packages/actor-query-operation-filter-sparqlee/lib/ActorQueryOperationFilterSparqlee.ts).;
 
 ## Aggregates
 
-An `AggregateEvaluator` to which you can pass the individual bindings in the stream, and ask the aggregated result back, is provided.
-It uses the internal type system for operations such as `sum` and `avg`.
+The aggregation of bindings is handled by the [bus-bindings-aggregator-factory]().
+Given a request for a certain aggregator, the factory will return an aggregator that can be used to aggregate bindings.
+After all bindings have been put onto the aggregator, the result can be retrieved.
+The aggregators tend to make use of other expression evaluation related busses like the
+[`bus-term-comparator-factory`](), [`bus-function-factory`](), and most will use the [`bus-expression-evaluator-factory`]().
+Because of the dependency on these buses, the type system can also be used.
 
-```ts
-const stream = [bindings1, bindings2, bindings3];
+Additionally, you should also note the order of calling and awaiting put while using the `GroupConcat` aggregator.
 
-if (stream.length === 0) {
-  return AggregateEvaluator.emptyValue(aggregateExpression);
-} else {
-  const evaluator = new AggregateEvaluator(aggregateExpression, bindings[0]);
-  stream.slice(1).forEach((bindings) => evaluator.put(bindings));
-  return evaluator.result();
-}
-```
 
-We have not found any SPARQL Algebra for which this occurs,
-but we happen to find any aggregate expressions nested in the expression (or even at the top level),
-we will call (similarly to EXISTS) an aggregate hook you might have provided.
+## functionArgumentsCache
 
-```ts
-aggregate?: (expression: Alg.AggregateExpression) => Promise<RDF.Term>;
-```
-
-You can probably ignore this.
-
-We also provide an `AsyncAggregateEvaluator` to that works the same way `AggregateEvaluator` does.
-The signature of only the `put` method changes to be async. It is up to you to handle this correctly.
-You are for example expected to await all puts before you ask for `result`.
-You should also note the order of calling and awaiting put while using the `GroupConcat` aggregator.
-
-## Extension functions
-
-This section explains how to pass extension functions to the evaluator.
-You don't need to do this directly. If you want to provide extension function to a
-Comunica engine follow the [extension function docs](https://comunica.dev/docs/query/advanced/extension_functions/).
-
-Extension functions can be added by providing the `extensionFunctionCreator` in the config.
-Example
-```ts
-config.extensionFunctionCreator = (functionName: RDF.NamedNode) => {
-   if (functionNamedNode.value === 'https://example.org/functions#equal') {
-      return async (args: RDF.Term[]) => {
-         return literal(String(args[0].equals(args[1])), 'http://www.w3.org/2001/XMLSchema#boolean');       
-      }
-   }
-}
-```
-
-## Overload function caching
-
-An functionArgumentsCache allows the partial evaluator to cache the implementation of a function provided the argument types.
+An `functionArgumentsCache` allows the expression evaluator to cache the implementation of a function provided the| argument types.
+This decreases the overhead caused by function overloading.
 When not providing a cache in the context, the evaluator will create one.
 
 This cache can be reused across multiple evaluators. Manual modification is not recommended.
+
 
 ## Context dependant functions
 
@@ -179,7 +126,7 @@ If they are not passed, the evaluator will use a naive implementation that might
 
 ### BNODE
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-bnode)
+[spec](https://www.w3.org/TR/sparql11-query/#func-bnode)[actor]()
 
 Blank nodes are very dependent on the rest of the SPARQL query, therefore,
 we provide the option of delegating the entire responsibility back to you by accepting a blank node constructor callback.
@@ -190,7 +137,7 @@ or we use uuid (v4) for argument-less calls to generate definitely unique blank 
 
 ### Now
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-now)
+[spec](https://www.w3.org/TR/sparql11-query/#func-now)[actor]()
 
 All calls to now in a query must return the same value, since we aren't aware of the rest of the query,
 you can provide a timestamp (`now: Date`). If it's not present, the evaluator will use the timestamp of evaluator creation,
@@ -198,21 +145,23 @@ this at least allows evaluation with multiple bindings to have the same `now` va
 
 ### IRI
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-iri)
+[spec](https://www.w3.org/TR/sparql11-query/#func-iri)[actor]()
 
 To be fully spec compliant, the IRI/URI functions should take into account base IRI of the query,
 which you can provide as `baseIRI: string` to the config.
 
+
 ## SPARQL 1.2
 
-The partial evaluator package looks already implements some SPARQL 1.2 specification functions.
+The expression evaluator package looks to the future and already implements some SPARQL 1.2 specification functions.
 
 Currently, this is restricted to the [extended date](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md) functionality.
 Please note that the new sparql built-in `ADJUST` function has not been implemented due to package dependencies.
 
+
 ## Type System
 
-The type system of the partial evaluator is tailored for doing (supposedly) quick evaluation of overloaded functions.
+The type system of the expression evaluator is tailored for doing (supposedly) quick evaluation of overloaded functions.
 
 A function definition object consists of a tree-like structure with a type (e.g. `xsd:float`) at each internal node.
 Each level of the tree represents an argument of the function
@@ -237,6 +186,5 @@ function call would still succeed. The type of the term does not change in this 
 
 The expression evaluator also handles **[type promotion](https://www.w3.org/TR/xpath-31/#promotion)**.
 Type promotion defines some rules where a types can be promoted to another, even if there is no super-type relation.
-Examples include `xsd:float`  and `xsd:decimal` to `xsd:double`and `xsd:anyURI` to `xsd:string`.
+Examples include `xsd:float` and `xsd:decimal` to `xsd:double`and `xsd:anyURI` to `xsd:string`.
 In this case, the datatype of the term will change to the type it is promoted to.
-
