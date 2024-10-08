@@ -5,15 +5,15 @@ description: 'The expression evaluation engine of Comunica.'
 
 To evaluate expressions, Comunica uses a collection of packages that are part of the Comunica monorepo.
 Two buses specifically are of importance:
-* [`@comunica/bus-expression-evaluator-factory`](): Creates an expression evaluator, more info listed bellow.
-* [`@comunica/bus-function factory`](): creates function, more specifically it creates objects that are able to evaluate the desired function given the arguments.
+* [`@comunica/bus-expression-evaluator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-expression-evaluator-factory): Creates an expression evaluator, more info listed bellow.
+* [`@comunica/bus-function factory`](https://github.com/comunica/comunica/tree/master/packages/bus-function factory): creates function, more specifically it creates objects that are able to evaluate the desired function given the arguments.
 
 Two different kind of functions are used `TermFunctions` and `ExpressionFunctions`, and TermFunction extends ExpressionFunction.
 An `ExpressionFunction` is a function that takes control over the evaluation of its arguments, meaning that the argument of an ExpressionFunction are Expressions and not Terms.
 The evaluation of the function is async.
 A `TermFunction` on the other hand does not take control over the evolution of its arguments, and is synchronous.
 In scenarios where you already have the term and can only are in a synchronous context, you can use a `TermFunction`.
-Besides easier usage of TermFunctions, they are also easier to implement since the `declare` function of [the expression evaluator utils package]() can be used.
+Besides easier usage of TermFunctions, they are also easier to implement since the `declare` function of [the expression evaluator utils package](https://github.com/comunica/comunica/tree/master/packages/utils-expression-evaluator) can be used.
 This `declare` function allows for easy definition of functions that have function overloading.
 Functions created using `declare` use the OverloadTree, thereby also allowing for type promotion and subtype substitution.
 TLDR: Use `TermFunction` when you can using `declare`, and `ExpressionFunction` when you need to.
@@ -99,11 +99,13 @@ try {
 
 ## Aggregates
 
-The aggregation of bindings is handled by the [bus-bindings-aggregator-factory]().
+The aggregation of bindings is handled by the [bus-bindings-aggregator-factory](https://github.com/comunica/comunica/tree/master/packages/bus-bindings-aggregator-factory).
 Given a request for a certain aggregator, the factory will return an aggregator that can be used to aggregate bindings.
 After all bindings have been put onto the aggregator, the result can be retrieved.
 The aggregators tend to make use of other expression evaluation related busses like the
-[`bus-term-comparator-factory`](), [`bus-function-factory`](), and most will use the [`bus-expression-evaluator-factory`]().
+[`bus-term-comparator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-term-comparator-factory),
+[`bus-function-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-function-factory),
+and most will use the [`bus-expression-evaluator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-expression-evaluator-factory).
 Because of the dependency on these buses, the type system can also be used.
 
 Additionally, you should also note the order of calling and awaiting put while using the `GroupConcat` aggregator.
@@ -126,7 +128,7 @@ If they are not passed, the evaluator will use a naive implementation that might
 
 ### BNODE
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-bnode)[actor]()
+[spec](https://www.w3.org/TR/sparql11-query/#func-bnode)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-expression-bnode)
 
 Blank nodes are very dependent on the rest of the SPARQL query, therefore,
 we provide the option of delegating the entire responsibility back to you by accepting a blank node constructor callback.
@@ -137,7 +139,7 @@ or we use uuid (v4) for argument-less calls to generate definitely unique blank 
 
 ### Now
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-now)[actor]()
+[spec](https://www.w3.org/TR/sparql11-query/#func-now)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-now)
 
 All calls to now in a query must return the same value, since we aren't aware of the rest of the query,
 you can provide a timestamp (`now: Date`). If it's not present, the evaluator will use the timestamp of evaluator creation,
@@ -145,7 +147,7 @@ this at least allows evaluation with multiple bindings to have the same `now` va
 
 ### IRI
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-iri)[actor]()
+[spec](https://www.w3.org/TR/sparql11-query/#func-iri)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-iri)
 
 To be fully spec compliant, the IRI/URI functions should take into account base IRI of the query,
 which you can provide as `baseIRI: string` to the config.
