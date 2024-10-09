@@ -5,10 +5,20 @@ import BlogIndex from "../components/BlogIndex";
 import BreadCrumbs from "../components/Breadcrumbs";
 import Markdown from "../components/Markdown";
 import React from 'react';
+import {log} from "next/dist/server/typescript/utils";
+
+const additionalMattersData = [
+    {
+        path: '/docs/modify/advanced/busbis/',
+        sortKey: '/docs/2_modify/advanced/busbis/',
+        title: 'bus bis',
+        description: 'a bus description bissed',
+    }
+];
 
 export default class Page extends React.Component {
     render() {
-        const { frontmatter, body, path, paths, mattersData, excerpt } = this.props;
+        const { frontmatter, body, path, sortedPaths, mattersData, excerpt } = this.props;
         let dateString = '';
         if (path.startsWith('/blog/')) {
             const [_, year, month, day] = /^\/blog\/([0-9][0-9][0-9][0-9])-([0-9][0-9])-([0-9][0-9])-/.exec(path);
@@ -20,7 +30,7 @@ export default class Page extends React.Component {
             <div className="container-page">
                 <Head title={frontmatter.title} description={excerpt || frontmatter.description}/>
                 <main>
-                    <BreadCrumbs frontmatter={frontmatter} path={path} paths={paths} mattersData={mattersData}/>
+                    <BreadCrumbs frontmatter={frontmatter} path={path} paths={sortedPaths} mattersData={mattersData}/>
                     <h1>{frontmatter.title}</h1>
                     { dateString }
                     <hr />
@@ -40,8 +50,8 @@ export default class Page extends React.Component {
                         <ol className="headers-overview-elements"/>
                     </div>
                     <Markdown body={body} />
-                    {frontmatter.index && <DocIndex path={path} paths={paths} mattersData={mattersData} reverse={frontmatter.reverse}/>}
-                    {frontmatter.blog_index && <BlogIndex path={path} paths={paths} mattersData={mattersData}/>}
+                    {frontmatter.index && <DocIndex path={path} paths={sortedPaths} mattersData={mattersData} reverse={frontmatter.reverse}/>}
+                    {frontmatter.blog_index && <BlogIndex path={path} paths={sortedPaths} mattersData={mattersData}/>}
                 </main>
             </div>
         )
@@ -118,6 +128,10 @@ export async function getStaticProps({ ...ctx }) {
             mattersData[p].excerpt = excerpt;
         }
     }
+    const sortedPaths = [
+        ...paths,
+        ...additionalMattersData.map(p => ({ path: p.path, sortKey: p.sortKey})),
+    ].sort((a, b) => a.sortKey.localeCompare(b.sortKey)).map(p => p.path);
 
     return {
         props: {
@@ -125,7 +139,7 @@ export async function getStaticProps({ ...ctx }) {
             body: data.content,
             excerpt: data.excerpt,
             path,
-            paths,
+            sortedPaths,
             mattersData,
         },
     }
@@ -133,7 +147,8 @@ export async function getStaticProps({ ...ctx }) {
 
 export async function getStaticPaths() {
     const { paths, fallback } = await getStaticData();
-    return { paths, fallback };
+    const rawPaths = paths.map(p => p.path);
+    return { paths: rawPaths, fallback };
 }
 
 export async function getStaticData() {
@@ -149,23 +164,25 @@ export async function getStaticData() {
     // Remove index from file name
     const paths = pathsRaw.map(p => {
         let match;
-        while (match = /\/[0-9]*_/.exec(p)) {
-            p = p.replace(match, '/');
+        let cleaned = p;
+        while (match = /\/[0-9]*_/.exec(cleaned)) {
+            cleaned = cleaned.replace(match, '/');
         }
-        return p;
+        return { path: cleaned, sortKey: p };
     });
 
     const matters = (await Promise.all(pathsRaw
         .map(path => import(`.${path.slice(0, -1)}.md`))))
         .map(content => matter(content.default, { excerpt_separator: '<!-- excerpt-end -->' }))
         .reduce((acc, content, i) => {
-            acc[paths[i]] = content;
+            acc[paths[i].path] = content;
             return acc;
         }, {});
 
+    const additionalMatters = Object.fromEntries(additionalMattersData.map(p => [p.path, { data: p, content: '', excerpt: '' }]));
     return {
         paths,
-        matters,
+        matters: {...matters, ...additionalMatters},
         fallback: false,
     }
 }

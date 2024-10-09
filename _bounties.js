@@ -1,5 +1,5 @@
-import Head from '../../components/Head';
-import Markdown from "../../components/Markdown";
+import Head from './components/Head';
+import Markdown from "./components/Markdown";
 import 'cross-fetch/polyfill';
 
 function issueToTags(node) {
