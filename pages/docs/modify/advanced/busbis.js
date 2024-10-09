@@ -97,7 +97,7 @@ export default function Busbis({ bussesInfo }) {
                 <ol className="headers-overview-elements"/>
             </div>
 
-            <h1>Comunica Association Bounties</h1>
+            <h1>Buses and Actors</h1>
             <hr/>
             <p>
                 This page gives
