@@ -4,6 +4,7 @@
 import Head from '../../../../components/Head';
 import 'cross-fetch/polyfill';
 import React from "react";
+import Template from "../../../template";
 
 /**
  * Base url to use for linking to the Comunica repository.
@@ -11,13 +12,33 @@ import React from "react";
  */
 const rawRepoFiles = 'https://raw.githubusercontent.com/comunica/comunica/refs/heads/master/';
 const treeRepoFiles = 'https://github.com/comunica/comunica/tree/master/';
+const commonAbbreviation = [
+    ['http', 'HTTP'],
+    ['sparql', 'SPARQL'],
+    ['rdf', 'RDF'],
+]
+
+/**
+ * Replace snake case seperated abbreviation with their capitalized, well-known form
+ * @param text
+ */
+function abbreviate(text) {
+    let changed = text;
+    for (const [abbreviation, replacement] of commonAbbreviation) {
+        changed = changed.replace(new RegExp(`(^|-)${abbreviation}($|-)`, 'g'), `$1${replacement}$2`);
+    }
+    if (changed !== text) {
+        console.log(`Abbreviated ${text} to ${changed}`);
+    }
+    return changed;
+}
 
 function actorInfo(busName, { actorName, description }) {
     const packageUrl = `${treeRepoFiles}packages/${actorName}`;
     const actor = `@comunica/${actorName}`;
     const actorNameNatural = actorName
         .replace(`actor-${busName}-`, '')
-        .replace(/-[a-z]/g, g => ` ${g[1].toUpperCase()}`)
+        .replace(/-[a-zA-Z]/g, g => ` ${g[1].toUpperCase()}`)
         .replace(/^./, g => g.toUpperCase());
 
     return <tr>
@@ -29,8 +50,8 @@ function actorInfo(busName, { actorName, description }) {
 
 function functionBusInfo({ busName, description, actors }) {
     const actorsInfo = actors.map(actor => actorInfo(busName, actor));
-    const busNameNatural = busName
-        .replace(/-[a-z]/g, g => ` ${g[1].toUpperCase()}`)
+    const busNameNatural = abbreviate(busName)
+        .replace(/-[a-zA-Z]/g, g => ` ${g[1].toUpperCase()}`)
         .replace(/^./, g => g.toUpperCase());
     return <>
         <h2 id={busName}>{busNameNatural}</h2>
@@ -58,6 +79,7 @@ function functionBusInfo({ busName, description, actors }) {
 export default function Busbis({ bussesInfo }) {
   const busInfo = bussesInfo.map(busInfo => functionBusInfo(busInfo));
   return (
+    <Template key={'/docs/modify/advanced/busbis/'}>
     <div className="container-page">
       <Head
         title={'Buses and Actors'}
@@ -98,6 +120,7 @@ export default function Busbis({ bussesInfo }) {
             {busInfo}
         </main>
     </div>
+    </Template>
   )
 }
 
