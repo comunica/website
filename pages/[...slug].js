@@ -11,8 +11,8 @@ const additionalMattersData = [
     {
         path: '/docs/modify/advanced/busbis/',
         sortKey: '/docs/2_modify/advanced/busbis/',
-        title: 'bus bis',
-        description: 'a bus description bissed',
+        title: 'Buses and Actors',
+        description: 'An overview of all buses in Comunica and their actors.',
     }
 ];
 
