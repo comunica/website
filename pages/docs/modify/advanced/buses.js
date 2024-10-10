@@ -77,7 +77,7 @@ function functionBusInfo({ busName, description, actors }) {
 export default function Buses({ bussesInfo }) {
   const busInfo = bussesInfo.map(busInfo => functionBusInfo(busInfo));
   return (
-    <Template key={'/docs/modify/advanced/busbis/'}>
+    <Template key={'/docs/modify/advanced/buses/'}>
     <div className="container-page">
       <Head
         title={'Buses and Actors'}
@@ -128,8 +128,7 @@ async function fetchFile(url) {
 
 async function fetchJson(url) {
     try {
-        const response = await fetchFile(url);
-        return JSON.parse(response);
+        return await (await fetch(url)).json();
     } catch (e) {
         console.error(`Could not fetch ${url}: ${e}`);
         throw e;

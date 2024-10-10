@@ -9,8 +9,8 @@ import Template from "./template";
 
 const additionalMattersData = [
     {
-        path: '/docs/modify/advanced/busbis/',
-        sortKey: '/docs/2_modify/advanced/busbis/',
+        path: '/docs/modify/advanced/buses/',
+        sortKey: '/docs/2_modify/advanced/buses/',
         title: 'Buses and Actors',
         description: 'An overview of all buses in Comunica and their actors.',
     }
