@@ -120,7 +120,7 @@ This may be valuable in case your SPARQL query is used as a template with some v
 
 This can be done by passing an [RDF/JS `Bindings`](http://rdf.js.org/query-spec/#bindings-interface) object as value to the `initialBindings` context entry:
 ```javascript
-import { BindingsFactory } from '@comunica/bindings-factory';
+import { BindingsFactory } from '@comunica/utils-bindings-factory';
 import { DataFactory } from 'rdf-data-factory';
 
 const DF = new DataFactory();
@@ -138,7 +138,7 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE {
 ```
 
 `Bindings` can be created using any [RDF/JS `BindingsFactory`](http://rdf.js.org/query-spec/#bindingsfactory-interface),
-such as [`@comunica/bindings-factory`](https://www.npmjs.com/package/@comunica/bindings-factory).
+such as [`@comunica/utils-bindings-factory`](https://www.npmjs.com/package/@comunica/utils-bindings-factory).
 Learn more about the creation of these bindings objects in the [bindings guide](/docs/query/advanced/bindings/).
 
 ## 7. Setting the query format

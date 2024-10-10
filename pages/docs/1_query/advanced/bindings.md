@@ -14,10 +14,10 @@ and a <i>solution sequence</i> is equivalent to a bindings stream.
 
 Bindings object are represented using the [RDF/JS `Bindings`](http://rdf.js.org/query-spec/#bindings-interface) interface,
 and can be created using any RDF/JS [`BindingsFactory`](http://rdf.js.org/query-spec/#bindingsfactory-interface).
-Comunica provides the [`@comunica/bindings-factory`](https://github.com/comunica/comunica/tree/master/packages/bindings-factory) package that implements these interfaces.
+Comunica provides the [`@comunica/utils-bindings-factory`](https://github.com/comunica/comunica/tree/master/packages/bindings-factory) package that implements these interfaces.
 
 Below, several examples are shown on how these bindings objects can be used.
-Please refer to [the README of `@comunica/bindings-factory`](https://github.com/comunica/comunica/tree/master/packages/bindings-factory) for a complete overview of its operations.
+Please refer to [the README of `@comunica/utils-bindings-factory`](https://github.com/comunica/comunica/tree/master/packages/bindings-factory) for a complete overview of its operations.
 
 ## Reading values of bindings
 
@@ -92,8 +92,8 @@ Can output in the form of:
 First, a bindings factory must be created:
 ```typescript
 import * as RDF from '@rdfjs/types';
-import { DataFactory } from '@comunica/data-factory';
-import { BindingsFactory } from '@comunica/bindings-factory';
+import { DataFactory } from 'rdf-data-factory';
+import { BindingsFactory } from '@comunica/utils-bindings-factory';
 
 const DF = new DataFactory();
 const BF = new BindingsFactory(DF);
