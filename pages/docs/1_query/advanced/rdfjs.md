@@ -99,5 +99,5 @@ of a [source-based context](https://rdf.js.org/query-spec/#querysourcecontext-in
 
 Next to that, Comunica also implements the [`BindingsFactory`](http://rdf.js.org/query-spec/#bindingsfactory-interface)
 and  [`Bindings`](http://rdf.js.org/query-spec/#bindings-interface) interfaces via the
-[`@comunica/bindings-factory`](https://github.com/comunica/comunica/tree/master/packages/bindings-factory) package.
+[`@comunica/utils-bindings-factory`](https://github.com/comunica/comunica/tree/master/packages/bindings-factory) package.
 Learn more about the usage of these bindings [here](/docs/query/advanced/bindings/).
