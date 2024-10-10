@@ -5,7 +5,6 @@ import BlogIndex from "../components/BlogIndex";
 import BreadCrumbs from "../components/Breadcrumbs";
 import Markdown from "../components/Markdown";
 import React from 'react';
-import {log} from "next/dist/server/typescript/utils";
 import Template from "./template";
 
 const additionalMattersData = [

@@ -11,7 +11,7 @@ import Markdown from "../../../../components/Markdown";
  * Base url to use for linking to the Comunica repository.
  * @type {string}
  */
-const rawRepoFiles = 'https://raw.githubusercontent.com/jitsedesmet/comunica/refs/heads/chore/better-readmes/';
+const rawRepoFiles = 'https://raw.githubusercontent.com/comunica/comunica/refs/heads/master/';
 const treeRepoFiles = 'https://github.com/comunica/comunica/tree/master/';
 const commonAbbreviation = [
     ['http', 'HTTP'],
@@ -74,7 +74,7 @@ function functionBusInfo({ busName, description, actors }) {
     </>
 }
 
-export default function Busbis({ bussesInfo }) {
+export default function Buses({ bussesInfo }) {
   const busInfo = bussesInfo.map(busInfo => functionBusInfo(busInfo));
   return (
     <Template key={'/docs/modify/advanced/busbis/'}>
