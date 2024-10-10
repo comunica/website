@@ -5,12 +5,13 @@ import Head from '../../../../components/Head';
 import 'cross-fetch/polyfill';
 import React from "react";
 import Template from "../../../template";
+import Markdown from "../../../../components/Markdown";
 
 /**
  * Base url to use for linking to the Comunica repository.
  * @type {string}
  */
-const rawRepoFiles = 'https://raw.githubusercontent.com/comunica/comunica/refs/heads/master/';
+const rawRepoFiles = 'https://raw.githubusercontent.com/jitsedesmet/comunica/refs/heads/chore/better-readmes/';
 const treeRepoFiles = 'https://github.com/comunica/comunica/tree/master/';
 const commonAbbreviation = [
     ['http', 'HTTP'],
@@ -27,9 +28,6 @@ function abbreviate(text) {
     for (const [abbreviation, replacement] of commonAbbreviation) {
         changed = changed.replace(new RegExp(`(^|-)${abbreviation}($|-)`, 'g'), `$1${replacement}$2`);
     }
-    if (changed !== text) {
-        console.log(`Abbreviated ${text} to ${changed}`);
-    }
     return changed;
 }
 
@@ -44,7 +42,7 @@ function actorInfo(busName, { actorName, description }) {
     return <tr>
         <td>{actorNameNatural}</td>
         <td><a href={packageUrl}>{actor}</a></td>
-        <td>{description}</td>
+        <td><Markdown body={description} /></td>
     </tr>
 }
 
@@ -148,20 +146,23 @@ function sharedPrefixLength(a, b) {
 
 async function generateActorInfo(actor) {
     const actorName = actor.replace('@comunica/', '');
-    const actorPackages = await fetchJson(`${rawRepoFiles}packages/${actorName}/package.json`);
-    const description = actorPackages.description;
+    const actorReadme = await fetchFile(`${rawRepoFiles}packages/${actorName}/README.md`);
+    const descriptionMatch = new RegExp(
+        `^An? \\[([^\\]]*)\\]\\([^)]*\\)[ \n]actor((([^.]*\\.[^ \n])*[^.]*)*)\\.[ \n]`, 'gmiu'
+    ).exec(actorReadme);
 
-    // matching bus can be found as being the bus with the longest prefix match
-    const busNames = Object.keys(actorPackages.dependencies)
-        .filter(dep => dep.startsWith('@comunica/bus-'))
-        .map(dep => dep.replace('@comunica/bus-', ''))
-        .map(busName => ({ busName, prefixLength: sharedPrefixLength(busName, actorName.replace('actor-', '')) }))
-        .sort((a, b) => b.prefixLength - a.prefixLength);
-
-    if (busNames.length === 0) {
-        throw new Error(`No bus found for actor ${actorName}`);
+    if (!descriptionMatch) {
+        throw new Error(`No description found for actor ${actorName} parsed:\n${actorReadme}`);
     }
-    const busName = busNames[0].busName;
+    const description = descriptionMatch[2]
+        .replaceAll('\n', ' ')
+        .trim()
+        .replace(/\s+/gu, ' ')
+        .replace(/^that /gu, '')
+        .replace(/^which /gu, '')
+        .replace(/^./gu, g => g.toUpperCase());
+
+    const busName = descriptionMatch[1].toLowerCase().replaceAll(' ', '-');
 
     return {
         busName,
@@ -202,6 +203,3 @@ export async function getStaticProps({...ctx}) {
 
     return { props: { bussesInfo } };
 }
-
-// getStaticProps({}).then(console.log).catch(console.log
-// );
