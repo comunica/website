@@ -125,5 +125,11 @@
             <guid isPermaLink="false">pages/blog/2024-07-05-release_3_2.md</guid>
             <pubDate>Mon, 05 Aug 2024 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 4.0: 🚄 Faster actor testing and modularized expressions]]></title>
+            <link>https://comunica.dev/blog/2024-10-15-release_4_0/</link>
+            <guid isPermaLink="false">pages/blog/2024-10-15-release_4_0.md</guid>
+            <pubDate>Fri, 15 Nov 2024 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
