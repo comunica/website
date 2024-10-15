@@ -118,7 +118,7 @@ Making a new release only requires invoking `yarn run publish-release` from the 
 
 <div class="note">
 If publication fails due to a random NPM server error,
-you can invoke the [`retry-republish.sh`](https://github.com/comunica/comunica/blob/master/.github/retry-publish.sh) scripts to retry the publication.
+you can invoke the [`./packages/utils-monorepo/sh/retry-publish.sh`](https://github.com/comunica/comunica/blob/master/packages/utils-monorepo/sh/retry-publish.sh) scripts to retry the publication.
 This script can be safely called multiple times.
 You may have to stash your repo first.
 </div>
