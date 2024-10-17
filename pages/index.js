@@ -76,9 +76,6 @@ export default function Home() {
             <a href="https://www.ugent.be/ea/idlab/en">
               <img src="img/members/idlab.png" alt="IDLab - Internet Technology and Data Science Lab" />
             </a>
-            <a href="https://cecs.anu.edu.au/">
-              <img src="https://marketing-pages.anu.edu.au/_anu/4/images/logos/2x_anu_logo_small.svg" alt="ANU College of Engineering & Computer Science" />
-            </a>
             <a href="https://www.vlaanderen.be/digitaal-vlaanderen">
               <img src="img/members/digitaal-vlaanderen.png" alt="Digitaal Vlaanderen" />
             </a>
