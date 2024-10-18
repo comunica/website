@@ -267,7 +267,7 @@ pre {
 
     .sponsors-member {
         img {
-            height: 100px;
+            height: 120px;
             margin: 25px;
         }
     }
@@ -694,5 +694,17 @@ main .date {
 @media (max-width: 400px) and (min-width: 200px) {
     pre {
         width: 200px;
+    }
+}
+
+@media (max-width: 600px) {
+    pre {
+        width: 200px;
+    }
+    .sponsors-member {
+        img {
+            width: 90%;
+            height: auto !important;
+        }
     }
 }
