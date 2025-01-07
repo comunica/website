@@ -209,4 +209,4 @@ As a result of using the JS Regex Engine, our implementation of those functions 
 examples of which can be found in the skipped test blocks in
 [op.regex-test.ts](https://github.com/comunica/comunica/blob/master/packages/actor-function-factory-term-regex/test/op.regex-test.ts)
 and
-[op.replace-test.ts](https://github.com/comunica/comunica/blob/74beef86b11059fb192bf67274c22ee370ba59c8/packages/actor-function-factory-term-replace/test/op.replace-test.ts).
+[op.replace-test.ts](https://github.com/comunica/comunica/blob/master/packages/actor-function-factory-term-replace/test/op.replace-test.ts).
