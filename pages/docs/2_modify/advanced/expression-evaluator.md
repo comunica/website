@@ -192,9 +192,9 @@ Examples include `xsd:float` and `xsd:decimal` to `xsd:double`and `xsd:anyURI` t
 In this case, the datatype of the term will change to the type it is promoted to.
 
 
-## Known Spec Deviations
+## Deviations from the SPARQL specification
 
-Two functions have known spec deviations.
+Two functions have known deviations from the SPARQL specification in a few minor edge-cases.
 These are the
 [regex](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-regex)
 and
@@ -204,7 +204,7 @@ These two functions require the implementation of a Regular Expression Engine.
 Instead of implementing and bundling our own implementation of such an engine,
 we use the implementation provided by the JavaScript language (in unicode-mode, without [Annex B](https://262.ecma-international.org/6.0/#sec-regular-expressions-patterns)).
 This choice saves bundle size and probably execution time in comparison to implementing our own engine.
-Furthermore, it reduces implementation/ maintenance cost on our side.
+Furthermore, it reduces implementation and maintenance cost on our side.
 As a result of using the JS Regex Engine, our implementation of those functions has some known non-spec compliant edge cases,
 examples of which can be found in the skipped test blocks in
 [op.regex-test.ts](https://github.com/comunica/comunica/blob/master/packages/actor-function-factory-term-regex/test/op.regex-test.ts)
