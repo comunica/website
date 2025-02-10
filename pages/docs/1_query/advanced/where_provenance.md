@@ -3,7 +3,7 @@ title: 'Source attribution'
 description: 'Comunica can annotate query result bindings with the sources used to produced these bindings.'
 ---
 
-Comunica can track the sources that contribute to query results, which corresponds to **where-provenance** [1]. 
+Comunica can track the sources that contribute to query results, which corresponds to [where-provenance](https://homepages.inf.ed.ac.uk/opb/papers/ICDT2001.pdf). 
 However, this feature is not enabled by default due to the overhead of computing source attributions. 
 Enabling it requires a [custom configuration](https://comunica.dev/docs/modify/getting_started/custom_config_app/).
 
@@ -114,9 +114,3 @@ will produce:
 <div class="note">
 This actor does not work when the `aggregateTraversalStore` is enabled in `ActorQuerySourceIdentifyHypermedia`.
 </div>
-
-
-## References
-1. **Peter Buneman, Sanjeev Khanna, and Wang-Chiew Tan.**  
-   *"Why and where: A characterization of data provenance."*  
-   In *Database Theory—ICDT 2001*, pages 316–330. Springer, 2001.
