@@ -1,10 +1,11 @@
 ---
-title: 'Tracking source attribution of query results'
+title: 'Source attribution'
 description: 'Comunica can annotate query result bindings with the sources used to produced these bindings.'
 ---
 
-Comunica can track the sources that contribute to query results. This is equivalent to where-provenance [1] of results.
-This is not enabled by default due to the overhead of computing the source attributions and requires a [custom configuration](https://comunica.dev/docs/modify/getting_started/custom_config_app/).
+Comunica can track the sources that contribute to query results, which corresponds to **where-provenance** [1]. 
+However, this feature is not enabled by default due to the overhead of computing source attributions. 
+Enabling it requires a [custom configuration](https://comunica.dev/docs/modify/getting_started/custom_config_app/).
 
 To achieve this, Comunica wraps all query sources in a `QuerySourceAddSourceAttribution` via `ActorQuerySourceIdentifyHypermediaAnnotateSource`. This actor sets the URL of each query source in the context of the bindings it produces.
 
