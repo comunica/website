@@ -35,7 +35,7 @@ $ comunica-sparql sparql@https://dbpedia.org/sparql \
 ## Setting source type in an application
 
 Via a [JavaScript application](/docs/query/getting_started/query_app/),
-the source type can be set by using a hash containing `type` and `value`:
+the source type can be set by using a record containing `type` and `value`:
 ```javascript
 const bindingsStream = await myEngine.queryBindings(`...`, {
   sources: [
@@ -43,6 +43,10 @@ const bindingsStream = await myEngine.queryBindings(`...`, {
   ],
 });
 ```
+
+<div class="note">
+This record may optionally contain a <a href="/docs/query/advanced/context/">source-specific context</a> within the <code>"context"</code> field.
+</div>
 
 ## Supported source types
 

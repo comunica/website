@@ -67,11 +67,14 @@ Using the `sources` context entry, data sources can be defined that Comunica sho
 The value of this must be an array, where the array may contain both strings or objects:
 * Array elements that are strings are interpreted as URLs, such as `'https://www.rubensworks.net/'` or `'https://fragments.dbpedia.org/2016-04/en'`.
 * Object array elements can be different things:
-    * A hash containing `type` and `value`, such as `{ type: 'sparql', value: 'https://dbpedia.org/sparql' }`.
+    * A record containing `type` and `value`, such as `{ type: 'sparql', value: 'https://dbpedia.org/sparql' }`.
     * An [RDF/JS](/docs/query/advanced/rdfjs/) source object, such as [`new N3Store()`](https://github.com/rdfjs/N3.js#storing).
 
 String-based sources will lead to Comunica trying to determine their source type automatically.
-Hash-based sources allows you to enforce a specific source type.
+Record-based sources allows you to enforce a specific source type.
+
+Record-based sources can optionally contain a source-specific context within the <code>"context"</code> field,
+in which all entries of that context will apply only to that source.
 
 <div class="note">
 Learn more about <a href="/docs/query/advanced/source_types/">all available source type</a>.
@@ -91,6 +94,7 @@ const bindingsStream = await myEngine.queryBindings(`...`, {
     { type: 'file', value: 'https://www.rubensworks.net/' },
     new N3Store(),
     { type: 'sparql', value: 'https://dbpedia.org/sparql' },
+    { type: 'sparql', value: 'https://query.wikidata.org/sparql', context: { httpTimeout: 60_000 } },
   ],
 });
 ```
