@@ -6,6 +6,8 @@ description: 'HDT offers highly compressed immutable RDF storage.'
 [HDT](http://www.rdfhdt.org/) is a highly compressed RDF dataset format that enables efficient triple pattern querying.
 Comunica enables executing SPARQL queries over HDT files,
 as it is one of the supported [source types](/docs/query/advanced/source_types/).
+You can [download one of the public HDT files](https://www.rdfhdt.org/datasets/),
+or you can [create an HDT file yourself](https://github.com/rdfhdt/hdt-docker).
 
 Querying over HDT requires [Comunica SPARQL HDT package (`@comunica/query-sparql-hdt`)](https://github.com/comunica/comunica-feature-hdt/tree/master/engines/query-sparql-hdt#readme).
 
