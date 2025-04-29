@@ -131,5 +131,11 @@
             <guid isPermaLink="false">pages/blog/2024-10-15-release_4_0.md</guid>
             <pubDate>Fri, 15 Nov 2024 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 4.2: 🍇 Towards real-world federation improvements]]></title>
+            <link>https://comunica.dev/blog/2025-04-29-release_4_2/</link>
+            <guid isPermaLink="false">pages/blog/2025-04-29-release_4_2.md</guid>
+            <pubDate>Thu, 29 May 2025 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
