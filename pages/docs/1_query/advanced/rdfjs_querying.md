@@ -37,6 +37,10 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
 ```
 
 <div class="note">
+We recommend passing RDF/JS `Source`'s when possible. As they have an asynchronous streaming interface that leads to better performance when working with large datasets.
+</div>
+
+<div class="note">
 If an object implements both the RDF/JS `Source` and RDF/JS `DatasetCore`, then the source implementation is used.
 </div>
 
