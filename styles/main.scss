@@ -584,6 +584,41 @@ main .date {
     float: left;
 }
 
+/**
+ * Experiments
+ */
+.plot {
+    display: block;
+    margin: 15px auto 15px auto;
+    text-align: center;
+    width: 750px;
+}
+@media (max-width: 800px) {
+    .plot {
+        width: 500px;
+    }
+}
+
+.plot-figures {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    div {
+        display: flex;
+        align-items: stretch;
+        min-width: 0;
+        img {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+            display: block;
+            min-width: 0;
+        }
+    }
+}
+
 @media (max-width: 1350px) {
     .headers-overview {
         visibility: hidden;

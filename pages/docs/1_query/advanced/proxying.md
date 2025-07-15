@@ -32,4 +32,4 @@ which will simply put the URL `http://myproxy.org/?uri=` in front of all URLs th
 
 If you need a more advanced proxy behaviour,
 then you can implement your own proxy handler.
-All proxy handlers must implement the [`IProxyHandler` interface](https://github.com/comunica/comunica/blob/master/packages/actor-http-proxy/lib/IProxyHandler.ts).
+All proxy handlers must implement the [`IProxyHandler` interface](https://github.com/comunica/comunica/blob/master/packages/types/lib/IProxyHandler.ts).

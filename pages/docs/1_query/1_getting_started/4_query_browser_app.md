@@ -11,7 +11,7 @@ and as **client-side applications in Web browsers**.
 The easiest way to use Comunica in your Web app,
 is by using a pre-built Comunica SPARQL version that is served via a GitHub CDN:
 ```html
-<script src="https://rdf.js.org/comunica-browser/versions/v2/engines/query-sparql/comunica-browser.js"></script>
+<script src="https://rdf.js.org/comunica-browser/versions/v4/engines/query-sparql/comunica-browser.js"></script>
 <script language="JavaScript">
   new Comunica.QueryEngine().queryBindings(`
   SELECT * {
@@ -30,7 +30,7 @@ is by using a pre-built Comunica SPARQL version that is served via a GitHub CDN:
 ```
 
 <div class="note">
-The code example above will always make use of the the latest Comunica version in the 2.x.x range.
+The code example above will always make use of the the latest Comunica version in the 4.x.x range.
 Instead, you can <a href="https://github.com/rdfjs/comunica-browser#readme">use a specific version</a>.
 </div>
 
@@ -52,4 +52,9 @@ You will need to create a "UMD bundle" and supply a name (e.g. with the -s Comun
 Refer to our specific guide on
 <a href="/docs/modify/advanced/browser_builds/">building for the browser</a>
 if you want to build specific configurations of Comunica for the browser.
+</div>
+
+<div class="note">
+If want to use Vite instead of Webpack, you may need to work around an issue related to <code>process.env</code>,
+for which a <a href="https://github.com/comunica/comunica/issues/1523">workaround</a> is available.
 </div>

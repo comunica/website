@@ -104,6 +104,12 @@ For example, the imported config file `ccqs:config/query-operation/actors.json` 
 }
 ```
 
+<div class="note">
+Imports from prefixes such as <code>ccqs:</code> allow you to refer to config files from npm packages.
+If you want to import a local file for quick testing, you may omit this prefix
+to refer to files on the local file system, such as <code>"relative/path/to/actor.json"</code>
+</div>
+
 This example config file imports several smaller config files,
 where each config file contains a single _[actor](/docs/modify/advanced/architecture_core/)_ that will be loaded into Comunica.
 

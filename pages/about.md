@@ -9,6 +9,7 @@ This page provides more details about its goals and motivations.
 Related pages:
 * [Roadmap](/roadmap/)
 * [Contribute](/contribute/)
+* [Performance](/performance/)
 * [Logos](/logos/)
 
 <div class="video">

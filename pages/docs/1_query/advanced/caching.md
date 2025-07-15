@@ -9,10 +9,10 @@ which can be done as follows:
 
 ```javascript
 // Invalidate the full cache
-myEngine.invalidateHttpCache();
+await myEngine.invalidateHttpCache();
 
 // Invalidate a single document
-myEngine.invalidateHttpCache('http://example.org/page.html');
+await myEngine.invalidateHttpCache('http://example.org/page.html');
 ```
 
 Optionally, you can also pass the `noCache: true` flag to your context to invalidate the cache before query execution starts:
