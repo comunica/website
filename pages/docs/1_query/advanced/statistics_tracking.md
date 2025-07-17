@@ -1,6 +1,6 @@
 ---
 title: 'Statistics Tracking System'
-description: 'Comunica provides real-time runtime statistics during query execution.'
+description: 'Track real-time runtime statistics during query execution.'
 ---
 
 Comunica includes a **dynamic runtime statistics tracking system** that monitors key performance metrics throughout query execution.  
@@ -90,14 +90,14 @@ Other Comunica actors can access the statistic tracker objects by retrieving it 
 
 Comunica does not natively support statistic tracking from the command line.  
 However, it would be easy to add it to the context using an actor subscribing to the `bus-context-preprocess`.  
-The implementation would be similar to the implementation of [actor-context-preprocess-set-defaults](https://github.com/comunica/comunica/tree/master/packages/actor-context-preprocess-set-defaults).  
+The implementation would be similar to the implementation of [`@comunica/actor-context-preprocess-set-defaults`](https://github.com/comunica/comunica/tree/master/packages/actor-context-preprocess-set-defaults).  
 
 
 ## Intermediate Result Events
 
 Tracking intermediate results follows a similar approach to the other statistics, but it requires a [custom configuration](https://comunica.dev/docs/modify/getting_started/custom_config_app/) with additional setup steps.  
 Intermediate result events are captured by wrapping the `query-operation` and `rdf-join` streams with a callback.  
-This wrapping is performed by actors subscribing to the [bus-iterator-transform](https://github.com/comunica/comunica/tree/master/packages/bus-iterator-transform) bus, which allows multiple wraps of a single stream.
+This wrapping is performed by actors subscribing to the [`@comunica/bus-iterator-transform`](https://github.com/comunica/comunica/tree/master/packages/bus-iterator-transform) bus, which allows multiple wraps of a single stream.
 
 To track intermediate results produced by join actors, include the following actor:
 
