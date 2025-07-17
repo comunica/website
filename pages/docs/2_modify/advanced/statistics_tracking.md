@@ -4,7 +4,7 @@ description: 'Track real-time runtime statistics during query execution.'
 ---
 
 Comunica includes a **dynamic runtime statistics tracking system** that monitors key performance metrics throughout query execution.  
-These statistics cover aspects such as the number of intermediate results, discovered links, and dereferenced links.  
+These statistics cover aspects such as the number of intermediate results, discovered links, and dereferenced links. Note that this behavior is disabled by default; enabling it requires configuration steps described in the following sections.
 
 As the query executes, Comunica **emits these metrics in real time**, enabling other (future) Comunica actors to adaptively optimize query processing.  
 After query completion, these statistics can be analyzed to gain insights into execution behavior and performance characteristics. The available types of statistics are described in more detail below.
