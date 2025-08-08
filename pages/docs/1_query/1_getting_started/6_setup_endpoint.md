@@ -90,7 +90,68 @@ $ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
 
 Setting this to the number of available CPU cores tends to give the best performance.
 
-## 7. Learn more
+## 7. Adding a context
+
+Using the `-c` option, you can add a context (JSON string or file):
+```bash
+$ comunica-sparql-http -c config.json
+```
+`config.json` could look like this:
+```json
+{
+  "sources": [
+    "https://fragments.dbpedia.org/2016-04/en"
+  ],
+  "lenient": true
+}
+```
+
+You can also pass a string.
+
+<div class="note">
+When using a context, the sources need to be provided within said context.
+</div>
+
+## 8. Including VoID metadata
+
+Using `--includeVoID` you can make your endpoint expose a [VoID](https://www.w3.org/TR/void/) description:
+
+```bash
+$ comunica-sparql-http -c config.json --includeVoID
+```
+
+The metadata can be accessed at http://localhost:3000/void.
+
+You can also add [Dublin Core Metadata Terms](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) (general metadata) using a `dcterms` field in the context:
+```json
+{
+  "sources": [
+    "https://www.rubensworks.net/",
+    "https://ruben.verborgh.org/profile/"
+  ],
+  "dcterms": {
+    "title": "comunica SPARQL endpoint",
+    "creator": "me"
+  }
+}
+```
+
+The VoID description for the above context will look like this:
+```ttl
+</void> a <http://rdfs.org/ns/void#Dataset>;
+    <http://rdfs.org/ns/void#sparqlEndpoint> </sparql>;
+    <http://rdfs.org/ns/void#vocabulary> <http://www.w3.org/ns/formats/>;
+    <http://rdfs.org/ns/void#feature> <http://www.w3.org/ns/formats/N3>, <http://www.w3.org/ns/formats/N-Triples>, <http://www.w3.org/ns/formats/RDF_XML>, <http://www.w3.org/ns/formats/RDFa>, <http://www.w3.org/ns/formats/Turtle>;
+    <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/terms/>;
+    <http://purl.org/dc/terms/title> <comunica SPARQL endpoint>;
+    <http://purl.org/dc/terms/creator> <me>;
+    <http://rdfs.org/ns/void#triples> 11536;
+    <http://rdfs.org/ns/void#properties> 11536;
+    <http://rdfs.org/ns/void#distinctSubjects> 3712;
+    <http://rdfs.org/ns/void#distinctObjects> 5644.
+```
+
+## 9. Learn more
 
 This guide only discussed the basic functionality of `comunica-sparql-http`.
 You can learn more options by invoking the _help_ command:
@@ -102,18 +163,28 @@ Recommended options:
   -p, --port     HTTP port to run on                                                                                                    [number] [default: 3000]
   -w, --workers  Number of worker threads                                                                                                  [number] [default: 1]
   -t, --timeout  Query execution timeout in seconds                                                                                       [number] [default: 60]
-  -u, --update   Enable update queries (otherwise, only read queries are enabled)                                                     [boolean] [default: false]
+  -u, --update   Enable update queries (otherwise, only read queries are enabled)                                                                      [boolean]
 
 Options:
-  -c, --context          Use the given JSON context string or file (e.g., config.json)                                                                  [string]
-      --to               Destination for update queries                                                                                                 [string]
-  -b, --baseIRI          base IRI for the query (e.g., http://example.org/)                                                                             [string]
-  -d, --dateTime         Sets a datetime for querying Memento-enabled archives                                                                          [string]
-  -l, --logLevel         Sets the log level (e.g., debug, info, warn, ...)                                                            [string] [default: "warn"]
-      --lenient          If failing requests and parsing errors should be logged instead of causing a hard crash                                       [boolean]
-  -v, --version          Prints version information                                                                                                    [boolean]
-      --showStackTrace   Prints the full stacktrace when errors are thrown                                                                             [boolean]
-  -i, --invalidateCache  Enable cache invalidation before each query execution                                                        [boolean] [default: false]
+  -c, --context                 Use the given JSON context string or file (e.g., config.json)                                                           [string]
+      --to                      Destination for update queries                                                                                          [string]
+  -b, --baseIRI                 base IRI for the query (e.g., http://example.org/)                                                                      [string]
+  -d, --dateTime                Sets a datetime for querying Memento-enabled archives                                                                   [string]
+  -l, --logLevel                Sets the log level (e.g., debug, info, warn, ...)                                                     [string] [default: "warn"]
+      --lenient                 If failing requests and parsing errors should be logged instead of causing a hard crash                                [boolean]
+  -v, --version                 Prints version information                                                                                             [boolean]
+      --showStackTrace          Prints the full stacktrace when errors are thrown                                                                      [boolean]
+      --httpTimeout             HTTP requests timeout in milliseconds                                                                                   [number]
+      --httpBodyTimeout         Makes the HTTP timeout take into account the response body stream read                                                 [boolean]
+      --httpRetryCount          The number of retries to perform on failed fetch requests                                                               [number]
+      --httpRetryDelayFallback  The fallback delay in milliseconds between fetch retries                                                                [number]
+      --httpRetryDelayLimit     The upper limit in milliseconds for the delay between fetch retries                                                     [number]
+      --unionDefaultGraph       If the default graph should also contain the union of all named graphs                                                 [boolean]
+  -i, --invalidateCache         Enable cache invalidation before each query execution                                                                  [boolean]
+      --distinctConstruct       If the query engine should deduplicate resulting triples                                                               [boolean]
+      --freshWorker             Kills the worker after each query execution                                                                            [boolean]
+      --contextOverride         If the query context can be overridden through POST requests                                                           [boolean]
+      --includeVoID             Include a VoID description, which can be accessed at /void                                                             [boolean]
 
 Examples:
   comunica-sparql-http https://fragments.dbpedia.org/2016-04/en
