@@ -106,8 +106,6 @@ $ comunica-sparql-http -c config.json
 }
 ```
 
-You can also pass a string.
-
 <div class="note">
 When using a context, the sources need to be provided within said context.
 </div>
