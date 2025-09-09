@@ -110,15 +110,15 @@ $ comunica-sparql-http -c config.json
 When using a context, the sources need to be provided within said context.
 </div>
 
-## 8. Including VoID metadata
+## 8. Emitting VoID metadata
 
-Using `--includeVoID` you can make your endpoint expose a [VoID](https://www.w3.org/TR/void/) description:
+Using `--emitVoid` you can make your endpoint include a [VoID](https://www.w3.org/TR/void/) description in its service description:
 
 ```bash
-$ comunica-sparql-http -c config.json --includeVoID
+$ comunica-sparql-http -c config.json --emitVoid
 ```
 
-The metadata can be accessed at http://localhost:3000/void.
+The metadata can be found in the service description at http://localhost:3000/sparql.
 
 You can also add [Dublin Core Metadata Terms](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) (general metadata) using a `dcterms` field in the context:
 ```json
@@ -134,19 +134,69 @@ You can also add [Dublin Core Metadata Terms](https://www.dublincore.org/specifi
 }
 ```
 
-The VoID description for the above context will look like this:
+The service description with VoID included for the above context will look like this:
 ```ttl
-</void> a <http://rdfs.org/ns/void#Dataset>;
+</sparql> a <http://www.w3.org/ns/sparql-service-description#Service>;
+    <http://www.w3.org/ns/sparql-service-description#endpoint> </sparql>;
+    <http://www.w3.org/ns/sparql-service-description#url> </sparql>;
+    <http://www.w3.org/ns/sparql-service-description#feature> <http://www.w3.org/ns/sparql-service-description#BasicFederatedQuery>;
+    <http://www.w3.org/ns/sparql-service-description#supportedLanguage> <http://www.w3.org/ns/sparql-service-description#SPARQL10Query>, <http://www.w3.org/ns/sparql-service-description#SPARQL11Query>;
+    <http://www.w3.org/ns/sparql-service-description#resultFormat> <https://comunica.linkeddatafragments.org/#results_stats>, <http://www.w3.org/ns/formats/SPARQL_Results_JSON>, <http://www.w3.org/ns/formats/Shaclc>, <http://www.w3.org/ns/formats/ShaclcExtended>, <http://www.w3.org/ns/formats/JSON-LD>, <http://www.w3.org/ns/formats/N-Quads>, <http://www.w3.org/ns/formats/N-Triples>, <http://www.w3.org/ns/formats/TriG>, <http://www.w3.org/ns/formats/N3>, <http://www.w3.org/ns/formats/Turtle>, <https://comunica.linkeddatafragments.org/#results_tree>, <https://comunica.linkeddatafragments.org/#results_table>, <http://www.w3.org/ns/formats/SPARQL_Results_XML>, <http://www.w3.org/ns/formats/SPARQL_Results_TSV>, <http://www.w3.org/ns/formats/SPARQL_Results_CSV>, <https://comunica.linkeddatafragments.org/#results_simple>, <https://comunica.linkeddatafragments.org/#results_JSON>;
+    <http://www.w3.org/ns/sparql-service-description#defaultDataset> _:defaultDataset.
+_:defaultDataset a <http://www.w3.org/ns/sparql-service-description#Dataset>, <http://rdfs.org/ns/void#Dataset>;
     <http://rdfs.org/ns/void#sparqlEndpoint> </sparql>;
-    <http://rdfs.org/ns/void#vocabulary> <http://www.w3.org/ns/formats/>;
-    <http://rdfs.org/ns/void#feature> <http://www.w3.org/ns/formats/N3>, <http://www.w3.org/ns/formats/N-Triples>, <http://www.w3.org/ns/formats/RDF_XML>, <http://www.w3.org/ns/formats/RDFa>, <http://www.w3.org/ns/formats/Turtle>;
     <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/terms/>;
     <http://purl.org/dc/terms/title> <comunica SPARQL endpoint>;
     <http://purl.org/dc/terms/creator> <me>;
-    <http://rdfs.org/ns/void#triples> 11536;
-    <http://rdfs.org/ns/void#properties> 11536;
-    <http://rdfs.org/ns/void#distinctSubjects> 3712;
-    <http://rdfs.org/ns/void#distinctObjects> 5644.
+    <http://www.w3.org/ns/sparql-service-description#defaultGraph> _:defaultGraph.
+_:defaultGraph a <http://www.w3.org/ns/sparql-service-description#Graph>;
+    <http://rdfs.org/ns/void#classes> 19.
+_:defaultDataset <http://rdfs.org/ns/void#classPartition> _:classPartition0.
+_:classPartition0 a <http://rdfs.org/ns/void#ClassPartition>;
+    <http://rdfs.org/ns/void#class> <http://xmlns.com/foaf/0.1/Person>;
+    <http://rdfs.org/ns/void#entities> 438.
+_:defaultDataset <http://rdfs.org/ns/void#classPartition> _:classPartition1.
+_:classPartition1 a <http://rdfs.org/ns/void#ClassPartition>;
+    <http://rdfs.org/ns/void#class> <http://xmlns.com/foaf/0.1/Document>;
+    <http://rdfs.org/ns/void#entities> 1.
+    
+...
+
+_:defaultDataset <http://rdfs.org/ns/void#classPartition> _:classPartition18.
+_:classPartition18 a <http://rdfs.org/ns/void#ClassPartition>;
+    <http://rdfs.org/ns/void#class> <http://www.w3.org/2002/07/owl#AllDifferent>;
+    <http://rdfs.org/ns/void#entities> 1.
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition0.
+_:propertyPartition0 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://xmlns.com/foaf/0.1/primaryTopic>;
+    <http://rdfs.org/ns/void#triples> 8.
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition1.
+_:propertyPartition1 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>;
+    <http://rdfs.org/ns/void#triples> 901.
+
+...
+
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition9.
+_:propertyPartition9 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://xmlns.com/foaf/0.1/name>;
+    <http://rdfs.org/ns/void#triples> 80.
+_:defaultGraph <http://rdfs.org/ns/void#triples> 11542;
+    <http://rdfs.org/ns/void#entities> 5701;
+    <http://rdfs.org/ns/void#distinctSubjects> 3714;
+    <http://rdfs.org/ns/void#properties> 79;
+    <http://rdfs.org/ns/void#distinctObjects> 5646.
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition10.
+_:propertyPartition10 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://ogp.me/ns#site_name>;
+    <http://rdfs.org/ns/void#triples> 1.
+
+...
+
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition78.
+_:propertyPartition78 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://www.w3.org/2002/07/owl#distinctMembers>;
+    <http://rdfs.org/ns/void#triples> 1.
 ```
 
 ## 9. Learn more
