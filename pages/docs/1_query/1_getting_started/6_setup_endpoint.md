@@ -132,8 +132,10 @@ You can also add [Dublin Core Metadata Terms](https://www.dublincore.org/specifi
     "https://ruben.verborgh.org/profile/"
   ],
   "dcterms": {
-    "title": "\"comunica SPARQL endpoint\"",
-    "creator": "https://example.com/johndoe"
+    "title": "title",
+    "description": "description",
+    "creator": "http://example.org/creator",
+    "created": "2025/08/07"
   }
 }
 ```
@@ -150,8 +152,10 @@ The service description with VoID included for the above context will look like 
 _:defaultDataset a <http://www.w3.org/ns/sparql-service-description#Dataset>, <http://rdfs.org/ns/void#Dataset>;
     <http://rdfs.org/ns/void#sparqlEndpoint> <http://localhost:3000/sparql>;
     <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/terms/>;
-    <http://purl.org/dc/terms/title> "comunica SPARQL endpoint";
-    <http://purl.org/dc/terms/creator> <https://example.com/johndoe>;
+    <http://purl.org/dc/terms/title> "title";
+    <http://purl.org/dc/terms/description> "description";
+    <http://purl.org/dc/terms/creator> <http://example.org/creator>;
+    <http://purl.org/dc/terms/created> "2025/08/07"^^<http://www.w3.org/2001/XMLSchema#date>;
     <http://www.w3.org/ns/sparql-service-description#defaultGraph> _:defaultGraph.
 _:defaultGraph a <http://www.w3.org/ns/sparql-service-description#Graph>;
     <http://rdfs.org/ns/void#classes> 19.
