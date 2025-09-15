@@ -112,6 +112,10 @@ When using a context, the sources need to be provided within said context.
 
 ## 8. Emitting VoID metadata
 
+<div class="note">
+Experimental feature: can be very slow to generate the descriptions for big datasets. But only the first time and after update queries, since caching is implemented and invalidated after updating.
+</div>
+
 Using `--emitVoid` you can make your endpoint include a [VoID](https://www.w3.org/TR/void/) description in its service description:
 
 ```bash
