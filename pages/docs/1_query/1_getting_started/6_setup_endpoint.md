@@ -132,26 +132,26 @@ You can also add [Dublin Core Metadata Terms](https://www.dublincore.org/specifi
     "https://ruben.verborgh.org/profile/"
   ],
   "dcterms": {
-    "title": "comunica SPARQL endpoint",
-    "creator": "me"
+    "title": "\"comunica SPARQL endpoint\"",
+    "creator": "https://example.com/johndoe"
   }
 }
 ```
 
 The service description with VoID included for the above context will look like this:
 ```ttl
-</sparql> a <http://www.w3.org/ns/sparql-service-description#Service>;
-    <http://www.w3.org/ns/sparql-service-description#endpoint> </sparql>;
-    <http://www.w3.org/ns/sparql-service-description#url> </sparql>;
+<http://localhost:3000/sparql> a <http://www.w3.org/ns/sparql-service-description#Service>;
+    <http://www.w3.org/ns/sparql-service-description#endpoint> <http://localhost:3000/sparql>;
+    <http://www.w3.org/ns/sparql-service-description#url> <http://localhost:3000/sparql>;
     <http://www.w3.org/ns/sparql-service-description#feature> <http://www.w3.org/ns/sparql-service-description#BasicFederatedQuery>;
     <http://www.w3.org/ns/sparql-service-description#supportedLanguage> <http://www.w3.org/ns/sparql-service-description#SPARQL10Query>, <http://www.w3.org/ns/sparql-service-description#SPARQL11Query>;
     <http://www.w3.org/ns/sparql-service-description#resultFormat> <https://comunica.linkeddatafragments.org/#results_stats>, <http://www.w3.org/ns/formats/SPARQL_Results_JSON>, <http://www.w3.org/ns/formats/Shaclc>, <http://www.w3.org/ns/formats/ShaclcExtended>, <http://www.w3.org/ns/formats/JSON-LD>, <http://www.w3.org/ns/formats/N-Quads>, <http://www.w3.org/ns/formats/N-Triples>, <http://www.w3.org/ns/formats/TriG>, <http://www.w3.org/ns/formats/N3>, <http://www.w3.org/ns/formats/Turtle>, <https://comunica.linkeddatafragments.org/#results_tree>, <https://comunica.linkeddatafragments.org/#results_table>, <http://www.w3.org/ns/formats/SPARQL_Results_XML>, <http://www.w3.org/ns/formats/SPARQL_Results_TSV>, <http://www.w3.org/ns/formats/SPARQL_Results_CSV>, <https://comunica.linkeddatafragments.org/#results_simple>, <https://comunica.linkeddatafragments.org/#results_JSON>;
     <http://www.w3.org/ns/sparql-service-description#defaultDataset> _:defaultDataset.
 _:defaultDataset a <http://www.w3.org/ns/sparql-service-description#Dataset>, <http://rdfs.org/ns/void#Dataset>;
-    <http://rdfs.org/ns/void#sparqlEndpoint> </sparql>;
+    <http://rdfs.org/ns/void#sparqlEndpoint> <http://localhost:3000/sparql>;
     <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/terms/>;
-    <http://purl.org/dc/terms/title> <comunica SPARQL endpoint>;
-    <http://purl.org/dc/terms/creator> <me>;
+    <http://purl.org/dc/terms/title> "comunica SPARQL endpoint";
+    <http://purl.org/dc/terms/creator> <https://example.com/johndoe>;
     <http://www.w3.org/ns/sparql-service-description#defaultGraph> _:defaultGraph.
 _:defaultGraph a <http://www.w3.org/ns/sparql-service-description#Graph>;
     <http://rdfs.org/ns/void#classes> 19.
@@ -163,7 +163,7 @@ _:defaultDataset <http://rdfs.org/ns/void#classPartition> _:classPartition1.
 _:classPartition1 a <http://rdfs.org/ns/void#ClassPartition>;
     <http://rdfs.org/ns/void#class> <http://xmlns.com/foaf/0.1/Document>;
     <http://rdfs.org/ns/void#entities> 1.
-    
+
 ...
 
 _:defaultDataset <http://rdfs.org/ns/void#classPartition> _:classPartition18.
