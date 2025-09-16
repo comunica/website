@@ -132,10 +132,10 @@ You can also add [Dublin Core Metadata Terms](https://www.dublincore.org/specifi
     "https://ruben.verborgh.org/profile/"
   ],
   "dcterms": {
-    "title": "title",
-    "description": "description",
-    "creator": "http://example.org/creator",
-    "created": "2025/08/07"
+    "title": "My Comunica SPARQL Endpoint",
+    "description": "This is a SPARQL endpoint powered by Comunica",
+    "creator": "https://rubensworks.net/#me",
+    "created": "2025-08-07"
   }
 }
 ```
@@ -152,10 +152,10 @@ The service description with VoID included for the above context will look like 
 _:defaultDataset a <http://www.w3.org/ns/sparql-service-description#Dataset>, <http://rdfs.org/ns/void#Dataset>;
     <http://rdfs.org/ns/void#sparqlEndpoint> <http://localhost:3000/sparql>;
     <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/terms/>;
-    <http://purl.org/dc/terms/title> "title";
-    <http://purl.org/dc/terms/description> "description";
-    <http://purl.org/dc/terms/creator> <http://example.org/creator>;
-    <http://purl.org/dc/terms/created> "2025/08/07"^^<http://www.w3.org/2001/XMLSchema#date>;
+    <http://purl.org/dc/terms/title> "My Comunica SPARQL Endpoint";
+    <http://purl.org/dc/terms/description> "This is a SPARQL endpoint powered by Comunica";
+    <http://purl.org/dc/terms/creator> <https://rubensworks.net/#me>;
+    <http://purl.org/dc/terms/created> "2025-08-07"^^<http://www.w3.org/2001/XMLSchema#date>;
     <http://www.w3.org/ns/sparql-service-description#defaultGraph> _:defaultGraph.
 _:defaultGraph a <http://www.w3.org/ns/sparql-service-description#Graph>;
     <http://rdfs.org/ns/void#classes> 19.
@@ -225,6 +225,7 @@ Options:
   -c, --context                 Use the given JSON context string or file (e.g., config.json)                                                           [string]
       --to                      Destination for update queries                                                                                          [string]
   -b, --baseIRI                 base IRI for the query (e.g., http://example.org/)                                                                      [string]
+      --fileBaseIRI             base IRI for the file (e.g., http://example.org/), useful when using comunica-sparql-file                               [string]
   -d, --dateTime                Sets a datetime for querying Memento-enabled archives                                                                   [string]
   -l, --logLevel                Sets the log level (e.g., debug, info, warn, ...)                                                     [string] [default: "warn"]
       --lenient                 If failing requests and parsing errors should be logged instead of causing a hard crash                                [boolean]
@@ -240,7 +241,7 @@ Options:
       --distinctConstruct       If the query engine should deduplicate resulting triples                                                               [boolean]
       --freshWorker             Kills the worker after each query execution                                                                            [boolean]
       --contextOverride         If the query context can be overridden through POST requests                                                           [boolean]
-      --includeVoID             Include a VoID description, which can be accessed at /void                                                             [boolean]
+      --emitVoid                Generate VoID descriptions and include them in the service description                                                 [boolean]
 
 Examples:
   comunica-sparql-http https://fragments.dbpedia.org/2016-04/en
