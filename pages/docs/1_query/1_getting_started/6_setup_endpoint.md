@@ -142,15 +142,15 @@ You can also add [Dublin Core Metadata Terms](https://www.dublincore.org/specifi
 
 The service description with VoID included for the above context will look like this:
 ```ttl
-<http://localhost:3000/sparql> a <http://www.w3.org/ns/sparql-service-description#Service>;
-    <http://www.w3.org/ns/sparql-service-description#endpoint> <http://localhost:3000/sparql>;
-    <http://www.w3.org/ns/sparql-service-description#url> <http://localhost:3000/sparql>;
+</sparql> a <http://www.w3.org/ns/sparql-service-description#Service>;
+    <http://www.w3.org/ns/sparql-service-description#endpoint> </sparql>;
+    <http://www.w3.org/ns/sparql-service-description#url> </sparql>;
     <http://www.w3.org/ns/sparql-service-description#feature> <http://www.w3.org/ns/sparql-service-description#BasicFederatedQuery>;
     <http://www.w3.org/ns/sparql-service-description#supportedLanguage> <http://www.w3.org/ns/sparql-service-description#SPARQL10Query>, <http://www.w3.org/ns/sparql-service-description#SPARQL11Query>;
     <http://www.w3.org/ns/sparql-service-description#resultFormat> <https://comunica.linkeddatafragments.org/#results_stats>, <http://www.w3.org/ns/formats/SPARQL_Results_JSON>, <http://www.w3.org/ns/formats/Shaclc>, <http://www.w3.org/ns/formats/ShaclcExtended>, <http://www.w3.org/ns/formats/JSON-LD>, <http://www.w3.org/ns/formats/N-Quads>, <http://www.w3.org/ns/formats/N-Triples>, <http://www.w3.org/ns/formats/TriG>, <http://www.w3.org/ns/formats/N3>, <http://www.w3.org/ns/formats/Turtle>, <https://comunica.linkeddatafragments.org/#results_tree>, <https://comunica.linkeddatafragments.org/#results_table>, <http://www.w3.org/ns/formats/SPARQL_Results_XML>, <http://www.w3.org/ns/formats/SPARQL_Results_TSV>, <http://www.w3.org/ns/formats/SPARQL_Results_CSV>, <https://comunica.linkeddatafragments.org/#results_simple>, <https://comunica.linkeddatafragments.org/#results_JSON>;
     <http://www.w3.org/ns/sparql-service-description#defaultDataset> _:defaultDataset.
 _:defaultDataset a <http://www.w3.org/ns/sparql-service-description#Dataset>, <http://rdfs.org/ns/void#Dataset>;
-    <http://rdfs.org/ns/void#sparqlEndpoint> <http://localhost:3000/sparql>;
+    <http://rdfs.org/ns/void#sparqlEndpoint> </sparql>;
     <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/terms/>;
     <http://purl.org/dc/terms/title> "My Comunica SPARQL Endpoint";
     <http://purl.org/dc/terms/description> "This is a SPARQL endpoint powered by Comunica";
