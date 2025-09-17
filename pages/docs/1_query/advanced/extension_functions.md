@@ -13,6 +13,11 @@ that these queries will not be portable to other types of query engines anymore,
 as these extension functions may not be standardized.
 </div>
 
+When querying over SPARQL endpoints, extension functions will be pushed down into the endpoint
+if the endpoint explicitly mentions these extension functions within the [SPARQL Service Description](https://www.w3.org/TR/sparql11-service-description/),
+and will otherwise be executed locally.
+This means that this pushing down functionality will not work for endpoints without Service Description.
+
 ## Dictionary-based extension functions
 
 The easiest way to plug in extension functions to Comunica is by using
