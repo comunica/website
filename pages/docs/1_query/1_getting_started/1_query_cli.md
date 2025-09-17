@@ -150,6 +150,7 @@ Options:
   -c, --context                 Use the given JSON context string or file (e.g., config.json)                                                           [string]
       --to                      Destination for update queries                                                                                          [string]
   -b, --baseIRI                 base IRI for the query (e.g., http://example.org/)                                                                      [string]
+      --fileBaseIRI             base IRI for the file (e.g., http://example.org/), useful when using comunica-sparql-file                               [string]
   -d, --dateTime                Sets a datetime for querying Memento-enabled archives                                                                   [string]
   -l, --logLevel                Sets the log level (e.g., debug, info, warn, ...)                                                     [string] [default: "warn"]
       --lenient                 If failing requests and parsing errors should be logged instead of causing a hard crash                                [boolean]
