@@ -90,7 +90,124 @@ $ comunica-sparql-http https://fragments.dbpedia.org/2016-04/en \
 
 Setting this to the number of available CPU cores tends to give the best performance.
 
-## 7. Learn more
+## 7. Adding a context
+
+Using the `-c` option, you can add a context (JSON string or file):
+```bash
+$ comunica-sparql-http -c config.json
+```
+`config.json` could look like this:
+```json
+{
+  "sources": [
+    "https://fragments.dbpedia.org/2016-04/en"
+  ],
+  "lenient": true
+}
+```
+
+<div class="note">
+When using a context, the sources need to be provided within said context.
+</div>
+
+## 8. Emitting VoID metadata
+
+<div class="note">
+Experimental feature: can be very slow to generate the descriptions for big datasets. But only the first time and after update queries, since caching is implemented and invalidated after updating.
+</div>
+
+Using `--emitVoid` you can make your endpoint include a [VoID](https://www.w3.org/TR/void/) description in its service description:
+
+```bash
+$ comunica-sparql-http -c config.json --emitVoid
+```
+
+The metadata can be found in the service description at http://localhost:3000/sparql.
+
+You can also add [Dublin Core Metadata Terms](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) (general metadata) using a `dcterms` field in the context:
+```json
+{
+  "sources": [
+    "https://www.rubensworks.net/",
+    "https://ruben.verborgh.org/profile/"
+  ],
+  "dcterms": {
+    "title": "My Comunica SPARQL Endpoint",
+    "description": "This is a SPARQL endpoint powered by Comunica",
+    "creator": "https://rubensworks.net/#me",
+    "created": "2025-08-07"
+  }
+}
+```
+
+The service description with VoID included for the above context will look like this:
+```ttl
+</sparql> a <http://www.w3.org/ns/sparql-service-description#Service>;
+    <http://www.w3.org/ns/sparql-service-description#endpoint> </sparql>;
+    <http://www.w3.org/ns/sparql-service-description#url> </sparql>;
+    <http://www.w3.org/ns/sparql-service-description#feature> <http://www.w3.org/ns/sparql-service-description#BasicFederatedQuery>;
+    <http://www.w3.org/ns/sparql-service-description#supportedLanguage> <http://www.w3.org/ns/sparql-service-description#SPARQL10Query>, <http://www.w3.org/ns/sparql-service-description#SPARQL11Query>;
+    <http://www.w3.org/ns/sparql-service-description#resultFormat> <https://comunica.linkeddatafragments.org/#results_stats>, <http://www.w3.org/ns/formats/SPARQL_Results_JSON>, <http://www.w3.org/ns/formats/Shaclc>, <http://www.w3.org/ns/formats/ShaclcExtended>, <http://www.w3.org/ns/formats/JSON-LD>, <http://www.w3.org/ns/formats/N-Quads>, <http://www.w3.org/ns/formats/N-Triples>, <http://www.w3.org/ns/formats/TriG>, <http://www.w3.org/ns/formats/N3>, <http://www.w3.org/ns/formats/Turtle>, <https://comunica.linkeddatafragments.org/#results_tree>, <https://comunica.linkeddatafragments.org/#results_table>, <http://www.w3.org/ns/formats/SPARQL_Results_XML>, <http://www.w3.org/ns/formats/SPARQL_Results_TSV>, <http://www.w3.org/ns/formats/SPARQL_Results_CSV>, <https://comunica.linkeddatafragments.org/#results_simple>, <https://comunica.linkeddatafragments.org/#results_JSON>;
+    <http://www.w3.org/ns/sparql-service-description#defaultDataset> _:defaultDataset.
+_:defaultDataset a <http://www.w3.org/ns/sparql-service-description#Dataset>, <http://rdfs.org/ns/void#Dataset>;
+    <http://rdfs.org/ns/void#sparqlEndpoint> </sparql>;
+    <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/terms/>;
+    <http://purl.org/dc/terms/title> "My Comunica SPARQL Endpoint";
+    <http://purl.org/dc/terms/description> "This is a SPARQL endpoint powered by Comunica";
+    <http://purl.org/dc/terms/creator> <https://rubensworks.net/#me>;
+    <http://purl.org/dc/terms/created> "2025-08-07"^^<http://www.w3.org/2001/XMLSchema#date>;
+    <http://www.w3.org/ns/sparql-service-description#defaultGraph> _:defaultGraph.
+_:defaultGraph a <http://www.w3.org/ns/sparql-service-description#Graph>;
+    <http://rdfs.org/ns/void#classes> 19.
+_:defaultDataset <http://rdfs.org/ns/void#classPartition> _:classPartition0.
+_:classPartition0 a <http://rdfs.org/ns/void#ClassPartition>;
+    <http://rdfs.org/ns/void#class> <http://xmlns.com/foaf/0.1/Person>;
+    <http://rdfs.org/ns/void#entities> 438.
+_:defaultDataset <http://rdfs.org/ns/void#classPartition> _:classPartition1.
+_:classPartition1 a <http://rdfs.org/ns/void#ClassPartition>;
+    <http://rdfs.org/ns/void#class> <http://xmlns.com/foaf/0.1/Document>;
+    <http://rdfs.org/ns/void#entities> 1.
+
+...
+
+_:defaultDataset <http://rdfs.org/ns/void#classPartition> _:classPartition18.
+_:classPartition18 a <http://rdfs.org/ns/void#ClassPartition>;
+    <http://rdfs.org/ns/void#class> <http://www.w3.org/2002/07/owl#AllDifferent>;
+    <http://rdfs.org/ns/void#entities> 1.
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition0.
+_:propertyPartition0 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://xmlns.com/foaf/0.1/primaryTopic>;
+    <http://rdfs.org/ns/void#triples> 8.
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition1.
+_:propertyPartition1 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>;
+    <http://rdfs.org/ns/void#triples> 901.
+
+...
+
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition9.
+_:propertyPartition9 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://xmlns.com/foaf/0.1/name>;
+    <http://rdfs.org/ns/void#triples> 80.
+_:defaultGraph <http://rdfs.org/ns/void#triples> 11542;
+    <http://rdfs.org/ns/void#entities> 5701;
+    <http://rdfs.org/ns/void#distinctSubjects> 3714;
+    <http://rdfs.org/ns/void#properties> 79;
+    <http://rdfs.org/ns/void#distinctObjects> 5646.
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition10.
+_:propertyPartition10 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://ogp.me/ns#site_name>;
+    <http://rdfs.org/ns/void#triples> 1.
+
+...
+
+_:defaultDataset <http://rdfs.org/ns/void#propertyPartition> _:propertyPartition78.
+_:propertyPartition78 a <http://rdfs.org/ns/void#PropertyPartition>;
+    <http://rdfs.org/ns/void#property> <http://www.w3.org/2002/07/owl#distinctMembers>;
+    <http://rdfs.org/ns/void#triples> 1.
+```
+
+## 9. Learn more
 
 This guide only discussed the basic functionality of `comunica-sparql-http`.
 You can learn more options by invoking the _help_ command:
@@ -102,18 +219,29 @@ Recommended options:
   -p, --port     HTTP port to run on                                                                                                    [number] [default: 3000]
   -w, --workers  Number of worker threads                                                                                                  [number] [default: 1]
   -t, --timeout  Query execution timeout in seconds                                                                                       [number] [default: 60]
-  -u, --update   Enable update queries (otherwise, only read queries are enabled)                                                     [boolean] [default: false]
+  -u, --update   Enable update queries (otherwise, only read queries are enabled)                                                                      [boolean]
 
 Options:
-  -c, --context          Use the given JSON context string or file (e.g., config.json)                                                                  [string]
-      --to               Destination for update queries                                                                                                 [string]
-  -b, --baseIRI          base IRI for the query (e.g., http://example.org/)                                                                             [string]
-  -d, --dateTime         Sets a datetime for querying Memento-enabled archives                                                                          [string]
-  -l, --logLevel         Sets the log level (e.g., debug, info, warn, ...)                                                            [string] [default: "warn"]
-      --lenient          If failing requests and parsing errors should be logged instead of causing a hard crash                                       [boolean]
-  -v, --version          Prints version information                                                                                                    [boolean]
-      --showStackTrace   Prints the full stacktrace when errors are thrown                                                                             [boolean]
-  -i, --invalidateCache  Enable cache invalidation before each query execution                                                        [boolean] [default: false]
+  -c, --context                 Use the given JSON context string or file (e.g., config.json)                                                           [string]
+      --to                      Destination for update queries                                                                                          [string]
+  -b, --baseIRI                 base IRI for the query (e.g., http://example.org/)                                                                      [string]
+      --fileBaseIRI             base IRI for the file (e.g., http://example.org/), useful when using comunica-sparql-file                               [string]
+  -d, --dateTime                Sets a datetime for querying Memento-enabled archives                                                                   [string]
+  -l, --logLevel                Sets the log level (e.g., debug, info, warn, ...)                                                     [string] [default: "warn"]
+      --lenient                 If failing requests and parsing errors should be logged instead of causing a hard crash                                [boolean]
+  -v, --version                 Prints version information                                                                                             [boolean]
+      --showStackTrace          Prints the full stacktrace when errors are thrown                                                                      [boolean]
+      --httpTimeout             HTTP requests timeout in milliseconds                                                                                   [number]
+      --httpBodyTimeout         Makes the HTTP timeout take into account the response body stream read                                                 [boolean]
+      --httpRetryCount          The number of retries to perform on failed fetch requests                                                               [number]
+      --httpRetryDelayFallback  The fallback delay in milliseconds between fetch retries                                                                [number]
+      --httpRetryDelayLimit     The upper limit in milliseconds for the delay between fetch retries                                                     [number]
+      --unionDefaultGraph       If the default graph should also contain the union of all named graphs                                                 [boolean]
+  -i, --invalidateCache         Enable cache invalidation before each query execution                                                                  [boolean]
+      --distinctConstruct       If the query engine should deduplicate resulting triples                                                               [boolean]
+      --freshWorker             Kills the worker after each query execution                                                                            [boolean]
+      --contextOverride         If the query context can be overridden through POST requests                                                           [boolean]
+      --emitVoid                Generate VoID descriptions and include them in the service description                                                 [boolean]
 
 Examples:
   comunica-sparql-http https://fragments.dbpedia.org/2016-04/en
