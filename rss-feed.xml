@@ -137,5 +137,11 @@
             <guid isPermaLink="false">pages/blog/2025-04-29-release_4_2.md</guid>
             <pubDate>Thu, 29 May 2025 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 4.4: 🌸 Quality-of-life features and optimizations]]></title>
+            <link>https://comunica.dev/blog/2025-09-17-release_4_4/</link>
+            <guid isPermaLink="false">pages/blog/2025-09-17-release_4_4.md</guid>
+            <pubDate>Fri, 17 Oct 2025 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
