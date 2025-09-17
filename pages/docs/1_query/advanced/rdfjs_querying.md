@@ -3,20 +3,20 @@ title: 'Querying over RDF/JS sources'
 description: 'If the built-in source types are not sufficient, you can pass a custom JavaScript object implementing a specific interface.'
 ---
 
-One of the [different types of sources](/docs/query/advanced/source_types/) that is supported by Comunica
-is the [RDF/JS `Source` interface](http://rdf.js.org/stream-spec/#source-interface).
-This allows you to pass objects as source to Comunica as long as they implement this interface.
+Two of the [different types of sources](/docs/query/advanced/source_types/) that are supported by Comunica
+are the [RDF/JS `Source` interface](http://rdf.js.org/stream-spec/#source-interface) and the [RDF/JS `DatasetCore` interface](https://rdf.js.org/dataset-spec/#datasetcore-interface).
+These allow you to pass objects as source to Comunica as long as they implement one of the interfaces.
 
 An RDF/JS `Source` exposes the [`match`](http://rdf.js.org/stream-spec/#source-interface) method
 that allows quad pattern queries to be executed,
-and matching quads to be returned as a stream.
+and matching quads to be returned as a stream. An RDF/JS `DatasetCore` also exposes a [`match`](https://rdf.js.org/dataset-spec/#datasetcore-interface) method which returns a `Dataset` instead of a stream.
 
 <div class="note">
 Learn more about RDF/JS in this <a href="/docs/query/advanced/rdfjs/">RDF/JS guide</a>.
 </div>
 
-Several implementations of this `Source` interface exist.
-In the example below, we make use of the [`Store` from `N3.js`](https://github.com/rdfjs/N3.js#storing)
+Several implementations of these `Source` and `DatasetCore` interfaces exist.
+In the example below, we make use of the [`Store` from `N3.js`](https://github.com/rdfjs/N3.js#storing) (which implements both interfaces),
 that offers one possible implementation when you want to [query over it with Comunica within a JavaScript application](/docs/query/getting_started/query_app/):
 ```javascript
 const store = new N3.Store();
@@ -35,6 +35,14 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
   sources: [store],
 });
 ```
+
+<div class="note">
+We recommend passing RDF/JS `Source`'s when possible. As they have an asynchronous streaming interface that leads to better performance when working with large datasets.
+</div>
+
+<div class="note">
+If an object implements both the RDF/JS `Source` and RDF/JS `DatasetCore`, then the source implementation is used.
+</div>
 
 <div class="note">
 Instead of the default Comunica SPARQL package (<code>@comunica/query-sparql</code>),
