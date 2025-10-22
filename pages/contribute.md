@@ -136,7 +136,7 @@ Pre-releases do not trigger changelog changes, git commits, and pushes.
 If the lerna script exited with an error, you may notice some issues with git. In that case, make sure to execute the following:
 
 ```bash
-git update-index --no-assume-unchanged $(git ls-files | tr '\\n' ' ') && git checkout .
+git update-index --no-assume-unchanged $(git ls-files) && git checkout .
 ```
 
 ### Preparing a major release
