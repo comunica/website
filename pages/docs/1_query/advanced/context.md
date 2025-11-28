@@ -310,3 +310,30 @@ const bindingsStream = await myEngine.queryBindings(`CONSTRUCT WHERE { ?s1 ?p1 ?
   distinctConstruct: true,
 });
 ```
+
+## 21. HTTP-level caching
+
+Besides the [default HTTP-dependent caches](/docs/query/advanced/caching/),
+you can also optionally enable HTTP-level caching using the `httpCache` flag: 
+
+```javascript
+const bindingsStream = await myEngine.queryBindings(`CONSTRUCT WHERE { ?s1 ?p1 ?o1. ?s2 ?p2 ?o2 }`, {
+  sources: ['https://fragments.dbpedia.org/2015/en'],
+  httpCache: true,
+});
+```
+
+## 22. Aborting HTTP requests
+
+When sending HTTP requests using the HTTP bus,
+you can also optionally send pass an [AbortController's signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
+into the query context to allow aborting the request before completion:
+
+```javascript
+const abortController = new AbortController();
+const response = await mediatorHttp.mediate({
+  input: 'https://www.rubensworks.net/',
+  context: context.set(KeysHttp.httpAbortSignal, abortController.signal),
+});
+// Invoke abortController.abort() to abort the request.
+```

@@ -9,10 +9,12 @@ There are three explain modes available:
 
 - `parsed`: The [SPARQL Algebra](/docs/modify/advanced/algebra/) tree as parsed from the input query.
 - `logical`: The optimized logical query plan in SPARQL Algebra.
+- `query`: The optimized logical query plan as a SPARQL query, including SERVICE clauses after source assignment.
 - `physical`: A hierarchical log of which logical operations have been executed by which (physical) actors.
+- `physical-json`: A JSON-based representation of the physical plan.
 
-While the `parsed` and `logical` explain modes happen before query execution,
-the `physical` explain mode requires query execution to be completed.
+While the `parsed`, `logical`, and `query` explain modes happen before query execution,
+the `physical` and `physical-json` explain modes requires query execution to be completed.
 This is because Comunica is an adaptive query engine that alters its query plan dynamically based on the sources it discovers at runtime.
 This means that query execution must be completed before the final (physical) query plan can be inspected.
 
@@ -22,8 +24,8 @@ you can make use of the built-in <a href="/docs/query/advanced/logging/">logging
 </div>
 
 <div class="note">
-The output for the physical mode is an experimental feature,
-which means that the format of it might improve and be changed in the future inbetween major updates.
+The output for the physical and physical-json modes are experimental features,
+which means that the format of it might improve and be changed in the future in-between major updates.
 </div>
 
 ## Explaining on the command line
@@ -145,10 +147,67 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
 }
 ```
 
+### Explain query on the command line
+
+```bash
+$ comunica-sparql https://dbpedia.org/sparql https://data.linkeddatafragments.org/viaf https://data.linkeddatafragments.org/harvard \
+  -q 'SELECT ?person ?name ?book ?title {
+  ?person dbpedia-owl:birthPlace [ rdfs:label "San Francisco"@en ].
+  ?viafID schema:sameAs ?person;
+          schema:name ?name.
+  ?book dc:contributor [ foaf:name ?name ];
+        dc:title ?title.
+}
+' --explain query
+
+SELECT ?person ?name ?book ?title WHERE {
+  {
+    SERVICE <https://dbpedia.org/sparql> {
+      ?viafID <http://schema.org/sameAs> ?person .
+    }
+  }
+  UNION {
+    SERVICE <https://data.linkeddatafragments.org/viaf> {
+      ?viafID <http://schema.org/sameAs> ?person .
+    }
+  }
+  {
+    SERVICE <https://dbpedia.org/sparql> {
+      ?g_1 <http://xmlns.com/foaf/0.1/name> ?name .
+    }
+  }
+  UNION {
+    SERVICE <https://data.linkeddatafragments.org/harvard> {
+      ?g_1 <http://xmlns.com/foaf/0.1/name> ?name .
+    }
+  }
+  {
+    SERVICE <https://dbpedia.org/sparql> {
+      ?book <http://purl.org/dc/terms/title> ?title .
+    }
+  }
+  UNION {
+    SERVICE <https://data.linkeddatafragments.org/harvard> {
+      ?book <http://purl.org/dc/terms/title> ?title .
+    }
+  }
+  SERVICE <https://dbpedia.org/sparql> {
+    ?g_0 <http://www.w3.org/2000/01/rdf-schema#label> "San Francisco"@en .
+    ?person <http://dbpedia.org/ontology/birthPlace> ?g_0 .
+  }
+  SERVICE <https://data.linkeddatafragments.org/viaf> {
+    ?viafID <http://schema.org/name> ?name .
+  }
+  SERVICE <https://data.linkeddatafragments.org/harvard> {
+    ?book <http://purl.org/dc/terms/contributor> ?g_1 .
+  }
+}
+```
+
 ### Explain physical on the command line
 
 ```bash
-$ node bin/query.js https://fragments.dbpedia.org/2016-04/en \
+$ comunica-sparql https://fragments.dbpedia.org/2016-04/en \
   -q 'SELECT ?movie ?title ?name
 WHERE {
   ?movie dbpedia-owl:starring [ rdfs:label "Brad Pitt"@en ];

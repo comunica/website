@@ -9,37 +9,36 @@ This page summarizes the specifications Comunica implements.
 
 The following standard query specifications are supported:
 
-| **Description**                                                                                                         |
-|-------------------------------------------------------------------------------------------------------------------------|
-| [SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/)                                                      |
-| [SPARQL 1.1 Update](https://www.w3.org/TR/sparql11-update/)                                                             |
-| [SPARQL 1.1 Service Description](https://www.w3.org/TR/sparql11-service-description/)                                   |
-| [SPARQL 1.1 Federated Query](https://www.w3.org/TR/sparql11-federated-query/)                                           |
-| [SPARQL 1.1 Query Results JSON Format](https://www.w3.org/TR/sparql11-results-json/)                                    |
-| [SPARQL Query Results XML Format (Second Edition)](https://www.w3.org/TR/rdf-sparql-XMLres/)                            |
-| [SPARQL 1.1 Query Results CSV and TSV Formats](https://www.w3.org/TR/sparql11-results-csv-tsv/)                         |
-| [SPARQL 1.1 Protocol](https://www.w3.org/TR/sparql11-protocol/)                                                         |
-| [SPARQL next SEP 0002 - Excluding ADJUST function](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md) |
-| [RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)                                                    | 
+| **Description**                                                                                                          |
+|--------------------------------------------------------------------------------------------------------------------------|
+| [SPARQL 1.2 Query Language](https://www.w3.org/TR/sparql12-query/)                                                       |
+| [SPARQL 1.2 Update](https://www.w3.org/TR/sparql12-update/)                                                              |
+| [SPARQL 1.2 Service Description](https://www.w3.org/TR/sparql12-service-description/)                                    |
+| [SPARQL 1.2 Federated Query](https://www.w3.org/TR/sparql12-federated-query/)                                            |
+| [SPARQL 1.2 Query Results JSON Format](https://www.w3.org/TR/sparql12-results-json/)                                     |
+| [SPARQL 1.2 Query Results XML Format](https://www.w3.org/TR/sparql12-results-xml/)                                       |
+| [SPARQL 1.2 Query Results CSV and TSV Formats](https://www.w3.org/TR/sparql12-results-csv-tsv/)                          |
+| [SPARQL 1.2 Protocol](https://www.w3.org/TR/sparql12-protocol/)                                                          |
+| [SPARQL next SEP 0002 - Excluding ADJUST function](https://github.com/w3c/sparql-dev/blob/main/SEP/SEP-0002/sep-0002.md) |
 
 The following notable specifications are not supported _yet_:
 
-| **Description** |
-| ------- |
-| [SPARQL 1.1 Entailment Regimes](https://www.w3.org/TR/sparql11-entailment/) |
-| [SPARQL 1.1 Graph Store HTTP Protocol](https://www.w3.org/TR/sparql11-http-rdf-update/) |
+| **Description**                                                                         |
+|-----------------------------------------------------------------------------------------|
+| [SPARQL 1.2 Entailment Regimes](https://www.w3.org/TR/sparql12-entailment/)             |
+| [SPARQL 1.2 Graph Store HTTP Protocol](https://www.w3.org/TR/sparql12-http-rdf-update/) |
 
 ## Serializing SPARQL results
 
 SPARQL query results can be serialized in [different formats](/docs/query/advanced/result_formats/).
 For all of these supported formats, the following are standards:
 
-| **Media type** | **Description** |
-| ------- | --------------- |
-| [`application/sparql-results+json`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-json) | The [SPARQL/JSON](https://www.w3.org/TR/sparql11-results-json/) results format. |
-| [`application/sparql-results+xml`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-xml) | The [SPARQL/XML](https://www.w3.org/TR/rdf-sparql-XMLres/) results format. |
-| [`text/csv`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-csv) | The [SPARQL/CSV](https://www.w3.org/TR/sparql11-results-csv-tsv/) results format. |
-| [`text/tab-separated-values`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-tsv) | The [SPARQL/TSV](https://www.w3.org/TR/sparql11-results-csv-tsv/) results format. |
+| **Media type** | **Description**                                                                   |
+| ------- |-----------------------------------------------------------------------------------|
+| [`application/sparql-results+json`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-json) | The [SPARQL/JSON](https://www.w3.org/TR/sparql12-results-json/) results format.   |
+| [`application/sparql-results+xml`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-xml) | The [SPARQL/XML](https://www.w3.org/TR/sparql12-results-xml/) results format.     |
+| [`text/csv`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-csv) | The [SPARQL/CSV](https://www.w3.org/TR/sparql12-results-csv-tsv/) results format. |
+| [`text/tab-separated-values`](https://github.com/comunica/comunica/tree/master/packages/actor-sparql-serialize-sparql-tsv) | The [SPARQL/TSV](https://www.w3.org/TR/sparql12-results-csv-tsv/) results format. |
 
 <div class="note">
 All serializers work in a <i>streaming</i> manner.
@@ -89,8 +88,9 @@ All parsers work in a <i>streaming</i> manner.
 
 Alignment with other JavaScript libraries is achieved via the following RDF/JS specifications:
 
-| **Description** |
-| ------- |
-| [RDF/JS Query specification](https://rdf.js.org/query-spec/) |
+| **Description**                                                           |
+|---------------------------------------------------------------------------|
+| [RDF/JS Query specification](https://rdf.js.org/query-spec/)              |
 | [RDF/JS Stream interfaces specification](https://rdf.js.org/stream-spec/) |
-| [RDF/JS Data model specification](https://rdf.js.org/data-model-spec/) |
+| [RDF/JS Dataset specification](https://rdf.js.org/dataset-spec/)          |
+| [RDF/JS Data model specification](https://rdf.js.org/data-model-spec/)    |
