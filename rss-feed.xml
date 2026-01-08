@@ -143,5 +143,11 @@
             <guid isPermaLink="false">pages/blog/2025-09-17-release_4_4.md</guid>
             <pubDate>Fri, 17 Oct 2025 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 5.0: 🧩 Increased parsing modularity for SPARQL 1.2 and beyond]]></title>
+            <link>https://comunica.dev/blog/2026-01-07-release_5_0/</link>
+            <guid isPermaLink="false">pages/blog/2026-01-07-release_5_0.md</guid>
+            <pubDate>Sat, 07 Feb 2026 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
