@@ -104,9 +104,9 @@ To track intermediate results produced by join actors, include the following act
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^4.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^5.0.0/components/context.jsonld",
 
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-rdf-join-wrap-stream/^4.0.0/components/context.jsonld"],
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-rdf-join-wrap-stream/^5.0.0/components/context.jsonld"],
   "@id": "urn:comunica:default:Runner",
   "@type": "Runner",
   "actors": [
@@ -126,9 +126,9 @@ To track intermediate results produced by query operation actors, include the fo
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^4.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^5.0.0/components/context.jsonld",
 
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-wrap-stream/^4.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-query-operation-wrap-stream/^5.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:default:Runner",
   "@type": "Runner",
@@ -148,8 +148,8 @@ To define the wrapper applied to each intermediate result stream, include the fo
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^4.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-iterator-transform-record-intermediate-results/^4.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/runner/^5.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/actor-iterator-transform-record-intermediate-results/^5.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:default:Runner",
   "@type": "Runner",
@@ -166,8 +166,8 @@ Mediator:
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-iterator-transform/^4.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/mediator-combine-pipeline/^4.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/bus-iterator-transform/^5.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/mediator-combine-pipeline/^5.0.0/components/context.jsonld"
   ],
   "@id": "urn:comunica:default:iterator-transform/mediators#main",
   "@type": "MediatorCombinePipeline",

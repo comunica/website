@@ -141,7 +141,29 @@ git update-index --no-assume-unchanged $(git ls-files) && git checkout .
 
 ### Preparing a major release
 
+Before starting, it may be necessary to temporarily override your local access token,
+as lerna currently does not seem to support npm's new 2FA checking during publishing.
+
+For this, create a new token with all permissions (npm: settings / tokens / granular-access-tokens) and temporarily override it in your `.npmrc`.
+
+#### Release with an intermediary release (safer)
+
 * Bump the version (select `major`) and prepare the changelog: `npx lerna version --no-push --no-git-tag-version`
 * Do a search/replace of `/^OLD.0.0/` to `/^NEW.0.0/` in your editor to update config files to the new version.
 * Run `yarn install` and `yarn run test` to ensure everything works.
 * Follow the steps of `Making a new release`, and select a `patch` select.
+
+#### Release without an intermediary release (experimental)
+
+* `yarn run publish-release`
+* Prepare the changelog (but don't press any key yet, we do this later!).
+* Add newline at end of lerna.json (add `git add` it).
+* Do a search/replace of `/^OLD.0.0/` to `/^NEW.0.0/` in your editor to update config files to the new version (add `git add` them).
+* `yarn install` (add `git add` changed files)
+* Press any key to finish the changelog command.
+
+#### If release commit succeeds, but npm publish fails
+
+* `git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')`
+* `npx lerna publish from-package --no-git-reset --no-push --no-git-tag-version --yes`
+* `git update-index --no-assume-unchanged $(git ls-files | tr '\n' ' ')`
