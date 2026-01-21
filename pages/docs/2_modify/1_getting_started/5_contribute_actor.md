@@ -3,7 +3,7 @@ title: 'Contributing a new query operation actor to the Comunica repository'
 description: 'Setup a development environment, implement a new actor, and create a pull request.'
 ---
 
-This guide focuses on all the required steps for contributing a new query operation actor to Comunica, restricting itself to the contribution of an operator that is already [known by Comunica](link to source code of known operators).
+This guide focuses on all the required steps for contributing a new query operation actor to Comunica, restricting itself to the contribution of an operator that can be parsed by Comunica.
 Concretely, we will focus on implementing a custom actor for the SPARQL `REDUCED` operator.
 
 <div class="note">
