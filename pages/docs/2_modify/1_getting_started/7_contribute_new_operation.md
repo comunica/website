@@ -135,6 +135,7 @@ Afterward, you should also change your engines config to use the new SPARQL pars
 
 Creating the lateral actor than boils down to following the guide on [implementing your own actor query operation](5_contribute_actor.md#4-implementing-your-actor).
 You should just make sure that the generic type passed to `ActorQueryOperationTypedMediated` is your `Lateral` type.
+NOTE: do not forget to update you Components.js setup to include your parser and lateral actor.
 
 ## 5. Reflect
 
