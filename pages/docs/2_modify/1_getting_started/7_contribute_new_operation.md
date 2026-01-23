@@ -3,7 +3,7 @@ title: 'Contributing an actor for a new query operation'
 description: 'Extend the SPARQL parser, register a new algebra operation, and implement an actor to handle that new operation'
 ---
 
-This guide explains how to extend Comunica with a new SPARQL construct that requires changes to the parser, the algebra, and query execution. Concretely, you will:
+This guide explains how to extend Comunica with a new SPARQL operator that requires changes to the parser, the algebra, and query execution. Concretely, you will:
 1. Extend the SPARQL grammar to parse a new query operation (e.g. union, optional, lateral, etc)
 2. Modify the generated [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) to represent that pattern 
 3. Translate the modified AST into a new [Algebra Operation](https://github.com/comunica/comunica/blob/master/packages/utils-algebra/lib/Algebra.ts#L48-L50).
@@ -194,7 +194,7 @@ transforming an AST that contains the `LATERAL` operation.
 In [section 6 of contributing an actor](./5_contribute_actor.md#6-configuring-your-actor)
 you learned about the dependency injection framework used by Comunica.
 You may now configure your parsing actor in a similar way:
-* Add it as a dependency in `engines/query-sparql/package.json`, and remove the original `Actor-query-parse-sparql`.
+* Add it as a dependency in `engines/query-sparql/package.json`, and remove the original `@comunica/actor-query-parse-sparql`.
 * Change the default config file for the parser (`engines/config-query-sparql/config/query-parse/actors.json` and `actors-sparql.json`) to use your parser instead.
 
 At this point, Comunica can parse and produce algebra for LATERAL,
