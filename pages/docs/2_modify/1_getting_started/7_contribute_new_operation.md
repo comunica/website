@@ -119,6 +119,28 @@ const lateralGraphPattern: T12.SparqlRule<'lateralGraphPattern', PatternLateral>
 ```
 
 At this point, `lateralParserBuilder.build()` produces a fully functional SPARQL1.2 + lateral parser.
+However, to match the API currently used by the Comunica parser we suggest adding a wrapper class.
+Using this wrapper class the SparqlParser used by `ActorQueryParseSparql.ts` can simply be replaced by the wrapper:
+
+```ts
+import type { ParserBuildArgs } from '@traqula/core';
+import { completeParseContext, copyParseContext } from '@traqula/rules-sparql-1-2';
+
+export class ComunicaSparqlParser {
+  private readonly parser: ComunicaParser;
+  protected readonly defaultContext: T12.SparqlContext;
+  public constructor(args: ParserBuildArgs & { defaultContext?: Partial<T12.SparqlContext> } = {}) {
+    this.parser = comunicaParserBuilder.build({
+      ...args,
+      tokenVocabulary: lateralLexer.tokenVocabulary,
+    });
+    this.defaultContext = completeParseContext(args.defaultContext ?? {});
+  }
+  public parse(query: string, context: Partial<T12.SparqlContext> = {}): T12.SparqlQuery {
+    return this.parser.queryOrUpdate(query, copyParseContext({ ...this.defaultContext, ...context }));
+  }
+}
+```
 
 <div class="note">
 The generated TypeScript types do not yet include PatternLateral.
@@ -187,6 +209,26 @@ const lateralAlgebraBuilder = IndirBuilder
 
 By calling `lateralAlgebraBuilder.build()`, a new algebra transformer can be constructed capable of
 transforming an AST that contains the `LATERAL` operation.
+Again to match the API currently used by `ActorQueryParseSparql.ts` we wrap this `.build` in a function:
+```ts
+import { createAlgebraContext } from '@traqula/algebra-transformations-1-2';
+import type { ContextConfigs, Algebra } from '@traqula/algebra-transformations-1-2';
+
+export function toComunicaAlgebra(query: T12.SparqlQuery, options: ContextConfigs = {}): Algebra.Operation {
+  const c = createAlgebraContext(options);
+  const transformer = algebraBuilderComunica.build();
+  return transformer.translateQuery(c, query, options.quads, options.blankToVariable);
+}
+```
+
+Now simply change the imports within `ActorQueryParseSparql.ts`:
+```ts
+// Remove these two
+// import { toAlgebra } from '@traqula/algebra-sparql-1-2';
+// import { Parser as SparqlParser } from '@traqula/parser-sparql-1-2';
+// Add:
+import { toComunicaAlgebra as toAlgebra, ComunicaSparqlParser as SparqlParser } from '@comunica/utils-algebra-lateral';
+```
 
 
 ## 3. Replace the original parse actor with yours
