@@ -17,7 +17,7 @@ Extending the SPARQL parser and algebra is made possible by
 a modular parser, generator, and transformer framework maintained by Comunica.
 Traqula's architecture and codebase differ from Comunica.
 To fully understand this guide, we strongly recommend reading
-<a href="https://github.com/comunica/traqula/blob/main/docs/implementingYourOwnParser.md">Traqula's documentation</a> as well.
+<a href="https://github.com/comunica/traqula/blob/main/docs/index.md">Traqula's documentation</a> as well.
 </div>
 
 ## 1. Getting started
@@ -145,6 +145,8 @@ export class ComunicaSparqlParser {
 <div class="note">
 The generated TypeScript types do not yet include PatternLateral.
 <a href="https://github.com/comunica/traqula/blob/main/engines/parser-sparql-1-2/lib/Parser.ts#L16">Type patching</a> is required for full type safety, but this is out of scope for this guide.
+The interested reader can find more information on this in
+<a href="https://github.com/comunica/traqula/blob/main/docs/modifications/create-parser.md">Traqula's creating a parser documentation</a>
 </div>
 
 ### 2.2. Modifying the algebra transformer
@@ -159,7 +161,7 @@ We will define our modified algebra transformer as part of our actor in a new fi
 
 <div class="note">
 The algebraic definitions for the SPARQL language can be found in
-<a href="https://www.w3.org/TR/sparql11-query/#sparqlAlgebra">section 18.5 of the SPARQL spec</a>.
+<a href="https://www.w3.org/TR/sparql12-query/#sparqlAlgebra">section 18.6 of the SPARQL spec</a>.
 </div>
 
 Although Traqula provides algebra transformations, Comunica maintains its own algebra representation.
