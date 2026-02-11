@@ -5,7 +5,7 @@ description: 'Allow AI agents to query with Comunica through MCP.'
 
 [MCP server](https://modelcontextprotocol.io/) is a protocol that allows AI agents such as Claude and ChatGPT
 to connect to and interact with external services.
-Many Comunica engines are available through MCP,
+Most Comunica engines are available through MCP (find them on [GitHub](https://github.com/comunica/comunica-feature-mcp)),
 which allows agents to query over decentralized RDF knowledge graphs on the Web,
 thereby significantly improving the accuracy of answers and expressivity of actions by AI agents.
 
@@ -64,7 +64,7 @@ When performing federated queries, endpoint URLs passed to the MCP server are no
 
 ## Learn more
 
-Besides Comunica SPARQL MCP, other Comunica engines can also be used:
+Besides Comunica SPARQL MCP, other Comunica engines can also be found within a [dedicated monorepo on GitHub](https://github.com/comunica/comunica-feature-mcp):
 
 * [Comunica MCP SPARQL](https://github.com/comunica/comunica-feature-mcp/tree/master/engines/mcp-sparql): An MCP server for SPARQL querying over decentralized RDF knowledge graphs on the Web.
 * [Comunica MCP SPARQL File](https://github.com/comunica/comunica-feature-mcp/tree/master/engines/mcp-sparql-file): An MCP server for SPARQL querying over local RDF files.
