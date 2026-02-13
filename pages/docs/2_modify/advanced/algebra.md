@@ -17,14 +17,15 @@ correspond to exactly one SPARQL algebra operator type.
 For example, [`@comunica/actor-query-operation-construct`](https://github.com/comunica/comunica/tree/master/packages/actor-query-operation-construct)
 handles algebra operations with type `'construct'`.
 
-## SPARQLAlgebra.js
+## Traqula
 
 Converting a query string to SPARQL algebra
 happens in the [SPARQL Parse bus](/docs/modify/advanced/buses/#query-parse).
 The [`@comunica/actor-query-parse-sparql`](https://github.com/comunica/comunica/tree/master/packages/actor-query-parse-sparql) actor
-on this bus makes use of the [SPARQLAlgebra.js](https://github.com/joachimvh/SPARQLAlgebra.js) package.
+on this bus makes use of the [Traqula framework](https://github.com/comunica/traqula).
 
-Examples on how the conversion between SPARQL query string and SPARQL algebra happens can be found in the tests: https://github.com/joachimvh/SPARQLAlgebra.js/tree/master/test
+Examples on how the conversion between SPARQL query string and SPARQL algebra happens can be found in [the specific SPARQL algebra 1.2 package](https://www.npmjs.com/package/@traqula/algebra-sparql-1-2).
+Example transformations can be found as part of [Traqula's test suite](https://github.com/comunica/traqula/tree/main/packages/test-utils/statics/algebra). 
 
 ## Converting a SPARQL query into algebra
 
@@ -81,57 +82,5 @@ $ comunica-sparql https://fragments.dbpedia.org/2016-04/en -q 'SELECT * { ?s ?p 
 This tool is therefore useful if you want to implement support for a SPARQL operator,
 but you need to find out to what algebra operation this corresponds.
 
-## Converting algebra into a SPARQL query
-
-You can also apply the reverse transformation from algebra to SPARQL query string,
-for which you will need to globally install [SPARQLAlgebra.js](https://github.com/joachimvh/SPARQLAlgebra.js):
-```bash
-$ npm install -g sparqlalgebrajs
-$ sparqlalgebrajs -q -r '
-{
-  "type": "project",
-  "input": {
-    "type": "bgp",
-    "patterns": [
-      {
-        "type": "pattern",
-        "termType": "Quad",
-        "value": "",
-        "subject": {
-          "termType": "Variable",
-          "value": "x"
-        },
-        "predicate": {
-          "termType": "Variable",
-          "value": "y"
-        },
-        "object": {
-          "termType": "Variable",
-          "value": "z"
-        },
-        "graph": {
-          "termType": "DefaultGraph",
-          "value": ""
-        }
-      }
-    ]
-  },
-  "variables": [
-    {
-      "termType": "Variable",
-      "value": "x"
-    },
-    {
-      "termType": "Variable",
-      "value": "y"
-    },
-    {
-      "termType": "Variable",
-      "value": "z"
-    }
-  ]
-}
-'
-
-SELECT ?x ?y ?z WHERE { ?x ?y ?z }
-```
+> [!note]
+> Before implementing support for a SPARQL operator, read our tutorial on [contributing an actor](../1_getting_started/5_contribute_actor.md) and [contributing a new operator](../1_getting_started/7_contribute_new_operation.md).
