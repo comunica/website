@@ -5,6 +5,11 @@ export default function Home() {
   useEffect(() => {
     // Rotate SPARQL queries
     const queries = document.querySelectorAll('.sparql-query');
+    
+    if (queries.length === 0) {
+      return;
+    }
+    
     let currentQuery = 0;
     
     const rotateQueries = () => {

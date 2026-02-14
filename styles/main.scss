@@ -1155,6 +1155,28 @@ main .date {
     }
 }
 
+// Respect user motion preferences
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .source-types-scroll .source-types-track {
+        animation: none;
+    }
+    
+    .hero-logo,
+    .hero-title,
+    .hero-subtitle,
+    .hero-buttons {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
 // Responsive adjustments for new index page
 @media (max-width: 1020px) {
     .hero {
