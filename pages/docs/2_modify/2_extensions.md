@@ -64,3 +64,21 @@ provides a default configuration that adds full SPARQL query support using other
 ## SPARQL-OTFC
 
 [SPARQL-OTFC](https://github.com/Flanders-Make-vzw/sparql-otfc#readme) extends the SPARQL query language with on-the-fly computations. It enables developers to host special predicates that do not exist in a queried data source yet are computed at runtime. To the end-user asking a query, these predicates behave just like regular predicates.
+
+## MCP
+
+[`@comunica/mcp-sparql`](https://github.com/comunica/comunica-feature-mcp) exposes Comunica as an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server,
+allowing AI agents such as Claude and ChatGPT to query Linked Data and SPARQL endpoints directly.
+This enables AI agents to retrieve and reason over decentralized RDF knowledge graphs on the Web,
+significantly improving the accuracy and expressivity of their answers.
+Multiple variants are available, including MCP servers for HDT files, Solid data pods, and link traversal.
+
+Read more about this in [our guide on MCP](/docs/query/advanced/mcp/).
+
+## Incremunica
+
+[Incremunica](https://github.com/maartyman/incremunica) is an incremental SPARQL query engine built on top of Comunica.
+It extends Comunica's actor–mediator–bus architecture to support incremental query evaluation:
+when RDF data sources change, only the affected parts of the query result are recomputed,
+making it well-suited for applications over dynamic or streaming data.
+
