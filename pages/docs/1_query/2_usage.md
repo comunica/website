@@ -4,8 +4,13 @@ description: 'Examples of where Comunica is used.'
 ---
 
 Comunica is being used in a variety of places for its querying and RDF-related capabilities.
+Due to the open nature of the project, we do not actively track all uses of Comunica.
 Below, a couple of these uses are listed.
 Feel free to [contact us](/ask/) if you want your use of Comunica added to this list.
+
+A more complete list of projects that use Comunica can be found by looking at
+the [GitHub dependency graph](https://github.com/comunica/comunica/network/dependents) (1.600 at the time of writing)
+or by inspecting the number of downloads on [npm](https://www.npmjs.com/package/@comunica/core) (45.000 weekly downloads at the time of writing).
 
 ## NDE — Network of Terms
 
