@@ -706,9 +706,15 @@ main .date {
                     float: none;
                     padding: 1rem;
                     width: 100%;
-                    display: block;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
                     text-align: left;
                     border-bottom: none;
+
+                    .nav-search-label {
+                        display: inline;
+                    }
 
                     &:hover,
                     &:focus,
@@ -745,6 +751,11 @@ nav ul li .nav-search-btn {
     vertical-align: middle;
     display: inline-flex;
     align-items: center;
+    gap: 0.35rem;
+
+    .nav-search-label {
+        display: none;
+    }
 
     &:hover,
     &:focus,

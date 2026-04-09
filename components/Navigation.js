@@ -30,6 +30,7 @@ export default function Navigation() {
                     <li>
                         <button className="nav-search-btn" id="nav-search-trigger" aria-label="Open search">
                             <SearchIcon />
+                            <span className="nav-search-label">Search</span>
                         </button>
                     </li>
                 </ul>
@@ -46,4 +47,3 @@ export default function Navigation() {
         </>
     );
 }
-
