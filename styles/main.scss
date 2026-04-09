@@ -708,7 +708,29 @@ main .date {
     }
 }
 
-@media (max-width: 800px) and (min-width: 700px) {
+.search-unavailable {
+    padding: 1rem;
+    margin: 1rem 0;
+    background: #faf5e7;
+    border: 1px solid #d0ae3e;
+    border-radius: 5px;
+}
+
+// Pagefind UI theme overrides
+:root {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #{$color-comunica-red};
+    --pagefind-ui-text: #333;
+    --pagefind-ui-background: #fff;
+    --pagefind-ui-border: #e5e3e3;
+    --pagefind-ui-tag: #f8f8f8;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 5px;
+    --pagefind-ui-image-border-radius: 5px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
     pre {
         width: 700px;
     }

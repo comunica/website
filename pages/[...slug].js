@@ -35,6 +35,7 @@ export default class Page extends React.Component {
                     <h1>{frontmatter.title}</h1>
                     { dateString }
                     <hr />
+                    <div data-pagefind-body>
                     {frontmatter.wip && <div className={'wip'}>
                         <h2>🚧 Under construction 🚧️</h2>
                         <p>
@@ -53,6 +54,7 @@ export default class Page extends React.Component {
                     <Markdown body={body} />
                     {frontmatter.index && <DocIndex path={path} paths={sortedPaths} mattersData={mattersData} reverse={frontmatter.reverse}/>}
                     {frontmatter.blog_index && <BlogIndex path={path} paths={sortedPaths} mattersData={mattersData}/>}
+                    </div>
                 </main>
             </div>
             </Template>

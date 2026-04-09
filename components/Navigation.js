@@ -11,6 +11,7 @@ export default class Navigation extends React.Component {
                 <li><a href="https://query.comunica.dev/">Try live</a></li>
                 <li><a href="/docs/">Docs</a></li>
                 <li><a href="/blog/">Blog</a></li>
+                <li><a href="/search/">Search</a></li>
                 <li><a href="/about/">About</a></li>
                 <li><a href="/ask/">Ask</a></li>
                 <li><a href="/research/">Research</a></li>
