@@ -700,6 +700,23 @@ main .date {
                         border: none;
                     }
                 }
+                .nav-search-btn {
+                    margin: 0;
+                    background: $color-comunica-red;
+                    float: none;
+                    padding: 1rem;
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                    border-bottom: none;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        background: $color-comunica-red-dark;
+                        border-bottom: none;
+                    }
+                }
             }
         }
     }
@@ -716,19 +733,141 @@ main .date {
     border-radius: 5px;
 }
 
-// Pagefind UI theme overrides
+nav ul li .nav-search-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0 4px 4px 4px;
+    font-family: inherit;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-bottom: 2px solid #fff;
+    }
+}
+
+.search-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 2000;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 5rem;
+
+    &.search-overlay-open {
+        display: flex;
+    }
+
+    .search-modal {
+        background: #fff;
+        border-radius: 8px;
+        padding: 1.5rem;
+        width: 90%;
+        max-width: 680px;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+
+        .search-modal-close {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            color: #555;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+
+            &:hover,
+            &:focus {
+                color: $color-comunica-red;
+                background: #f5f5f5;
+            }
+        }
+    }
+}
+
+
+// Pagefind custom search UI
 :root {
-    --pagefind-ui-scale: 1;
     --pagefind-ui-primary: #{$color-comunica-red};
-    --pagefind-ui-text: #333;
-    --pagefind-ui-background: #fff;
-    --pagefind-ui-border: #e5e3e3;
-    --pagefind-ui-tag: #f8f8f8;
-    --pagefind-ui-border-width: 1px;
-    --pagefind-ui-border-radius: 5px;
-    --pagefind-ui-image-border-radius: 5px;
-    --pagefind-ui-image-box-ratio: 3 / 2;
-    --pagefind-ui-font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.pf-form {
+    margin-bottom: 1rem;
+
+    .pf-input {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        font-family: inherit;
+        border: 1px solid #e5e3e3;
+        border-radius: 5px;
+        outline: none;
+        box-sizing: border-box;
+
+        &:focus {
+            border-color: $color-comunica-red;
+            box-shadow: 0 0 0 2px rgba(156, 5, 16, 0.15);
+        }
+    }
+}
+
+.pf-results {
+    .pf-result {
+        display: block;
+        padding: 0.65rem 0.75rem;
+        border-radius: 5px;
+        text-decoration: none;
+        color: inherit;
+        margin-bottom: 0.25rem;
+
+        &:hover {
+            background: #f5f5f5;
+            text-decoration: none;
+        }
+
+        .pf-result-title {
+            font-weight: 600;
+            color: $color-comunica-red-dark;
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .pf-result-excerpt {
+            font-size: 0.875rem;
+            color: #555;
+            line-height: 1.45;
+
+            mark {
+                background: #fff3cd;
+                color: inherit;
+                border-radius: 2px;
+                padding: 0 2px;
+            }
+        }
+    }
+
+    .pf-no-results {
+        color: #666;
+        padding: 0.5rem 0.75rem;
+    }
 }
 
 @media (max-width: 800px) and (min-width: 700px) {

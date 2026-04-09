@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node ./build_post_index && next dev",
-    "build": "node ./build_post_index && next build && next export && npx pagefind --site out",
+    "build": "node ./build_post_index && next build && next export && npx pagefind --site out && cp -r out/pagefind public/pagefind",
     "start": "next start"
   },
   "dependencies": {
