@@ -13,13 +13,16 @@ class MyDocument extends Document {
             <Html>
                 <Head>
                     <link rel="icon" href="/favicon.ico"/>
+                    <link href="/pagefind/pagefind-component-ui.css" rel="stylesheet"/>
                 </Head>
                 <body>
                 <Navigation />
                 <div className="nav-pusher"/>
+                <pagefind-modal reset-on-close=""></pagefind-modal>
                 <Main />
                 <Foot/>
                 <NextScript />
+                <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
                 </body>
             </Html>
         )

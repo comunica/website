@@ -2,6 +2,16 @@ $color-comunica-red: #9C0510;
 $color-comunica-red-light: #c20e1c;
 $color-comunica-red-dark: #740008;
 
+// Pagefind component UI colour overrides
+:root {
+    --pf-outline-focus: #{$color-comunica-red};
+}
+
+// Pagefind default UI colour override (for sub-results etc.)
+:root {
+    --pagefind-ui-primary: #{$color-comunica-red};
+}
+
 html,
 body {
     padding: 0;
@@ -44,6 +54,7 @@ nav {
     margin: 0;
     height: 3.5rem;
     color: white;
+    z-index: 100;
 
     ul {
         float: right;
@@ -74,6 +85,37 @@ nav {
         height: 2.5rem;
         vertical-align: middle;
         float: left;
+    }
+
+    // Desktop search trigger: pagefind-modal-trigger inside the nav <ul>
+    .nav-search-desktop {
+        display: inline;
+        vertical-align: middle;
+
+        pagefind-modal-trigger {
+            --pf-background: transparent;
+            --pf-border: rgba(255, 255, 255, 0.55);
+            --pf-border-focus: rgba(255, 255, 255, 0.9);
+            --pf-text: #ffffff;
+            --pf-text-muted: rgba(255, 255, 255, 0.85);
+            --pf-hover: rgba(255, 255, 255, 0.15);
+            --pf-input-height: 28px;
+            display: inline-flex;
+            vertical-align: middle;
+            margin-top: -2px;
+
+            // Keyboard shortcut badges (Ctrl / K): white pill with brand-red text
+            .pf-trigger-key {
+                background: rgba(255, 255, 255, 0.9) !important;
+                border-color: rgba(255, 255, 255, 0.9) !important;
+                color: $color-comunica-red-dark !important;
+            }
+        }
+    }
+
+    // Mobile compact trigger (inside nav <div>, next to hamburger) – hidden on desktop
+    & > div > pagefind-modal-trigger {
+        display: none;
     }
 }
 .nav-pusher {
@@ -661,6 +703,22 @@ main .date {
                 background: $color-comunica-red-dark;
                 border: none;
             }
+        }
+        // Hide desktop search trigger on mobile
+        .nav-search-desktop {
+            display: none !important;
+        }
+        // Show compact search icon next to hamburger
+        & > div > pagefind-modal-trigger {
+            display: block;
+            float: right;
+            margin: 0.5rem 0.25rem 0;
+            --pf-background: transparent;
+            --pf-border: rgba(255, 255, 255, 0.55);
+            --pf-border-focus: rgba(255, 255, 255, 0.9);
+            --pf-text-muted: rgba(255, 255, 255, 0.85);
+            --pf-hover: rgba(255, 255, 255, 0.15);
+            --pf-input-height: 36px;
         }
     }
     nav:not(.active) {
