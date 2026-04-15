@@ -667,6 +667,20 @@ main .date {
     }
 }
 
+@media (max-width: 1300px) and (min-width: 1021px) {
+    nav {
+        ul {
+            margin: 1rem 1rem;
+            li {
+                margin-left: 1rem;
+            }
+        }
+        .nav-icon {
+            margin: 0.5rem 0 0.5rem 1rem;
+        }
+    }
+}
+
 @media (max-width: 1020px) {
     .grid, .grid-wide {
         min-width: 0;
