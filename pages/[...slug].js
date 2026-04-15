@@ -50,7 +50,9 @@ export default class Page extends React.Component {
                         <p>On this page</p>
                         <ol className="headers-overview-elements"/>
                     </div>
-                    <Markdown body={body} />
+                    <div data-pagefind-weight={path.startsWith('/docs/') ? "2" : "1"}>
+                        <Markdown body={body} />
+                    </div>
                     {frontmatter.index && <DocIndex path={path} paths={sortedPaths} mattersData={mattersData} reverse={frontmatter.reverse}/>}
                     {frontmatter.blog_index && <BlogIndex path={path} paths={sortedPaths} mattersData={mattersData}/>}
                 </main>

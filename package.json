@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "node ./build_post_index && next dev",
-    "build": "node ./build_post_index && next build && next export",
+    "build": "node ./build_post_index && next build && next export && ./node_modules/.bin/pagefind --site out",
     "start": "next start"
   },
   "dependencies": {
     "cross-fetch": "^3.1.4",
     "gray-matter": "^4.0.3",
     "next": "^13.2.1",
+    "pagefind": "^1.5.2",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -22,6 +23,5 @@
     "remark-gfm": "^1.0.0",
     "rss": "^1.2.2",
     "sass": "^1.26.10"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }

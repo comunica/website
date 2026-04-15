@@ -36,3 +36,6 @@ yarn-error.log*
 
 # RSS feed
 public/rss-feed.xml
+
+# Generated pagefind search index
+public/pagefind/

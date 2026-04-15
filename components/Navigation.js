@@ -6,6 +6,7 @@ export default class Navigation extends React.Component {
             <div>
                 <a href="/"><img src="/img/comunica_white.svg" className="nav-icon" alt="Comunica logo" /></a>
                 <a href="#" className="toggle-nav"><img src="/img/navigation-toggle.svg" alt="Toggle navigation bar" /></a>
+                <pagefind-modal-trigger compact=""></pagefind-modal-trigger>
             </div>
             <ul>
                 <li><a href="https://query.comunica.dev/">Try live</a></li>
@@ -17,6 +18,9 @@ export default class Navigation extends React.Component {
                 <li><a href="/events/">Events</a></li>
 				<li><a href="/association/">Association</a></li>
                 <li><a href="https://github.com/comunica/comunica">GitHub</a></li>
+                <li className="nav-search-desktop">
+                    <pagefind-modal-trigger placeholder="Search…"></pagefind-modal-trigger>
+                </li>
             </ul>
         </nav>;
     }
