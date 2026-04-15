@@ -719,6 +719,12 @@ main .date {
             --pf-text-muted: rgba(255, 255, 255, 0.85);
             --pf-hover: rgba(255, 255, 255, 0.15);
             --pf-input-height: 36px;
+
+            .pf-trigger-key {
+                background: rgba(255, 255, 255, 0.9) !important;
+                border-color: rgba(255, 255, 255, 0.9) !important;
+                color: $color-comunica-red-dark !important;
+            }
         }
     }
     nav:not(.active) {
