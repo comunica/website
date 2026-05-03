@@ -94,6 +94,14 @@ For shapes that define SPARQL-based constraints (`sh:sparql`) or target declarat
 the engine delegates query execution to Comunica via
 [`@comunica/query-sparql-rdfjs-lite`](https://www.npmjs.com/package/@comunica/query-sparql-rdfjs-lite).
 
+## Mentor for Visual Studio Code
+
+_Open Source_
+
+[Mentor](https://mentor-vscode.dev/) is a Visual Studio Code extension that essentially turns the editor into a specialized IDE for RDF and knowledge graph development,
+with features like SPARQL querying, ontology navigation, reasoning, and workspace-wide indexing of RDF resources.
+Mentor uses Comunica to power its SPARQL querying capabilities, allowing users to execute queries against RDF data in their workspace and external sources directly from the editor.
+
 ## LDflex
 
 _Academic_
