@@ -53,6 +53,16 @@ export default function Home() {
             <p>Learn how to configure or extend</p>
           </a>
 
+          <a href="docs/query/advanced/solid" className="card">
+            <h3>Query Solid pods &rarr;</h3>
+            <p>Query one or more Solid pods</p>
+          </a>
+
+          <a href="docs/query/advanced/mcp/" className="card">
+            <h3>Comunica MCP &rarr;</h3>
+            <p>Connect Comunica with AI Agents</p>
+          </a>
+
           <a href="https://opencollective.com/comunica-association" className="card">
             <h3>Donate &rarr;</h3>
             <p>Sponsor via Open Collective</p>
