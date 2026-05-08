@@ -42,6 +42,11 @@ it is possible to include the local versions of Comunica base packages in the pr
 
 Afterwards, running `yarn install` in the local project directory should result in Yarn simply linking the local Comunica packages in it.
 
+<div class="note">
+You need to use relative paths in the workspace difinitions.
+This approach does not work using absolute paths.
+</div>
+
 
 ### Using with a local monorepository with Comunica dependencies
 
