@@ -580,6 +580,18 @@ main .date {
     padding: 1rem;
 }
 
+.usage-clear {
+    clear: both;
+}
+
+.usage-logo {
+    float: left;
+    width: 120px;
+    height: 72px;
+    object-fit: contain;
+    margin: 0.35rem 1rem 0.5rem 0;
+}
+
 .headers-overview {
     display: none;
     position: fixed;
@@ -682,6 +694,12 @@ main .date {
 }
 
 @media (max-width: 1020px) {
+    .usage-logo {
+        float: none;
+        display: block;
+        margin: 0 auto 1rem auto;
+    }
+
     .grid, .grid-wide {
         min-width: 0;
         width: 100%;
