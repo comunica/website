@@ -12,6 +12,9 @@ A more complete list of projects that use Comunica can be found by looking at
 the [GitHub dependency graph](https://github.com/comunica/comunica/network/dependents) (1.600 at the time of writing)
 or by inspecting the number of downloads on [npm](https://www.npmjs.com/package/@comunica/core) (45.000 weekly downloads at the time of writing).
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/nde.svg" alt="NDE — Network of Terms logo" class="usage-logo" />
+
 ## NDE — Network of Terms
 
 _Governmental_
@@ -29,6 +32,9 @@ Each stage of the pipeline uses SPARQL queries to iterate over, filter, and cons
 with Comunica powering the query execution against both local RDF files and remote SPARQL endpoints.
 NDE is also a founding member of the [Comunica Association](/association/).
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/triplydb.svg" alt="TriplyDB logo" class="usage-logo" />
+
 ## TriplyDB
 
 _Commercial_
@@ -41,6 +47,9 @@ Triply has also published [Comunica-GraphQL](https://github.com/TriplyDB/Comunic
 an open-source GraphQL API layer over Linked Data built on top of Comunica.
 Triply has sponsored bounties via the [Comunica Association](/association/).
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/inrupt.svg" alt="Inrupt logo" class="usage-logo" />
+
 ## Inrupt
 
 _Commercial_
@@ -49,6 +58,9 @@ _Commercial_
 Inrupt integrates Comunica into their products and services to enable authenticated querying
 of data stored in [Solid Pods](https://solidproject.org/users/get-a-pod) via their [query service](https://fragments.inrupt.com/),
 including their PodSpaces hosting platform.
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/frink.svg" alt="FRINK Open Knowledge Network logo" class="usage-logo" />
 
 ## FRINK Open Knowledge Network
 
@@ -63,6 +75,9 @@ When multiple sources are selected, Comunica performs a client-side federated qu
 the Triple Pattern Fragments endpoints of each chosen graph entirely in the browser,
 without any server-side query processing.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/coghent.svg" alt="CoGhent — City of Ghent logo" class="usage-logo" />
+
 ## CoGhent — City of Ghent
 
 _Governmental_
@@ -75,6 +90,9 @@ Comunica is the recommended and documented tool for [querying these collections]
 both directly in the browser and locally via the `@comunica/query-sparql` CLI and JavaScript API,
 making it the primary query interface for accessing the openly published cultural heritage data of Ghent.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/sparnatural.svg" alt="Sparnatural logo" class="usage-logo" />
+
 ## Sparnatural
 
 _Commercial_
@@ -85,6 +103,9 @@ It uses [`@comunica/query-sparql-rdfjs-lite`](https://www.npmjs.com/package/@com
 to execute queries directly in the browser against RDF data loaded via the RDF/JS interface,
 enabling fully client-side querying with no server required.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/shacl-engine.svg" alt="shacl-engine logo" class="usage-logo" />
+
 ## shacl-engine
 
 _Open Source_
@@ -94,6 +115,9 @@ For shapes that define SPARQL-based constraints (`sh:sparql`) or target declarat
 the engine delegates query execution to Comunica via
 [`@comunica/query-sparql-rdfjs-lite`](https://www.npmjs.com/package/@comunica/query-sparql-rdfjs-lite).
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/mentor.svg" alt="Mentor for Visual Studio Code logo" class="usage-logo" />
+
 ## Mentor for Visual Studio Code
 
 _Open Source_
@@ -101,6 +125,9 @@ _Open Source_
 [Mentor](https://mentor-vscode.dev/) is a Visual Studio Code extension that essentially turns the editor into a specialized IDE for RDF and knowledge graph development,
 with features like SPARQL querying, ontology navigation, reasoning, and workspace-wide indexing of RDF resources.
 Mentor uses Comunica to power its SPARQL querying capabilities, allowing users to execute queries against RDF data in their workspace and external sources directly from the editor.
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/ldflex.svg" alt="LDflex logo" class="usage-logo" />
 
 ## LDflex
 
@@ -111,6 +138,9 @@ Using the power of Comunica and JSON-LD contexts, you can write expressions like
 
 LDflex is used within the [Solid](https://solidproject.org/) community to easily [interact with one or more Solid data pods](https://github.com/solid/query-ldflex/).
 Using the compact syntax of LDflex, it is very simple to query from within [React components](https://github.com/solid/react-components).
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/graphql-ld.svg" alt="GraphQL-LD logo" class="usage-logo" />
 
 ## GraphQL-LD
 
@@ -124,12 +154,18 @@ which can then be executed by any SPARQL query engine [such as Comunica](https:/
 It can also be used execute [authenticated queries over Solid data pods](https://github.com/rubensworks/GraphQL-LD-Comunica-Solid.js),
 for which [reusable React components](https://github.com/rubensworks/solid-react-graphql-ld.js) are available.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/quadstore.svg" alt="Quadstore logo" class="usage-logo" />
+
 ## Quadstore
 
 _Open Source_
 
 [Quadstore](https://github.com/belayeng/quadstore) is a [LevelDB](https://github.com/google/leveldb)-based graph database for Node.js and the browser.
 [Quadstore Comunica](https://github.com/belayeng/quadstore-comunica) is a SPARQL engine on top of Quadstore that is powered by Comunica.
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/ldkit.svg" alt="LDkit logo" class="usage-logo" />
 
 ## LDkit
 
@@ -139,6 +175,9 @@ _Open Source_
 
 LDkit provides built-in support to query SPARQL endpoints, but it is [fully compatible with Comunica](https://ldkit.io/docs/how-to/query-with-comunica) in case you need to access other RDF data sources.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/rdf-parse.svg" alt="RDF Parse logo" class="usage-logo" />
+
 ## RDF Parse
 
 _Open Source_
@@ -146,6 +185,9 @@ _Open Source_
 [RDF Parse](https://github.com/rubensworks/rdf-parse.js) is a JavaScript library parses RDF based on content type or file name in a streaming manner.
 It supports all of the major RDF serializations.
 Internally, this library makes use of the `rdf-parse` bus and actors from Comunica.
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/rdf-dereference.svg" alt="RDF Dereference logo" class="usage-logo" />
 
 ## RDF Dereference
 
@@ -155,12 +197,18 @@ _Open Source_
 This tool is useful in situations where you have a URL, and you just need the parsed triples/quads, without having to concern yourself with determining the correct content type and picking the correct parser.
 Internally, this library makes use of the `rdf-dereference` bus and actors from Comunica.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/rdf-play.svg" alt="RDF Play logo" class="usage-logo" />
+
 ## RDF Play
 
 _Open Source_
 
 [RDF Play](https://rdf-play.rubensworks.net/) is a Web-based tool for performing simple RDF operations, such as parsing, serializing and dereferencing from URLs.
 Internally, this library makes use of RDF parsers from the Comunica framework, which enable streaming processing of RDF.
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/eswc-2020.svg" alt="ESWC Conference 2020 logo" class="usage-logo" />
 
 ## ESWC Conference 2020
 
@@ -169,6 +217,9 @@ _Academic_
 All metadata of the [ESWC Conference (2020)](https://2020.eswc-conferences.org/) is [queryable](https://query.2020.eswc-conferences.org/)
 via a jQuery widget instance of Comunica.
 It features several example queries over a [Triple Pattern Fragments](https://linkeddatafragments.org/concept/) interface through which the ESWC 2020 metadata is published.
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/walder.svg" alt="Walder logo" class="usage-logo" />
 
 ## Walder
 
@@ -181,6 +232,9 @@ hosted via Solid PODs, SPARQL endpoints, Triple Pattern Fragments interfaces, RD
 Using content negotiation, Walder makes the data in these knowledge graphs available to clients via HTML, RDF, and JSON-LD. 
 Users define in a configuration file which data Walder uses and how it processes this data.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/jquery-widget.svg" alt="Comunica jQuery Widget logo" class="usage-logo" />
+
 ## Comunica jQuery Widget
 
 _Academic_
@@ -190,6 +244,9 @@ It powers the live Comunica demo at [query.comunica.dev](https://query.comunica.
 allowing end users to execute SPARQL queries directly in the browser against any combination of supported source types
 without needing a server-side component.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/solidbench.svg" alt="SolidBench logo" class="usage-logo" />
+
 ## SolidBench
 
 _Academic_
@@ -197,6 +254,9 @@ _Academic_
 [SolidBench](https://github.com/SolidBench/SolidBench.js) is a benchmarking suite for evaluating the performance of Solid-compatible query engines.
 It generates realistic social-network RDF datasets distributed across simulated Solid pods
 and uses Comunica SPARQL Solid as its reference query engine to execute and measure benchmark queries.
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/jbr.svg" alt="JBR logo" class="usage-logo" />
 
 ## JBR
 
@@ -207,6 +267,9 @@ with engines such as Comunica and [LDF Server](https://github.com/LinkedDataFrag
 It covers the full provenance chain: software setup, input data generation, experiment execution, dependency tracking, result reporting, and archiving.
 JBR makes it straightforward to compare different Comunica configurations or measure the impact of custom modifications.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/css.svg" alt="Community Solid Server logo" class="usage-logo" />
+
 ## Community Solid Server
 
 _Academic_
@@ -215,6 +278,9 @@ The [Community Solid Server (CSS)](https://github.com/CommunitySolidServer/Commu
 [Solid protocol](https://solidproject.org/TR/protocol), developed at Ghent University.
 CSS uses `@comunica/query-sparql` internally to evaluate SPARQL queries and updates against its in-memory RDF data stores,
 making it one of the most prominent real-world deployments of Comunica in a server-side context.
+
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/koreografeye.svg" alt="Koreografeye logo" class="usage-logo" />
 
 ## Koreografeye
 
