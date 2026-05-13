@@ -139,9 +139,6 @@ Using the power of Comunica and JSON-LD contexts, you can write expressions like
 LDflex is used within the [Solid](https://solidproject.org/) community to easily [interact with one or more Solid data pods](https://github.com/solid/query-ldflex/).
 Using the compact syntax of LDflex, it is very simple to query from within [React components](https://github.com/solid/react-components).
 
-<div class="usage-clear"></div>
-<img src="/img/usage-showcase/graphql-ld.jpg" alt="GraphQL-LD logo" class="usage-logo" />
-
 ## GraphQL-LD
 
 _Academic_
@@ -175,9 +172,6 @@ _Open Source_
 
 LDkit provides built-in support to query SPARQL endpoints, but it is [fully compatible with Comunica](https://ldkit.io/docs/how-to/query-with-comunica) in case you need to access other RDF data sources.
 
-<div class="usage-clear"></div>
-<img src="/img/usage-showcase/rdf-parse.jpg" alt="RDF Parse logo" class="usage-logo" />
-
 ## RDF Parse
 
 _Open Source_
@@ -186,9 +180,6 @@ _Open Source_
 It supports all of the major RDF serializations.
 Internally, this library makes use of the `rdf-parse` bus and actors from Comunica.
 
-<div class="usage-clear"></div>
-<img src="/img/usage-showcase/rdf-dereference.jpg" alt="RDF Dereference logo" class="usage-logo" />
-
 ## RDF Dereference
 
 _Open Source_
@@ -196,9 +187,6 @@ _Open Source_
 [RDF Dereference](https://github.com/rubensworks/rdf-dereference.js) is a JavaScript library dereferences URLs to get its RDF contents.
 This tool is useful in situations where you have a URL, and you just need the parsed triples/quads, without having to concern yourself with determining the correct content type and picking the correct parser.
 Internally, this library makes use of the `rdf-dereference` bus and actors from Comunica.
-
-<div class="usage-clear"></div>
-<img src="/img/usage-showcase/rdf-play.jpg" alt="RDF Play logo" class="usage-logo" />
 
 ## RDF Play
 
@@ -254,9 +242,6 @@ _Academic_
 [SolidBench](https://github.com/SolidBench/SolidBench.js) is a benchmarking suite for evaluating the performance of Solid-compatible query engines.
 It generates realistic social-network RDF datasets distributed across simulated Solid pods
 and uses Comunica SPARQL Solid as its reference query engine to execute and measure benchmark queries.
-
-<div class="usage-clear"></div>
-<img src="/img/usage-showcase/jbr.jpg" alt="JBR logo" class="usage-logo" />
 
 ## JBR
 
