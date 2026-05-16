@@ -83,4 +83,4 @@ This tool is therefore useful if you want to implement support for a SPARQL oper
 but you need to find out to what algebra operation this corresponds.
 
 > [!note]
-> Before implementing support for a SPARQL operator, read our tutorial on [contributing an actor](../1_getting_started/5_contribute_actor.md) and [contributing a new operator](../1_getting_started/7_contribute_new_operation.md).
+> Before implementing support for a SPARQL operator, read our tutorial on [contributing an actor](https://comunica.dev/docs/modify/getting_started/contribute_actor) and [contributing a new operator](https://comunica.dev/docs/modify/getting_started/contribute_new_operation).

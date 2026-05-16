@@ -22,7 +22,7 @@ To fully understand this guide, we strongly recommend reading
 
 ## 1. Getting started
 
-First, set up your development environment by following sections 1 and 2 of [_contributing an actor_](5_contribute_actor.md#1-requirements).
+First, set up your development environment by following sections 1 and 2 of [_contributing an actor_](https://comunica.dev/docs/modify/getting_started/contribute_actor/#1--requirements).
 Next, [create a new actor package](https://comunica.dev/docs/modify/getting_started/contribute_actor/#3--creating-a-new-package):
 ```yo comunica:actor```.
 Configure the actor with name `lateral` on bus `query-parse`, you can agree with the default options the program suggests.
@@ -235,7 +235,7 @@ import { toComunicaAlgebra as toAlgebra, ComunicaSparqlParser as SparqlParser } 
 
 ## 3. Replace the original parse actor with yours
 
-In [section 6 of contributing an actor](./5_contribute_actor.md#6-configuring-your-actor)
+In [section 6 of contributing an actor](https://comunica.dev/docs/modify/getting_started/contribute_actor/#6--configuring-your-actor)
 you learned about the dependency injection framework used by Comunica.
 You may now configure your parsing actor in a similar way:
 * Add it as a dependency in `engines/query-sparql/package.json`, and remove the original `@comunica/actor-query-parse-sparql`.
@@ -247,12 +247,12 @@ all that's left is implementing the actor that perform the operation.
 ## 4. Implementing the LATERAL actor
 
 Implementing the execution logic now follows the standard guide:
-[implementing your own actor query operation](5_contribute_actor.md#4-implementing-your-actor).
+[implementing your own actor query operation](https://comunica.dev/docs/modify/getting_started/contribute_actor/#4--implementing-your-actor).
 You should just make sure that the generic type passed to `ActorQueryOperationTypedMediated` is your `Lateral` type.
 
 ## 5. Testing with Comunica SPARQL
 
-Just like [section 7 of contributing an actor](./5_contribute_actor.md#7-testing-with-comunica-sparql),
+Just like [section 7 of contributing an actor](https://comunica.dev/docs/modify/getting_started/contribute_actor/#7--testing-with-comunica-sparql),
 we need to make sure our actor works before we create a pull request.
 Simply rebuild your engine as described there, and test that it works on a query using `LATERAL`.
 ```bash
