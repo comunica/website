@@ -56,7 +56,6 @@ When submitting an expense, you must attach an invoice, which must be a valid fi
 This document must at least contain your VAT ID and your address, the Comunica Association (Open Collective Europe must not be mentioned), and the Comunica Association's address:
 
 ```
-AA Tower (Ghent University – imec)
 Technologiepark-Zwijnaarde 122
 9052 Ghent, Belgium
 België
