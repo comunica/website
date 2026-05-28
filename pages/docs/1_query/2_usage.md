@@ -13,7 +13,7 @@ the [GitHub dependency graph](https://github.com/comunica/comunica/network/depen
 or by inspecting the number of downloads on [npm](https://www.npmjs.com/package/@comunica/core) (45.000 weekly downloads at the time of writing).
 
 <div class="usage-clear"></div>
-<img src="/img/usage-showcase/nde.jpg" alt="NDE — Network of Terms logo" class="usage-logo" />
+<img src="/img/usage-showcase/nde.png" alt="NDE — Network of Terms logo" class="usage-logo" />
 
 ## NDE — Network of Terms
 
