@@ -75,6 +75,15 @@ export default function Home() {
         </div>
 
         <div className="container-page sponsors">
+          <h2>Used By</h2>
+          <p>
+            Comunica is production-ready, and is <a href="/docs/query/usage/">widely within commercial, governmental, and academic contexts</a>.<br />
+            It has <strong>1.600+ dependent projects</strong> on GitHub (only counting open-source projects),<br />
+            and reaches <strong>400.000+ monthly downloads</strong> on npm.
+          </p>
+        </div>
+
+        <div className="container-page sponsors">
           <h2>Supported By</h2>
           <p>
             Comunica is a community-driven project, sustained by the <a href="/association/">Comunica Association</a>.
