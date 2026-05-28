@@ -60,6 +60,19 @@ of data stored in [Solid Pods](https://solidproject.org/users/get-a-pod) via the
 including their PodSpaces hosting platform.
 
 <div class="usage-clear"></div>
+<img src="/img/usage-showcase/era.png" alt="EU Agency for Railways logo" class="usage-logo" />
+
+## EU Agency for Railways (ERA)
+
+_Governmental_
+
+The [European Union Agency for Railways (ERA)](https://www.era.europa.eu/) integrates Comunica into its
+[Interoperable Data Programme](https://www.era.europa.eu/domains/registers/rinf_en) to query and validate decentralized rail data across Europe.
+Comunica is embedded in the testing, validation, and training environments of the
+ERA Knowledge Graph and ERA Ontology,
+for example in the [era-railway-resources library](https://gitlab.com/era-europa-eu/public/interoperable-data-programme/era-ontology/efficient-vehicle-authorisation/era-rdf-ts-resources).
+
+<div class="usage-clear"></div>
 <img src="/img/usage-showcase/frink.png" alt="FRINK Open Knowledge Network logo" class="usage-logo" />
 
 ## FRINK Open Knowledge Network
