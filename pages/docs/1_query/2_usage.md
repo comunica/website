@@ -201,6 +201,9 @@ _Open Source_
 This tool is useful in situations where you have a URL, and you just need the parsed triples/quads, without having to concern yourself with determining the correct content type and picking the correct parser.
 Internally, this library makes use of the `rdf-dereference` bus and actors from Comunica.
 
+<div class="usage-clear"></div>
+<img src="/img/usage-showcase/rdf-play.png" alt="RDF play logo" class="usage-logo" />
+
 ## RDF Play
 
 _Open Source_
