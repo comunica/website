@@ -1,5 +1,5 @@
 ---
-title: 'Next'
+title: 'Query with experimental SPARQL features'
 description: 'If you want to make use of non-standard SPARQL features'
 ---
 
