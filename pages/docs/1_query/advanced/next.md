@@ -1,6 +1,6 @@
 ---
 title: 'Next'
-description: 'Comunica SPARQL Next offers non-standard SPARQL features'
+description: 'If you want to make use of non-standard SPARQL features'
 ---
 
 Comunica SAPRQL Next offers non-standardized SPARQL features within Comunica.
