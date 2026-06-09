@@ -3,7 +3,7 @@ title: 'Query with experimental SPARQL features'
 description: 'If you want to make use of non-standard SPARQL features'
 ---
 
-Comunica SAPRQL Next offers non-standardized SPARQL features within Comunica.
+Comunica SPARQL Next offers non-standardized SPARQL features within Comunica.
 
 
 ## 1. Installation
@@ -29,10 +29,11 @@ but you are free to package your own version of the engine, adding or removing f
 (see [Modify Comunica](https://comunica.dev/docs/modify/) for more information). 
 </div>
 
-### WIP
 
+<div class="note">
 We are activelly adding features to this feature repository, see the repository for updates:
 https://github.com/comunica/comunica-feature-next/pulls
+</div>
 
 
 ## Learn more
