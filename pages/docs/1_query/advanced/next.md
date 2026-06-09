@@ -17,14 +17,14 @@ $ npm install -g @comunica/query-sparql-next
 
 ## Features
 
-The next version supports the same features as `@comunica/query-sparql`
+This "next" version supports the same features as `@comunica/query-sparql`
 (see the other documentation pages on this website), adding additional language features ontop of it.
 This means we support [SPARQL 1.2](https://www.w3.org/TR/sparql12-query/)
 and additional language features listed bellow.
 
 <div class="note">
-Comunica SPARQL Next is build on the same foundation as base Comunica.
-This means that we package a default comfiguration,
+Comunica SPARQL Next is built on the same foundation as base Comunica.
+This means that we package a default configuration,
 but you are free to package your own version of the engine, adding or removing features as you please
 (see [Modify Comunica](https://comunica.dev/docs/modify/) for more information). 
 </div>
@@ -35,9 +35,9 @@ We are activelly adding features to this feature repository, see the repository 
 https://github.com/comunica/comunica-feature-next/pulls
 
 
-## 4. Learn more
+## Learn more
 
-This guide only discussed the basic functionality of `comunica-sparql-next`.
+This guide only discusses the basic functionality of `comunica-sparql-next`.
 You can learn more options by invoking the _help_ command, or by [reading the Comunica SPARQL documentation](/docs/query/getting_started/query_cli/):
 ```text
 $ comunica-sparql-next --help
@@ -51,4 +51,4 @@ In order to [set up a SPARQL endpoint, `comunica-sparql-next-http` can be used, 
 
 ### Contribution
 
-The Next version is maintained in its own feature repository: [comunica-feature-next](https://github.com/comunica/comunica-feature-next/).
+The "next" version is maintained in its own feature repository: [comunica-feature-next](https://github.com/comunica/comunica-feature-next/).
