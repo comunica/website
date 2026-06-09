@@ -17,7 +17,7 @@ $ npm install -g @comunica/query-sparql-next
 
 ## Features
 
-The next version supports the same features as `@comunica/query-sparql`
+This "next" version supports the same features as `@comunica/query-sparql`
 (see the other documentation pages on this website), adding additional language features ontop of it.
 This means we support [SPARQL 1.2](https://www.w3.org/TR/sparql12-query/)
 and additional language features listed bellow.
