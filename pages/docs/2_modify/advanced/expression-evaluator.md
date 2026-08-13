@@ -74,7 +74,7 @@ The following keys are of importance:
   * `true`: treats it as a literal and compare both operands.
   * `false`: throws an error.
 * KeysExpressionEvaluator.fullTermComparison: A boolean denoting the behaviour of the lesser than function when used with non-literal and mixed operands. Such non-literals are IRIs, blank nodes, languageStrings and triple terms.
-  * true: compares them by type first and then by string value (see [non-lexical and full term comparison](#non-lexical-and-full-term-comparison)).
+  * `true`: compares them by type first and then by string value (see [non-lexical and full term comparison](#non-lexical-and-full-term-comparison)).
   * false: throws an error.
 
 
