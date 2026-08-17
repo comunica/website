@@ -70,6 +70,12 @@ The following keys are of importance:
 * KeysExpressionEvaluator.defaultTimeZone: The default timezone to use for date functions, if none given, extracts the timezone from the `queryTimestamp` value. It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time). 
 * KeysExpressionEvaluator.superTypeProvider: A way of interacting with the type system, it's a callback that given a type unknown to the system, returns the super type of that type.
 * KeysExpressionEvaluator.baseIRI: The base IRI to use for functions that require it.
+* KeysExpressionEvaluator.nonLexicalComparison: A boolean denoting the behaviour of the lesser than function when used with non-lexical literal operands.
+  * `true`: treats it as a literal and compare both operands.
+  * `false`: throws an error (default).
+* KeysExpressionEvaluator.fullTermComparison: A boolean denoting the behaviour of the lesser than function when used with non-literal and mixed operands. Such non-literals are IRIs, blank nodes, languageStrings and triple terms.
+  * `true`: compares them by type first and then by string value (see [non-lexical and full term comparison](#non-lexical-and-full-term-comparison)).
+  * `false`: throws an error (default).
 
 
 ## Errors
@@ -210,3 +216,30 @@ examples of which can be found in the skipped test blocks in
 [op.regex-test.ts](https://github.com/comunica/comunica/blob/master/packages/actor-function-factory-term-regex/test/op.regex-test.ts)
 and
 [op.replace-test.ts](https://github.com/comunica/comunica/blob/master/packages/actor-function-factory-term-replace/test/op.replace-test.ts).
+
+### Non-lexical and full term comparison
+
+Note that this is for both comparison with the `<`, `<=`, `>`, `>=` functions (if you set the `nonLexicalComparison` and `fullTermComparison` options to true) and comparison used for `ORDER BY`.
+
+Two terms are first compared by term type, in which the following order is used (from lowest to highest):
+
+1. blank nodes
+2. IRIs
+3. (non-lexical) literals
+4. quads
+5. default graphs
+
+[SPARQL 1.2](https://w3c.github.io/sparql-query/spec/#modOrderBy) defined ordering for the first four and we say default graphs is the lowest in priority.
+
+For 2 operands of the same term type, except literals, the string values are compared. For (non-lexical) literals first the data types are compared and if they're equal, their values are compared. Different numeric data types are seen as equal (e.g. `xsd:integer` = `xsd:decimal`).
+
+A few examples:
+
+```SPARQL
+_:abc < ex:abc < "abc"^^xsd:integer
+"true"^^xsd:boolean < "abc"^^xsd:integer
+"abc"^^xsd:integer = "abc"^^xsd:decimal
+```
+
+You can find a ton more examples in [`TermComparator-test.ts`](https://github.com/comunica/comunica/blob/b7128e8e97af0e8a73ab9147f8455702a8e76147/packages/actor-term-comparator-factory-expression-evaluator/test/TermComparator-test.ts).
+
