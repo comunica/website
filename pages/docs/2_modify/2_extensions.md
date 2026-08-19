@@ -11,11 +11,6 @@ Next to those, several extensions and modified versions exist of Comunica that o
 
 Feel free to [contact us](/ask/) if you want your extension of Comunica added to this list.
 
-## Examples
-
-The [Comunica Examples](https://github.com/comunica/examples) repository
-contains a number of example packages that explain and illustrate how to create customized Comunica packages.
-
 ## Solid
 
 [`@comunica/query-sparql-solid`](https://github.com/comunica/comunica-feature-solid)
