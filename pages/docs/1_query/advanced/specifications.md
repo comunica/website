@@ -94,3 +94,35 @@ Alignment with other JavaScript libraries is achieved via the following RDF/JS s
 | [RDF/JS Stream interfaces specification](https://rdf.js.org/stream-spec/) |
 | [RDF/JS Dataset specification](https://rdf.js.org/dataset-spec/)          |
 | [RDF/JS Data model specification](https://rdf.js.org/data-model-spec/)    |
+
+## Supported and unsupported extensions
+
+There are 4 extensions for SPARQL 1.0 defined here: https://www.w3.org/2001/sw/DataAccess/tests/README.html.
+
+We implement `mf:StringSimpleLiteralCmp` and `mf:LangTagAwareness`. `mf:XsdDateOperations` and `mf:KnownTypesDefault2Neq` aren't implemented.
+
+### StringSimpleLiteralCmp
+
+"This indicates that the test uses the fact that plain literals, without language tags test are the same value as an xsd;string with the same lexicial form. This is covered by rules "xsd 1a" and "xsd 1b" from RDF Semantics [http://www.w3.org/TR/rdf-mt/#DtypeRules]."
+
+This extension can be used if you set the `nonLexicalComparison` and `fullTermComparison` options to true.
+
+### LangTagAwareness
+
+"This indicates that the test assumes the SPARQL query processor has support for plain literals with language tags. The minimum set of operators in the SPARQL operator table does not include language tag handling, only plain literals without language tag (simple literals) and certain XSD datatypes."
+
+This extension is always enabled.
+
+### Skipped SPARQL 1.0 open-world tests
+
+#### XsdDateOperation
+
+"Requires the processor to understand comparisons of literal of type xsd:date. Without proivding operations on the xsd:date datatype, a processor would raise an error on the operations of "=" and "!=" etc. With an understanding of xsd:date, a processor can perform value-based operations and provide the operations described in "XQuery 1.0 and XPath 2.0 Functions and Operators" (e.g. date-equals date-less-than)"
+
+`date-1` and `date-2` require this extension. But it clashes with the specs of SPARQL 1.1 and 1.2, so we didn't implement it. These tests are skipped.
+
+#### KnownTypesDefault2Neq
+
+"This indicates that a processor extends the SPARQL operator model by using the fact that values of literals can be in disjoint value spaces and hence can not be equal by value. For example, an xsd:integer can not be the same value as an xsd:boolean because these two datatypes define disjoint value spaces."
+
+`open-eq-8`, `open-eq-10`, `open-eq-11` and `open-eq-12` require this extension. We don't implement it, because we have a similar option `fullTermComparison` instead (see https://comunica.dev/docs/modify/advanced/expression-evaluator/#non-lexical-and-full-term-comparison).

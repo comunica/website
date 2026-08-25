@@ -59,6 +59,9 @@ The following table gives an overview of all possible context entries that can b
 | `explain`                                          | The query explain mode                                                                  |
 | `unionDefaultGraph`                                | If the default graph should also contain the union of all named graphs                  |
 | `localizeBlankNodes`                               | If blank nodes should be localized per bindings entry                                   |
+| `nonLexicalComparison`                             | When true, compares non-lexical literals. Throws an expression error otherwise, which is caught by FILTER and BIND. |
+| `fullTermComparison`                               | When true, compares IRIs, blank nodes, languageStrings and triple terms. Throws an expression error otherwise, which is caught by FILTER and BIND. |
+
 
 When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/_comunica_context_entries.html). 
 

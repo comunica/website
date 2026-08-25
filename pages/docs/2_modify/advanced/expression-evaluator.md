@@ -70,10 +70,10 @@ The following keys are of importance:
 * KeysExpressionEvaluator.defaultTimeZone: The default timezone to use for date functions, if none given, extracts the timezone from the `queryTimestamp` value. It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time). 
 * KeysExpressionEvaluator.superTypeProvider: A way of interacting with the type system, it's a callback that given a type unknown to the system, returns the super type of that type.
 * KeysExpressionEvaluator.baseIRI: The base IRI to use for functions that require it.
-* KeysExpressionEvaluator.nonLexicalComparison: A boolean denoting the behaviour of the lesser than function when used with non-lexical literal operands.
+* KeysExpressionEvaluator.nonLexicalComparison: A boolean denoting the behaviour of comparators (e.g. <, >, =) when used with non-lexical literal operands.
   * `true`: treats it as a literal and compare both operands.
   * `false`: throws an error (default).
-* KeysExpressionEvaluator.fullTermComparison: A boolean denoting the behaviour of the lesser than function when used with non-literal and mixed operands. Such non-literals are IRIs, blank nodes, languageStrings and triple terms.
+* KeysExpressionEvaluator.fullTermComparison: A boolean denoting the behaviour of comparators (e.g. <, >, =) when used with non-literal and mixed operands. Such non-literals are IRIs, blank nodes, languageStrings and triple terms.
   * `true`: compares them by type first and then by string value (see [non-lexical and full term comparison](#non-lexical-and-full-term-comparison)).
   * `false`: throws an error (default).
 
@@ -219,7 +219,7 @@ and
 
 ### Non-lexical and full term comparison
 
-Note that this is for both comparison with the `<`, `<=`, `>`, `>=` functions (if you set the `nonLexicalComparison` and `fullTermComparison` options to true) and comparison used for `ORDER BY`.
+Note that this is for both comparison with the comparator functions (if you set the `nonLexicalComparison` and `fullTermComparison` options to true) and comparison used for `ORDER BY`.
 
 Two terms are first compared by term type, in which the following order is used (from lowest to highest):
 
