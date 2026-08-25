@@ -95,7 +95,7 @@ Alignment with other JavaScript libraries is achieved via the following RDF/JS s
 | [RDF/JS Dataset specification](https://rdf.js.org/dataset-spec/)          |
 | [RDF/JS Data model specification](https://rdf.js.org/data-model-spec/)    |
 
-## Extensions
+## Supported and unsupported extensions
 
 There are 4 extensions for SPARQL 1.0 defined here: https://www.w3.org/2001/sw/DataAccess/tests/README.html.
 
