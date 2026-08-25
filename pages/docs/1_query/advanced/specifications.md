@@ -125,4 +125,4 @@ This extension is always enabled.
 
 "This indicates that a processor extends the SPARQL operator model by using the fact that values of literals can be in disjoint value spaces and hence can not be equal by value. For example, an xsd:integer can not be the same value as an xsd:boolean because these two datatypes define disjoint value spaces."
 
-`open-eq-8`, `open-eq-10`, `open-eq-11` and `open-eq-12` require this extenstion. We don't implement it, because we have a similar option `fullTermComparison` instead (see https://comunica.dev/docs/modify/advanced/expression-evaluator/#non-lexical-and-full-term-comparison).
+`open-eq-8`, `open-eq-10`, `open-eq-11` and `open-eq-12` require this extension. We don't implement it, because we have a similar option `fullTermComparison` instead (see https://comunica.dev/docs/modify/advanced/expression-evaluator/#non-lexical-and-full-term-comparison).
