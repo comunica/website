@@ -99,7 +99,7 @@ Alignment with other JavaScript libraries is achieved via the following RDF/JS s
 
 There are 4 extensions for SPARQL 1.0 defined here: https://www.w3.org/2001/sw/DataAccess/tests/README.html.
 
-We implement `mf:StringSimpleLiteralCmp` and `mf:LangTagAwareness`.
+We implement `mf:StringSimpleLiteralCmp` and `mf:LangTagAwareness`. `mf:XsdDateOperations` and `mf:KnownTypesDefault2Neq` aren't implemented.
 
 ### StringSimpleLiteralCmp
 
@@ -113,12 +113,16 @@ This extension can be used if you set the `nonLexicalComparison` and `fullTermCo
 
 This extension is always enabled.
 
-## Skipped spec tests
+### Skipped SPARQL 1.0 open-world tests
 
-### SPARQL 1.0 tests
+#### XsdDateOperation
 
-#### open-world
+"Requires the processor to understand comparisons of literal of type xsd:date. Without proivding operations on the xsd:date datatype, a processor would raise an error on the operations of "=" and "!=" etc. With an understanding of xsd:date, a processor can perform value-based operations and provide the operations described in "XQuery 1.0 and XPath 2.0 Functions and Operators" (e.g. date-equals date-less-than)"
 
-`date-1` and `date-2` require `mf:XsdDateOperations`, which haven't implemented. It clashes with the specs of SPARQL 1.1 and 1.2. So these are skipped.
+`date-1` and `date-2` require this extension. But it clashes with the specs of SPARQL 1.1 and 1.2, so we didn't implement it. These tests are skipped.
 
-`open-eq-8`, `open-eq-10`, `open-eq-11` and `open-eq-12` require `mf:KnownTypesDefault2Neq`, which we haven't implemented. We have a similar option `fullTermComparison` instead (see https://comunica.dev/docs/modify/advanced/expression-evaluator/#non-lexical-and-full-term-comparison).
+#### KnownTypesDefault2Neq
+
+"This indicates that a processor extends the SPARQL operator model by using the fact that values of literals can be in disjoint value spaces and hence can not be equal by value. For example, an xsd:integer can not be the same value as an xsd:boolean because these two datatypes define disjoint value spaces."
+
+`open-eq-8`, `open-eq-10`, `open-eq-11` and `open-eq-12` require this extenstion. We don't implement it, because we have a similar option `fullTermComparison` instead (see https://comunica.dev/docs/modify/advanced/expression-evaluator/#non-lexical-and-full-term-comparison).
