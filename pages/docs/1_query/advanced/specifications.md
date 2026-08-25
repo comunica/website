@@ -111,7 +111,7 @@ This extension can be used if you set the `nonLexicalComparison` and `fullTermCo
 
 "This indicates that the test assumes the SPARQL query processor has support for plain literals with language tags. The minimum set of operators in the SPARQL operator table does not include language tag handling, only plain literals without language tag (simple literals) and certain XSD datatypes."
 
-This extension is always used.
+This extension is always enabled.
 
 ## Skipped spec tests
 
