@@ -94,3 +94,31 @@ Alignment with other JavaScript libraries is achieved via the following RDF/JS s
 | [RDF/JS Stream interfaces specification](https://rdf.js.org/stream-spec/) |
 | [RDF/JS Dataset specification](https://rdf.js.org/dataset-spec/)          |
 | [RDF/JS Data model specification](https://rdf.js.org/data-model-spec/)    |
+
+## Extensions
+
+There are 4 extensions for SPARQL 1.0 defined here: https://www.w3.org/2001/sw/DataAccess/tests/README.html.
+
+We implement `mf:StringSimpleLiteralCmp` and `mf:LangTagAwareness`.
+
+### StringSimpleLiteralCmp
+
+"This indicates that the test uses the fact that plain literals, without language tags test are the same value as an xsd;string with the same lexicial form. This is covered by rules "xsd 1a" and "xsd 1b" from RDF Semantics [http://www.w3.org/TR/rdf-mt/#DtypeRules]."
+
+This extension can be used if you set the `nonLexicalComparison` and `fullTermComparison` options to true.
+
+### LangTagAwareness
+
+"This indicates that the test assumes the SPARQL query processor has support for plain literals with language tags. The minimum set of operators in the SPARQL operator table does not include language tag handling, only plain literals without language tag (simple literals) and certain XSD datatypes."
+
+This extension is always used.
+
+## Skipped spec tests
+
+### SPARQL 1.0 tests
+
+#### open-world
+
+`date-1` and `date-2` require `mf:XsdDateOperations`, which haven't implemented. It clashes with the specs of SPARQL 1.1 and 1.2. So these are skipped.
+
+`open-eq-8`, `open-eq-10`, `open-eq-11` and `open-eq-12` require `mf:KnownTypesDefault2Neq`, which we haven't implemented. We have a similar option `fullTermComparison` instead (see https://comunica.dev/docs/modify/advanced/expression-evaluator/#non-lexical-and-full-term-comparison).
