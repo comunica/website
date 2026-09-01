@@ -94,7 +94,7 @@ For example, all of the following source elements are valid:
 const bindingsStream = await myEngine.queryBindings(`...`, {
   sources: [
     'https://fragments.dbpedia.org/2015/en',
-    { type: 'hypermedia', value: 'https://fragments.dbpedia.org/2016/en' },
+    { type: 'qpf', value: 'https://fragments.dbpedia.org/2016/en' },
     { type: 'file', value: 'https://www.rubensworks.net/' },
     new N3Store(),
     { type: 'sparql', value: 'https://dbpedia.org/sparql' },

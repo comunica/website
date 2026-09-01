@@ -56,7 +56,6 @@ The table below summarizes the different source types that Comunica supports by 
 |-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `file`          | plain RDF file in any RDF serialization, such as [Turtle](https://www.w3.org/TR/turtle/), [TriG](https://www.w3.org/TR/trig/), [JSON-LD](https://json-ld.org/), [RDFa](https://www.w3.org/TR/rdfa-primer/), ...                                                                 |
 | `sparql`        | [SPARQL endpoint](https://www.w3.org/TR/sparql11-protocol/)                                                                                                                                                                                                                     |
-| `hypermedia`    | Sources that expose query capabilities via hypermedia metadata, such as [Triple Pattern Fragments](https://linkeddatafragments.org/specification/triple-pattern-fragments/) and [Quad Pattern Fragments](https://linkeddatafragments.org/specification/quad-pattern-fragments/) |
 | `qpf`           | A hypermedia source that is enforced as [Triple Pattern Fragments](https://linkeddatafragments.org/specification/triple-pattern-fragments/) or [Quad Pattern Fragments](https://linkeddatafragments.org/specification/quad-pattern-fragments/)                                  |
 | `brtpf`         | A hypermedia source that is enforced as [bindings-restricted Triple Pattern Fragments](https://arxiv.org/abs/1608.08148)                                                                                                                                                        |
 | `rdfjs`         | JavaScript objects implementing the [RDF/JS `Source` or `DatasetCore` interface](/docs/query/advanced/rdfjs_querying/)                                                                                                                                                          |
@@ -65,10 +64,15 @@ The table below summarizes the different source types that Comunica supports by 
 | `ostrichFile`   | Versioned [OSTRICH archives](https://github.com/rdfostrich/comunica-query-sparql-ostrich)                                                                                                                                                                                       |
 | `compositefile` | An array of strings pointing to files that will be indexed in one place.                                                                                                                                                                                                        |
 
-The default source type is `auto`,
-which will automatically detect the proper source type.
+When no type is set, Comunica detects the proper source type automatically,
+based on the hypermedia controls that a source exposes.
 For example, if a [SPARQL Service Description](https://www.w3.org/TR/sparql11-service-description/)
-is detected, the `sparql` type is used.
+is detected, the `sparql` type is used,
+and [Triple Pattern Fragments](https://linkeddatafragments.org/specification/triple-pattern-fragments/)
+and [Quad Pattern Fragments](https://linkeddatafragments.org/specification/quad-pattern-fragments/)
+interfaces are recognized by their controls.
+This hypermedia-based detection is the default behaviour,
+so it does not have a type name of its own that can be enforced.
 
 ## RDF serializations
 
