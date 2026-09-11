@@ -246,5 +246,5 @@ Options:
 Examples:
   comunica-sparql-http https://fragments.dbpedia.org/2016-04/en
   comunica-sparql-http https://fragments.dbpedia.org/2016-04/en https://query.wikidata.org/sparql
-  comunica-sparql-http hypermedia@https://fragments.dbpedia.org/2016-04/en sparql@https://query.wikidata.org/sparql
+  comunica-sparql-http qpf@https://fragments.dbpedia.org/2016-04/en sparql@https://query.wikidata.org/sparql
 ```
