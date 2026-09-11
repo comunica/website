@@ -5,71 +5,93 @@ description: 'The expression evaluation engine of Comunica.'
 
 To evaluate expressions, Comunica uses a collection of packages that are part of the Comunica monorepo.
 Two buses specifically are of importance:
-* [`@comunica/bus-expression-evaluator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-expression-evaluator-factory): Creates an expression evaluator, more info listed bellow.
-* [`@comunica/bus-function factory`](https://github.com/comunica/comunica/tree/master/packages/bus-function-factory): creates function, more specifically it creates objects that are able to evaluate the desired function given the arguments.
+* [`@comunica/bus-expression-evaluator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-expression-evaluator-factory): Creates an expression evaluator, more info listed below.
+* [`@comunica/bus-function-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-function-factory): Creates functions, more specifically objects that are able to evaluate the desired function given the arguments.
 
-Two different kind of functions are used `TermFunctions` and `ExpressionFunctions`, and TermFunction extends ExpressionFunction.
-An `ExpressionFunction` is a function that takes control over the evaluation of its arguments, meaning that the argument of an ExpressionFunction are Expressions and not Terms.
+Two different kinds of functions are used, `TermFunction` and `ExpressionFunction`, where TermFunction extends ExpressionFunction.
+An `ExpressionFunction` takes control over the evaluation of its arguments, meaning that its arguments are Expressions and not Terms.
 The evaluation of the function is async.
-A `TermFunction` on the other hand does not take control over the evolution of its arguments, and is synchronous.
-In scenarios where you already have the term and can only are in a synchronous context, you can use a `TermFunction`.
-Besides easier usage of TermFunctions, they are also easier to implement since the `declare` function of [the expression evaluator utils package](https://github.com/comunica/comunica/tree/master/packages/utils-expression-evaluator) can be used.
+A `TermFunction` on the other hand does not take control over the evaluation of its arguments, and is synchronous.
+In scenarios where you already have the terms and are in a synchronous context, you can use a `TermFunction`.
+Besides being easier to use, TermFunctions are also easier to implement, since the `declare` function of [the expression evaluator utils package](https://github.com/comunica/comunica/tree/master/packages/utils-expression-evaluator) can be used.
 This `declare` function allows for easy definition of functions that have function overloading.
 Functions created using `declare` use the OverloadTree, thereby also allowing for type promotion and subtype substitution.
-TLDR: Use `TermFunction` when you can using `declare`, and `ExpressionFunction` when you need to.
+TLDR: Use `TermFunction` with `declare` when you can, and `ExpressionFunction` when you need to.
+
+Note that while individual TermFunctions are synchronous, evaluating an expression is always asynchronous:
+there is no synchronous evaluator.
 
 
-## Using The Expression Evaluator
+## Standalone usage
 
-```ts
-import type { MediatorExpressionEvaluatorFactory } from '@comunica/bus-expression-evaluator-factory';
-import { translate } from "sparqlalgebrajs";
-import { stringToTerm } from "rdf-string";
+[`@comunica/expressions-sparql`](https://github.com/comunica/comunica/tree/master/engines/expressions-sparql)
+is an engine that evaluates expressions without querying, for use outside of a Comunica query engine.
+It is the successor of the standalone `sparqlee` package.
+
+```typescript
+import { ExpressionEngine } from '@comunica/expressions-sparql';
+import { BindingsFactory } from '@comunica/utils-bindings-factory';
+import { toAlgebra } from '@traqula/algebra-sparql-1-2';
+import { Parser } from '@traqula/parser-sparql-1-2';
+import { DataFactory } from 'rdf-data-factory';
+
+const DF = new DataFactory();
+const BF = new BindingsFactory(DF);
 
 // An example SPARQL query with an expression in a FILTER statement.
 // We translate it to SPARQL Algebra format ...
-const query = translate(`
+const query: any = toAlgebra(new Parser().parse(`
   SELECT * WHERE {
      ?s ?p ?o
      FILTER langMatches(lang(?o), "FR")
-    }
-`);
+  }
+`));
 
-// ... and get the part corresponding to "langMatches(...)".
-const expression = query.input.expression;
-
-// We create an evaluator for this expression.
-// A sync version exists as well.
-const evaluator = await mediatorExpressionEvaluatorFactory
-    .mediate({ algExpr: expression, context });
+// ... and create an evaluator for the part corresponding to "langMatches(...)".
+const engine = new ExpressionEngine();
+const evaluator = await engine.createEvaluator(query.input.expression);
 
 // We can now evaluate some bindings as a term, ...
-const result: RDF.Term = await evaluator.evaluate(
-  Bindings({
-    ...
-    '?o': stringToTerm("Ceci n'est pas une pipe"@fr),
-    ...
-  })
-);
+const term = await evaluator.evaluate(BF.fromRecord({ o: DF.literal("Ceci n'est pas une pipe", 'fr') }));
 
 // ... or as an Effective Boolean Value (e.g. for use in FILTER)
-const result: boolean = await evaluator.evaluateAsEBV(bindings);
-// ... or as an inetrnal Expression
-evaluateAsEvaluatorExpression.evaluateAsEvaluatorExpression(bindings);
+const bool = await evaluator.evaluateAsEBV(BF.fromRecord({ o: DF.literal('This is not a pipe', 'en') }));
 ```
+
+The same engine creates [aggregators](#aggregates) with `createAggregator`,
+and term comparators with `createTermComparator`.
+Because it configures no query operations, it cannot evaluate the sub-query of an `EXISTS` itself;
+supply a `KeysExpressionEvaluator.existenceResolver` for that (see [EXISTS](#exists)).
+
+
+## Usage within an engine
+
+Actors obtain the same evaluator through a `MediatorExpressionEvaluatorFactory` over the
+[expression evaluator factory bus](https://github.com/comunica/comunica/tree/master/packages/bus-expression-evaluator-factory):
+
+```typescript
+const evaluator = await this.mediatorExpressionEvaluatorFactory
+    .mediate({ algExpr: expression, context });
+```
+
+Besides `evaluate` and `evaluateAsEBV`, `evaluateAsEvaluatorExpression` returns the internal term
+representation instead of an RDF/JS term, which avoids a conversion when the result is fed back into
+the evaluator.
 
 
 ## Config
 
 Just like many other actors, the ExpressionEvaluatorFactoryDefault expects a context object.
 The following keys are of importance:
+* KeysInitQuery.dataFactory: The RDF/JS data factory used to produce the resulting terms.
 * KeysInitQuery.extensionFunctionCreator: A function that creates an extension function.
 * KeysInitQuery.extensionFunctions: A map of function names to function implementations.
 * KeysInitQuery.queryTimestamp: The timestamp to use for functions requiring a notion of "now".
 * KeysInitQuery.functionArgumentsCache: see [later in this document](#functionArgumentsCache).
-* KeysExpressionEvaluator.defaultTimeZone: The default timezone to use for date functions, if none given, extracts the timezone from the `queryTimestamp` value. It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time). 
+* KeysInitQuery.baseIRI: The base IRI to use for functions that require it.
+* KeysExpressionEvaluator.defaultTimeZone: The default timezone to use for date functions, if none given, extracts the timezone from the `queryTimestamp` value. It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time).
 * KeysExpressionEvaluator.superTypeProvider: A way of interacting with the type system, it's a callback that given a type unknown to the system, returns the super type of that type.
-* KeysExpressionEvaluator.baseIRI: The base IRI to use for functions that require it.
+* KeysExpressionEvaluator.existenceResolver: A callback that resolves `EXISTS` and `NOT EXISTS`, see [EXISTS](#exists). When absent, the evaluator uses its query operation mediator.
 * KeysExpressionEvaluator.nonLexicalComparison: A boolean denoting the behaviour of comparators (e.g. <, >, =) when used with non-lexical literal operands.
   * `true`: treats it as a literal and compare both operands.
   * `false`: throws an error (default).
@@ -114,12 +136,15 @@ The aggregators tend to make use of other expression evaluation related busses l
 and most will use the [`bus-expression-evaluator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-expression-evaluator-factory).
 Because of the dependency on these buses, the type system can also be used.
 
-Additionally, you should also note the order of calling and awaiting put while using the `GroupConcat` aggregator.
+Additionally, you should also note the order of calling and awaiting `putBindings` while using the `GroupConcat` aggregator.
+
+Outside of an engine, [`@comunica/expressions-sparql`](#standalone-usage) exposes these aggregators through
+`createAggregator`.
 
 
 ## functionArgumentsCache
 
-An `functionArgumentsCache` allows the expression evaluator to cache the implementation of a function provided the| argument types.
+A `functionArgumentsCache` allows the expression evaluator to cache the implementation of a function given the argument types.
 This decreases the overhead caused by function overloading.
 When not providing a cache in the context, the evaluator will create one.
 
@@ -128,9 +153,26 @@ This cache can be reused across multiple evaluators. Manual modification is not 
 
 ## Context dependant functions
 
-Some functions (BNODE, NOW, IRI) need a (stateful) context from the caller to function correctly according to the spec.
+Some functions (BNODE, NOW, IRI, EXISTS) need a (stateful) context from the caller to function correctly according to the spec.
 This context can be passed as an argument to the evaluator (see the [config section](#config) for exact types).
-If they are not passed, the evaluator will use a naive implementation that might do the trick for simple use cases.
+If they are not passed, the evaluator falls back to a default that might do the trick for simple use cases.
+
+### EXISTS
+
+[spec](https://www.w3.org/TR/sparql11-query/#func-filter-exists)
+
+By default the evaluator answers `EXISTS` by substituting the bindings into its sub-operation with
+`materializeOperation`, and evaluating that through the query operation mediator, stopping at the first solution.
+Outside of a query engine there are no query operations to mediate over, so
+`KeysExpressionEvaluator.existenceResolver` takes over the expression entirely:
+
+```typescript
+(expression: Algebra.ExistenceExpression, bindings: RDF.Bindings) => Promise<boolean>
+```
+
+The resolver receives the expression as it appears in the algebra, and is therefore responsible for both
+substituting the bindings into `expression.input` and for applying `expression.not`.
+Nothing is materialized before it is called, so a resolver that rejects unsupported expressions costs nothing.
 
 ### BNODE
 
@@ -163,7 +205,9 @@ which you can provide as `baseIRI: string` to the config.
 
 The expression evaluator package looks to the future and already implements some SPARQL 1.2 specification functions.
 
-Currently, this is restricted to the [extended date](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md) functionality.
+This includes the [extended date](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md) functionality,
+the directional language tag functions (`hasLANG`, `hasLANGDIR`, `LANGDIR`, `STRLANGDIR`),
+and the triple term functions (`isTRIPLE`, `TRIPLE`, `SUBJECT`, `PREDICATE`, `OBJECT`).
 Please note that the new sparql built-in `ADJUST` function has not been implemented due to package dependencies.
 
 
