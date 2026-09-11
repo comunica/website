@@ -60,7 +60,8 @@ const bool = await evaluator.evaluateAsEBV(BF.fromRecord({ o: DF.literal('This i
 
 The same engine creates [aggregators](#aggregates) with `createAggregator`,
 and term comparators with `createTermComparator`.
-Because it configures no query operations, it cannot evaluate `EXISTS`.
+Because it configures no query operations, it cannot evaluate the sub-query of an `EXISTS` itself;
+supply a `KeysExpressionEvaluator.existenceResolver` for that (see [EXISTS](#exists)).
 
 
 ## Usage within an engine
@@ -90,6 +91,7 @@ The following keys are of importance:
 * KeysInitQuery.baseIRI: The base IRI to use for functions that require it.
 * KeysExpressionEvaluator.defaultTimeZone: The default timezone to use for date functions, if none given, extracts the timezone from the `queryTimestamp` value. It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time).
 * KeysExpressionEvaluator.superTypeProvider: A way of interacting with the type system, it's a callback that given a type unknown to the system, returns the super type of that type.
+* KeysExpressionEvaluator.existenceResolver: A callback that resolves `EXISTS` and `NOT EXISTS`, see [EXISTS](#exists). When absent, the evaluator uses its query operation mediator.
 * KeysExpressionEvaluator.nonLexicalComparison: A boolean denoting the behaviour of comparators (e.g. <, >, =) when used with non-lexical literal operands.
   * `true`: treats it as a literal and compare both operands.
   * `false`: throws an error (default).
@@ -151,9 +153,26 @@ This cache can be reused across multiple evaluators. Manual modification is not 
 
 ## Context dependant functions
 
-Some functions (BNODE, NOW, IRI) need a (stateful) context from the caller to function correctly according to the spec.
+Some functions (BNODE, NOW, IRI, EXISTS) need a (stateful) context from the caller to function correctly according to the spec.
 This context can be passed as an argument to the evaluator (see the [config section](#config) for exact types).
-If they are not passed, the evaluator will use a naive implementation that might do the trick for simple use cases.
+If they are not passed, the evaluator falls back to a default that might do the trick for simple use cases.
+
+### EXISTS
+
+[spec](https://www.w3.org/TR/sparql11-query/#func-filter-exists)
+
+By default the evaluator answers `EXISTS` by substituting the bindings into its sub-operation with
+`materializeOperation`, and evaluating that through the query operation mediator, stopping at the first solution.
+Outside of a query engine there are no query operations to mediate over, so
+`KeysExpressionEvaluator.existenceResolver` takes over the expression entirely:
+
+```typescript
+(expression: Algebra.ExistenceExpression, bindings: RDF.Bindings) => Promise<boolean>
+```
+
+The resolver receives the expression as it appears in the algebra, and is therefore responsible for both
+substituting the bindings into `expression.input` and for applying `expression.not`.
+Nothing is materialized before it is called, so a resolver that rejects unsupported expressions costs nothing.
 
 ### BNODE
 
