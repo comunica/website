@@ -1078,19 +1078,48 @@ main .date {
     }
 }
 
-// Feature highlights on the index page
-.features {
+// Sections of the index page below the demo
+.home-section {
     width: 760px;
-    margin: 1.5rem auto 1rem auto;
+    margin: 2.5rem auto 0 auto;
 }
 
-.features-overline {
+.home-overline {
     margin: 0 0 0.75rem 0;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: $color-comunica-red;
+}
+
+.home-lead {
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+// Shared surface of the clickable cards on the index page
+%home-card {
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+%home-card-hover {
+    text-decoration: none;
+    border-color: $color-comunica-red-light;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.features {
+    margin-top: 1.5rem;
 }
 
 .features-grid {
@@ -1100,14 +1129,8 @@ main .date {
 }
 
 .feature {
-    display: flex;
-    flex-direction: column;
+    @extend %home-card;
     padding: 1.5rem;
-    color: inherit;
-    background: #fafafa;
-    border: 1px solid #eaeaea;
-    border-radius: 12px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 
     h3 {
         margin: 0 0 0.5rem 0;
@@ -1126,10 +1149,7 @@ main .date {
 .feature:hover,
 .feature:focus,
 .feature:active {
-    text-decoration: none;
-    border-color: $color-comunica-red-light;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    @extend %home-card-hover;
 
     .feature-link {
         text-decoration: underline;
@@ -1157,19 +1177,136 @@ main .date {
     -webkit-mask: var(--icon) center / contain no-repeat;
 }
 
-
 .feature-link {
     font-size: 0.9rem;
     font-weight: 600;
     color: $color-comunica-red-dark;
 }
 
-@media (max-width: 1020px) {
-    .features {
-        width: calc(100% - 2rem);
-        margin: 1.5rem 1rem 1rem 1rem;
+// Compact link tiles
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tile {
+    @extend %home-card;
+    padding: 1.1rem 1.25rem;
+
+    h3 {
+        margin: 0 0 0.25rem 0;
+        font-size: 1.05rem;
+        line-height: 1.3;
     }
-    .features-grid {
+    p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: #555;
+    }
+}
+
+.tile:hover,
+.tile:focus,
+.tile:active {
+    @extend %home-card-hover;
+
+    h3 {
+        color: $color-comunica-red-dark;
+    }
+}
+
+// Headline numbers
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.stat {
+    @extend %home-card;
+    padding: 1.25rem;
+
+    strong {
+        font-size: 1.75rem;
+        line-height: 1.2;
+        color: $color-comunica-red;
+    }
+    span {
+        margin-top: 0.35rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: #555;
+    }
+}
+
+.stat-link:hover,
+.stat-link:focus,
+.stat-link:active {
+    @extend %home-card-hover;
+}
+
+// Sponsor logos on one surface
+.sponsor-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+}
+
+.sponsor-tier {
+    text-align: center;
+
+    h3 {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    p {
+        margin: 0.15rem 0 0.75rem 0;
+        font-size: 0.85rem;
+        color: #777;
+    }
+}
+
+.sponsor-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 2.5rem;
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+}
+
+.sponsor-logos-member img {
+    height: 80px;
+}
+
+.sponsor-logos-bronze img {
+    height: 40px;
+}
+
+@media (max-width: 1020px) {
+    .home-section {
+        width: calc(100% - 2rem);
+        margin: 2.5rem 1rem 0 1rem;
+    }
+    .features {
+        margin-top: 1.5rem;
+    }
+    .features-grid,
+    .tiles,
+    .stats {
         grid-template-columns: 1fr;
+    }
+    .sponsor-logos-member img {
+        height: 60px;
     }
 }
