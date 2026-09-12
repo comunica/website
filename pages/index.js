@@ -43,9 +43,9 @@ SELECT DISTINCT ?person ?name WHERE {
 }`} />
           <div className="live-demo-sources">
             <span className="live-demo-sources-label">Sources</span>
-            <span className="live-demo-source">https://www.rubensworks.net/<button type="button" title="Remove source">&times;</button></span>
-            <span className="live-demo-source">https://pietercolpaert.be/<button type="button" title="Remove source">&times;</button></span>
-            <span className="live-demo-source">https://ruben.verborgh.org/profile/<button type="button" title="Remove source">&times;</button></span>
+            <span className="live-demo-source"><span className="live-demo-source-type">RDFa</span>https://www.rubensworks.net/<button type="button" title="Remove source">&times;</button></span>
+            <span className="live-demo-source"><span className="live-demo-source-type">JSON-LD</span>https://pietercolpaert.be/<button type="button" title="Remove source">&times;</button></span>
+            <span className="live-demo-source"><span className="live-demo-source-type">Turtle</span>https://ruben.verborgh.org/profile/<button type="button" title="Remove source">&times;</button></span>
             <input type="text" className="live-demo-source-add" placeholder="+ Add a source URL" spellCheck="false" />
           </div>
           <div className="live-demo-actions">

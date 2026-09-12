@@ -922,7 +922,7 @@ main .date {
             align-items: center;
             gap: 0.3rem;
             max-width: 100%;
-            padding: 0.2rem 0.4rem 0.2rem 0.6rem;
+            padding: 0.15rem 0.4rem 0.15rem 0.15rem;
             font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
             font-size: 0.75rem;
@@ -932,6 +932,17 @@ main .date {
             border-radius: 999px;
             overflow-wrap: anywhere;
 
+            .live-demo-source-type {
+                padding: 0.1rem 0.45rem;
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+                font-size: 0.65rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: #fff;
+                background: $color-comunica-red;
+                border-radius: 999px;
+            }
             button {
                 padding: 0 0.2rem;
                 font: inherit;
