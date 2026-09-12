@@ -1,4 +1,5 @@
 import Head from '../components/Head';
+import LiveDemo from '../components/LiveDemo';
 
 export default function Home() {
   return (
@@ -17,6 +18,8 @@ export default function Home() {
         <p className="description">
           Flexible SPARQL and GraphQL over decentralized RDF on the Web.
         </p>
+
+        <LiveDemo />
 
         <div className="grid-wide">
           <div className="card-info">
