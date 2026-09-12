@@ -25,7 +25,7 @@ export default function Home() {
         <section className="home-section features">
           <p className="home-overline">Why Comunica</p>
           <div className="features-grid">
-            <a href="docs/query/getting_started/query_browser_app/" className="feature">
+            <a href="/docs/query/getting_started/query_app/" className="feature">
               <span className="feature-badge"><span className="feature-glyph" style={{ '--icon': 'url(/img/web.svg)' }} /></span>
               <h3>For the Web</h3>
               <p>Powered by Web technologies, execute queries via JavaScript on server or client.</p>
