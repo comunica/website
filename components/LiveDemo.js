@@ -18,7 +18,7 @@ SELECT DISTINCT ?person ?name WHERE {
       { url: 'https://pietercolpaert.be/', type: 'JSON-LD' },
       { url: 'https://data.verborgh.org/ruben', type: 'TPF' },
     ],
-    status: '4 results in 3.8 s',
+    status: '4 results in 4.1 s · 29 HTTP requests',
     variables: ['?person', '?name'],
     rows: [
       [{ iri: 'https://csarven.ca/#i' }, 'Sarven Capadisli'],
@@ -41,7 +41,7 @@ SELECT ?title ?name WHERE {
     sources: [
       { url: 'https://fragments.dbpedia.org/2016-04/en', type: 'TPF' },
     ],
-    status: '10 results in 1.9 s',
+    status: '10 results in 2.2 s · 52 HTTP requests',
     variables: ['?title', '?name'],
     rows: [
       ['12 Monkeys', 'Terry Gilliam'],
