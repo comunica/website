@@ -859,8 +859,7 @@ main .date {
         margin-bottom: 0.5rem;
     }
 
-    .live-demo-presets,
-    .live-demo-sources {
+    .live-demo-presets {
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -868,8 +867,8 @@ main .date {
         font-size: 0.85rem;
         color: #555;
 
-        select, input {
-            flex: 1;
+        select {
+            flex: 0 1 auto;
             min-width: 0;
             max-width: 100%;
             font: inherit;
@@ -880,9 +879,6 @@ main .date {
             background: #fff;
             color: #222;
         }
-    }
-    .live-demo-presets select {
-        flex: 0 1 auto;
     }
 
     .live-demo-links {
@@ -910,20 +906,61 @@ main .date {
     }
 
     .live-demo-sources {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.4rem;
         margin-top: 0.5rem;
-        align-items: flex-start;
-        textarea {
-            flex: 1;
-            min-width: 0;
-            margin: 0;
-            padding: 0.3rem 0.5rem;
-            resize: vertical;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            color: #222;
+        font-size: 0.85rem;
+        color: #555;
+
+        .live-demo-sources-label {
+            margin-right: 0.1rem;
+        }
+        .live-demo-source {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            max-width: 100%;
+            padding: 0.2rem 0.4rem 0.2rem 0.6rem;
             font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+            font-size: 0.75rem;
+            color: #222;
+            background: #f3f3f3;
+            border: 1px solid #ddd;
+            border-radius: 999px;
+            overflow-wrap: anywhere;
+
+            button {
+                padding: 0 0.2rem;
+                font: inherit;
+                font-size: 0.9rem;
+                line-height: 1;
+                color: #888;
+                background: none;
+                border: 0;
+                cursor: pointer;
+            }
+            button:hover {
+                color: $color-comunica-red;
+            }
+        }
+        .live-demo-source-add {
+            flex: 1 1 12rem;
+            min-width: 0;
+            padding: 0.25rem 0.4rem;
+            font: inherit;
             font-size: 0.8rem;
+            color: #222;
+            background: transparent;
+            border: 1px dashed #ccc;
+            border-radius: 999px;
+        }
+        .live-demo-source-add:focus {
+            outline: none;
+            border-color: $color-comunica-red;
+            border-style: solid;
         }
     }
 
