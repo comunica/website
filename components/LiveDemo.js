@@ -64,7 +64,6 @@ function webClientUrl(query, sources) {
   const parameters = [
     `query=${encode(query)}`,
     `datasources=${sources.map(source => encode(source.url)).join(';')}`,
-    'executeOnLoad=true',
   ];
   return `${WEB_CLIENT_URL}#${parameters.join('&')}`;
 }
