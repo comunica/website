@@ -1,5 +1,6 @@
 import Head from '../components/Head';
 import LiveDemo from '../components/LiveDemo';
+import CountUp from '../components/CountUp';
 
 export default function Home() {
   return (
@@ -82,15 +83,15 @@ export default function Home() {
           </p>
           <div className="stats">
             <div className="stat">
-              <strong>1.600+</strong>
+              <CountUp value={1600} suffix="+" />
               <span>dependents on GitHub</span>
             </div>
             <div className="stat">
-              <strong>400.000+</strong>
+              <CountUp value={400000} suffix="+" />
               <span>monthly npm downloads</span>
             </div>
             <div className="stat">
-              <strong>300+</strong>
+              <CountUp value={300} suffix="+" />
               <span>core framework modules</span>
             </div>
           </div>

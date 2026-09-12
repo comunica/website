@@ -1223,6 +1223,7 @@ main .date {
     strong {
         font-size: 1.75rem;
         line-height: 1.2;
+        font-variant-numeric: tabular-nums;
         color: $color-comunica-red;
     }
     span {
