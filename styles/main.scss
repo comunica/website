@@ -261,7 +261,8 @@ pre {
     width: 800px;
 }
 
-.card-info {
+// Shared box of the link cards; only used through @extend
+%card-info {
     flex-basis: 95%;
     margin: 1rem;
     padding: 1.5rem;
@@ -271,10 +272,20 @@ pre {
     border: 1px solid #eaeaea;
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
+
+    h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.5rem;
+    }
+    p {
+        margin: 0;
+        font-size: 1.25rem;
+        line-height: 1.5;
+    }
 }
 
 .card {
-    @extend .card-info;
+    @extend %card-info;
     flex-basis: 45%;
 }
 
@@ -286,52 +297,8 @@ pre {
     text-decoration: none;
 }
 
-.card-info h3 {
-    margin: 0 0 1rem 0;
-    font-size: 1.5rem;
-}
-
-.card-info p {
-    margin: 0;
-    font-size: 1.25rem;
-    line-height: 1.5;
-}
-
-.sponsors {
-    min-height: unset;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #e5e3e3;
-
-    .sponsors-member {
-        img {
-            height: 120px;
-            margin: 25px;
-        }
-    }
-    .sponsors-gold {
-        img {
-            height: 100px;
-        }
-    }
-    .sponsors-silver {
-        img {
-            height: 80px;
-        }
-    }
-    .sponsors-bronze {
-        img {
-            height: 50px;
-        }
-    }
-}
-
 .card-bounty {
-    @extend .card-info;
+    @extend %card-info;
     flex-basis: 45%;
 
     p {
@@ -464,12 +431,6 @@ pre {
     .title {
         font-size: 3rem;
     }
-}
-
-.feature-icon {
-    float: left;
-    margin-right: 0.5rem;
-    height: 2rem;
 }
 
 .index-entry, .blog-entry {
@@ -831,12 +792,6 @@ main .date {
 @media (max-width: 600px) {
     pre {
         width: 200px;
-    }
-    .sponsors-member {
-        img {
-            width: 90%;
-            height: auto !important;
-        }
     }
 }
 
