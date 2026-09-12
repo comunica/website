@@ -8,17 +8,18 @@ function format(value) {
 }
 
 // Counts from zero to the value the first time the element scrolls into view.
+// The exported HTML carries the real value; the client resets to zero once it runs.
 export default function CountUp({ value, suffix = '' }) {
-  const [shown, setShown] = useState(0);
+  const [shown, setShown] = useState(value);
   const element = useRef(undefined);
 
   useEffect(() => {
     const node = element.current;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!node || reduceMotion || !('IntersectionObserver' in window)) {
-      setShown(value);
       return undefined;
     }
+    setShown(0);
     let frame;
     const observer = new IntersectionObserver((entries) => {
       if (!entries.some(entry => entry.isIntersecting)) {
