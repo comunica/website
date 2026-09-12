@@ -54,7 +54,7 @@ export default function Home() {
             </a>
             <a href="docs/modify/" className="tile">
               <h3>Modify Comunica &rarr;</h3>
-              <p>Learn how to configure or extend</p>
+              <p>Configure or extend Comunica</p>
             </a>
             <a href="docs/query/advanced/solid" className="tile">
               <h3>Query Solid pods &rarr;</h3>
@@ -62,7 +62,7 @@ export default function Home() {
             </a>
             <a href="docs/query/advanced/mcp/" className="tile">
               <h3>Comunica MCP &rarr;</h3>
-              <p>Connect Comunica with AI agents</p>
+              <p>Connect it with AI agents</p>
             </a>
             <a href="https://opencollective.com/comunica-association" className="tile">
               <h3>Donate &rarr;</h3>
@@ -78,21 +78,21 @@ export default function Home() {
         <section className="home-section">
           <p className="home-overline">Used by</p>
           <p className="home-lead">
-            Comunica is production-ready, and is widely used within commercial, governmental, and academic contexts.
+            Production-ready, and <a href="/docs/query/usage/">widely used in commercial, governmental, and academic contexts</a>.
           </p>
           <div className="stats">
             <div className="stat">
               <strong>1.600+</strong>
-              <span>dependent open-source projects on GitHub</span>
+              <span>dependent projects on GitHub</span>
             </div>
             <div className="stat">
               <strong>400.000+</strong>
               <span>monthly downloads on npm</span>
             </div>
-            <a href="/docs/query/usage/" className="stat stat-link">
-              <strong>Who uses it &rarr;</strong>
-              <span>Companies, governments, and research groups</span>
-            </a>
+            <div className="stat">
+              <strong>300+</strong>
+              <span>modules in the core framework</span>
+            </div>
           </div>
         </section>
 

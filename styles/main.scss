@@ -1241,12 +1241,6 @@ main .date {
     }
 }
 
-.stat-link:hover,
-.stat-link:focus,
-.stat-link:active {
-    @extend %home-card-hover;
-}
-
 // Sponsor logos on one surface
 .sponsor-panel {
     display: flex;
