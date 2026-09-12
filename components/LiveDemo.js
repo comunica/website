@@ -194,95 +194,97 @@ export default function LiveDemo() {
   }
 
   return (
-    <div className="live-demo">
-      <div className="live-demo-header">
-        <label className="live-demo-presets">
-          Example
-          <select value={presetId} onChange={event => selectPreset(event.target.value)}>
-            {PRESETS.map(preset => <option key={preset.id} value={preset.id}>{preset.label}</option>)}
-          </select>
-        </label>
-        <span className="live-demo-links">
-          <a href={webClientUrl(query, sources)}>Open in the Web client &rarr;</a>
-          <a href="/docs/query/getting_started/query_browser_app/">How this works &rarr;</a>
-        </span>
-      </div>
-
-      <textarea
-        className="live-demo-query"
-        aria-label="SPARQL query"
-        rows={Math.min(Math.max(query.split('\n').length, 6), 14)}
-        spellCheck="false"
-        value={query}
-        onChange={event => setQuery(event.target.value)}
-      />
-
-      <div className="live-demo-sources">
-        <span className="live-demo-sources-label">Sources</span>
-        {sources.map(source => (
-          <span key={source.url} className="live-demo-source">
-            {source.type ? <span className="live-demo-source-type">{source.type}</span> : undefined}
-            {source.url}
-            <button
-              type="button"
-              title="Remove this source"
-              onClick={() => setSources(sources.filter(other => other.url !== source.url))}
-            >&times;</button>
+    <div className="grid-wide live-demo-row">
+      <div className="live-demo">
+        <div className="live-demo-header">
+          <label className="live-demo-presets">
+            Example
+            <select value={presetId} onChange={event => selectPreset(event.target.value)}>
+              {PRESETS.map(preset => <option key={preset.id} value={preset.id}>{preset.label}</option>)}
+            </select>
+          </label>
+          <span className="live-demo-links">
+            <a href={webClientUrl(query, sources)}>Open in the Web client &rarr;</a>
+            <a href="/docs/query/getting_started/query_browser_app/">How this works &rarr;</a>
           </span>
-        ))}
-        <form onSubmit={addSource}>
-          <input
-            type="text"
-            className="live-demo-source-add"
-            placeholder="+ Add a source URL"
-            spellCheck="false"
-            value={newSource}
-            onChange={event => setNewSource(event.target.value)}
-          />
-        </form>
-      </div>
-
-      <div className="live-demo-actions">
-        <button
-          className="live-demo-run"
-          onClick={running ? stop : () => run()}
-          disabled={!running && (sources.length === 0 || query.trim() === '')}
-        >
-          {running ? '■ Stop' : '▶ Run query'}
-        </button>
-        <span className={`live-demo-status${error ? ' live-demo-error' : ''}`}>{status}</span>
-      </div>
-
-      {variables.length > 0 && !error ? (
-        <div className="live-demo-results">
-          <table>
-            <thead>
-              <tr>{variables.map(variable => <th key={variable}>?{variable}</th>)}</tr>
-            </thead>
-            <tbody>
-              {rows.map((row, index) => (
-                <tr key={index}>
-                  {row.map((term, column) => (
-                    <td key={column}>
-                      {term && term.termType === 'NamedNode'
-                        ? <a href={term.value}>{term.value}</a>
-                        : (term ? term.value : '')}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {rows.length === 0 && !running ? <p className="live-demo-empty">This query has no results.</p> : undefined}
         </div>
-      ) : undefined}
 
-      {truncated ? (
-        <p className="live-demo-more">
-          Only the first {RESULT_LIMIT} results are shown.{' '}
-          <a href={webClientUrl(query, sources)}>See all results in the Web client &rarr;</a>
-        </p>
-      ) : undefined}
+        <textarea
+          className="live-demo-query"
+          aria-label="SPARQL query"
+          rows={Math.min(Math.max(query.split('\n').length, 6), 14)}
+          spellCheck="false"
+          value={query}
+          onChange={event => setQuery(event.target.value)}
+        />
+
+        <div className="live-demo-sources">
+          <span className="live-demo-sources-label">Sources</span>
+          {sources.map(source => (
+            <span key={source.url} className="live-demo-source">
+              {source.type ? <span className="live-demo-source-type">{source.type}</span> : undefined}
+              {source.url}
+              <button
+                type="button"
+                title="Remove this source"
+                onClick={() => setSources(sources.filter(other => other.url !== source.url))}
+              >&times;</button>
+            </span>
+          ))}
+          <form onSubmit={addSource}>
+            <input
+              type="text"
+              className="live-demo-source-add"
+              placeholder="+ Add a source URL"
+              spellCheck="false"
+              value={newSource}
+              onChange={event => setNewSource(event.target.value)}
+            />
+          </form>
+        </div>
+
+        <div className="live-demo-actions">
+          <button
+            className="live-demo-run"
+            onClick={running ? stop : () => run()}
+            disabled={!running && (sources.length === 0 || query.trim() === '')}
+          >
+            {running ? '■ Stop' : '▶ Run query'}
+          </button>
+          <span className={`live-demo-status${error ? ' live-demo-error' : ''}`}>{status}</span>
+        </div>
+
+        {variables.length > 0 && !error ? (
+          <div className="live-demo-results">
+            <table>
+              <thead>
+                <tr>{variables.map(variable => <th key={variable}>?{variable}</th>)}</tr>
+              </thead>
+              <tbody>
+                {rows.map((row, index) => (
+                  <tr key={index}>
+                    {row.map((term, column) => (
+                      <td key={column}>
+                        {term && term.termType === 'NamedNode'
+                          ? <a href={term.value}>{term.value}</a>
+                          : (term ? term.value : '')}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {rows.length === 0 && !running ? <p className="live-demo-empty">This query has no results.</p> : undefined}
+          </div>
+        ) : undefined}
+
+        {truncated ? (
+          <p className="live-demo-more">
+            Only the first {RESULT_LIMIT} results are shown.{' '}
+            <a href={webClientUrl(query, sources)}>See all results in the Web client &rarr;</a>
+          </p>
+        ) : undefined}
+      </div>
     </div>
   );
 }

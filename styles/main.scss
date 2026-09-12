@@ -841,11 +841,23 @@ main .date {
 }
 
 // Live query demo on the index page
+.live-demo-row {
+    margin-top: 0.5rem;
+}
+
+// The cards below follow their own top margin, so drop the extra one.
+.live-demo-row + .grid-wide {
+    margin-top: 0;
+}
+
+// The same box as the cards below it.
 .live-demo {
-    width: 800px;
-    max-width: calc(100vw - 2rem);
-    margin: 1.5rem auto 0 auto;
-    padding: 1rem;
+    flex-basis: 95%;
+    min-width: 0;
+    // Keeps the long query and URLs inside from widening the page.
+    max-width: calc(100vw - 3rem);
+    margin: 1rem;
+    padding: 1.5rem;
     text-align: left;
     border: 1px solid #eaeaea;
     border-radius: 10px;
@@ -1063,7 +1075,6 @@ main .date {
 
 @media (max-width: 1020px) {
     .live-demo {
-        width: 100%;
         .live-demo-links {
             margin-left: 0;
             a:first-child { margin-left: 0; }
