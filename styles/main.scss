@@ -957,8 +957,13 @@ main .date {
                 color: $color-comunica-red;
             }
         }
-        .live-demo-source-add {
+        form {
             flex: 1 1 12rem;
+            min-width: 0;
+            margin: 0;
+        }
+        .live-demo-source-add {
+            width: 100%;
             min-width: 0;
             padding: 0.25rem 0.4rem;
             font: inherit;
@@ -997,14 +1002,22 @@ main .date {
         .live-demo-run:hover {
             background: $color-comunica-red-light;
         }
+        .live-demo-run:disabled {
+            background: #bbb;
+            cursor: default;
+        }
         .live-demo-status {
             font-size: 0.85rem;
             color: #555;
         }
+        .live-demo-error {
+            color: $color-comunica-red-dark;
+            overflow-wrap: anywhere;
+        }
     }
 
     .live-demo-results {
-        max-height: 13rem;
+        max-height: 18rem;
         overflow: auto;
         border: 1px solid #eaeaea;
         border-radius: 5px;
@@ -1032,6 +1045,19 @@ main .date {
         tr:last-child td {
             border-bottom: 0;
         }
+    }
+
+    .live-demo-empty {
+        margin: 0;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+        color: #777;
+    }
+
+    .live-demo-more {
+        margin: 0.5rem 0 0;
+        font-size: 0.85rem;
+        color: #555;
     }
 }
 
