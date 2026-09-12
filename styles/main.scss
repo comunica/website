@@ -911,7 +911,16 @@ main .date {
 
     .live-demo-sources {
         margin-top: 0.5rem;
-        input {
+        align-items: flex-start;
+        textarea {
+            flex: 1;
+            min-width: 0;
+            margin: 0;
+            padding: 0.3rem 0.5rem;
+            resize: vertical;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #222;
             font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
             font-size: 0.8rem;
