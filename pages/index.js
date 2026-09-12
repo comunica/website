@@ -23,7 +23,7 @@ export default function Home() {
             <label className="live-demo-presets">
               Example
               <select defaultValue="interests">
-                <option value="interests">Mutual acquaintances of two people</option>
+                <option value="interests">Mutual acquaintances of three people</option>
                 <option value="brad-pitt">Directors of movies starring Brad Pitt</option>
               </select>
             </label>
@@ -32,42 +32,34 @@ export default function Home() {
               <a href="/docs/query/getting_started/query_browser_app/">How this works &rarr;</a>
             </span>
           </div>
-          <textarea className="live-demo-query" rows="7" spellCheck="false" defaultValue={`PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          <textarea className="live-demo-query" rows="9" spellCheck="false" defaultValue={`PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX schema: <https://schema.org/>
 SELECT DISTINCT ?person ?name WHERE {
   <https://www.rubensworks.net/#me> foaf:knows ?person.
   <https://pietercolpaert.be/#me> (foaf:knows|schema:colleague) ?person.
+  <https://ruben.verborgh.org/profile/#me> foaf:knows ?person.
   ?person foaf:name ?name.
+  FILTER(LANG(?name) = "")
 }`} />
           <div className="live-demo-sources">
             <span className="live-demo-sources-label">Sources</span>
             <span className="live-demo-source">https://www.rubensworks.net/<button type="button" title="Remove source">&times;</button></span>
             <span className="live-demo-source">https://pietercolpaert.be/<button type="button" title="Remove source">&times;</button></span>
+            <span className="live-demo-source">https://ruben.verborgh.org/profile/<button type="button" title="Remove source">&times;</button></span>
             <input type="text" className="live-demo-source-add" placeholder="+ Add a source URL" spellCheck="false" />
           </div>
           <div className="live-demo-actions">
             <button className="live-demo-run">&#9654; Run query</button>
-            <span className="live-demo-status">15 results in 1.2 s</span>
+            <span className="live-demo-status">4 results in 1.1 s</span>
           </div>
           <div className="live-demo-results">
             <table>
               <thead><tr><th>?person</th><th>?name</th></tr></thead>
               <tbody>
-                <tr><td><a href="https://data.knows.idlab.ugent.be/person/femkeongenae/#me">https://data.knows.idlab.ugent.be/person/femkeongenae/#me</a></td><td>Femke Ongenae</td></tr>
-                <tr><td><a href="https://data.knows.idlab.ugent.be/person/gertjandm/#me">https://data.knows.idlab.ugent.be/person/gertjandm/#me</a></td><td>Gertjan De Mulder</td></tr>
-                <tr><td><a href="https://smessaert.be/#me">https://smessaert.be/#me</a></td><td>Ieben Smessaert</td></tr>
-                <tr><td><a href="https://id.eriador.io/jonni#me">https://id.eriador.io/jonni#me</a></td><td>Jonni Hanski</td></tr>
-                <tr><td><a href="https://josd.github.io/card.ttl#me">https://josd.github.io/card.ttl#me</a></td><td>Jos De Roo</td></tr>
-                <tr><td><a href="https://julianrojas.org/#me">https://julianrojas.org/#me</a></td><td>Julián Andrés Rojas Meléndez</td></tr>
-                <tr><td><a href="https://data.knows.idlab.ugent.be/person/martinvanbrabant/#me">https://data.knows.idlab.ugent.be/person/martinvanbrabant/#me</a></td><td>Martin Vanbrabant</td></tr>
-                <tr><td><a href="https://patrickhochstenbach.net/profile/card#me">https://patrickhochstenbach.net/profile/card#me</a></td><td>Patrick Hochstenbach</td></tr>
-                <tr><td><a href="https://pieterheyvaert.com/#me">https://pieterheyvaert.com/#me</a></td><td>Pieter Heyvaert</td></tr>
-                <tr><td><a href="https://pod.rubendedecker.be/profile/card#me">https://pod.rubendedecker.be/profile/card#me</a></td><td>Ruben Dedecker</td></tr>
-                <tr><td><a href="https://reschauz.pod.knows.idlab.ugent.be/profile/profile/card#me">https://reschauz.pod.knows.idlab.ugent.be/profile/profile/card#me</a></td><td>Ruben Eschauzier</td></tr>
-                <tr><td><a href="https://www.rubensworks.net/#me">https://www.rubensworks.net/#me</a></td><td>Ruben Taelman</td></tr>
-                <tr><td><a href="https://www.rubensworks.net/#me">https://www.rubensworks.net/#me</a></td><td>Ruben Taelman</td></tr>
-                <tr><td><a href="https://ruben.verborgh.org/profile/#me">https://ruben.verborgh.org/profile/#me</a></td><td>Ruben Verborgh</td></tr>
                 <tr><td><a href="https://csarven.ca/#i">https://csarven.ca/#i</a></td><td>Sarven Capadisli</td></tr>
+                <tr><td><a href="https://pieterheyvaert.com/#me">https://pieterheyvaert.com/#me</a></td><td>Pieter Heyvaert</td></tr>
+                <tr><td><a href="https://julianrojas.org/#me">https://julianrojas.org/#me</a></td><td>Julián Andrés Rojas Meléndez</td></tr>
+                <tr><td><a href="https://www.rubensworks.net/#me">https://www.rubensworks.net/#me</a></td><td>Ruben Taelman</td></tr>
               </tbody>
             </table>
           </div>
