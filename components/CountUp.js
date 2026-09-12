@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const DURATION = 1200;
+const DURATION = 800;
 
 // Thousands separated by dots, as elsewhere on the site.
 function format(value) {
