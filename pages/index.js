@@ -50,27 +50,27 @@ export default function Home() {
           <div className="tiles">
             <a href="docs/query/" className="tile">
               <h3>Query with Comunica &rarr;</h3>
-              <p>Learn how to execute queries</p>
+              <p>Execute your first query</p>
             </a>
             <a href="docs/modify/" className="tile">
               <h3>Modify Comunica &rarr;</h3>
-              <p>Configure or extend Comunica</p>
+              <p>Configure or extend it</p>
             </a>
             <a href="docs/query/advanced/solid" className="tile">
               <h3>Query Solid pods &rarr;</h3>
-              <p>Query one or more Solid pods</p>
+              <p>Query data in Solid pods</p>
             </a>
             <a href="docs/query/advanced/mcp/" className="tile">
               <h3>Comunica MCP &rarr;</h3>
-              <p>Connect it with AI agents</p>
+              <p>Use it from AI agents</p>
             </a>
             <a href="https://opencollective.com/comunica-association" className="tile">
               <h3>Donate &rarr;</h3>
-              <p>Sponsor via Open Collective</p>
+              <p>Sponsor on Open Collective</p>
             </a>
             <a href="contribute/" className="tile">
               <h3>Contribute &rarr;</h3>
-              <p>Contribute to the development</p>
+              <p>Help with development</p>
             </a>
           </div>
         </section>
@@ -83,15 +83,15 @@ export default function Home() {
           <div className="stats">
             <div className="stat">
               <strong>1.600+</strong>
-              <span>dependent projects on GitHub</span>
+              <span>dependents on GitHub</span>
             </div>
             <div className="stat">
               <strong>400.000+</strong>
-              <span>monthly downloads on npm</span>
+              <span>monthly npm downloads</span>
             </div>
             <div className="stat">
               <strong>300+</strong>
-              <span>modules in the core framework</span>
+              <span>core framework modules</span>
             </div>
           </div>
         </section>
@@ -109,9 +109,6 @@ export default function Home() {
               <div className="sponsor-logos sponsor-logos-member">
                 <a href="https://www.ugent.be/ea/idlab/en">
                   <img src="img/members/idlab.png" alt="IDLab - Internet Technology and Data Science Lab" />
-                </a>
-                <a href="https://www.vlaanderen.be/digitaal-vlaanderen">
-                  <img src="img/members/digitaal-vlaanderen.png" alt="Digitaal Vlaanderen" />
                 </a>
               </div>
             </div>

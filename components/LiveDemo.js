@@ -24,6 +24,23 @@ SELECT DISTINCT ?person ?name WHERE {
     ],
   },
   {
+    id: 'interests',
+    label: 'Common interests of two people',
+    query: `PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?interest ?name WHERE {
+  <https://www.rubensworks.net/#me> foaf:topic_interest ?interest.
+  <https://ruben.verborgh.org/profile/#me> foaf:topic_interest ?interest.
+  ?interest rdfs:label ?name.
+  FILTER LANGMATCHES(LANG(?name), "en")
+}`,
+    sources: [
+      { url: 'https://www.rubensworks.net/', type: 'RDFa' },
+      { url: 'https://ruben.verborgh.org/profile/', type: 'Turtle' },
+      { url: 'https://fragments.dbpedia.org/2016-04/en', type: 'TPF' },
+    ],
+  },
+  {
     id: 'bradpitt',
     label: 'Directors of movies starring Brad Pitt',
     query: `PREFIX dbo: <http://dbpedia.org/ontology/>
@@ -54,6 +71,37 @@ function webClientUrl(query, sources) {
 
 function formatDuration(milliseconds) {
   return `${(milliseconds / 1000).toFixed(1)} s`;
+}
+
+const SPARQL_KEYWORDS = 'SELECT|CONSTRUCT|ASK|DESCRIBE|WHERE|PREFIX|BASE|FROM|NAMED|DISTINCT|REDUCED|' +
+  'OPTIONAL|UNION|MINUS|GRAPH|SERVICE|FILTER|BIND|VALUES|AS|ORDER|BY|ASC|DESC|LIMIT|OFFSET|' +
+  'GROUP|HAVING|NOT|IN|EXISTS|INSERT|DELETE|DATA|WITH|USING|SILENT|TRUE|FALSE|' +
+  'LANGMATCHES|LANG|DATATYPE|BOUND|IRI|URI|STR|REGEX|COUNT|SUM|MIN|MAX|AVG|SAMPLE|GROUP_CONCAT';
+const SPARQL_TOKEN = new RegExp([
+  '(#[^\\n]*)',
+  '(<[^<>\\s]*>)',
+  '("(?:[^"\\\\]|\\\\.)*"(?:@[\\w-]+|\\^\\^\\S+)?)',
+  '([?$][\\w]+)',
+  '([A-Za-z_][\\w-]*:[\\w-]*|:[\\w-]+)',
+  `\\b(${SPARQL_KEYWORDS})\\b`,
+  '(\\b\\d+(?:\\.\\d+)?\\b)',
+].join('|'), 'gi');
+const SPARQL_CLASSES = ['comment', 'iri', 'string', 'variable', 'prefixed', 'keyword', 'number'];
+
+// Splits a query into colored spans; plain text is passed through unchanged.
+function highlightSparql(text) {
+  const parts = [];
+  let last = 0;
+  for (const match of text.matchAll(SPARQL_TOKEN)) {
+    if (match.index > last) {
+      parts.push(text.slice(last, match.index));
+    }
+    const kind = SPARQL_CLASSES[match.slice(1).findIndex(group => group !== undefined)];
+    parts.push(<span key={match.index} className={`sparql-${kind}`}>{match[0]}</span>);
+    last = match.index + match[0].length;
+  }
+  parts.push(text.slice(last));
+  return parts;
 }
 
 export default function LiveDemo() {
@@ -204,19 +252,20 @@ export default function LiveDemo() {
             </select>
           </label>
           <span className="live-demo-links">
-            <a href={webClientUrl(query, sources)}>Open in the Web client &rarr;</a>
-            <a href="/docs/query/getting_started/query_browser_app/">How this works &rarr;</a>
+            <a href={webClientUrl(query, sources)}>Try more live queries &rarr;</a>
           </span>
         </div>
 
-        <textarea
-          className="live-demo-query"
-          aria-label="SPARQL query"
-          rows={Math.min(Math.max(query.split('\n').length, 6), 14)}
-          spellCheck="false"
-          value={query}
-          onChange={event => setQuery(event.target.value)}
-        />
+        <div className="live-demo-editor">
+          <pre className="live-demo-highlight" aria-hidden="true">{highlightSparql(query)}{'\n'}</pre>
+          <textarea
+            className="live-demo-query"
+            aria-label="SPARQL query"
+            spellCheck="false"
+            value={query}
+            onChange={event => setQuery(event.target.value)}
+          />
+        </div>
 
         <div className="live-demo-sources">
           <span className="live-demo-sources-label">Sources</span>

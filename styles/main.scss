@@ -852,21 +852,59 @@ main .date {
         }
     }
 
+    // The highlighted copy sets the size; the transparent textarea on top takes the input.
+    .live-demo-editor {
+        position: relative;
+    }
+
+    .live-demo-highlight,
     .live-demo-query {
-        display: block;
+        box-sizing: border-box;
         width: 100%;
         margin: 0;
         padding: 0.6rem 0.75rem;
-        resize: vertical;
         font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
         DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         font-size: 0.85rem;
         line-height: 1.35;
-        color: #222;
-        background: #f8f8f8;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        tab-size: 2;
         border: 1px solid #ddd;
         border-radius: 5px;
     }
+
+    .live-demo-highlight {
+        min-height: calc(6 * 1.35 * 0.85rem + 1.2rem + 2px);
+        overflow: hidden;
+        color: #222;
+        background: #f8f8f8;
+    }
+
+    .live-demo-query {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        overflow: hidden;
+        resize: none;
+        color: transparent;
+        caret-color: #222;
+        background: transparent;
+        border-color: transparent;
+        outline: none;
+    }
+
+    .live-demo-editor:focus-within .live-demo-highlight {
+        border-color: $color-comunica-red;
+    }
+
+    .sparql-keyword { color: #0550ae; font-weight: 600; }
+    .sparql-variable { color: $color-comunica-red; }
+    .sparql-iri { color: #116329; }
+    .sparql-prefixed { color: #6639ba; }
+    .sparql-string { color: #953800; }
+    .sparql-number { color: #0550ae; }
+    .sparql-comment { color: #888; font-style: italic; }
 
     .live-demo-sources {
         display: flex;
@@ -901,7 +939,6 @@ main .date {
                 font-size: 0.65rem;
                 font-weight: 600;
                 letter-spacing: 0.02em;
-                text-transform: uppercase;
                 color: #fff;
                 background: $color-comunica-red;
                 border-radius: 999px;
@@ -1147,7 +1184,7 @@ main .date {
 
 .tile {
     @extend %home-card;
-    padding: 1.1rem 1.25rem;
+    padding: 1.1rem 1rem;
 
     h3 {
         margin: 0 0 0.25rem 0;
@@ -1181,7 +1218,7 @@ main .date {
 
 .stat {
     @extend %home-card;
-    padding: 1.25rem;
+    padding: 1.25rem 1rem;
 
     strong {
         font-size: 1.75rem;
