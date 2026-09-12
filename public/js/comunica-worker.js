@@ -19,8 +19,20 @@ self.onmessage = function (event) {
     runQuery(event.data);
   } else if (event.data.type === 'stop') {
     stopQuery(true);
+  } else if (event.data.type === 'preload') {
+    preloadEngine();
   }
 };
+
+// Fetch the engine ahead of the first query, without contacting any source.
+function preloadEngine() {
+  try {
+    loadEngine();
+    postMessage({ type: 'ready' });
+  } catch (error) {
+    postMessage({ type: 'engineError', message: String((error && error.message) || error) });
+  }
+}
 
 // Load the pre-built engine on first use, and keep it for later queries.
 function loadEngine() {

@@ -4,9 +4,6 @@ const WORKER_URL = '/js/comunica-worker.js';
 const WEB_CLIENT_URL = 'https://query.comunica.dev/';
 const RESULT_LIMIT = 10;
 
-// Runs the first example as soon as the engine is ready.
-const RUN_ON_LOAD = true;
-
 const PRESETS = [
   {
     id: 'acquaintances',
@@ -64,7 +61,8 @@ export default function LiveDemo() {
   const [query, setQuery] = useState(PRESETS[0].query);
   const [sources, setSources] = useState(PRESETS[0].sources);
   const [newSource, setNewSource] = useState('');
-  const [state, setState] = useState('loading');
+  const [state, setState] = useState('idle');
+  const [engineReady, setEngineReady] = useState(false);
   const [variables, setVariables] = useState([]);
   const [rows, setRows] = useState([]);
   const [truncated, setTruncated] = useState(false);
@@ -103,6 +101,14 @@ export default function LiveDemo() {
     worker.current = instance;
     instance.onmessage = (event) => {
       const message = event.data;
+      if (message.type === 'ready') {
+        setEngineReady(true);
+        return;
+      }
+      if (message.type === 'engineError') {
+        setError(message.message);
+        return;
+      }
       // Ignore messages of queries that were replaced in the meantime.
       if (message.token !== token.current) {
         return;
@@ -134,7 +140,8 @@ export default function LiveDemo() {
       setError('The query engine could not be loaded.');
       setState('done');
     };
-    setState('idle');
+    // Download the engine now, so that the first run only waits on the sources.
+    instance.postMessage({ type: 'preload' });
     return () => {
       token.current++;
       instance.terminate();
@@ -142,25 +149,26 @@ export default function LiveDemo() {
     };
   }, []);
 
-  // Execute the first example once the worker exists.
-  useEffect(() => {
-    if (RUN_ON_LOAD && state === 'idle' && started.current === 0) {
-      run();
-    }
-  }, [state, run]);
-
   function stop() {
     if (worker.current) {
       worker.current.postMessage({ type: 'stop' });
     }
   }
 
+  // Loading an example does not execute it; that stays up to the visitor.
   function selectPreset(id) {
     const preset = PRESETS.find(candidate => candidate.id === id);
     setPresetId(id);
     setQuery(preset.query);
     setSources(preset.sources);
-    run(preset.query, preset.sources);
+    token.current++;
+    setState('idle');
+    setVariables([]);
+    setRows([]);
+    setTruncated(false);
+    setRequests(0);
+    setDuration(0);
+    setError(undefined);
   }
 
   function addSource(event) {
@@ -173,10 +181,17 @@ export default function LiveDemo() {
   }
 
   const running = state === 'running';
-  const status = error
-    ? `Query failed: ${error}`
-    : `${rows.length}${truncated ? '+' : ''} result${rows.length === 1 ? '' : 's'}` +
+  let status;
+  if (error) {
+    status = `Query failed: ${error}`;
+  } else if (!engineReady) {
+    status = 'Loading the query engine…';
+  } else if (state === 'idle') {
+    status = 'Press Run to execute this query in your browser.';
+  } else {
+    status = `${rows.length}${truncated ? '+' : ''} result${rows.length === 1 ? '' : 's'}` +
       ` · ${formatDuration(duration)} · ${requests} HTTP request${requests === 1 ? '' : 's'}`;
+  }
 
   return (
     <div className="live-demo">
@@ -231,13 +246,11 @@ export default function LiveDemo() {
         <button
           className="live-demo-run"
           onClick={running ? stop : () => run()}
-          disabled={state === 'loading' || (!running && (sources.length === 0 || query.trim() === ''))}
+          disabled={!running && (sources.length === 0 || query.trim() === '')}
         >
           {running ? '■ Stop' : '▶ Run query'}
         </button>
-        <span className={`live-demo-status${error ? ' live-demo-error' : ''}`}>
-          {state === 'loading' ? 'Loading the query engine…' : status}
-        </span>
+        <span className={`live-demo-status${error ? ' live-demo-error' : ''}`}>{status}</span>
       </div>
 
       {variables.length > 0 && !error ? (
