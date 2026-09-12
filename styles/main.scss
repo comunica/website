@@ -261,7 +261,8 @@ pre {
     width: 800px;
 }
 
-.card-info {
+// Shared box of the link cards; only used through @extend
+%card-info {
     flex-basis: 95%;
     margin: 1rem;
     padding: 1.5rem;
@@ -271,10 +272,20 @@ pre {
     border: 1px solid #eaeaea;
     border-radius: 10px;
     transition: color 0.15s ease, border-color 0.15s ease;
+
+    h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.5rem;
+    }
+    p {
+        margin: 0;
+        font-size: 1.25rem;
+        line-height: 1.5;
+    }
 }
 
 .card {
-    @extend .card-info;
+    @extend %card-info;
     flex-basis: 45%;
 }
 
@@ -286,52 +297,8 @@ pre {
     text-decoration: none;
 }
 
-.card-info h3 {
-    margin: 0 0 1rem 0;
-    font-size: 1.5rem;
-}
-
-.card-info p {
-    margin: 0;
-    font-size: 1.25rem;
-    line-height: 1.5;
-}
-
-.sponsors {
-    min-height: unset;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #e5e3e3;
-
-    .sponsors-member {
-        img {
-            height: 120px;
-            margin: 25px;
-        }
-    }
-    .sponsors-gold {
-        img {
-            height: 100px;
-        }
-    }
-    .sponsors-silver {
-        img {
-            height: 80px;
-        }
-    }
-    .sponsors-bronze {
-        img {
-            height: 50px;
-        }
-    }
-}
-
 .card-bounty {
-    @extend .card-info;
+    @extend %card-info;
     flex-basis: 45%;
 
     p {
@@ -464,12 +431,6 @@ pre {
     .title {
         font-size: 3rem;
     }
-}
-
-.feature-icon {
-    float: left;
-    margin-right: 0.5rem;
-    height: 2rem;
 }
 
 .index-entry, .blog-entry {
@@ -832,12 +793,6 @@ main .date {
     pre {
         width: 200px;
     }
-    .sponsors-member {
-        img {
-            width: 90%;
-            height: auto !important;
-        }
-    }
 }
 
 // Live query demo on the index page
@@ -845,10 +800,6 @@ main .date {
     margin-top: 0.5rem;
 }
 
-// The cards below follow their own top margin, so drop the extra one.
-.live-demo-row + .grid-wide {
-    margin-top: 0;
-}
 
 // The same box as the cards below it.
 .live-demo {
@@ -901,21 +852,59 @@ main .date {
         }
     }
 
+    // The highlighted copy sets the size; the transparent textarea on top takes the input.
+    .live-demo-editor {
+        position: relative;
+    }
+
+    .live-demo-highlight,
     .live-demo-query {
-        display: block;
+        box-sizing: border-box;
         width: 100%;
         margin: 0;
         padding: 0.6rem 0.75rem;
-        resize: vertical;
         font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
         DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         font-size: 0.85rem;
         line-height: 1.35;
-        color: #222;
-        background: #f8f8f8;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        tab-size: 2;
         border: 1px solid #ddd;
         border-radius: 5px;
     }
+
+    .live-demo-highlight {
+        min-height: calc(6 * 1.35 * 0.85rem + 1.2rem + 2px);
+        overflow: hidden;
+        color: #222;
+        background: #f8f8f8;
+    }
+
+    .live-demo-query {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        overflow: hidden;
+        resize: none;
+        color: transparent;
+        caret-color: #222;
+        background: transparent;
+        border-color: transparent;
+        outline: none;
+    }
+
+    .live-demo-editor:focus-within .live-demo-highlight {
+        border-color: $color-comunica-red;
+    }
+
+    .sparql-keyword { color: #0550ae; font-weight: 600; }
+    .sparql-variable { color: $color-comunica-red; }
+    .sparql-iri { color: #116329; }
+    .sparql-prefixed { color: #6639ba; }
+    .sparql-string { color: #953800; }
+    .sparql-number { color: #0550ae; }
+    .sparql-comment { color: #888; font-style: italic; }
 
     .live-demo-sources {
         display: flex;
@@ -950,7 +939,6 @@ main .date {
                 font-size: 0.65rem;
                 font-weight: 600;
                 letter-spacing: 0.02em;
-                text-transform: uppercase;
                 color: #fff;
                 background: $color-comunica-red;
                 border-radius: 999px;
@@ -1079,5 +1067,239 @@ main .date {
             margin-left: 0;
             a:first-child { margin-left: 0; }
         }
+    }
+}
+
+// Sections of the index page below the demo
+.home-section {
+    width: 760px;
+    margin: 2.5rem auto 0 auto;
+}
+
+.home-overline {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $color-comunica-red;
+}
+
+.home-lead {
+    margin: 0 0 1rem 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+// Shared surface of the clickable cards on the index page
+%home-card {
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+%home-card-hover {
+    text-decoration: none;
+    border-color: $color-comunica-red-light;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.features {
+    margin-top: 1.5rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.feature {
+    @extend %home-card;
+    padding: 1.5rem;
+
+    h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.15rem;
+        line-height: 1.3;
+    }
+    p {
+        flex: 1;
+        margin: 0 0 1rem 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #555;
+    }
+}
+
+.feature:hover,
+.feature:focus,
+.feature:active {
+    @extend %home-card-hover;
+
+    .feature-link {
+        text-decoration: underline;
+    }
+}
+
+.feature-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 1rem;
+    background: rgba($color-comunica-red, 0.08);
+    border-radius: 0.75rem;
+}
+
+// Recolors the single-color icons to the brand red.
+.feature-glyph {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: $color-comunica-red;
+    mask: var(--icon) center / contain no-repeat;
+    -webkit-mask: var(--icon) center / contain no-repeat;
+}
+
+.feature-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $color-comunica-red-dark;
+}
+
+// Compact link tiles
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tile {
+    @extend %home-card;
+    padding: 1.1rem 1rem;
+
+    h3 {
+        margin: 0 0 0.25rem 0;
+        font-size: 1.05rem;
+        line-height: 1.3;
+    }
+    p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: #555;
+    }
+}
+
+.tile:hover,
+.tile:focus,
+.tile:active {
+    @extend %home-card-hover;
+
+    h3 {
+        color: $color-comunica-red-dark;
+    }
+}
+
+// Headline numbers
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.stat {
+    @extend %home-card;
+    padding: 1.25rem 1rem;
+
+    strong {
+        font-size: 1.75rem;
+        line-height: 1.2;
+        font-variant-numeric: tabular-nums;
+        color: $color-comunica-red;
+    }
+    span {
+        margin-top: 0.35rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        color: #555;
+    }
+}
+
+.stat:hover,
+.stat:focus,
+.stat:active {
+    @extend %home-card-hover;
+}
+
+// Sponsor logos on one surface
+.sponsor-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+}
+
+.sponsor-tier {
+    text-align: center;
+
+    h3 {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    p {
+        margin: 0.15rem 0 0.75rem 0;
+        font-size: 0.85rem;
+        color: #777;
+    }
+}
+
+.sponsor-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 2.5rem;
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+}
+
+.sponsor-logos-member img {
+    height: 80px;
+}
+
+.sponsor-logos-bronze img {
+    height: 40px;
+}
+
+@media (max-width: 1020px) {
+    .home-section {
+        width: calc(100% - 2rem);
+        margin: 2.5rem 1rem 0 1rem;
+    }
+    .features {
+        margin-top: 1.5rem;
+    }
+    .features-grid,
+    .tiles,
+    .stats {
+        grid-template-columns: 1fr;
+    }
+    .sponsor-logos-member img {
+        height: 60px;
     }
 }
