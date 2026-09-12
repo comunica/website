@@ -82,18 +82,18 @@ export default function Home() {
             Production-ready, and <a href="/docs/query/usage/">widely used in commercial, governmental, and academic contexts</a>.
           </p>
           <div className="stats">
-            <div className="stat">
+            <a href="https://github.com/comunica/comunica/network/dependents" className="stat">
               <CountUp value={1600} suffix="+" />
               <span>dependents on GitHub</span>
-            </div>
-            <div className="stat">
+            </a>
+            <a href="https://www.npmjs.com/package/@comunica/core" className="stat">
               <CountUp value={400000} suffix="+" />
               <span>monthly npm downloads</span>
-            </div>
-            <div className="stat">
+            </a>
+            <a href="/docs/modify/advanced/buses/" className="stat">
               <CountUp value={300} suffix="+" />
               <span>core framework modules</span>
-            </div>
+            </a>
           </div>
         </section>
 
