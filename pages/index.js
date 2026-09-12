@@ -21,29 +21,29 @@ export default function Home() {
 
         <LiveDemo />
 
-        <div className="grid-wide">
-          <div className="card-info">
-            <img src="/img/web.svg" alt="Web" className="feature-icon" />
-            <h3>For the Web</h3>
-            <p>
-              Powered by Web technologies, execute queries via JavaScript on server or client.
-            </p>
+        <section className="features">
+          <p className="features-overline">Why Comunica</p>
+          <div className="features-grid">
+            <a href="docs/query/getting_started/query_browser_app/" className="feature">
+              <span className="feature-badge"><span className="feature-glyph" style={{ '--icon': 'url(/img/web.svg)' }} /></span>
+              <h3>For the Web</h3>
+              <p>Powered by Web technologies, execute queries via JavaScript on server or client.</p>
+              <span className="feature-link">Learn more &rarr;</span>
+            </a>
+            <a href="docs/query/advanced/federation/" className="feature">
+              <span className="feature-badge"><span className="feature-glyph" style={{ '--icon': 'url(/img/sources.svg)' }} /></span>
+              <h3>Heterogeneous</h3>
+              <p>Execute queries over multiple federated data sources of different types.</p>
+              <span className="feature-link">Learn more &rarr;</span>
+            </a>
+            <a href="docs/modify/" className="feature">
+              <span className="feature-badge"><span className="feature-glyph" style={{ '--icon': 'url(/img/modular.svg)' }} /></span>
+              <h3>Modular</h3>
+              <p>A collection of modules that can be combined to achieve a certain task.</p>
+              <span className="feature-link">Learn more &rarr;</span>
+            </a>
           </div>
-          <div className="card-info">
-            <img src="/img/ldf.svg" alt="Web" className="feature-icon" />
-            <h3>Heterogeneous</h3>
-            <p>
-              Execute queries over multiple federated data sources of different types.
-            </p>
-          </div>
-          <div className="card-info">
-            <img src="/img/modular.svg" alt="Web" className="feature-icon" />
-            <h3>Modular</h3>
-            <p>
-              A collection of modules that can be combined to achieve a certain task.
-            </p>
-          </div>
-        </div>
+        </section>
 
         <div className="grid">
           <a href="docs/query/" className="card">
