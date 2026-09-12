@@ -1,4 +1,5 @@
 import Head from '../components/Head';
+import LiveDemo from '../components/LiveDemo';
 
 export default function Home() {
   return (
@@ -18,52 +19,7 @@ export default function Home() {
           Flexible SPARQL and GraphQL over decentralized RDF on the Web.
         </p>
 
-        <div className="live-demo">
-          <div className="live-demo-header">
-            <label className="live-demo-presets">
-              Example
-              <select defaultValue="interests">
-                <option value="interests">Mutual acquaintances of three people</option>
-                <option value="brad-pitt">Directors of movies starring Brad Pitt</option>
-              </select>
-            </label>
-            <span className="live-demo-links">
-              <a href="https://query.comunica.dev/">Open in the Web client &rarr;</a>
-              <a href="/docs/query/getting_started/query_browser_app/">How this works &rarr;</a>
-            </span>
-          </div>
-          <textarea className="live-demo-query" rows="9" spellCheck="false" defaultValue={`PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX schema: <https://schema.org/>
-SELECT DISTINCT ?person ?name WHERE {
-  <https://www.rubensworks.net/#me> foaf:knows ?person.
-  <https://pietercolpaert.be/#me> (foaf:knows|schema:colleague) ?person.
-  <https://ruben.verborgh.org/profile/#me> foaf:knows ?person.
-  ?person foaf:name ?name.
-  FILTER(LANG(?name) = "")
-}`} />
-          <div className="live-demo-sources">
-            <span className="live-demo-sources-label">Sources</span>
-            <span className="live-demo-source"><span className="live-demo-source-type">RDFa</span>https://www.rubensworks.net/<button type="button" title="Remove source">&times;</button></span>
-            <span className="live-demo-source"><span className="live-demo-source-type">JSON-LD</span>https://pietercolpaert.be/<button type="button" title="Remove source">&times;</button></span>
-            <span className="live-demo-source"><span className="live-demo-source-type">Turtle</span>https://ruben.verborgh.org/profile/<button type="button" title="Remove source">&times;</button></span>
-            <input type="text" className="live-demo-source-add" placeholder="+ Add a source URL" spellCheck="false" />
-          </div>
-          <div className="live-demo-actions">
-            <button className="live-demo-run">&#9654; Run query</button>
-            <span className="live-demo-status">4 results in 1.1 s</span>
-          </div>
-          <div className="live-demo-results">
-            <table>
-              <thead><tr><th>?person</th><th>?name</th></tr></thead>
-              <tbody>
-                <tr><td><a href="https://csarven.ca/#i">https://csarven.ca/#i</a></td><td>Sarven Capadisli</td></tr>
-                <tr><td><a href="https://pieterheyvaert.com/#me">https://pieterheyvaert.com/#me</a></td><td>Pieter Heyvaert</td></tr>
-                <tr><td><a href="https://julianrojas.org/#me">https://julianrojas.org/#me</a></td><td>Julián Andrés Rojas Meléndez</td></tr>
-                <tr><td><a href="https://www.rubensworks.net/#me">https://www.rubensworks.net/#me</a></td><td>Ruben Taelman</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <LiveDemo />
 
         <div className="grid-wide">
           <div className="card-info">
