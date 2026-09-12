@@ -18,6 +18,58 @@ export default function Home() {
           Flexible SPARQL and GraphQL over decentralized RDF on the Web.
         </p>
 
+        <div className="live-demo">
+          <div className="live-demo-header">
+            <h2>Try it live</h2>
+            <p>This SPARQL query runs right now in your browser, over live Web sources.</p>
+            <label className="live-demo-presets">
+              Example
+              <select defaultValue="brad-pitt">
+                <option value="brad-pitt">Directors of movies starring Brad Pitt</option>
+                <option value="interests">Shared interests of two people (federated)</option>
+              </select>
+            </label>
+          </div>
+          <textarea className="live-demo-query" rows="9" spellCheck="false" defaultValue={`PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?title ?name WHERE {
+  ?movie dbo:starring [ rdfs:label "Brad Pitt"@en ];
+         rdfs:label ?title;
+         dbo:director [ rdfs:label ?name ].
+  FILTER LANGMATCHES(LANG(?title), "EN")
+  FILTER LANGMATCHES(LANG(?name), "EN")
+} LIMIT 10`} />
+          <label className="live-demo-sources">
+            Sources
+            <input type="text" defaultValue="https://fragments.dbpedia.org/2016-04/en" spellCheck="false" />
+          </label>
+          <div className="live-demo-actions">
+            <button className="live-demo-run">&#9654; Run query</button>
+            <span className="live-demo-status">10 results in 1.9 s</span>
+            <span className="live-demo-links">
+              <a href="https://query.comunica.dev/">Open in the Web client &rarr;</a>
+              <a href="/docs/query/getting_started/query_browser_app/">How this works &rarr;</a>
+            </span>
+          </div>
+          <div className="live-demo-results">
+            <table>
+              <thead><tr><th>?title</th><th>?name</th></tr></thead>
+              <tbody>
+                <tr><td>12 Monkeys</td><td>Terry Gilliam</td></tr>
+                <tr><td>A River Runs Through It (film)</td><td>Robert Redford</td></tr>
+                <tr><td>Across the Tracks</td><td>Sandy Tung</td></tr>
+                <tr><td>Babel (film)</td><td>Alejandro González Iñárritu</td></tr>
+                <tr><td>Burn After Reading</td><td>Ethan Coen</td></tr>
+                <tr><td>Burn After Reading</td><td>Joel Coen</td></tr>
+                <tr><td>By the Sea (2015 film)</td><td>Angelina Jolie</td></tr>
+                <tr><td>Contact (1997 American film)</td><td>Robert Zemeckis</td></tr>
+                <tr><td>Cool World</td><td>Ralph Bakshi</td></tr>
+                <tr><td>Cutting Class</td><td>Rospo Pallenberg</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div className="grid-wide">
           <div className="card-info">
             <img src="/img/web.svg" alt="Web" className="feature-icon" />

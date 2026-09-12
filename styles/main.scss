@@ -839,3 +839,163 @@ main .date {
         }
     }
 }
+
+// Live query demo on the index page
+.live-demo {
+    width: 800px;
+    max-width: calc(100vw - 2rem);
+    margin: 2rem auto 0 auto;
+    padding: 1.5rem;
+    text-align: left;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    background: #fff;
+
+    .live-demo-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0 1rem;
+        margin-bottom: 0.75rem;
+
+        h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        p {
+            flex: 1 1 100%;
+            margin: 0.25rem 0 0.5rem 0;
+            color: #555;
+            line-height: 1.4rem;
+        }
+    }
+
+    .live-demo-presets,
+    .live-demo-sources {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: #555;
+
+        select, input {
+            flex: 1;
+            min-width: 0;
+            font: inherit;
+            font-size: 0.9rem;
+            padding: 0.35rem 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+            color: #222;
+        }
+    }
+    .live-demo-presets {
+        flex: 1 1 100%;
+        min-width: 0;
+        select {
+            flex: 0 1 auto;
+            max-width: 100%;
+        }
+    }
+
+    .live-demo-query {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0.75rem;
+        resize: vertical;
+        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+        DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+        font-size: 0.85rem;
+        line-height: 1.35;
+        color: #222;
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .live-demo-sources {
+        margin-top: 0.5rem;
+        input {
+            font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+            font-size: 0.8rem;
+        }
+    }
+
+    .live-demo-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 1rem;
+        margin: 0.75rem 0;
+
+        .live-demo-run {
+            font: inherit;
+            font-weight: 600;
+            padding: 0.5rem 1.25rem;
+            color: #fff;
+            background: $color-comunica-red;
+            border: 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+        .live-demo-run:hover {
+            background: $color-comunica-red-light;
+        }
+        .live-demo-status {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .live-demo-links {
+            margin-left: auto;
+            font-size: 0.9rem;
+            a {
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .live-demo-results {
+        max-height: 16rem;
+        overflow: auto;
+        border: 1px solid #eaeaea;
+        border-radius: 5px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 0.4rem 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            word-break: break-word;
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background: #f8f8f8;
+            font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+            font-weight: 600;
+            color: $color-comunica-red-dark;
+        }
+        tr:last-child td {
+            border-bottom: 0;
+        }
+    }
+}
+
+@media (max-width: 1020px) {
+    .live-demo {
+        width: 100%;
+        .live-demo-actions .live-demo-links {
+            margin-left: 0;
+            a:first-child { margin-left: 0; }
+        }
+    }
+}
