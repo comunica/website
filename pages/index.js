@@ -20,8 +20,6 @@ export default function Home() {
 
         <div className="live-demo">
           <div className="live-demo-header">
-            <h2>Try it live</h2>
-            <p>This SPARQL query runs right now in your browser, over live Web sources.</p>
             <label className="live-demo-presets">
               Example
               <select defaultValue="brad-pitt">
@@ -29,6 +27,10 @@ export default function Home() {
                 <option value="interests">Shared interests of two people (federated)</option>
               </select>
             </label>
+            <span className="live-demo-links">
+              <a href="https://query.comunica.dev/">Open in the Web client &rarr;</a>
+              <a href="/docs/query/getting_started/query_browser_app/">How this works &rarr;</a>
+            </span>
           </div>
           <textarea className="live-demo-query" rows="9" spellCheck="false" defaultValue={`PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -46,10 +48,6 @@ SELECT ?title ?name WHERE {
           <div className="live-demo-actions">
             <button className="live-demo-run">&#9654; Run query</button>
             <span className="live-demo-status">10 results in 1.9 s</span>
-            <span className="live-demo-links">
-              <a href="https://query.comunica.dev/">Open in the Web client &rarr;</a>
-              <a href="/docs/query/getting_started/query_browser_app/">How this works &rarr;</a>
-            </span>
           </div>
           <div className="live-demo-results">
             <table>
