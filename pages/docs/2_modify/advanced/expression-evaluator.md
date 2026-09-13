@@ -150,6 +150,12 @@ When not providing a cache in the context, the evaluator will create one.
 
 This cache can be reused across multiple evaluators. Manual modification is not recommended.
 
+The cache is keyed by function and argument datatypes only, while the resolution behind it depends on the
+[`superTypeProvider`](#config) that was in the context at the time. A cache must therefore not be shared between
+evaluations that use different super-type providers: the first provider's resolutions would be served to the
+second one, silently selecting the wrong implementation. Pass a fresh `functionArgumentsCache` whenever the
+`superTypeProvider` changes.
+
 
 ## Context dependant functions
 
