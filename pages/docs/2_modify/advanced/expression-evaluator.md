@@ -87,7 +87,7 @@ The following keys are of importance:
 * KeysInitQuery.extensionFunctionCreator: A function that creates an extension function.
 * KeysInitQuery.extensionFunctions: A map of function names to function implementations.
 * KeysInitQuery.queryTimestamp: The timestamp to use for functions requiring a notion of "now".
-* KeysInitQuery.functionArgumentsCache: see [later in this document](#functionArgumentsCache).
+* KeysInitQuery.functionArgumentsCache: see [later in this document](#functionargumentscache).
 * KeysInitQuery.baseIRI: The base IRI to use for functions that require it.
 * KeysExpressionEvaluator.defaultTimeZone: The default timezone to use for date functions, if none given, extracts the timezone from the `queryTimestamp` value. It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time).
 * KeysExpressionEvaluator.superTypeProvider: A way of interacting with the type system, it's a callback that given a type unknown to the system, returns the super type of that type.
@@ -159,9 +159,9 @@ second one, silently selecting the wrong implementation. Pass a fresh `functionA
 
 ## Context dependant functions
 
-Some functions (BNODE, NOW, IRI, EXISTS) need a (stateful) context from the caller to function correctly according to the spec.
-This context can be passed as an argument to the evaluator (see the [config section](#config) for exact types).
-If they are not passed, the evaluator falls back to a default that might do the trick for simple use cases.
+Some functions (BNODE, NOW, IRI, EXISTS) need a (stateful) context to function correctly according to the spec.
+Where the caller can supply it, this context is passed as an argument to the evaluator (see the [config section](#config) for exact types).
+If it is not passed, the evaluator falls back to a default that might do the trick for simple use cases.
 
 ### EXISTS
 
@@ -184,12 +184,9 @@ Nothing is materialized before it is called, so a resolver that rejects unsuppor
 
 [spec](https://www.w3.org/TR/sparql11-query/#func-bnode)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-expression-bnode)
 
-Blank nodes are very dependent on the rest of the SPARQL query, therefore,
-we provide the option of delegating the entire responsibility back to you by accepting a blank node constructor callback.
-If this is not found, we create a blank node with the given label,
-or we use uuid (v4) for argument-less calls to generate definitely unique blank nodes of the shape `blank_uuid`.
-
-`bnode(input?: string) => RDF.BlankNode`
+Blank nodes are very dependent on the rest of the SPARQL query.
+The evaluator creates a `BlankNodeBindingsScoped`, which is scoped to the bindings it was created for,
+labelled with the given argument, or with `BNODE_<counter>` for argument-less calls.
 
 ### Now
 
