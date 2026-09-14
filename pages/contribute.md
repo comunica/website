@@ -121,6 +121,7 @@ If publication fails due to a random NPM server error,
 you can invoke the [`./packages/utils-monorepo/sh/retry-publish.sh`](https://github.com/comunica/comunica/blob/master/packages/utils-monorepo/sh/retry-publish.sh) scripts to retry the publication.
 This script can be safely called multiple times.
 You may have to stash your repo first.
+`lerna publish from-package` may also be safe to rerun in that state.
 </div>
 
 ### Making a new pre-release
