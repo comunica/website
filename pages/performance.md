@@ -24,7 +24,7 @@ For considering the performance for different aspects, we have included the foll
 This allows us to inspect performance as follows:
 
 <div class="docs-intro-img">
-  <a href="https://comunica.github.io/comunica-performance-results/comunica/master/benchmarks-total/"><img src="/img/blog/2024-07-05-release_3_2/continuous-perf.png" alt="Continuous performance" style="width:100%" \></a>
+  <a href="https://comunica.github.io/comunica-performance-results/comunica/master/benchmarks-total/"><img src="/img/blog/2026-09-14-release_5_4/continuous-perf.png" alt="Continuous performance" style="width:100%" \></a>
 </div>
 
 _Fluctuations in the graph are mainly caused by confounding variables in the GitHub Actions environment, such as running on different hardware and runner versions._
@@ -40,6 +40,11 @@ you can still get decent levels of performance compared to state-of-the-art engi
 as can be seen when running
 the [Berlin SPARQL benchmark](http://wbsg.informatik.uni-mannheim.de/bizer/berlinsparqlbenchmark/)
 and the [WatDiv benchmark](https://dsg.uwaterloo.ca/watdiv/).
+
+<div class="note">
+The following measurements were done in Comunica v4.
+Comunica v5 is at least 2x faster on average than Comunica v4 at the time of writing, but the following experiments have not been updated yet. 
+</div>
 
 The following engines were compared:
 

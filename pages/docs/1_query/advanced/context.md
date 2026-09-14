@@ -33,34 +33,36 @@ to ensure that the original context entries remain unchanged during the whole qu
 
 The following table gives an overview of all possible context entries that can be passed.
 
-| **Key**                                            | **Description**                                                                         |
-|----------------------------------------------------|-----------------------------------------------------------------------------------------|
-| `sources`                                          | An array of data sources                                                                |
-| `destination`                                      | A data destination for update queries                                                   |
-| `lenient`                                          | If HTTP and parsing failures are ignored                                                |
-| `initialBindings`                                  | Variables that have to be pre-bound to values in the query                              |
-| `queryFormat`                                      | The provided query's format                                                             |
-| `baseIRI`                                          | Base IRI for relative IRIs in SPARQL queries                                            |
-| `fileBaseIRI`                                      | Base IRI for relative IRIs in the parsed file                                           |
-| `log`                                              | A custom logger instance                                                                |
-| `datetime`                                         | Specify a custom date                                                                   |
-| `httpProxyHandler`                                 | A proxy for all HTTP requests                                                           |
-| `httpIncludeCredentials`                           | (_browser-only_) If current credentials should be included for HTTP requests            |
-| `httpAuth`                                         | HTTP basic authentication value                                                         |
-| `httpTimeout`                                      | HTTP timeout in milliseconds                                                            |
-| `httpBodyTimeout`                                  | Makes the HTTP timeout apply until the response is fully consumed                       |
-| `httpRetryCount`                                   | The number of retries to perform on failed fetch requests                               |
-| `httpRetryDelay`                                   | The number of milliseconds to wait between fetch retries                                |
-| `httpRetryOnServerError`                           | If fetch should be retried on 5xx server error responses, instead of being resolved.    |
-| `recoverBrokenLinks`                               | Use the WayBack machine to recover broken links                                         |
-| `extensionFunctions` or `extensionFunctionCreator` | SPARQL extension functions                                                              |
-| `fetch`                                            | A custom [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) function |
-| `readOnly`                                         | If update queries may not be executed                                                   |
-| `explain`                                          | The query explain mode                                                                  |
-| `unionDefaultGraph`                                | If the default graph should also contain the union of all named graphs                  |
-| `localizeBlankNodes`                               | If blank nodes should be localized per bindings entry                                   |
-| `nonLexicalComparison`                             | When true, compares non-lexical literals. Throws an expression error otherwise, which is caught by FILTER and BIND. |
+| **Key**                                            | **Description**                                                                                                                                    |
+|----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sources`                                          | An array of data sources                                                                                                                           |
+| `destination`                                      | A data destination for update queries                                                                                                              |
+| `lenient`                                          | If HTTP and parsing failures are ignored                                                                                                           |
+| `initialBindings`                                  | Variables that have to be pre-bound to values in the query                                                                                         |
+| `queryFormat`                                      | The provided query's format                                                                                                                        |
+| `baseIRI`                                          | Base IRI for relative IRIs in SPARQL queries                                                                                                       |
+| `fileBaseIRI`                                      | Base IRI for relative IRIs in the parsed file                                                                                                      |
+| `log`                                              | A custom logger instance                                                                                                                           |
+| `datetime`                                         | Specify a custom date                                                                                                                              |
+| `httpProxyHandler`                                 | A proxy for all HTTP requests                                                                                                                      |
+| `httpIncludeCredentials`                           | (_browser-only_) If current credentials should be included for HTTP requests                                                                       |
+| `httpAuth`                                         | HTTP basic authentication value                                                                                                                    |
+| `httpTimeout`                                      | HTTP timeout in milliseconds                                                                                                                       |
+| `httpBodyTimeout`                                  | Makes the HTTP timeout apply until the response is fully consumed                                                                                  |
+| `httpRetryCount`                                   | The number of retries to perform on failed fetch requests                                                                                          |
+| `httpRetryDelay`                                   | The number of milliseconds to wait between fetch retries                                                                                           |
+| `httpRetryOnServerError`                           | If fetch should be retried on 5xx server error responses, instead of being resolved.                                                               |
+| `recoverBrokenLinks`                               | Use the WayBack machine to recover broken links                                                                                                    |
+| `extensionFunctions` or `extensionFunctionCreator` | SPARQL extension functions                                                                                                                         |
+| `fetch`                                            | A custom [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) function                                                            |
+| `readOnly`                                         | If update queries may not be executed                                                                                                              |
+| `explain`                                          | The query explain mode                                                                                                                             |
+| `unionDefaultGraph`                                | If the default graph should also contain the union of all named graphs                                                                             |
+| `localizeBlankNodes`                               | If blank nodes should be localized per bindings entry                                                                                              |
+| `nonLexicalComparison`                             | When true, compares non-lexical literals. Throws an expression error otherwise, which is caught by FILTER and BIND.                                |
 | `fullTermComparison`                               | When true, compares IRIs, blank nodes, languageStrings and triple terms. Throws an expression error otherwise, which is caught by FILTER and BIND. |
+| `serviceAllowFileTargets`                          | When true, allows the `SERVICE` operator to target file sources. (disabled by default)                                                             |
+| `serviceAllowVariableTargets`                      | When true, allows the `SERVICE` operator to target variable sources. (disabled by default)                                                         |
 
 
 When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/_comunica_context_entries.html). 
@@ -339,4 +341,27 @@ const response = await mediatorHttp.mediate({
   context: context.set(KeysHttp.httpAbortSignal, abortController.signal),
 });
 // Invoke abortController.abort() to abort the request.
+```
+
+## 23. Variable `SERVICE` targets
+
+SPARQL's `SERVICE` operator allows users to define a target source for a subquery.
+For security reasons, we do not allow variables to be used as the target source by default.
+To enable support for this, the `serviceAllowVariableTargets` context entry must be set to `true`:
+
+```javascript
+const bindingsStream = await myEngine.queryBindings(`
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT * WHERE {
+  ?person a foaf:Person;
+          rdfs:seeAlso ?sa.
+  SERVICE ?sa {
+    ?person foaf:knows ?other.
+  }
+}`, {
+  sources: ['http://...'],
+  serviceAllowVariableTargets: true,
+});
 ```
