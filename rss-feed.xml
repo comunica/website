@@ -155,5 +155,11 @@
             <guid isPermaLink="false">pages/blog/2026-04-14-release_5_2.md</guid>
             <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
         </item>
+        <item>
+            <title><![CDATA[Release 5.4: 🚚 Variable SERVICE targets, major performance improvements, and stricter spec compliance]]></title>
+            <link>https://comunica.dev/blog/2026-09-14-release_5_4/</link>
+            <guid isPermaLink="false">pages/blog/2026-09-14-release_5_4.md</guid>
+            <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
+        </item>
     </channel>
 </rss>
