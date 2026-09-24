@@ -169,16 +169,20 @@ If it is not passed, the evaluator falls back to a default that might do the tri
 
 By default the evaluator answers `EXISTS` by substituting the bindings into its sub-operation with
 `materializeOperation`, and evaluating that through the query operation mediator, stopping at the first solution.
-Outside of a query engine there are no query operations to mediate over, so
-`KeysExpressionEvaluator.existenceResolver` takes over the expression entirely:
+A `KeysExpressionEvaluator.existenceResolver` takes over the expression entirely,
+which is required outside of a query engine, as there are no query operations to mediate over:
 
 ```typescript
-(expression: Algebra.ExistenceExpression, bindings: RDF.Bindings) => Promise<boolean>
+(expression: Algebra.ExistenceExpression, bindings: RDF.Bindings, context: IActionContext) => Promise<boolean>
 ```
 
 The resolver receives the expression as it appears in the algebra, and is therefore responsible for both
 substituting the bindings into `expression.input` and for applying `expression.not`.
 Nothing is materialized before it is called, so a resolver that rejects unsupported expressions costs nothing.
+
+Inside a query engine, operations containing an `EXISTS` are then kept away from sources,
+except within the body of a `SERVICE` clause, which is left to its target.
+The `context` tells apart the sources (`KeysQueryOperation.querySources`) that the input targets (`getOperationSource`).
 
 ### BNODE
 
