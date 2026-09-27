@@ -59,18 +59,20 @@ function functionBusInfo({ busName, description, actors }) {
         <p>
             {description}
         </p>
-        <table>
-            <thead>
-            <tr>
-                <th>Actor</th>
-                <th>Package</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            {actorsInfo}
-            </tbody>
-        </table>
+        <div className="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Actor</th>
+                    <th>Package</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                {actorsInfo}
+                </tbody>
+            </table>
+        </div>
     </>
 }
 
