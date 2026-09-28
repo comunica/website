@@ -232,7 +232,7 @@ Learn more in the full Components.js documentation on [exposing components](http
 ### More control over Components.js configuration (optional)
 
 While this is optional,
-you can configure yourself where Components.js can find required files (components, contexts, configs) in your npm package**.
+**you can configure yourself where Components.js can find required files (components, contexts, configs) in your npm package**.
 
 For this, you can add the following entries to your `package.json` file:
 ```text

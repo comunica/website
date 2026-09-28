@@ -13,6 +13,7 @@ export default function Markdown({body}) {
             children={body}
             components={{
                 code: CodeBlock,
+                table: Table,
                 h1: Heading,
                 h2: Heading,
                 h3: Heading,
@@ -36,6 +37,12 @@ const CodeBlock = (ctx) => {
         </Highlight>
     )
 }
+
+const Table = ({node, ...props}) => (
+    <div className="table-wrapper">
+        <table {...props}/>
+    </div>
+)
 
 const Heading = (props) => {
     const children = React.Children.toArray(props.children)

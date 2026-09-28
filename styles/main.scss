@@ -137,6 +137,11 @@ ul.breadcrumbs {
     }
 }
 
+// Wraps Markdown tables so wide ones scroll instead of widening the page.
+.table-wrapper {
+    overflow-x: auto;
+}
+
 table {
     width: 100%;
     border-spacing: 0;
@@ -180,6 +185,13 @@ table {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
+    // Flex items default to min-width: auto, which would let wide content push the page off-screen.
+    main {
+        min-width: 0;
+        // Lets long URLs and inline code wrap instead of overflowing.
+        overflow-wrap: break-word;
+    }
 }
 
 main {
@@ -240,8 +252,9 @@ code.text {
 
 pre {
     display: block;
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 800px;
+    max-width: 100%;
 }
 
 .grid-wide {
@@ -607,6 +620,7 @@ main .date {
     margin: 15px auto 15px auto;
     text-align: center;
     width: 750px;
+    max-width: 100%;
 }
 @media (max-width: 800px) {
     .plot {
@@ -762,36 +776,6 @@ main .date {
     }
     .nav-pusher {
         height: 0;
-    }
-}
-
-@media (max-width: 800px) and (min-width: 700px) {
-    pre {
-        width: 700px;
-    }
-}
-
-@media (max-width: 700px) and (min-width: 600px) {
-    pre {
-        width: 600px;
-    }
-}
-
-@media (max-width: 600px) and (min-width: 400px) {
-    pre {
-        width: 400px;
-    }
-}
-
-@media (max-width: 400px) and (min-width: 200px) {
-    pre {
-        width: 200px;
-    }
-}
-
-@media (max-width: 600px) {
-    pre {
-        width: 200px;
     }
 }
 
