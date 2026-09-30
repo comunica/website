@@ -140,6 +140,7 @@ with features like SPARQL querying, ontology navigation, reasoning, and workspac
 Mentor uses Comunica to power its SPARQL querying capabilities, allowing users to execute queries against RDF data in their workspace and external sources directly from the editor.
 
 <div class="usage-clear"></div>
+<img src="/img/usage-showcase/sib.svg" alt="SIB Swiss Institute of Bioinformatics logo" class="usage-logo" />
 
 ## SIB SPARQL Training
 
