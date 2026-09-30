@@ -140,6 +140,18 @@ with features like SPARQL querying, ontology navigation, reasoning, and workspac
 Mentor uses Comunica to power its SPARQL querying capabilities, allowing users to execute queries against RDF data in their workspace and external sources directly from the editor.
 
 <div class="usage-clear"></div>
+
+## SIB SPARQL Training
+
+_Academic_
+
+The [SIB SPARQL Training](https://sib-swiss.github.io/sparql-training/) is training material by the [SIB Swiss Institute of Bioinformatics](https://www.sib.swiss/)
+for learning SPARQL and querying SIB resources such as UniProt and Rhea.
+Every example query on the site runs directly in the browser using Comunica,
+with editable queries and Turtle data, so learners can experiment without any server, account, or installation.
+The material is developed in the open on [GitHub](https://github.com/sib-swiss/sparql-training).
+
+<div class="usage-clear"></div>
 <img src="/img/usage-showcase/ldflex.png" alt="LDflex logo" class="usage-logo" />
 
 ## LDflex
