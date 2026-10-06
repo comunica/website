@@ -173,7 +173,7 @@ Outside of a query engine there are no query operations to mediate over, so
 `KeysExpressionEvaluator.existenceResolver` takes over the expression entirely:
 
 ```typescript
-(expression: Algebra.ExistenceExpression, bindings: RDF.Bindings) => Promise<boolean>
+(expression: Algebra.ExistenceExpression, mapping: RDF.Bindings) => Promise<boolean>
 ```
 
 The resolver receives the expression as it appears in the algebra, and is therefore responsible for both
