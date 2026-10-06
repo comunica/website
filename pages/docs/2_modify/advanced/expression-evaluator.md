@@ -216,6 +216,9 @@ This includes the directional language tag functions (`hasLANG`, `hasLANGDIR`, `
 and the triple term functions (`isTRIPLE`, `TRIPLE`, `SUBJECT`, `PREDICATE`, `OBJECT`).
 Please note that the new sparql built-in `ADJUST` function has not been implemented due to package dependencies.
 
+
+## Extensible value testing
+
 Through [extensible value testing](https://www.w3.org/TR/sparql12-query/#extensionFunctions),
 the arithmetic and comparison operators are also overloaded for dates, times and durations,
 as proposed by [SEP-0002](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md).
