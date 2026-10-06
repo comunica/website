@@ -26,7 +26,7 @@ there is no synchronous evaluator.
 
 [`@comunica/expressions-sparql`](https://github.com/comunica/comunica/tree/master/engines/expressions-sparql)
 is an engine that evaluates expressions without querying, for use outside of a Comunica query engine.
-It is the successor of the standalone `sparqlee` package.
+It is the successor of the standalone [`sparqlee`](https://github.com/comunica/sparqlee) package.
 
 ```typescript
 import { ExpressionEngine } from '@comunica/expressions-sparql';
@@ -92,6 +92,7 @@ The following keys are of importance:
 * KeysExpressionEvaluator.defaultTimeZone: The default timezone to use for date functions, if none given, extracts the timezone from the `queryTimestamp` value. It can be desired to set it explicitly so `implicitTimezone` does not change over time (i.e., it is not dependent on daylight saving time).
 * KeysExpressionEvaluator.superTypeProvider: A way of interacting with the type system, it's a callback that given a type unknown to the system, returns the super type of that type.
 * KeysExpressionEvaluator.existenceResolver: A callback that resolves `EXISTS` and `NOT EXISTS`, see [EXISTS](#exists). When absent, the evaluator uses its query operation mediator.
+  Do not provide it to a query engine.
 * KeysExpressionEvaluator.nonLexicalComparison: A boolean denoting the behaviour of comparators (e.g. <, >, =) when used with non-lexical literal operands.
   * `true`: treats it as a literal and compare both operands.
   * `false`: throws an error (default).
@@ -151,8 +152,8 @@ When not providing a cache in the context, the evaluator will create one.
 This cache can be reused across multiple evaluators. Manual modification is not recommended.
 
 The cache is keyed by function and argument datatypes only, while the resolution behind it depends on the
-[`superTypeProvider`](#config) that was in the context at the time. A cache must therefore not be shared between
-evaluations that use different super-type providers: the first provider's resolutions would be served to the
+[`superTypeProvider`](#config) that was in the context at the time. A cache must therefore not be **shared between
+evaluations that use different super-type providers**: the first provider's resolutions would be served to the
 second one, silently selecting the wrong implementation. Pass a fresh `functionArgumentsCache` whenever the
 `superTypeProvider` changes.
 
@@ -211,10 +212,13 @@ which you can provide as `baseIRI: string` to the config.
 
 The expression evaluator package looks to the future and already implements some SPARQL 1.2 specification functions.
 
-This includes the [extended date](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md) functionality,
-the directional language tag functions (`hasLANG`, `hasLANGDIR`, `LANGDIR`, `STRLANGDIR`),
+This includes the directional language tag functions (`hasLANG`, `hasLANGDIR`, `LANGDIR`, `STRLANGDIR`),
 and the triple term functions (`isTRIPLE`, `TRIPLE`, `SUBJECT`, `PREDICATE`, `OBJECT`).
 Please note that the new sparql built-in `ADJUST` function has not been implemented due to package dependencies.
+
+Outside of the specification, the arithmetic and comparison operators are overloaded for dates, times and durations,
+as proposed by [SEP-0002](https://github.com/w3c/sparql-12/blob/main/SEP/SEP-0002/sep-0002.md),
+which did not make it into SPARQL 1.2.
 
 
 ## Type System
