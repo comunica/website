@@ -63,6 +63,7 @@ The following table gives an overview of all possible context entries that can b
 | `fullTermComparison`                               | When true, compares IRIs, blank nodes, languageStrings and triple terms. Throws an expression error otherwise, which is caught by FILTER and BIND. |
 | `serviceAllowFileTargets`                          | When true, allows the `SERVICE` operator to target file sources. (disabled by default)                                                             |
 | `serviceAllowVariableTargets`                      | When true, allows the `SERVICE` operator to target variable sources. (disabled by default)                                                         |
+| `serviceExecutors` or `serviceExecutorCreator`     | Custom executors for SPARQL `SERVICE` clauses                                                                                                      |
 
 
 When developing Comunica modules, all context entry keys can be found in [`@comunica/context-entries`](https://comunica.github.io/comunica/modules/_comunica_context_entries.html). 
@@ -365,3 +366,10 @@ SELECT * WHERE {
   serviceAllowVariableTargets: true,
 });
 ```
+
+## 24. Custom `SERVICE` executors
+
+SPARQL's `SERVICE` keyword is used to evaluate part of a query over a remote source.
+Comunica allows developers to plug in custom executors for `SERVICE` clauses via the context,
+so that clauses targeting certain IRIs are evaluated by application code instead.
+More information on this can be found in the [custom `SERVICE` executors guide](/docs/query/advanced/service_executors/).
