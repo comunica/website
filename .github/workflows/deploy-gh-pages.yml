@@ -23,10 +23,6 @@ jobs:
           touch out/.nojekyll
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7
       - name: Deploy 🚀
         if: startsWith(github.ref, 'refs/heads/master')
         uses: JamesIves/github-pages-deploy-action@v4.9.0
