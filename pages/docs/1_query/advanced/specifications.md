@@ -19,6 +19,7 @@ The following standard query specifications are supported:
 | [SPARQL 1.2 Query Results XML Format](https://www.w3.org/TR/sparql12-results-xml/)                                       |
 | [SPARQL 1.2 Query Results CSV and TSV Formats](https://www.w3.org/TR/sparql12-results-csv-tsv/)                          |
 | [SPARQL 1.2 Protocol](https://www.w3.org/TR/sparql12-protocol/)                                                          |
+| [SPARQL 1.2 Graph Store Protocol](https://www.w3.org/TR/sparql12-graph-store-protocol/)                                  |
 | [SPARQL next SEP 0002 - Excluding ADJUST function](https://github.com/w3c/sparql-dev/blob/main/SEP/SEP-0002/sep-0002.md) |
 
 The following notable specifications are not supported _yet_:
@@ -26,7 +27,6 @@ The following notable specifications are not supported _yet_:
 | **Description**                                                                         |
 |-----------------------------------------------------------------------------------------|
 | [SPARQL 1.2 Entailment Regimes](https://www.w3.org/TR/sparql12-entailment/)             |
-| [SPARQL 1.2 Graph Store HTTP Protocol](https://www.w3.org/TR/sparql12-http-rdf-update/) |
 
 ## Serializing SPARQL results
 
