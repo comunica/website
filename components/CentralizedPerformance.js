@@ -248,7 +248,7 @@ function best(values, isBetter) {
 }
 
 function Best({ value, children }) {
-    return value ? <strong className="perf-best">{children}<span className="perf-hidden"> (best)</span></strong> : children;
+    return value ? <strong className="perf-best">{children}</strong> : children;
 }
 
 function EngineTable({ analysis, refEngine, selected, select, style }) {
