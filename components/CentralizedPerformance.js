@@ -237,8 +237,31 @@ function describeRun(run, analysis) {
     return parts.join(' ');
 }
 
+// The best of a column's values, or undefined when all engines share it, as marking every row says nothing.
+function best(values, isBetter) {
+    const known = values.filter(value => value !== null && value !== undefined);
+    if (known.length < 2) {
+        return undefined;
+    }
+    const top = known.reduce((a, b) => isBetter(b, a) ? b : a);
+    return known.every(value => value === top) ? undefined : top;
+}
+
+function Best({ value, children }) {
+    return value ? <strong className="perf-best">{children}<span className="perf-hidden"> (best)</span></strong> : children;
+}
+
 function EngineTable({ analysis, refEngine, selected, select, style }) {
     const total = analysis.templates.length;
+    const lower = (a, b) => a < b;
+    const { rows } = analysis;
+    const bestAnswered = best(rows.map(row => row.answered), (a, b) => a > b);
+    const bestMean = best(rows.map(row => row.mean), lower);
+    const bestTotal = best(rows.map(row => row.total), lower);
+    const bestLoading = best(rows.map(row => row.engine.ingestion), lower);
+    // Memory and disk sizes are not comparable, so each has its own best.
+    const bestStore = kind => best(rows.filter(row => row.engine.storeSize?.kind === kind).map(row => row.engine.storeSize.bytes), lower);
+    const bestStores = { memory: bestStore('memory'), disk: bestStore('disk') };
     return (
         <div className="table-wrapper">
             <table className="perf-engines">
@@ -270,14 +293,18 @@ function EngineTable({ analysis, refEngine, selected, select, style }) {
                                         </button>
                                     )}
                                 </th>
-                                <td>{row.answered} of {total}</td>
-                                <td>{row.mean === null ? '–' : formatTime(row.mean)}</td>
-                                <td>{row.total === null ? '–' : formatTime(row.total)}</td>
+                                <td><Best value={row.answered === bestAnswered}>{row.answered} of {total}</Best></td>
+                                <td>{row.mean === null ? '–' : <Best value={row.mean === bestMean}>{formatTime(row.mean)}</Best>}</td>
+                                <td>{row.total === null ? '–' : <Best value={row.total === bestTotal}>{formatTime(row.total)}</Best>}</td>
                                 {refEngine && <td>{isReference ? 'reference' : <Relative row={row}/>}</td>}
-                                <td title={engine.name === 'comunica-hdt' ? 'Opening the HDT file and its index, which were created beforehand' : undefined}>
-                                    {engine.ingestion === null || engine.ingestion === undefined ? '–' : formatDuration(engine.ingestion)}
+                                <td title={engine.name === 'comunica-hdt' ? 'Creating the HDT file and its index, and opening them' : undefined}>
+                                    {engine.ingestion === null || engine.ingestion === undefined ? '–' : <Best value={engine.ingestion === bestLoading}>{formatDuration(engine.ingestion)}</Best>}
                                 </td>
-                                <td>{engine.storeSize ? <>{formatBytes(engine.storeSize.bytes)} <span className="perf-muted">{engine.storeSize.kind}</span></> : '–'}</td>
+                                <td>
+                                    {engine.storeSize ? (
+                                        <><Best value={engine.storeSize.bytes === bestStores[engine.storeSize.kind]}>{formatBytes(engine.storeSize.bytes)}</Best> <span className="perf-muted">{engine.storeSize.kind}</span></>
+                                    ) : '–'}
+                                </td>
                             </tr>
                         );
                     })}
@@ -287,6 +314,7 @@ function EngineTable({ analysis, refEngine, selected, select, style }) {
                 Answered: templates without timeouts or errors, and with the result count most engines agree on.
                 Mean (geometric) and total of the time per template, over the {analysis.common.length} template{analysis.common.length === 1 ? '' : 's'} that every engine answered.
                 {refEngine && ` vs ${refEngine.label}: geometric mean of the time ratio, over the templates that both answered.`}
+                {' '}Bold: the best value of a column, and for store sizes, the smallest in memory and on disk.
             </p>
         </div>
     );

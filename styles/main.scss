@@ -1392,6 +1392,19 @@ table.perf-engines {
     }
 }
 
+.perf-best {
+    font-weight: 700;
+}
+
+.perf-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
 .perf-engine {
     display: inline-flex;
     align-items: center;
