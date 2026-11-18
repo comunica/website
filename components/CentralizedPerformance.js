@@ -162,7 +162,8 @@ export default function CentralizedPerformance({ src = DEFAULT_SOURCE }) {
     const current = benchmark ?? benchmarks[0];
     const runs = data.runs.filter(run => run.experiment === current)
         .sort((a, b) => collator.compare(a.scale ?? '', b.scale ?? ''));
-    const run = runs.find(r => r.scale === scales[current]) ?? runs[runs.length - 1];
+    // The smallest dataset is shown first.
+    const run = runs.find(r => r.scale === scales[current]) ?? runs[0];
     return (
         <Results
             data={data}
