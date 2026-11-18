@@ -268,10 +268,10 @@ function EngineTable({ analysis, refEngine, selected, select, style }) {
                 <thead>
                     <tr>
                         <th scope="col">Engine</th>
-                        <th scope="col">Answered</th>
-                        <th scope="col">Mean</th>
-                        <th scope="col">Total</th>
-                        {refEngine && <th scope="col">vs {refEngine.label}</th>}
+                        <th scope="col" title="Templates without timeouts or errors, and with the result count most engines agree on">Answered</th>
+                        <th scope="col" title={`Geometric mean of the time per template, over the ${analysis.common.length} templates that every engine answered`}>Mean</th>
+                        <th scope="col" title={`Sum of the time per template, over the ${analysis.common.length} templates that every engine answered`}>Total</th>
+                        {refEngine && <th scope="col" title="Geometric mean of the time ratio, over the templates that both engines answered">vs {refEngine.label}</th>}
                         <th scope="col">Loading</th>
                         <th scope="col">Store size</th>
                     </tr>
@@ -310,12 +310,6 @@ function EngineTable({ analysis, refEngine, selected, select, style }) {
                     })}
                 </tbody>
             </table>
-            <p className="perf-muted perf-footnote">
-                Answered: templates without timeouts or errors, and with the result count most engines agree on.
-                Mean (geometric) and total of the time per template, over the {analysis.common.length} template{analysis.common.length === 1 ? '' : 's'} that every engine answered.
-                {refEngine && ` vs ${refEngine.label}: geometric mean of the time ratio, over the templates that both answered.`}
-                {' '}Bold: the best value of a column, and for store sizes, the smallest in memory and on disk.
-            </p>
         </div>
     );
 }
