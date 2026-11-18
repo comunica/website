@@ -4,6 +4,13 @@ import React from 'react';
 import gfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
+import dynamic from 'next/dynamic';
+
+// Only loaded on pages that contain a <centralized-performance> element, with its closing tag on the next line.
+const CentralizedPerformance = dynamic(() => import('./CentralizedPerformance'), {
+    ssr: false,
+    loading: () => <p className="perf-status">Loading the results…</p>,
+});
 
 export default function Markdown({body}) {
     return (
@@ -20,6 +27,7 @@ export default function Markdown({body}) {
                 h4: Heading,
                 h5: Heading,
                 h6: Heading,
+                'centralized-performance': CentralizedPerformance,
             }}
         />
     );
