@@ -54,7 +54,7 @@ Hover over a template, or move to it with the keyboard, to see the time of every
 
 The following engines were compared:
 
-- [Comunica Memory](https://github.com/comunica/comunica/tree/master/engines/query-sparql-file#readme) (`@comunica/query-sparql-file`, development version of November 2026, after v5.4.1), using an [in-memory triple store](https://github.com/rubensworks/rdf-stores.js).
+- [Comunica Memory](https://github.com/comunica/comunica/tree/master/engines/query-sparql-file#readme) (`@comunica/query-sparql-file` v5.5.0), using an [in-memory triple store](https://github.com/rubensworks/rdf-stores.js).
 - [Comunica HDT](https://github.com/comunica/comunica-feature-hdt) (the same version, with `@comunica/actor-query-source-identify-hdt` v5.0.1), using an [HDT-based triple store](https://www.rdfhdt.org/). Not included in LDBC SNB.
 - [Oxigraph](https://github.com/oxigraph/oxigraph) (v0.5.13): A Rust-based engine, with its RocksDB-based store on disk, and with its in-memory store.
 - [Jena Fuseki](https://jena.apache.org/) (v6.2.0): A Java-based engine, with its TDB2 store on disk, and with its in-memory store.
