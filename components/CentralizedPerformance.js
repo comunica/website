@@ -74,7 +74,10 @@ function analyze(run, reference) {
     const engines = run.engines.filter(engine => engine.templates);
     const templates = [ ...new Set(engines.flatMap(engine => Object.keys(engine.templates))) ].sort(collator.compare);
     const ref = engines.find(engine => engine.name === reference);
+    // Means and totals are only comparable over the same templates, so they cover those that every engine answered.
+    const common = templates.filter(t => engines.every(engine => answered(engine.templates[t])));
     const rows = engines.map(engine => {
+        const times = common.map(t => Math.max(engine.templates[t].mean, 0.01));
         const shared = ref ? templates.filter(t => answered(engine.templates[t]) && answered(ref.templates[t])) : [];
         const logRatios = shared.map(t => Math.log(Math.max(engine.templates[t].mean, 0.01) / Math.max(ref.templates[t].mean, 0.01)));
         return {
@@ -82,16 +85,11 @@ function analyze(run, reference) {
             answered: templates.filter(t => answered(engine.templates[t])).length,
             shared: shared.length,
             relative: shared.length > 0 ? Math.exp(logRatios.reduce((a, b) => a + b, 0) / shared.length) : null,
+            mean: times.length > 0 ? Math.exp(times.reduce((sum, time) => sum + Math.log(time), 0) / times.length) : null,
+            total: times.length > 0 ? times.reduce((sum, time) => sum + time, 0) : null,
         };
     });
-    return { engines, templates, rows };
-}
-
-// The engine to compare with by default: the one answering the most templates, then the fastest relative to Comunica.
-function defaultComparison(rows, reference) {
-    const candidates = rows.filter(row => !row.engine.name.startsWith('comunica') && row.engine.name !== reference);
-    candidates.sort((a, b) => b.answered - a.answered || (a.relative ?? Infinity) - (b.relative ?? Infinity));
-    return candidates[0]?.engine.name ?? null;
+    return { engines, templates, common, rows };
 }
 
 function useWidth(ref) {
@@ -138,7 +136,7 @@ export default function CentralizedPerformance({ src = DEFAULT_SOURCE }) {
     const [ error, setError ] = useState(null);
     const [ benchmark, setBenchmark ] = useState(null);
     const [ scales, setScales ] = useState({});
-    const [ comparison, setComparison ] = useState({});
+    const [ highlighted, setHighlighted ] = useState({});
     const [ showTable, setShowTable ] = useState(false);
 
     useEffect(() => {
@@ -175,19 +173,20 @@ export default function CentralizedPerformance({ src = DEFAULT_SOURCE }) {
             runs={runs}
             run={run}
             setScale={scale => setScales({ ...scales, [current]: scale })}
-            comparison={comparison}
-            setComparison={setComparison}
+            highlighted={highlighted}
+            setHighlighted={setHighlighted}
             showTable={showTable}
             setShowTable={setShowTable}
         />
     );
 }
 
-function Results({ reference, benchmarks, benchmark, setBenchmark, runs, run, setScale, comparison, setComparison, showTable, setShowTable }) {
+function Results({ reference, benchmarks, benchmark, setBenchmark, runs, run, setScale, highlighted, setHighlighted, showTable, setShowTable }) {
     const analysis = useMemo(() => analyze(run, reference), [ run, reference ]);
     const runKey = `${run.experiment}|${run.scale}`;
-    const selected = comparison[runKey] !== undefined ? comparison[runKey] : defaultComparison(analysis.rows, reference);
-    const select = name => setComparison({ ...comparison, [runKey]: name });
+    // An engine that was clicked in the table, which the chart highlights.
+    const selected = highlighted[runKey] ?? null;
+    const select = name => setHighlighted({ ...highlighted, [runKey]: name });
     const refEngine = analysis.engines.find(engine => engine.name === reference);
     const style = engine => ({
         shape: engine.name === 'comunica-hdt' ? 'diamond' : 'circle',
@@ -210,15 +209,6 @@ function Results({ reference, benchmarks, benchmark, setBenchmark, runs, run, se
                         ))}
                     </div>
                 )}
-                <label className="perf-compare">
-                    <span>Compare with</span>
-                    <select value={selected ?? ''} onChange={event => select(event.target.value || null)}>
-                        <option value="">No engine</option>
-                        {analysis.engines.filter(engine => engine.name !== reference).map(engine => (
-                            <option key={engine.name} value={engine.name}>{engine.label}</option>
-                        ))}
-                    </select>
-                </label>
             </div>
 
             <p className="perf-caption">{describeRun(run, analysis)}</p>
@@ -256,7 +246,9 @@ function EngineTable({ analysis, refEngine, selected, select, style }) {
                     <tr>
                         <th scope="col">Engine</th>
                         <th scope="col">Answered</th>
-                        <th scope="col">Query time{refEngine ? ` vs ${refEngine.label}` : ''}</th>
+                        <th scope="col">Mean</th>
+                        <th scope="col">Total</th>
+                        {refEngine && <th scope="col">vs {refEngine.label}</th>}
                         <th scope="col">Loading</th>
                         <th scope="col">Store size</th>
                     </tr>
@@ -273,20 +265,29 @@ function EngineTable({ analysis, refEngine, selected, select, style }) {
                                         <span className="perf-engine"><Swatch shape={s.shape} color={s.color}/>{engine.label}</span>
                                     ) : (
                                         <button type="button" className="perf-engine" aria-pressed={engine.name === selected}
-                                            title={`Compare with ${engine.label}`} onClick={() => select(engine.name === selected ? null : engine.name)}>
+                                            title={`Highlight ${engine.label} in the chart`} onClick={() => select(engine.name === selected ? null : engine.name)}>
                                             <Swatch shape={s.shape} color={s.color}/>{engine.label}
                                         </button>
                                     )}
                                 </th>
                                 <td>{row.answered} of {total}</td>
-                                <td>{isReference ? 'reference' : <Relative row={row}/>}</td>
-                                <td>{engine.ingestion === null || engine.ingestion === undefined ? '–' : formatDuration(engine.ingestion)}</td>
-                                <td>{engine.storeSize ? `${formatBytes(engine.storeSize.bytes)} ${engine.storeSize.kind === 'memory' ? 'in memory' : 'on disk'}` : '–'}</td>
+                                <td>{row.mean === null ? '–' : formatTime(row.mean)}</td>
+                                <td>{row.total === null ? '–' : formatTime(row.total)}</td>
+                                {refEngine && <td>{isReference ? 'reference' : <Relative row={row}/>}</td>}
+                                <td title={engine.name === 'comunica-hdt' ? 'Opening the HDT file and its index, which were created beforehand' : undefined}>
+                                    {engine.ingestion === null || engine.ingestion === undefined ? '–' : formatDuration(engine.ingestion)}
+                                </td>
+                                <td>{engine.storeSize ? <>{formatBytes(engine.storeSize.bytes)} <span className="perf-muted">{engine.storeSize.kind}</span></> : '–'}</td>
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
+            <p className="perf-muted perf-footnote">
+                Answered: templates without timeouts or errors, and with the result count most engines agree on.
+                Mean (geometric) and total of the time per template, over the {analysis.common.length} template{analysis.common.length === 1 ? '' : 's'} that every engine answered.
+                {refEngine && ` vs ${refEngine.label}: geometric mean of the time ratio, over the templates that both answered.`}
+            </p>
         </div>
     );
 }

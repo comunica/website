@@ -44,20 +44,11 @@ and the Interactive workload of the [LDBC Social Network Benchmark (SNB)](https:
 
 Pick a benchmark and a dataset size below.
 The table summarizes how each engine did, and the chart shows the mean execution time of each query template on a logarithmic scale.
-Click an engine in the table, or pick one under _Compare with_, to highlight it in the chart.
+Click an engine in the table to highlight it in the chart.
 Hover over a template, or move to it with the keyboard, to see the time of every engine.
 
 <centralized-performance>
 </centralized-performance>
-
-### How to read the results
-
-- **Templates answered**: the query templates for which every query finished without a timeout or error, and returned the number of results that most engines agree on. Results with a different count are shown as hollow markers, and are left out of the comparison.
-- **Query time**: the geometric mean of the ratio between the engine's time and Comunica-Memory's time, over the templates that both answered. For example, _2.0× slower on 18_ means that over 18 shared templates, the engine took twice as long on average.
-- **Loading time**: how long the engine took to load the dataset before it could answer queries. For Comunica-HDT, this only covers opening an HDT file and its index, as both were created beforehand.
-- **Store size**: the space the loaded dataset takes, in memory for in-memory engines, and on disk for the others. Disk-based engines can use compressed formats, and also use memory while answering queries, so these sizes are not directly comparable.
-
-QLever caches query results, so the repeated executions of a query can be answered from its cache, which lowers its times.
 
 ### Setup
 

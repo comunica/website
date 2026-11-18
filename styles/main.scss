@@ -1343,22 +1343,6 @@ main .date {
     }
 }
 
-.perf-compare {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    color: #52514e;
-
-    select {
-        font: inherit;
-        padding: 0.3rem 0.4rem;
-        border: 1px solid #d0d0d0;
-        border-radius: 5px;
-        background: #fff;
-    }
-}
-
 .perf-caption {
     color: #52514e;
     font-size: 0.9rem;
@@ -1366,11 +1350,11 @@ main .date {
 
 table.perf-engines,
 table.perf-values {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
 
     th,
     td {
-        padding: 4px 10px;
+        padding: 4px 8px;
         text-align: left;
         white-space: nowrap;
     }
