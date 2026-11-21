@@ -12,9 +12,18 @@ there are situations where you may want to make use of the **latest development 
 For example, if your application depends on a new _feature_ or _fix_ in Comunica,
 and you already want to develop or test your application before the new Comunica release is available.
 
-In this guide, we will do this by setting up the **Comunica development environment**.
+If you just want to try out the latest development version, you can do so **in your browser**.
+Otherwise, this guide explains how to set up the **Comunica development environment**.
 
-## 1. Setup the Comunica development environment
+## 1. Trying it in your browser
+
+On every commit, the latest development version of Comunica is built as a [Web client](/docs/query/getting_started/setup_web_client/),
+in which you can execute queries without installing anything.
+Web clients are also built for the next major version while it is being prepared, and for every release of Comunica.
+
+<iframe src="https://comunica.github.io/comunica-web-clients/" width="100%" height="700px" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto">Loading...</iframe>
+
+## 2. Setup the Comunica development environment
 
 If you want to make use of the latest development version,
 you will have to **clone** the GitHub repository,
@@ -30,7 +39,7 @@ Setting up the development via the npm package manager will not work due to the 
 of the <a href="https://classic.yarnpkg.com/en/docs/workspaces/">Yarn workspaces functionality</a>.
 </div>
 
-## 2. Querying from the command line
+## 3. Querying from the command line
 
 If installation is successful, you can navigate to any package and make use of it
 similar to how you would when it has been installed via npm.
@@ -49,7 +58,7 @@ by simply replacing `comunica-sparql` with `node bin/query.js`.
 If you want to [set up a SPARQL endpoint](/docs/query/getting_started/setup_endpoint/),
 you can use `node/http.js` instead of `comunica-sparql-http`.
 
-## 3. Linking Comunica SPARQL to your package
+## 4. Linking Comunica SPARQL to your package
 
 If you have a [JavaScript application that makes use of Comunica SPARQL](/docs/query/getting_started/query_app/),
 then you can **link** it to your local Comunica development environment.

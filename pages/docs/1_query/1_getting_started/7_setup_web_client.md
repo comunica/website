@@ -7,7 +7,9 @@ If you want to easily **demonstrate** a couple of SPARQL queries on a **Web page
 or if you want to show off your custom built Comunica engine,
 then you can do this using the [Comunica jQuery widget](https://github.com/comunica/jQuery-Widget.js/).
 
-As an example, a public instance of this widget is available at http://query.linkeddatafragments.org/.
+As an example, a public instance of this widget is available at https://query.comunica.dev/.
+Web clients of the [latest development version](/docs/query/getting_started/query_dev_version/) and older releases of Comunica
+are available at https://comunica.github.io/comunica-web-clients/.
 
 ## 1. Install from npm
 
