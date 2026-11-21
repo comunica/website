@@ -1287,3 +1287,249 @@ main .date {
         height: 60px;
     }
 }
+
+// Centralized performance results (components/CentralizedPerformance.js)
+.perf {
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+
+    .perf-muted {
+        color: #6f6f6f;
+        font-weight: normal;
+    }
+}
+
+.perf-status {
+    color: #6f6f6f;
+}
+
+.perf-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.perf-segmented {
+    display: inline-flex;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    overflow: hidden;
+
+    button {
+        font: inherit;
+        font-size: 0.9rem;
+        padding: 0.35rem 0.75rem;
+        border: 0;
+        background: #fff;
+        color: #333;
+        cursor: pointer;
+
+        & + button {
+            border-left: 1px solid #d0d0d0;
+        }
+        &:hover {
+            background: #f3f3f3;
+        }
+        &[aria-pressed="true"] {
+            background: $color-comunica-red;
+            color: #fff;
+        }
+        &:focus-visible {
+            outline: 2px solid $color-comunica-red-dark;
+            outline-offset: -2px;
+        }
+    }
+}
+
+.perf-caption {
+    color: #52514e;
+    font-size: 0.9rem;
+}
+
+table.perf-engines,
+table.perf-values {
+    font-size: 0.875rem;
+
+    th,
+    td {
+        padding: 4px 8px;
+        text-align: left;
+        white-space: nowrap;
+    }
+    td {
+        font-variant-numeric: tabular-nums;
+    }
+    thead th {
+        font-weight: 600;
+        white-space: normal;
+        vertical-align: bottom;
+    }
+}
+
+// Keeps the engine names in view when a narrow screen scrolls the table sideways.
+@media (max-width: 800px) {
+    table.perf-engines tr > th:first-child {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        background: inherit;
+        box-shadow: 1px 0 0 #dfe2e5;
+    }
+}
+
+table.perf-engines {
+    tbody th {
+        font-weight: normal;
+    }
+    tr.perf-reference th {
+        font-weight: 600;
+    }
+    tr.perf-selected,
+    tr.perf-selected:nth-child(2n) {
+        background-color: #eaf2fc;
+    }
+}
+
+.perf-best {
+    font-weight: 700;
+}
+
+.perf-engine {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+}
+
+button.perf-engine {
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.perf-swatch {
+    flex: none;
+}
+
+ul.perf-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    list-style: none;
+    margin: 1.25rem 0 0.25rem;
+    padding: 0;
+    font-size: 0.85rem;
+    color: #52514e;
+
+    li {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin: 0;
+        line-height: 1.25rem;
+    }
+}
+
+.perf-plot {
+    position: relative;
+    width: 100%;
+
+    svg {
+        display: block;
+        overflow: visible;
+    }
+    .perf-grid {
+        stroke: #e1e0d9;
+        stroke-width: 1;
+    }
+    .perf-axis {
+        fill: #898781;
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+    }
+    .perf-label {
+        fill: #52514e;
+        font-size: 12px;
+    }
+    .perf-lane {
+        fill: #f6f6f4;
+    }
+    .perf-range {
+        stroke: #d6d5ce;
+        stroke-width: 1;
+    }
+    .perf-row {
+        outline: none;
+    }
+    .perf-row-bg {
+        fill: transparent;
+    }
+    .perf-row-active,
+    .perf-row:focus .perf-row-bg {
+        fill: #f4f4f1;
+    }
+}
+
+.perf-tooltip {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    background: #fff;
+    border: 1px solid rgba(11, 11, 11, 0.1);
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    padding: 0.5rem 0.65rem;
+    font-size: 0.82rem;
+
+    .perf-tooltip-title {
+        font-weight: 600;
+    }
+    ul {
+        list-style: none;
+        margin: 0.25rem 0 0;
+        padding: 0;
+    }
+    li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 2px 0;
+        line-height: 1.3;
+    }
+    strong {
+        min-width: 4.8em;
+        font-variant-numeric: tabular-nums;
+    }
+    .perf-key {
+        flex: none;
+        width: 12px;
+        height: 2px;
+        border-radius: 1px;
+    }
+}
+
+.perf-toggle {
+    font: inherit;
+    font-size: 0.9rem;
+    margin: 0.75rem 0 0.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: $color-comunica-red-dark;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.perf-footnote {
+    font-size: 0.85rem;
+}
