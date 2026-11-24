@@ -46,7 +46,7 @@ Tips and tricks:
 * `yarn run build-watch` will continuously build TypeScript to JavaScript and generate Components.js files, which is useful during development. These can also be invoked separately via `yarn run build-watch:ts` and `yarn run build-watch:components`.
 * `yarn test` and `yarn run lint` execute the tests and linter checks locally. Before a PR is opened, these must always pass, and testing coverage must be 100%.
 * When editing configuration files in packages like `query-sparql`, `yarn run prepare` can be executed to compile the JSON files to JavaScript before they can be executed. (not needed when executing dynamically)
-* When modifying a dependency package such as [sparqlee](https://github.com/comunica/sparqlee), [Yarn's link functionality](https://classic.yarnpkg.com/en/docs/cli/link/) can be used to force your local version of that dependency to be used in Comunica.
+* When modifying a dependency package such as [Traqula](https://github.com/comunica/traqula), [Yarn's link functionality](https://classic.yarnpkg.com/en/docs/cli/link/) can be used to force your local version of that dependency to be used in Comunica.
 
 ## Write documentation
 
