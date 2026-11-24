@@ -142,6 +142,11 @@ Additionally, you should also note the order of calling and awaiting `putBinding
 Outside of an engine, [`@comunica/expressions-sparql`](#standalone-usage) exposes these aggregators through
 `createAggregator`.
 
+Within query engines, [extension aggregates](/docs/query/advanced/extension_functions/#extension-aggregates)
+passed via `KeysInitQuery.extensionAggregators` or `KeysInitQuery.extensionAggregatorCreator`
+are handled by [`actor-bindings-aggregator-factory-extensions`](https://github.com/comunica/comunica/tree/master/packages/actor-bindings-aggregator-factory-extensions).
+These are not available in `@comunica/expressions-sparql`.
+
 
 ## functionArgumentsCache
 

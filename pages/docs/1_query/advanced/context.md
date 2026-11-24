@@ -54,6 +54,7 @@ The following table gives an overview of all possible context entries that can b
 | `httpRetryOnServerError`                           | If fetch should be retried on 5xx server error responses, instead of being resolved.                                                               |
 | `recoverBrokenLinks`                               | Use the WayBack machine to recover broken links                                                                                                    |
 | `extensionFunctions` or `extensionFunctionCreator` | SPARQL extension functions                                                                                                                         |
+| `extensionAggregators` or `extensionAggregatorCreator` | SPARQL extension aggregates                                                                                                                    |
 | `fetch`                                            | A custom [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) function                                                            |
 | `readOnly`                                         | If update queries may not be executed                                                                                                              |
 | `explain`                                          | The query explain mode                                                                                                                             |
@@ -222,12 +223,14 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
 Via HTTP Basic Authentication one can include **username and password** credentials in HTTP requests.
 More information on this can be found in the [HTTP basic authentication guide](/docs/query/advanced/basic_auth/).
 
-## 14. SPARQL extension functions
+## 14. SPARQL extension functions and aggregates
 
 SPARQL allows non-standard, [custom extension functions](https://www.w3.org/TR/sparql11-query/#extensionFunctions) to be used within queries.
 In order to provide an implementation to these extension functions,
 Comunica allows developers to plug them in via the context.
-More information on this can be found in the [SPARQL extension functions guide](/docs/query/advanced/extension_functions/).
+Custom aggregates, such as `ex:median(?o)`, can be provided in the same way.
+More information on this can be found in the [SPARQL extension functions guide](/docs/query/advanced/extension_functions/)
+and its [extension aggregates section](/docs/query/advanced/extension_functions/#extension-aggregates).
 
 ## 15. Using a custom fetch function
 
