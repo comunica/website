@@ -42,10 +42,7 @@ the [WatDiv benchmark](https://dsg.uwaterloo.ca/watdiv/),
 the [Berlin SPARQL benchmark (BSBM)](http://wbsg.informatik.uni-mannheim.de/bizer/berlinsparqlbenchmark/),
 and the Interactive workload of the [LDBC Social Network Benchmark (SNB)](https://ldbcouncil.org/benchmarks/snb/).
 
-Pick a benchmark and a dataset size below.
-The table summarizes how each engine did, and the chart shows the mean execution time of each query template on a logarithmic scale.
-Click an engine in the table to highlight it in the chart.
-Hover over a template, or move to it with the keyboard, to see the time of every engine.
+The interactive table and chart below indicate how Comunica compares to other engines.
 
 <centralized-performance>
 </centralized-performance>
@@ -63,7 +60,7 @@ The following engines were compared:
 - [Blazegraph](https://blazegraph.com/) (v2.1.5): A Java-based engine.
 - [GraphDB](https://graphdb.ontotext.com/) (v10.8.14): A Java-based engine.
 - [Virtuoso](https://vos.openlinksw.com/owiki/wiki/VOS/VOSSPARQL) (v7.2.17): An engine that translates SPARQL queries to SQL.
-- [QLever](https://github.com/ad-freiburg/qlever/) ([24 October 2026](https://github.com/ad-freiburg/qlever/commit/afc421d)): A C++-based engine. Not included in BSBM.
+- [QLever](https://github.com/ad-freiburg/qlever/) ([24 October 2026](https://github.com/ad-freiburg/qlever/commit/afc421d)): A C++-based engine. Not included in BSBM due to QLever not yet supporting SPARQL/XML.
 
 Each engine runs in its own Docker container, limited to one CPU core,
 on a machine with 128 GB of memory and a 24-core 2.40 GHz CPU.
