@@ -139,13 +139,13 @@ Because of the dependency on these buses, the type system can also be used.
 
 Additionally, you should also note the order of calling and awaiting `putBindings` while using the `GroupConcat` aggregator.
 
-Outside of an engine, [`@comunica/expressions-sparql`](#standalone-usage) exposes these aggregators through
-`createAggregator`.
-
-Within query engines, [extension aggregates](/docs/query/advanced/extension_functions/#extension-aggregates)
-passed via `KeysInitQuery.extensionAggregators` or `KeysInitQuery.extensionAggregatorCreator`
+[Extension aggregates](/docs/query/advanced/extension_functions/#extension-aggregates),
+passed via `KeysInitQuery.extensionAggregators` or `KeysInitQuery.extensionAggregatorCreator`,
 are handled by [`actor-bindings-aggregator-factory-extensions`](https://github.com/comunica/comunica/tree/master/packages/actor-bindings-aggregator-factory-extensions).
-These are not available in `@comunica/expressions-sparql`.
+
+Outside of a query engine, [`@comunica/expressions-sparql`](#standalone-usage) exposes all of these aggregators,
+extension aggregates included, through
+[`createAggregator`](https://github.com/comunica/comunica/tree/master/engines/expressions-sparql#extension-aggregates).
 
 
 ## functionArgumentsCache
