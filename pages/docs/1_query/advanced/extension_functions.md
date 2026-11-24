@@ -92,7 +92,7 @@ as the values of the  `extensionFunction` dictionary, or `undefined`.
 
 ## Extension aggregates
 
-SPARQL also allows custom aggregates, which are called like extension functions but aggregate over the solutions of a group,
+SPARQL also allows custom aggregates, extension functions that aggregate over the solutions of a group,
 such as `func:longest(?o)` in the query below.
 Implementations for such extension aggregates can be plugged in via the `extensionAggregators` context entry:
 
@@ -137,20 +137,3 @@ If evaluating an argument fails, or `put` or `result` throws an error, the resul
 Instead of `extensionAggregators`, the callback-based `extensionAggregatorCreator` entry may be used, but not both at the same time.
 Unlike `extensionFunctionCreator`, which may return a promise, this callback must be synchronous,
 as Comunica needs to know which function calls are aggregates while parsing the query.
-For the same query as above:
-
-```typescript
-const bindingsStream = await myEngine.queryBindings(query, {
-  sources: ['https://www.rubensworks.net/'],
-  extensionAggregatorCreator: (aggregateTerm: RDF.NamedNode) => {
-    if (aggregateTerm.value === 'http://example.org/functions#longest') {
-      return longest;
-    }
-  },
-});
-```
-
-As for extension functions, extension aggregates are only pushed down into a SPARQL endpoint
-if its Service Description lists them via `sd:extensionAggregate` or `sd:extensionFunction`
-(where `sd:` is `http://www.w3.org/ns/sparql-service-description#`),
-and are otherwise evaluated locally.
