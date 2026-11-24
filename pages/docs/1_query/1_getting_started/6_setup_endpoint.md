@@ -207,7 +207,36 @@ _:propertyPartition78 a <http://rdfs.org/ns/void#PropertyPartition>;
     <http://rdfs.org/ns/void#triples> 1.
 ```
 
-## 9. Learn more
+## 9. Reading and writing graphs via the Graph Store Protocol
+
+The [SPARQL Graph Store Protocol](https://www.w3.org/TR/sparql12-graph-store-protocol/) allows clients to read and write whole RDF graphs over HTTP.
+Using the `--graphStore` option, your endpoint will also expose such a graph store on `http://localhost:3000/store`.
+To also allow graphs to be modified, updates must be enabled using the `-u` option:
+```bash
+$ comunica-sparql-http https://example.org/sparql --graphStore -u
+```
+
+A graph is identified either by a URL within the graph store, such as `http://localhost:3000/store/people`, which then becomes its IRI,
+or by its URL-encoded IRI in the `graph` parameter, such as `http://localhost:3000/store?graph=http%3A%2F%2Fexample.org%2Fpeople`.
+The default graph is available at `http://localhost:3000/store?default`.
+
+`GET` retrieves a graph, `PUT` replaces its contents, `POST` adds to them, and `DELETE` removes the graph.
+For example, the following request creates a graph from a Turtle file:
+```bash
+$ curl -X PUT -H "Content-Type: text/turtle" --data-binary @people.ttl \
+    http://localhost:3000/store/people
+```
+
+Payloads can be in any [RDF serialization that Comunica can parse](/docs/query/advanced/specifications/#parsing-rdf),
+and several can be sent at once as `multipart/form-data`, with a media type per part.
+Graphs are returned as Turtle, unless [another serialization](/docs/query/advanced/specifications/#serializing-rdf) is requested via the `Accept` header:
+```bash
+$ curl -H "Accept: application/n-triples" http://localhost:3000/store/people
+```
+
+A `POST` to the graph store itself creates a new graph, and returns its IRI in the `Location` header.
+
+## 10. Learn more
 
 This guide only discussed the basic functionality of `comunica-sparql-http`.
 You can learn more options by invoking the _help_ command:
@@ -222,26 +251,43 @@ Recommended options:
   -u, --update   Enable update queries (otherwise, only read queries are enabled)                                                                      [boolean]
 
 Options:
-  -c, --context                 Use the given JSON context string or file (e.g., config.json)                                                           [string]
-      --to                      Destination for update queries                                                                                          [string]
-  -b, --baseIRI                 base IRI for the query (e.g., http://example.org/)                                                                      [string]
-      --fileBaseIRI             base IRI for the file (e.g., http://example.org/), useful when using comunica-sparql-file                               [string]
-  -d, --dateTime                Sets a datetime for querying Memento-enabled archives                                                                   [string]
-  -l, --logLevel                Sets the log level (e.g., debug, info, warn, ...)                                                     [string] [default: "warn"]
-      --lenient                 If failing requests and parsing errors should be logged instead of causing a hard crash                                [boolean]
-  -v, --version                 Prints version information                                                                                             [boolean]
-      --showStackTrace          Prints the full stacktrace when errors are thrown                                                                      [boolean]
-      --httpTimeout             HTTP requests timeout in milliseconds                                                                                   [number]
-      --httpBodyTimeout         Makes the HTTP timeout take into account the response body stream read                                                 [boolean]
-      --httpRetryCount          The number of retries to perform on failed fetch requests                                                               [number]
-      --httpRetryDelayFallback  The fallback delay in milliseconds between fetch retries                                                                [number]
-      --httpRetryDelayLimit     The upper limit in milliseconds for the delay between fetch retries                                                     [number]
-      --unionDefaultGraph       If the default graph should also contain the union of all named graphs                                                 [boolean]
-  -i, --invalidateCache         Enable cache invalidation before each query execution                                                                  [boolean]
-      --distinctConstruct       If the query engine should deduplicate resulting triples                                                               [boolean]
-      --freshWorker             Kills the worker after each query execution                                                                            [boolean]
-      --contextOverride         If the query context can be overridden through POST requests                                                           [boolean]
-      --emitVoid                Generate VoID descriptions and include them in the service description                                                 [boolean]
+  -c, --context                           Use the given JSON context string or file (e.g., config.json)                                                 [string]
+      --to                                Destination for update queries                                                                                [string]
+  -b, --baseIRI                           base IRI for the query (e.g., http://example.org/)                                                            [string]
+      --fileBaseIRI                       base IRI for the file (e.g., http://example.org/), useful when using comunica-sparql-file                     [string]
+  -d, --dateTime                          Sets a datetime for querying Memento-enabled archives                                                         [string]
+  -l, --logLevel                          Sets the log level (e.g., debug, info, warn, ...)                                           [string] [default: "warn"]
+      --lenient                           If failing requests and parsing errors should be logged instead of causing a hard crash                      [boolean]
+      --serviceAllowVariableTargets       If SERVICE clauses are allowed to have a variable as target, which lets the queried data determine what is
+                                          dereferenced                                                                                                 [boolean]
+      --parseUnsupportedVersions          If no error should be emitted on unsupported versions                                                        [boolean]
+  -v, --version                           Prints version information                                                                                   [boolean]
+      --showStackTrace                    Prints the full stacktrace when errors are thrown                                                            [boolean]
+      --httpTimeout                       HTTP requests timeout in milliseconds                                                                         [number]
+      --httpBodyTimeout                   Makes the HTTP timeout take into account the response body stream read                                       [boolean]
+      --httpRetryCount                    The number of retries to perform on failed fetch requests                                                     [number]
+      --httpRetryDelayFallback            The fallback delay in milliseconds between fetch retries                                                      [number]
+      --httpRetryDelayLimit               The upper limit in milliseconds for the delay between fetch retries                                           [number]
+      --httpRetryBodyCount                The number of retries to perform when the response body stream errors                                         [number]
+      --httpRetryBodyDelayFallback        The fallback delay in milliseconds between body retries                                                       [number]
+      --httpRetryBodyAllowUnsafe          Allow body retries for non-idempotent requests                                                               [boolean]
+      --httpRetryBodyMaxBytes             Maximum number of bytes to buffer when retrying response body streams                                         [number]
+      --httpCache                         Enables HTTP-level caching                                                                                   [boolean]
+      --unionDefaultGraph                 If the default graph should also contain the union of all named graphs                                       [boolean]
+  -i, --invalidateCache                   Enable cache invalidation before each query execution                                                        [boolean]
+      --distinctConstruct                 If the query engine should deduplicate resulting triples                                                     [boolean]
+      --nonLexicalComparison              When true, compares non-lexical literals.Throws an expression error otherwise, which is caught by FILTER and BIND.
+                                                                                                                                                       [boolean]
+      --fullTermComparison                When true, compares IRIs, blank nodes, languageStrings and triple terms.Throws an expression error otherwise, which is
+                                          caught by FILTER and BIND.                                                                                   [boolean]
+      --extensionFunctionsAlwaysPushdown  If extension functions must always be pushed down                                                            [boolean]
+      --dereferenceFromNamed              If the IRIs within FROM (NAMED) clauses must be dereferenced, and added as sources to the query              [boolean]
+      --dereferenceFromNamedConflictMode  How to handle named graphs that a FROM NAMED source already contains of its own
+                                                                                                        [string] [choices: "error", "preferNamed", "keepSource"]
+      --freshWorker                       Kills the worker after each query execution                                                                  [boolean]
+      --contextOverride                   If the query context can be overridden through POST requests                                                 [boolean]
+      --emitVoid                          Generate VoID descriptions and include them in the service description                                       [boolean]
+      --graphStore                        Expose the SPARQL Graph Store HTTP Protocol, which reads and writes whole RDF graphs                         [boolean]
 
 Examples:
   comunica-sparql-http https://fragments.dbpedia.org/2016-04/en
