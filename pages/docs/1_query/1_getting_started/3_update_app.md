@@ -13,14 +13,12 @@ The easiest way to create an engine and store is as follows:
 
 ```javascript
 const QueryEngine = require('@comunica/query-sparql').QueryEngine;
-const N3 = require('n3');
+const RdfStore = require('rdf-stores').RdfStore;
 
 const myEngine = new QueryEngine();
 
-const store = new N3.Store();
+const store = RdfStore.createDefault(); // Or the more efficient RdfStore.createOrdered() when you can load in bulk
 ```
-
-We make use of the [`Store` from `N3.js`](https://github.com/rdfjs/N3.js#storing) for these examples.
 
 ## 2. Executing INSERT DATA queries
 

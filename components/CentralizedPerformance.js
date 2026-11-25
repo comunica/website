@@ -231,9 +231,9 @@ function describeRun(run, analysis) {
     const p = run.params ?? {};
     const parts = [ `${run.experiment}, ${run.scaleLabel}${run.triples ? ` (${formatTriples(run.triples)})` : ''}: ${analysis.templates.length} query templates.` ];
     if (p.queryCount && p.queryRunnerReplication) {
-        parts.push(`Each template has ${p.queryCount} queries, each executed ${p.queryRunnerReplication} times after ${p.queryRunnerWarmupRounds ?? 0} warm-up round${p.queryRunnerWarmupRounds === 1 ? '' : 's'}; times are their mean.`);
+        parts.push(`Each template has ${p.queryCount} queries, each executed ${p.queryRunnerReplication} times after ${p.queryRunnerWarmupRounds ?? 0} warm-up round${p.queryRunnerWarmupRounds === 1 ? '' : 's'}.`);
     } else if (run.experiment === 'BSBM') {
-        parts.push('Times are the geometric mean per query type over the query mixes of the BSBM test driver.');
+        parts.push('Times are measured by the BSBM test driver.');
     }
     return parts.join(' ');
 }

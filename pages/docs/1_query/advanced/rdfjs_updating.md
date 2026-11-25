@@ -12,10 +12,10 @@ Learn more about RDF/JS in this <a href="/docs/query/advanced/rdfjs/">RDF/JS gui
 </div>
 
 Several implementations of this `Store` interface exist.
-In the example below, we make use of the [`Store` from `N3.js`](https://github.com/rdfjs/N3.js#storing)
+In the example below, we make use of the [`RdfStore` from `rdf-stores`](https://github.com/rubensworks/rdf-stores.js)
 that offers one possible implementation when you want to [query over it with Comunica within a JavaScript application](/docs/query/getting_started/query_app/):
 ```javascript
-const store = new N3.Store();
+const store = RdfStore.createDefault(); // Or the more efficient RdfStore.createOrdered() when you can load in bulk
 
 const query = `
 PREFIX dc: <http://purl.org/dc/elements/1.1/>

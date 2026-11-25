@@ -16,10 +16,10 @@ Learn more about RDF/JS in this <a href="/docs/query/advanced/rdfjs/">RDF/JS gui
 </div>
 
 Several implementations of these `Source` and `DatasetCore` interfaces exist.
-In the example below, we make use of the [`Store` from `N3.js`](https://github.com/rdfjs/N3.js#storing) (which implements both interfaces),
+In the example below, we make use of the [`RdfStore` from `rdf-stores`](https://github.com/rubensworks/rdf-stores.js) (which implements both interfaces),
 that offers one possible implementation when you want to [query over it with Comunica within a JavaScript application](/docs/query/getting_started/query_app/):
 ```javascript
-const store = new N3.Store();
+const store = RdfStore.createDefault(); // Or the more efficient RdfStore.createOrdered() when you can load in bulk
 store.addQuad(
   namedNode('http://ex.org/Pluto'),
   namedNode('http://ex.org/type'),
@@ -35,6 +35,11 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
   sources: [store],
 });
 ```
+
+<div class="note">
+We recommend using rdf-stores instead of N3.js' Store, as rdf-stores currently achieves better performance in Comunica
+due to it fully implementing <a href="https://comunica.github.io/comunica/interfaces/_comunica_actor-query-source-identify-rdfjs.IRdfJsSourceExtended.html">IRdfJsSourceExtended</a>. 
+</div>
 
 <div class="note">
 We recommend passing RDF/JS `Source`'s when possible. As they have an asynchronous streaming interface that leads to better performance when working with large datasets.

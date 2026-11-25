@@ -17,7 +17,7 @@ export default function Home() {
         </div>
 
         <p className="description">
-          Flexible SPARQL and GraphQL over decentralized RDF on the Web.
+          Flexible in-process SPARQL and GraphQL over decentralized RDF on the Web.
         </p>
 
         <LiveDemo />
@@ -79,15 +79,15 @@ export default function Home() {
         <section className="home-section">
           <p className="home-overline">Used by</p>
           <p className="home-lead">
-            Production-ready, and <a href="/docs/query/usage/">widely used in commercial, governmental, and academic contexts</a>.
+            Highly <a href="/performance/">performant</a>, production-ready, <a href="/docs/query/usage/">widely used a variety of commercial, governmental, and academic contexts</a>.
           </p>
           <div className="stats">
             <a href="https://github.com/comunica/comunica/network/dependents" className="stat">
-              <CountUp value={1600} suffix="+" />
+              <CountUp value={1700} suffix="+" />
               <span>dependents on GitHub</span>
             </a>
             <a href="https://www.npmjs.com/package/@comunica/core" className="stat">
-              <CountUp value={400000} suffix="+" />
+              <CountUp value={900000} suffix="+" />
               <span>monthly npm downloads</span>
             </a>
             <a href="/docs/modify/advanced/buses/" className="stat">

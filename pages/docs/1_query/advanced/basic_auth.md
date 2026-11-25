@@ -35,3 +35,24 @@ const bindingsStream = await myEngine.queryBindings(`SELECT * WHERE { ?s ?p ?o }
   sources: ['http://username:password@example.org/page'],
 });
 ```
+
+Additionally, `SERVICE` targets without credentials, where these targets are mentioned
+in the list of query sources with credentials, will lead to these `SERVICE` clauses to be
+evaluated by taking into account the credentials. This avoids the need of having to
+include credentials within `SERVICE` targets within the query itself.
+
+For example, basic authentication can be passed to a `SERVICE` target
+without explicitly including credentials in the query as follows:
+
+```typescript
+const bindingsStream = await myEngine.queryBindings(`
+  SELECT * WHERE {
+    ?s ?p ?o,
+  SERVICE <http://example.org/> {}
+      ?s2 ?p ?o2.
+  }
+`, {
+  sources: ['http://username:password@example.org/'],
+});
+```
+
