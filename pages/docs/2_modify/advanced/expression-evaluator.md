@@ -81,7 +81,7 @@ the evaluator.
 
 ## Config
 
-Just like many other actors, the ExpressionEvaluatorFactoryDefault expects a context object.
+Just like many other actors, the `ActorExpressionEvaluatorFactoryDefault` expects a context object.
 The following keys are of importance:
 * KeysInitQuery.dataFactory: The RDF/JS data factory used to produce the resulting terms.
 * KeysInitQuery.extensionFunctionCreator: A function that creates an extension function.
@@ -131,7 +131,7 @@ try {
 The aggregation of bindings is handled by the [`bus-bindings-aggregator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-bindings-aggregator-factory).
 Given a request for a certain aggregator, the factory will return an aggregator that can be used to aggregate bindings.
 After all bindings have been put onto the aggregator, the result can be retrieved.
-The aggregators tend to make use of other expression evaluation related busses like the
+The aggregators tend to make use of other expression evaluation related buses like the
 [`bus-term-comparator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-term-comparator-factory),
 [`bus-function-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-function-factory),
 and most will use the [`bus-expression-evaluator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-expression-evaluator-factory).
@@ -190,7 +190,7 @@ which then answers it instead of the resolver.
 
 ### BNODE
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-bnode)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-expression-bnode)
+[spec](https://www.w3.org/TR/sparql11-query/#func-bnode) · [actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-expression-bnode)
 
 Blank nodes are very dependent on the rest of the SPARQL query.
 The evaluator creates a `BlankNodeBindingsScoped`, which is scoped to the bindings it was created for,
@@ -198,15 +198,16 @@ labelled with the given argument, or with `BNODE_<counter>` for argument-less ca
 
 ### Now
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-now)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-now)
+[spec](https://www.w3.org/TR/sparql11-query/#func-now) · [actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-now)
 
-All calls to now in a query must return the same value, since we aren't aware of the rest of the query,
-you can provide a timestamp through `KeysInitQuery.queryTimestamp`. If it's not present, the evaluator will use the timestamp of evaluator creation,
-this at least allows evaluation with multiple bindings to have the same `now` value.
+All calls to `NOW` in a query must return the same value.
+Since the evaluator is not aware of the rest of the query, you can provide a timestamp through `KeysInitQuery.queryTimestamp`.
+If it is not present, the evaluator uses the timestamp of its creation,
+so that at least evaluations over multiple bindings return the same `NOW` value.
 
 ### IRI
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-iri)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-iri)
+[spec](https://www.w3.org/TR/sparql11-query/#func-iri) · [actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-iri)
 
 To be fully spec compliant, the IRI/URI functions should take into account base IRI of the query,
 which you can provide through `KeysInitQuery.baseIRI`.
