@@ -81,7 +81,7 @@ the evaluator.
 
 ## Config
 
-Just like many other actors, the ExpressionEvaluatorFactoryDefault expects a context object.
+Just like many other actors, the `ActorExpressionEvaluatorFactoryDefault` expects a context object.
 The following keys are of importance:
 * KeysInitQuery.dataFactory: The RDF/JS data factory used to produce the resulting terms.
 * KeysInitQuery.extensionFunctionCreator: A function that creates an extension function.
@@ -94,7 +94,7 @@ The following keys are of importance:
 * KeysExpressionEvaluator.existenceResolver: A callback that resolves `EXISTS` and `NOT EXISTS`, see [EXISTS](#exists). When absent, the evaluator uses its query operation mediator.
   Do not provide it to a query engine.
 * KeysExpressionEvaluator.nonLexicalComparison: A boolean denoting the behaviour of comparators (e.g. <, >, =) when used with non-lexical literal operands.
-  * `true`: treats it as a literal and compare both operands.
+  * `true`: treats them as literals and compares both operands.
   * `false`: throws an error (default).
 * KeysExpressionEvaluator.fullTermComparison: A boolean denoting the behaviour of comparators (e.g. <, >, =) when used with non-literal and mixed operands. Such non-literals are IRIs, blank nodes, languageStrings and triple terms.
   * `true`: compares them by type first and then by string value (see [non-lexical and full term comparison](#non-lexical-and-full-term-comparison)).
@@ -128,19 +128,23 @@ try {
 
 ## Aggregates
 
-The aggregation of bindings is handled by the [bus-bindings-aggregator-factory](https://github.com/comunica/comunica/tree/master/packages/bus-bindings-aggregator-factory).
+The aggregation of bindings is handled by the [`bus-bindings-aggregator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-bindings-aggregator-factory).
 Given a request for a certain aggregator, the factory will return an aggregator that can be used to aggregate bindings.
 After all bindings have been put onto the aggregator, the result can be retrieved.
-The aggregators tend to make use of other expression evaluation related busses like the
+The aggregators tend to make use of other expression evaluation related buses like the
 [`bus-term-comparator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-term-comparator-factory),
 [`bus-function-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-function-factory),
 and most will use the [`bus-expression-evaluator-factory`](https://github.com/comunica/comunica/tree/master/packages/bus-expression-evaluator-factory).
 Because of the dependency on these buses, the type system can also be used.
 
-Additionally, you should also note the order of calling and awaiting `putBindings` while using the `GroupConcat` aggregator.
+Additionally, the `GroupConcat` aggregator concatenates terms in the order in which `putBindings` calls finish,
+so await each call before making the next one if the order matters.
 
-Outside of an engine, [`@comunica/expressions-sparql`](#standalone-usage) exposes these aggregators through
-`createAggregator`.
+[Extension aggregates](/docs/query/advanced/extension_functions/#extension-aggregates),
+passed via `KeysInitQuery.extensionAggregators` or `KeysInitQuery.extensionAggregatorCreator`,
+are handled by [`actor-bindings-aggregator-factory-extensions`](https://github.com/comunica/comunica/tree/master/packages/actor-bindings-aggregator-factory-extensions).
+
+Outside of a query engine, [`@comunica/expressions-sparql`](#standalone-usage) exposes all of these aggregators through `createAggregator`.
 
 
 ## functionArgumentsCache
@@ -186,7 +190,7 @@ which then answers it instead of the resolver.
 
 ### BNODE
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-bnode)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-expression-bnode)
+[spec](https://www.w3.org/TR/sparql11-query/#func-bnode) · [actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-expression-bnode)
 
 Blank nodes are very dependent on the rest of the SPARQL query.
 The evaluator creates a `BlankNodeBindingsScoped`, which is scoped to the bindings it was created for,
@@ -194,18 +198,19 @@ labelled with the given argument, or with `BNODE_<counter>` for argument-less ca
 
 ### Now
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-now)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-now)
+[spec](https://www.w3.org/TR/sparql11-query/#func-now) · [actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-now)
 
-All calls to now in a query must return the same value, since we aren't aware of the rest of the query,
-you can provide a timestamp (`now: Date`). If it's not present, the evaluator will use the timestamp of evaluator creation,
-this at least allows evaluation with multiple bindings to have the same `now` value.
+All calls to `NOW` in a query must return the same value.
+Since the evaluator is not aware of the rest of the query, you can provide a timestamp through `KeysInitQuery.queryTimestamp`.
+If it is not present, the evaluator uses the timestamp of its creation,
+so that at least evaluations over multiple bindings return the same `NOW` value.
 
 ### IRI
 
-[spec](https://www.w3.org/TR/sparql11-query/#func-iri)[actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-iri)
+[spec](https://www.w3.org/TR/sparql11-query/#func-iri) · [actor](https://github.com/comunica/comunica/tree/master/packages/actor-function-factory-term-iri)
 
 To be fully spec compliant, the IRI/URI functions should take into account base IRI of the query,
-which you can provide as `baseIRI: string` to the config.
+which you can provide through `KeysInitQuery.baseIRI`.
 
 
 ## SPARQL 1.2
@@ -238,8 +243,7 @@ to find an implementation among all overloads matching the types of the argument
 is performed in the tree.
 
 **[Subtype substitution](https://www.w3.org/TR/xpath-31/#dt-subtype-substitution)** is handled for literal terms.
-What this means is that for every argument of the function, and it's associated accepted type,
-When a function accepts a type, it also accepts all subtypes for that argument.
+This means that when a function accepts a type for an argument, it also accepts all subtypes of that type.
 These sub/super-type relations define the following type tree:
 
 <div class="docs-intro-img">
@@ -250,8 +254,8 @@ So, when expecting an argument of type `xsd:integer` we could provide `xsd:long`
 function call would still succeed. The type of the term does not change in this operation.
 
 The expression evaluator also handles **[type promotion](https://www.w3.org/TR/xpath-31/#promotion)**.
-Type promotion defines some rules where a types can be promoted to another, even if there is no super-type relation.
-Examples include `xsd:float` and `xsd:decimal` to `xsd:double`and `xsd:anyURI` to `xsd:string`.
+Type promotion defines some rules where a type can be promoted to another, even if there is no super-type relation.
+Examples include `xsd:float` and `xsd:decimal` to `xsd:double` and `xsd:anyURI` to `xsd:string`.
 In this case, the datatype of the term will change to the type it is promoted to.
 
 
@@ -286,7 +290,7 @@ Two terms are first compared by term type, in which the following order is used 
 4. quads
 5. default graphs
 
-[SPARQL 1.2](https://w3c.github.io/sparql-query/spec/#modOrderBy) defined ordering for the first four and we say default graphs is the lowest in priority.
+[SPARQL 1.2](https://w3c.github.io/sparql-query/spec/#modOrderBy) defines the ordering of the first four, and we order default graphs last.
 
 For 2 operands of the same term type, except literals, the string values are compared. For (non-lexical) literals first the data types are compared and if they're equal, their values are compared. Different numeric data types are seen as equal (e.g. `xsd:integer` = `xsd:decimal`).
 
