@@ -144,9 +144,7 @@ so await each call before making the next one if the order matters.
 passed via `KeysInitQuery.extensionAggregators` or `KeysInitQuery.extensionAggregatorCreator`,
 are handled by [`actor-bindings-aggregator-factory-extensions`](https://github.com/comunica/comunica/tree/master/packages/actor-bindings-aggregator-factory-extensions).
 
-Outside of a query engine, [`@comunica/expressions-sparql`](#standalone-usage) exposes all of these aggregators,
-extension aggregates included, through
-[`createAggregator`](https://github.com/comunica/comunica/tree/master/engines/expressions-sparql#extension-aggregates).
+Outside of a query engine, [`@comunica/expressions-sparql`](#standalone-usage) exposes all of these aggregators through `createAggregator`.
 
 
 ## functionArgumentsCache
