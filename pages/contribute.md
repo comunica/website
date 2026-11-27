@@ -107,45 +107,48 @@ All PRs must pass the following checklist:
 
 ### Making a new release
 
-Making a new release only requires invoking `yarn run publish-release` from the repository root, which does the following using [lerna](https://github.com/lerna/lerna):
+Releases are first [staged on npm](https://docs.npmjs.com/staged-publishing),
+and only become public once you approve them with two-factor authentication (2FA).
+This requires npm 11.15.0 or newer (`npm install -g npm@latest`), and being logged in to npm (`npm login`).
 
-* Prompts your for providing the new version (major, minor, patch).
-* Bump the versions from all changed packages.
-* [Generate a changelog](https://github.com/rubensworks/manual-git-changelog.js) from all commits since the last release. The process will halt until you modify (and save) the changelog where needed (remove unneeded commits, and categorize them), and confirm by pressing any key in the console. 
-* Release all changed packages to npm.
-* Push the tag to GitHub.
-* Push to master.
+First, invoke `yarn run publish-release` from the repository root, which does the following:
+
+* Prompts you for the new version (major, minor, patch).
+* Bumps the versions of all changed packages.
+* [Generates a changelog](https://github.com/rubensworks/manual-git-changelog.js) from all commits since the last release. The process will halt until you modify (and save) the changelog where needed (remove unneeded commits, and categorize them), and confirm by pressing any key in the console.
+* Commits the release, tags it, and pushes both to GitHub.
+* Asks for confirmation, and stages all changed packages on npm. This does not require a one-time password. If npm rate limits the requests, the script waits and continues by itself.
+
+Next, invoke `yarn run approve-staged` to publish the staged packages.
+It asks for confirmation and for a one-time password from your authenticator app,
+and asks for a new one each time the previous one expires.
+Alternatively, staged packages can be approved in batches of up to 100 on [npmjs.com](https://www.npmjs.com/).
 
 <div class="note">
-If publication fails due to a random NPM server error,
-you can invoke the [`./packages/utils-monorepo/sh/retry-publish.sh`](https://github.com/comunica/comunica/blob/master/packages/utils-monorepo/sh/retry-publish.sh) scripts to retry the publication.
-This script can be safely called multiple times.
-You may have to stash your repo first.
-`lerna publish from-package` may also be safe to rerun in that state.
+If staging fails or is interrupted, invoke <code>yarn run stage-release</code> to stage the remaining packages.
+It skips versions that are already staged, so it can be safely called multiple times.
+Similarly, <code>yarn run approve-staged</code> can be invoked again to approve what is still staged.
 </div>
 
 ### Making a new pre-release
 
-Making a new release only requires invoking `yarn run publish-canary` from the repository root, which does the following using [lerna](https://github.com/lerna/lerna):
+Making a new pre-release only requires invoking `yarn run publish-canary` from the repository root, which does the following:
 
 * Temporarily do a patch release increment on all packages in the form of `<version>-alpha.<git-head-sha>.0`.
-* Release all packages to npm with the `next` tag.
-* Undo temporary changes
+* Stage all packages on npm with the `next` tag.
+* Undo temporary changes.
+
+Next, invoke `yarn run approve-staged` to publish the staged pre-release.
 
 Pre-releases do not trigger changelog changes, git commits, and pushes.
 
-If the lerna script exited with an error, you may notice some issues with git. In that case, make sure to execute the following:
+If the script exited with an error, the temporary version changes may still be present. In that case, undo them as follows:
 
 ```bash
-git update-index --no-assume-unchanged $(git ls-files) && git checkout .
+git checkout .
 ```
 
 ### Preparing a major release
-
-Before starting, it may be necessary to temporarily override your local access token,
-as lerna currently does not seem to support npm's new 2FA checking during publishing.
-
-For this, create a new token with all permissions (npm: settings / tokens / granular-access-tokens) and temporarily override it in your `.npmrc`.
 
 #### Release with an intermediary release (safer)
 
@@ -162,9 +165,9 @@ For this, create a new token with all permissions (npm: settings / tokens / gran
 * Do a search/replace of `/^OLD.0.0/` to `/^NEW.0.0/` in your editor to update config files to the new version (add `git add` them).
 * `yarn install` (add `git add` changed files)
 * Press any key to finish the changelog command.
+* `yarn run approve-staged`
 
-#### If release commit succeeds, but npm publish fails
+#### If the release commit succeeds, but staging fails
 
-* `git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')`
-* `npx lerna publish from-package --no-git-reset --no-push --no-git-tag-version --yes`
-* `git update-index --no-assume-unchanged $(git ls-files | tr '\n' ' ')`
+* `yarn run stage-release`
+* `yarn run approve-staged`
