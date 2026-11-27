@@ -31,7 +31,7 @@ $ npm install @comunica/query-sparql
 ## 2. Creating a new query engine
 
 While [`QueryEngine` is used to import Comunica SPARQL's default config](/docs/query/getting_started/query_app/),
-we can load a custom config by creating our engine via `newEngineDynamic()`:
+we can load a custom config by creating our engine via `QueryEngineFactory`:
 ```javascript
 const QueryEngineFactory = require('@comunica/query-sparql').QueryEngineFactory;
 
@@ -48,29 +48,53 @@ The easiest way to create a custom config, is to start from an existing one, and
 
 Let's create a file called `config.json` in your package.
 
-In this guide, we will start from
-the [Comunica SPARQL default config file](https://github.com/comunica/comunica/blob/master/engines/config-query-sparql/config/config-default.json).
+In this guide, we will start from the default config of Comunica SPARQL,
+which is provided by the **config package** [`@comunica/config-query-sparql`](https://github.com/comunica/comunica/tree/master/engines/config-query-sparql/config).
+This package contains several versions of this config:
+`config-default.json` contains the actors of the first release of the current major version,
+and files such as `config-default-v5-4-1.json` also contain the actors that were added in later minor versions.
+You should pick the one with the **highest version**.
+At the time of writing, this is [`config-default-v5-4-1.json`](https://github.com/comunica/comunica/blob/master/engines/config-query-sparql/config/config-default-v5-4-1.json).
+
+<div class="note">
+Only build upon config files from <b>config packages</b>, such as <code>@comunica/config-query-sparql</code>.
+Do <b>not</b> import the config files of <b>engine packages</b>,
+such as <code>config/config-default.json</code> in <code>@comunica/query-sparql</code>.
+Those files are internal to the engine and change in minor releases,
+which can break your custom engine after an update.
+<a href="/docs/modify/advanced/config_versioning/">Read more about config versioning</a>.
+</div>
+
 Let's **copy its contents entirely into our `config.json`**:
 ```json
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/config-query-sparql/^3.0.0/components/context.jsonld"
+    "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/config-query-sparql/^5.0.0/components/context.jsonld"
   ],
   "import": [
+    "ccqs:config/bindings-aggregator-factory/actors-v5-4-1.json",
+    "ccqs:config/bindings-aggregator-factory/mediators.json",
     "ccqs:config/context-preprocess/actors.json",
     "ccqs:config/context-preprocess/mediators.json",
+    "ccqs:config/expression-evaluator-factory/actors.json",
+    "ccqs:config/expression-evaluator-factory/mediators.json",
+    "ccqs:config/function-factory/actors.json",
+    "ccqs:config/function-factory/mediators.json",
     "ccqs:config/hash-bindings/actors.json",
     "ccqs:config/hash-bindings/mediators.json",
-    "ccqs:config/http/actors.json",
+    "ccqs:config/hash-quads/actors.json",
+    "ccqs:config/hash-quads/mediators.json",
+    "ccqs:config/http/actors-v5-4-1.json",
     "ccqs:config/http/mediators.json",
     "ccqs:config/http-invalidate/actors.json",
     "ccqs:config/http-invalidate/mediators.json",
-    "ccqs:config/init/actors.json",
+    "ccqs:config/init/actors-v5-4-1.json",
     "ccqs:config/merge-bindings-context/actors.json",
     "ccqs:config/merge-bindings-context/mediators.json",
-    "ccqs:config/optimize-query-operation/actors.json",
+    "ccqs:config/optimize-query-operation/actors-v5-4-1.json",
     "ccqs:config/optimize-query-operation/mediators.json",
-    "ccqs:config/query-operation/actors.json",
+    "ccqs:config/query-operation/actors-v5-3-0.json",
+    "ccqs:config/query-operation/actors/query/union-ordered.json",
     "ccqs:config/query-operation/mediators.json",
     "ccqs:config/query-parse/actors.json",
     "ccqs:config/query-parse/mediators.json",
@@ -78,15 +102,19 @@ Let's **copy its contents entirely into our `config.json`**:
     "ccqs:config/query-process/mediators.json",
     "ccqs:config/query-result-serialize/actors.json",
     "ccqs:config/query-result-serialize/mediators.json",
-    "ccqs:config/query-source-identify/actors.json",
+    "ccqs:config/query-serialize/actors.json",
+    "ccqs:config/query-serialize/mediators.json",
+    "ccqs:config/query-source-dereference-link/actors.json",
+    "ccqs:config/query-source-dereference-link/mediators.json",
+    "ccqs:config/query-source-identify/actors-v5-4-1.json",
     "ccqs:config/query-source-identify/mediators.json",
-    "ccqs:config/query-source-identify-hypermedia/actors.json",
+    "ccqs:config/query-source-identify-hypermedia/actors-v5-1-0.json",
     "ccqs:config/query-source-identify-hypermedia/mediators.json",
     "ccqs:config/dereference/actors.json",
     "ccqs:config/dereference/mediators.json",
     "ccqs:config/dereference-rdf/actors.json",
     "ccqs:config/dereference-rdf/mediators.json",
-    "ccqs:config/rdf-join/actors.json",
+    "ccqs:config/rdf-join/actors-v5-4-1.json",
     "ccqs:config/rdf-join/mediators.json",
     "ccqs:config/rdf-join-entries-sort/actors.json",
     "ccqs:config/rdf-join-entries-sort/mediators.json",
@@ -96,7 +124,7 @@ Let's **copy its contents entirely into our `config.json`**:
     "ccqs:config/rdf-metadata/mediators.json",
     "ccqs:config/rdf-metadata-accumulate/actors.json",
     "ccqs:config/rdf-metadata-accumulate/mediators.json",
-    "ccqs:config/rdf-metadata-extract/actors.json",
+    "ccqs:config/rdf-metadata-extract/actors-v5-3-0.json",
     "ccqs:config/rdf-metadata-extract/mediators.json",
     "ccqs:config/rdf-parse/actors.json",
     "ccqs:config/rdf-parse/mediators.json",
@@ -110,7 +138,11 @@ Let's **copy its contents entirely into our `config.json`**:
     "ccqs:config/rdf-update-hypermedia/actors.json",
     "ccqs:config/rdf-update-hypermedia/mediators.json",
     "ccqs:config/rdf-update-quads/actors.json",
-    "ccqs:config/rdf-update-quads/mediators.json"
+    "ccqs:config/rdf-update-quads/mediators.json",
+    "ccqs:config/term-comparator-factory/actors.json",
+    "ccqs:config/term-comparator-factory/mediators.json",
+    "ccqs:config/warmup/actors.json",
+    "ccqs:config/warmup/mediators.json"
   ]
 }
 ```
@@ -149,13 +181,13 @@ Our goal in this step is to build a query engine that can **_only_ execute `SELE
 and we don't want to be able to execute `CONSTRUCT` and `DESCRIBE` queries.
 This will require us to remove some more actors.
 
-While the actors for `CONSTRUCT` and `DESCRIBE` are defined in `ccqs:config/query-operation/actors.json`,
+While the actor for `CONSTRUCT` is defined in `ccqs:config/query-operation/actors-v5-3-0.json`,
 we can not just simply remove that file from our imports,
 because it also contains actors for other SPARQL query operators which we don't want to remove, such as `SELECT`.
 
 In the [guide on querying with a custom config from the command line](/docs/modify/getting_started/custom_config_cli/),
-we achieved this by inlining `ccqs:config/query-operation/actors.json` into our main config file.
-In this guide, we'll do this in a cleaner way by **redefining** the contents of `ccqs:config/query-operation/actors.json`
+we achieved this by inlining `ccqs:config/query-operation/actors-v5-3-0.json` into our main config file.
+In this guide, we'll do this in a cleaner way by **redefining** the contents of `ccqs:config/query-operation/actors-v5-3-0.json`
 in a **separate local file**, and applying our changes there.
 
 ### 5.1. Declare config options in `package.json`
@@ -205,10 +237,10 @@ To avoid collisions with other packages, it is recommended to use another prefix
 
 ### 5.3. Copying `config/query-operation/actors.json`
 
-Next, we will create a local copy of `ccqs:config/query-operation/actors.json`.
+Next, we will create a local copy of `ccqs:config/query-operation/actors-v5-3-0.json`.
 
 For this, create a file **`config/query-operation/actors.json`**,
-and paste in the contents of [`ccqs:config/query-operation/actors.json`](https://raw.githubusercontent.com/comunica/comunica/master/engines/config-query-sparql/config/query-operation/actors.json) ([GitHub](https://github.com/comunica/comunica/blob/master/engines/config-query-sparql/config/query-operation/actors.json)).
+and paste in the contents of [`ccqs:config/query-operation/actors-v5-3-0.json`](https://raw.githubusercontent.com/comunica/comunica/master/engines/config-query-sparql/config/query-operation/actors-v5-3-0.json) ([GitHub](https://github.com/comunica/comunica/blob/master/engines/config-query-sparql/config/query-operation/actors-v5-3-0.json)).
 
 ### 5.4. Make config refer to local `config/query-operation/actors.json`
 
@@ -219,7 +251,7 @@ everything is ready to **modify our `config.json` to refer to our local `config/
 
 For this, remove the following line from `config.json`:
 ```diff
--  "ccqs:config/query-operation/actors.json",
+-  "ccqs:config/query-operation/actors-v5-3-0.json",
 ```
 And replace it with the following line:
 ```diff
@@ -230,34 +262,32 @@ Also add the newly created config to the contexts of the config file (again repl
 ```diff
     "@context": [
 +     "https://linkedsoftwaredependencies.org/bundles/npm/my-package/^1.0.0/components/context.jsonld",
-      "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/config-query-sparql/^3.0.0/components/context.jsonld"
+      "https://linkedsoftwaredependencies.org/bundles/npm/@comunica/config-query-sparql/^5.0.0/components/context.jsonld"
     ],
 ```
 
 This change means that Comunica will load its query operators from our local `config/query-operation/actors.json` file,
-instead of the default `ccqs:config/query-operation/actors.json` file.
+instead of the default `ccqs:config/query-operation/actors-v5-3-0.json` file.
 
 If you run your app again, things should still function like before at this point.
 
 ### 5.5. Remove actors
 
-Next, we will remove the actors we don't need.
-Concretely, we will remove the following imports to actors:
+Next, we will remove the actor we don't need from our local `config/query-operation/actors.json`:
+`ccqs:config/query-operation/actors/query/construct.json`, which handles `CONSTRUCT` queries.
+We don't need to remove a separate actor for `DESCRIBE` queries,
+because these are rewritten into `CONSTRUCT` queries before they are executed.
 
-* `ccqs:config/query-operation/actors/query/construct.json`: Handles `CONSTRUCT` queries.
-* `ccqs:config/query-operation/actors/query/describe.json`: Handles `DESCRIBE` queries.
-
-For this, remove the following lines:
+For this, remove the following line:
 ```diff
 -    "ccqs:config/query-operation/actors/query/construct.json",
--    "ccqs:config/query-operation/actors/query/describe.json",
 ```
 
 ### 5.6. Test changes
 
 After this change, you should now be unable to execute `CONSTRUCT` or `DESCRIBE` queries.
 Try this out by executing the following:
-```bash
+```javascript
 const quadStream = await myEngine.queryQuads(`
   CONSTRUCT WHERE {
     ?s ?p ?o
@@ -274,7 +304,7 @@ quadStream.on('data', (quad) => {
 ```
 
 Executing a `SELECT` query will still work:
-```bash
+```javascript
 const bindingsStream = await myEngine.queryBindings(`
   SELECT ?s ?p ?o WHERE {
     ?s ?p <http://dbpedia.org/resource/Belgium>.
@@ -291,7 +321,7 @@ bindingsStream.on('data', (binding) => {
 ```
 
 You have now successfully built your own custom Comunica engine that is a bit more lightweight than the default one.
-Just like the `CONSTRUCT` and `DESCRIBE` actors,
+Just like the `CONSTRUCT` actor,
 you can remove any other actors you don't want to make it even more lightweight.
 
 If you want, you can create additional config file parts in `config/`

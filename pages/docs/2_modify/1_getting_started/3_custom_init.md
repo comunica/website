@@ -21,10 +21,17 @@ $ npm init
 ```
 
 The simplest way to include all required Comunica dependencies is to extend from **Comunica SPARQL**.
-As such, add it as a dependency as follows:
+As such, add it as a dependency as follows,
+together with the config package that your config file builds upon:
 ```bash
-$ npm install @comunica/query-sparql
+$ npm install @comunica/query-sparql @comunica/config-query-sparql
 ```
+
+<div class="note">
+Depending on <code>@comunica/query-sparql</code> is only a convenient way of installing the packages of all its actors.
+Your config file should not import the config files of <code>@comunica/query-sparql</code>,
+but those of <code>@comunica/config-query-sparql</code>, as explained in the next step.
+</div>
 
 <div class="note">
 If you want to create a more lightweight package by selecting only those dependencies that are absolutely required,
@@ -91,6 +98,15 @@ If your config file includes other config sets, you can include them in this fol
 In this case, you also have to make sure to include the context file in `components/context.jsonld`.
 
 The only requirement here is that there is at least a file **`config/config-default.json`**.
+
+<div class="note">
+Even though Comunica SPARQL also has a file called <code>config/config-default.json</code>,
+your config file must <b>not</b> import that file.
+It is internal to Comunica SPARQL and changes in minor releases, which would break your engine after an update.
+Instead, build upon a versioned config file from <code>@comunica/config-query-sparql</code>,
+such as <code>ccqs:config/config-default-v5-4-1.json</code>.
+<a href="/docs/modify/advanced/config_versioning/">Read more about config versioning</a>.
+</div>
 
 ### 2.2. Declare config options in `package.json`
 

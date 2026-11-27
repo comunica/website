@@ -7,6 +7,19 @@ Can't find an answer to your question?
 Feel free to [ask us](/ask/), or have a look at the
 [example](https://github.com/comunica/examples) repository.
 
+## Why did my custom engine break after a minor Comunica update?
+
+This usually happens when your config file imports the config file of an **engine package**,
+such as `config/config-default.json` in `@comunica/query-sparql`.
+These files are internal to the engine, and are changed in minor releases whenever the engine gets new actors.
+
+Instead, your config should build upon a **versioned config file** of a **config package**,
+such as `ccqs:config/config-default-v5-4-1.json` in `@comunica/config-query-sparql`.
+Within a major version, no actors are added to these files, so updates will not change the actors in your engine.
+
+[Click here](/docs/modify/advanced/config_versioning/) to learn which config file to pick,
+and how to fix an engine that broke after an update.
+
 ## Should I publish my package to npm before I can use it?
 
 While it is recommended to publish your reusable Comunica packages to npm, this is not required.
