@@ -1,9 +1,9 @@
 ---
 title: 'Config versioning'
-description: 'Which config files your own Comunica config can safely build upon, and how versioned config files keep custom engines working across updates.'
+description: 'How to extend and manage config files.'
 ---
 
-Custom Comunica engines are created by writing a config file that builds upon config files provided by Comunica.
+Custom Comunica engines are created by writing a config file from scratch, or by building upon existing config files provided by Comunica.
 Not all of these files are meant to be built upon, and choosing the wrong ones is the most common reason
 why a custom engine **breaks after a minor Comunica update**.
 
@@ -126,9 +126,11 @@ Your package must be able to load the packages of all actors in your config:
 * **Depend on the config package directly**, with a minimum version that contains the versioned file you build upon.
   For example, `"@comunica/config-query-sparql": "^5.5.0"` when using `config-default-v5-4-1.json`.
 * **Depend on the packages of all actors** in your config.
-  The simplest way is to depend on the engine package that uses the same or a newer versioned file,
-  such as `"@comunica/query-sparql": "^5.5.0"`.
-  Depending on an engine package to obtain its dependencies is fine, as long as you don't import its config files.
+  The [Comunica Packager](https://github.com/comunica/comunica/tree/master/packages/packager) determines these from your config file,
+  as explained in the guide on [exposing your custom config as an npm package](/docs/modify/getting_started/custom_init/).
+
+Don't rely on an engine package such as `@comunica/query-sparql` to provide the packages of your actors.
+Its dependencies follow its own config, so a later version may no longer depend on an actor that your config still uses.
 
 ## Upgrading to a newer versioned config
 
